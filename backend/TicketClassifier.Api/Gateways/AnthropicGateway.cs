@@ -24,7 +24,8 @@ public class AnthropicGateway : IClassificacaoGateway
     }
 
     public async Task<IReadOnlyList<ClassificacaoResultado>> ClassificarLoteAsync(
-        IReadOnlyList<TicketParaClassificar> itens, CancellationToken ct = default,
+        IReadOnlyList<TicketParaClassificar> itens, ClassificacaoPromptBuilder promptBuilder,
+        CancellationToken ct = default,
         int loteAtual = 1, int totalLotes = 1, int totalTickets = 0)
     {
         if (itens.Count == 0) return Array.Empty<ClassificacaoResultado>();
@@ -32,8 +33,8 @@ public class AnthropicGateway : IClassificacaoGateway
         var payloadJson = JsonSerializer.Serialize(new
         {
             model = _model,
-            max_tokens = Math.Min(8192, 200 + itens.Count * 150),
-            messages = new[] { new { role = "user", content = ClassificacaoPromptBuilder.ConstruirLote(itens, loteAtual, totalLotes, totalTickets) } }
+            max_tokens = Math.Max(4096, 500 + itens.Count * 400),
+            messages = new[] { new { role = "user", content = promptBuilder.ConstruirLote(itens, loteAtual, totalLotes, totalTickets) } }
         });
 
         var (texto, erro) = await ChamarComRetryAsync(payloadJson, ct);

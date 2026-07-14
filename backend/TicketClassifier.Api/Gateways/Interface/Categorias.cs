@@ -49,19 +49,38 @@ public static class Categorias
     public static string DepartamentoValido(string? d) => CasarOu(Departamentos, d, "Suporte");
     public static string SentimentoValido(string? s) => CasarOu(Sentimentos, s, "neutro");
 
+    private static string LimparMarkdown(string texto)
+    {
+        var limpo = texto.Trim();
+        if (limpo.StartsWith("```"))
+        {
+            var fimPrimeiraLinha = limpo.IndexOf('\n');
+            if (fimPrimeiraLinha > 0)
+                limpo = limpo[(fimPrimeiraLinha + 1)..];
+        }
+        if (limpo.EndsWith("```"))
+            limpo = limpo[..^3];
+        return limpo.Trim();
+    }
+
+    private static string ExtrairJson(string texto)
+    {
+        var limpo = LimparMarkdown(texto);
+        var i = limpo.IndexOf('[');
+        var j = limpo.LastIndexOf(']');
+        return (i >= 0 && j > i) ? limpo[i..(j + 1)] : "[]";
+    }
+
     /// <summary>Converte a resposta (array JSON) em dicionário indice → resultado.</summary>
     public static Dictionary<int, ClassificacaoResultado> ParseLote(string textoModelo)
     {
-        var i = textoModelo.IndexOf('[');
-        var j = textoModelo.LastIndexOf(']');
-        var json = (i >= 0 && j > i) ? textoModelo[i..(j + 1)] : "[]";
+        var json = ExtrairJson(textoModelo);
 
         using var doc = JsonDocument.Parse(json);
         if (doc.RootElement.ValueKind != JsonValueKind.Array)
             return new Dictionary<int, ClassificacaoResultado>();
 
-        var itens = ParseItens(doc.RootElement);
-        return itens;
+        return ParseItens(doc.RootElement);
     }
 
     /// <summary>
@@ -71,9 +90,7 @@ public static class Categorias
     public static Dictionary<int, ClassificacaoResultado> ParseLoteComFallback(
         string textoModelo, IReadOnlyList<int> indicesEsperados)
     {
-        var i = textoModelo.IndexOf('[');
-        var j = textoModelo.LastIndexOf(']');
-        var json = (i >= 0 && j > i) ? textoModelo[i..(j + 1)] : "[]";
+        var json = ExtrairJson(textoModelo);
 
         using var doc = JsonDocument.Parse(json);
         if (doc.RootElement.ValueKind != JsonValueKind.Array)

@@ -2,6 +2,7 @@ using TicketClassifier.Api.Dtos.Output;
 using TicketClassifier.Api.Gateways.Interface;
 using TicketClassifier.Api.Mappers;
 using TicketClassifier.Api.Models;
+using TicketClassifier.Api.Prompts;
 using TicketClassifier.Api.Repositories.Interface;
 using TicketClassifier.Api.Services.Interface;
 
@@ -197,6 +198,12 @@ public class TicketService : ITicketService
 
     // ── Classificação em lotes ───────────────────────────────────────────
 
+    private async Task<ClassificacaoPromptBuilder> CriarPromptBuilderAsync(CancellationToken ct)
+    {
+        var parametros = await _repo.ListarParametrosAsync(null, ct);
+        return new ClassificacaoPromptBuilder(parametros);
+    }
+
     private async Task<IReadOnlyList<(ClassificacaoResultado Resultado, bool Ok)>> ClassificarAsync(
         IClassificacaoGateway gateway,
         IReadOnlyList<(string? Assunto, string Descricao)> entradas,
@@ -217,6 +224,7 @@ public class TicketService : ITicketService
 
         var saida = new (ClassificacaoResultado, bool)[n];
         var throttler = new SemaphoreSlim(_lotesParalelos);
+        var promptBuilder = await CriarPromptBuilderAsync(ct);
 
         await Task.WhenAll(lotes.Select(async lote =>
         {
@@ -224,7 +232,7 @@ public class TicketService : ITicketService
             try
             {
                 var loteNum = lotes.IndexOf(lote) + 1;
-                var resultados = await gateway.ClassificarLoteAsync(lote, ct, loteNum, lotes.Count, n);
+                var resultados = await gateway.ClassificarLoteAsync(lote, promptBuilder, ct, loteNum, lotes.Count, n);
                 var okNoLote = 0;
                 for (var k = 0; k < lote.Count; k++)
                 {

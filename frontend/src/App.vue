@@ -5,6 +5,7 @@ import { useTicketClassifier } from './composables/useTicketClassifier'
 import { formatarData } from './utils/chartMappers'
 import BatchDashboard from './components/BatchDashboard.vue'
 import DuplicataModal from './components/DuplicataModal.vue'
+import ParametrosManager from './components/ParametrosManager.vue'
 
 const progressHook = useTicketProgress()
 const classifier = useTicketClassifier(progressHook)
@@ -162,6 +163,14 @@ function enviarComOpcao(sobrescrever) {
               <i class="fa-solid fa-history"></i>
               Lotes
             </button>
+            <button
+              @click="classifier.view.value = 'parametros'"
+              :class="classifier.view.value === 'parametros' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900'"
+              class="px-4 py-1.5 rounded-md text-sm font-medium transition duration-150 flex items-center gap-2 cursor-pointer"
+            >
+              <i class="fa-solid fa-sliders"></i>
+              Regras
+            </button>
           </nav>
 
           <!-- Mobile nav -->
@@ -179,6 +188,13 @@ function enviarComOpcao(sobrescrever) {
               class="p-2.5 rounded-lg text-sm cursor-pointer"
             >
               <i class="fa-solid fa-history"></i>
+            </button>
+            <button
+              @click="classifier.view.value = 'parametros'"
+              :class="classifier.view.value === 'parametros' ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'"
+              class="p-2.5 rounded-lg text-sm cursor-pointer"
+            >
+              <i class="fa-solid fa-sliders"></i>
             </button>
           </div>
         </div>
@@ -358,6 +374,9 @@ function enviarComOpcao(sobrescrever) {
           </div>
         </div>
       </div>
+
+      <!-- PARAMETROS VIEW -->
+      <ParametrosManager v-else-if="classifier.view.value === 'parametros'" />
 
       <!-- BATCH DETAIL VIEW -->
       <BatchDashboard

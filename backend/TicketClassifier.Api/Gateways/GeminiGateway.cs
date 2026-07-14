@@ -24,7 +24,8 @@ public class GeminiGateway : IClassificacaoGateway
     }
 
     public async Task<IReadOnlyList<ClassificacaoResultado>> ClassificarLoteAsync(
-        IReadOnlyList<TicketParaClassificar> itens, CancellationToken ct = default,
+        IReadOnlyList<TicketParaClassificar> itens, ClassificacaoPromptBuilder promptBuilder,
+        CancellationToken ct = default,
         int loteAtual = 1, int totalLotes = 1, int totalTickets = 0)
     {
         if (itens.Count == 0) return Array.Empty<ClassificacaoResultado>();
@@ -34,7 +35,7 @@ public class GeminiGateway : IClassificacaoGateway
         {
             contents = new[]
             {
-                new { parts = new[] { new { text = ClassificacaoPromptBuilder.ConstruirLote(itens, loteAtual, totalLotes, totalTickets) } } }
+                new { parts = new[] { new { text = promptBuilder.ConstruirLote(itens, loteAtual, totalLotes, totalTickets) } } }
             },
             generationConfig = new
             {

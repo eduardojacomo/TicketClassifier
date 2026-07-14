@@ -22,7 +22,8 @@ public class LlamaGateway : IClassificacaoGateway
     }
 
     public async Task<IReadOnlyList<ClassificacaoResultado>> ClassificarLoteAsync(
-        IReadOnlyList<TicketParaClassificar> itens, CancellationToken ct = default,
+        IReadOnlyList<TicketParaClassificar> itens, ClassificacaoPromptBuilder promptBuilder,
+        CancellationToken ct = default,
         int loteAtual = 1, int totalLotes = 1, int totalTickets = 0)
     {
         if (itens.Count == 0) return Array.Empty<ClassificacaoResultado>();
@@ -32,10 +33,10 @@ public class LlamaGateway : IClassificacaoGateway
         {
             messages = new[]
             {
-                new { role = "user", content = ClassificacaoPromptBuilder.ConstruirLote(itens, loteAtual, totalLotes, totalTickets) }
+                new { role = "user", content = promptBuilder.ConstruirLote(itens, loteAtual, totalLotes, totalTickets) }
             },
             temperature = 0.2,
-            max_tokens = Math.Min(8192, 200 + itens.Count * 150)
+            max_tokens = Math.Max(4096, 500 + itens.Count * 400)
         });
 
         var (texto, erro) = await ChamarComRetryAsync(url, payloadJson, ct);
