@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using TicketClassifier.Api.Models;
 
@@ -9,16 +10,11 @@ public class AppDbContext : DbContext
 
     public DbSet<TicketBatch> Batches => Set<TicketBatch>();
     public DbSet<Ticket> Tickets => Set<Ticket>();
+    public DbSet<TicketSimilaridade> Similaridades => Set<TicketSimilaridade>();
+    public DbSet<ParametroClassificacao> ParametrosClassificacao => Set<ParametroClassificacao>();
 
-    protected override void OnModelCreating(ModelBuilder b)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        b.Entity<TicketBatch>().HasKey(x => x.Id);
-        b.Entity<Ticket>().HasKey(x => x.Id);
-        b.Entity<Ticket>().HasIndex(x => x.BatchId);
-        b.Entity<Ticket>()
-            .HasOne<TicketBatch>()
-            .WithMany(x => x.Tickets)
-            .HasForeignKey(x => x.BatchId)
-            .OnDelete(DeleteBehavior.Cascade);
+        builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using TicketClassifier.Api.Dtos.Output;
 using TicketClassifier.Api.Services;
 using TicketClassifier.Api.Services.Interface;
 
@@ -17,9 +18,16 @@ public class TicketsController : ControllerBase
         _progresso = progresso;
     }
 
+    [HttpGet("verificar-duplicata")]
+    public async Task<IActionResult> VerificarDuplicata([FromQuery] string nomeArquivo, CancellationToken ct)
+    {
+        var existente = await _service.VerificarDuplicataAsync(nomeArquivo, ct);
+        return Ok(new { duplicado = existente is not null, batch = existente });
+    }
+
     [HttpPost("upload")]
     [RequestSizeLimit(20 * 1024 * 1024)]
-    public async Task<IActionResult> Upload(IFormFile file, [FromForm] Guid? jobId, CancellationToken ct)
+    public async Task<IActionResult> Upload(IFormFile file, [FromForm] Guid? jobId, [FromForm] bool sobrescrever, CancellationToken ct)
     {
         if (file is null || file.Length == 0)
             return BadRequest(new { erro = "Nenhum arquivo enviado." });
@@ -27,7 +35,7 @@ public class TicketsController : ControllerBase
         try
         {
             using var stream = file.OpenReadStream();
-            var resumo = await _service.ProcessarCsvAsync(stream, file.FileName, jobId ?? Guid.NewGuid(), ct);
+            var resumo = await _service.ProcessarCsvAsync(stream, file.FileName, jobId ?? Guid.NewGuid(), sobrescrever, ct);
             return Ok(resumo);
         }
         catch (InvalidOperationException ex)
@@ -65,7 +73,6 @@ public class TicketsController : ControllerBase
         return detalhe is null ? NotFound() : Ok(detalhe);
     }
 
-    /// <summary>Reprocessa apenas os tickets que falharam (fallback) no lote.</summary>
     [HttpPost("batches/{id:guid}/reprocessar")]
     public async Task<IActionResult> Reprocessar(Guid id, CancellationToken ct)
     {
@@ -73,12 +80,42 @@ public class TicketsController : ControllerBase
         return detalhe is null ? NotFound() : Ok(detalhe);
     }
 
-    [HttpGet("batches/{id:guid}/export")]
-    public async Task<IActionResult> Export(Guid id, CancellationToken ct)
+    [HttpPost("batches/{id:guid}/reprocessar-tudo")]
+    public async Task<IActionResult> ReprocessarTudo(Guid id, [FromQuery] Guid? jobId, CancellationToken ct)
     {
-        var bytes = await _service.ExportarAsync(id, ct);
+        var detalhe = await _service.ReprocessarTudoAsync(id, jobId ?? Guid.NewGuid(), ct);
+        return detalhe is null ? NotFound() : Ok(detalhe);
+    }
+
+    [HttpPatch("{ticketId:guid}")]
+    public async Task<IActionResult> EditarTicket(Guid ticketId, [FromBody] TicketEditDto dto, CancellationToken ct)
+    {
+        var result = await _service.AtualizarTicketAsync(ticketId, dto, ct);
+        return result is null ? NotFound() : Ok(result);
+    }
+
+    [HttpGet("{ticketId:guid}/similares")]
+    public async Task<IActionResult> Similares(Guid ticketId, CancellationToken ct)
+        => Ok(await _service.ObterSimilaresAsync(ticketId, ct));
+
+    [HttpDelete("similaridades/{id:guid}")]
+    public async Task<IActionResult> RemoverSimilaridade(Guid id, CancellationToken ct)
+    {
+        await _service.RemoverSimilaridadeAsync(id, ct);
+        return NoContent();
+    }
+
+    [HttpGet("batches/{id:guid}/export")]
+    public async Task<IActionResult> Export(Guid id, [FromQuery] string? colunas, CancellationToken ct)
+    {
+        var cols = colunas?.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        var bytes = await _service.ExportarAsync(id, cols, ct);
         return bytes is null
             ? NotFound()
             : File(bytes, "text/csv", $"tickets_classificados_{id:N}.csv");
     }
+
+    [HttpGet("export/colunas")]
+    public IActionResult ColunasDisponiveis()
+        => Ok(CsvService.ColunasDisponiveis.Select(c => new { key = c.Key, label = c.Label }));
 }

@@ -4,12 +4,15 @@ import { useTicketProgress } from './composables/useTicketProgress'
 import { useTicketClassifier } from './composables/useTicketClassifier'
 import { formatarData } from './utils/chartMappers'
 import BatchDashboard from './components/BatchDashboard.vue'
+import DuplicataModal from './components/DuplicataModal.vue'
 
 const progressHook = useTicketProgress()
 const classifier = useTicketClassifier(progressHook)
 
 const arquivoLocal = ref(null)
 const dragOver = ref(false)
+
+const duplicataInfo = ref(null)
 
 function tratarSelecaoArquivo(e) {
   arquivoLocal.value = e.target.files?.[0] ?? null
@@ -25,10 +28,23 @@ function handleDrop(e) {
   }
 }
 
-function dispararUpload() {
+async function dispararUpload() {
+  if (!arquivoLocal.value) return
+
+  const { duplicado, batch } = await classifier.verificarDuplicata(arquivoLocal.value.name)
+  if (duplicado && batch) {
+    duplicataInfo.value = batch
+    return
+  }
+
+  enviarComOpcao(false)
+}
+
+function enviarComOpcao(sobrescrever) {
+  duplicataInfo.value = null
   if (!arquivoLocal.value) return
   const jobId = crypto.randomUUID()
-  classifier.enviarArquivo(arquivoLocal.value, jobId).then(() => {
+  classifier.enviarArquivo(arquivoLocal.value, jobId, sobrescrever).then(() => {
     arquivoLocal.value = null
   })
 }
@@ -36,6 +52,16 @@ function dispararUpload() {
 
 <template>
   <div class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+
+    <!-- Duplicata Modal -->
+    <DuplicataModal
+      v-if="duplicataInfo"
+      :nome-arquivo="arquivoLocal?.name ?? ''"
+      :batch-existente="duplicataInfo"
+      @sobrescrever="enviarComOpcao(true)"
+      @novo="enviarComOpcao(false)"
+      @cancelar="duplicataInfo = null"
+    />
 
     <!-- Processing Modal Overlay -->
     <div v-if="progressHook.processando.value" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
@@ -265,7 +291,7 @@ function dispararUpload() {
                   <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">3</span>
                   <div>
                     <p class="font-semibold text-slate-800">Classificacao por LLM</p>
-                    <p class="text-slate-500">Gemini, Claude, Llama local ou heuristica mock.</p>
+                    <p class="text-slate-500">Gemini, Claude, Llama local ou investigação mock.</p>
                   </div>
                 </div>
                 <div class="flex items-start gap-2.5">
@@ -338,9 +364,13 @@ function dispararUpload() {
         v-else-if="classifier.view.value === 'detalhe' && classifier.batchAtual.value"
         :batch="classifier.batchAtual.value"
         :reprocessando="classifier.reprocessando.value"
+        :reprocessando-tudo="classifier.reprocessandoTudo.value"
         @voltar="classifier.carregarLotes"
         @reprocessar="classifier.reprocessarLote"
-        @baixar="classifier.baixarExportacao"
+        @reprocessar-tudo="classifier.reprocessarTudo"
+        @baixar="(cols) => classifier.baixarExportacao(cols)"
+        @atualizar-ticket="(id, dto, done) => classifier.atualizarTicket(id, dto).finally(done)"
+        @obter-similares="(id, cb) => classifier.obterSimilares(id).then(cb)"
       />
     </main>
 

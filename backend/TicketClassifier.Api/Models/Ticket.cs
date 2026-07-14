@@ -17,7 +17,12 @@ public class Ticket
     public string Resumo { get; set; } = string.Empty;
     public double Confianca { get; set; }
     public string Justificativa { get; set; } = string.Empty;
+    public string Sentimento { get; set; } = "neutro";
+    public string Tags { get; set; } = "[]";
 
     /// <summary>False quando a classificação falhou (caiu no fallback) — permite reprocessar.</summary>
     public bool ProcessadoOk { get; set; } = true;
+
+    public bool RegistroModificado { get; set; }
+    public DateTime? DataModificacao { get; set; }
 }

@@ -10,5 +10,6 @@ public interface IClassificacaoGateway
 
     /// <summary>Classifica um lote; retorna os resultados na MESMA ordem da entrada.</summary>
     Task<IReadOnlyList<ClassificacaoResultado>> ClassificarLoteAsync(
-        IReadOnlyList<TicketParaClassificar> itens, CancellationToken ct = default);
+        IReadOnlyList<TicketParaClassificar> itens, CancellationToken ct = default,
+        int loteAtual = 1, int totalLotes = 1, int totalTickets = 0);
 }

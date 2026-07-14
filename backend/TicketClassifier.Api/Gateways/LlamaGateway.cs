@@ -22,7 +22,8 @@ public class LlamaGateway : IClassificacaoGateway
     }
 
     public async Task<IReadOnlyList<ClassificacaoResultado>> ClassificarLoteAsync(
-        IReadOnlyList<TicketParaClassificar> itens, CancellationToken ct = default)
+        IReadOnlyList<TicketParaClassificar> itens, CancellationToken ct = default,
+        int loteAtual = 1, int totalLotes = 1, int totalTickets = 0)
     {
         if (itens.Count == 0) return Array.Empty<ClassificacaoResultado>();
 
@@ -31,23 +32,38 @@ public class LlamaGateway : IClassificacaoGateway
         {
             messages = new[]
             {
-                new { role = "user", content = ClassificacaoPromptBuilder.ConstruirLote(itens) }
+                new { role = "user", content = ClassificacaoPromptBuilder.ConstruirLote(itens, loteAtual, totalLotes, totalTickets) }
             },
             temperature = 0.2,
-            max_tokens = Math.Min(8192, 200 + itens.Count * 120)
+            max_tokens = Math.Min(8192, 200 + itens.Count * 150)
         });
 
-        var texto = await ChamarComRetryAsync(url, payloadJson, ct);
-        var porIndice = texto is null
-            ? new Dictionary<int, ClassificacaoResultado>()
-            : SeguroParse(texto);
+        var (texto, erro) = await ChamarComRetryAsync(url, payloadJson, ct);
 
-        return itens.Select(t => porIndice.GetValueOrDefault(t.Indice, Categorias.Fallback)).ToList();
+        if (texto is null)
+        {
+            var fallback = Categorias.FallbackComErro($"[Llama] {erro ?? "Erro desconhecido"}");
+            return itens.Select(_ => fallback).ToList();
+        }
+
+        _logger.LogInformation("Llama resposta bruta ({Len} chars): {Texto}", texto.Length, texto.Length > 1000 ? texto[..1000] + "…" : texto);
+
+        var indices = itens.Select(t => t.Indice).ToList();
+        var (porIndice, parseErro) = SeguroParse(texto, indices);
+
+        return itens.Select(t =>
+        {
+            if (porIndice.TryGetValue(t.Indice, out var r)) return r;
+            var motivo = parseErro ?? $"[Llama] Índice {t.Indice} ausente na resposta. Resposta parcial: {Truncar(texto, 200)}";
+            return Categorias.FallbackComErro(motivo);
+        }).ToList();
     }
 
-    private async Task<string?> ChamarComRetryAsync(string url, string payloadJson, CancellationToken ct)
+    private async Task<(string? texto, string? erro)> ChamarComRetryAsync(string url, string payloadJson, CancellationToken ct)
     {
         var backoff = new[] { 2000, 5000, 10000 };
+        string? ultimoErro = null;
+
         for (var tentativa = 0; ; tentativa++)
         {
             try
@@ -61,40 +77,71 @@ public class LlamaGateway : IClassificacaoGateway
 
                 if (EhTransiente(resp.StatusCode) && tentativa < backoff.Length)
                 {
-                    _logger.LogWarning("Llama {Status}, retry {N} em {Ms}ms.", (int)resp.StatusCode, tentativa + 1, backoff[tentativa]);
+                    ultimoErro = $"HTTP {(int)resp.StatusCode}: {Truncar(body, 300)}";
+                    _logger.LogWarning("Llama {Status}, retry {N} em {Ms}ms. Body: {Body}", (int)resp.StatusCode, tentativa + 1, backoff[tentativa], Truncar(body, 200));
                     await Task.Delay(backoff[tentativa], ct);
                     continue;
                 }
-                resp.EnsureSuccessStatusCode();
+
+                if (!resp.IsSuccessStatusCode)
+                {
+                    ultimoErro = $"HTTP {(int)resp.StatusCode}: {Truncar(body, 300)}";
+                    _logger.LogWarning("Llama resposta não-OK: {Status}. Body: {Body}", (int)resp.StatusCode, Truncar(body, 500));
+                    return (null, ultimoErro);
+                }
 
                 using var doc = JsonDocument.Parse(body);
-                return doc.RootElement
+                var content = doc.RootElement
                     .GetProperty("choices")[0]
                     .GetProperty("message")
                     .GetProperty("content").GetString();
+
+                return (content, null);
+            }
+            catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
+            {
+                ultimoErro = $"Timeout após {_http.Timeout.TotalSeconds}s aguardando resposta do Llama";
+                if (tentativa < backoff.Length)
+                {
+                    _logger.LogWarning("Llama timeout, retry {N} em {Ms}ms.", tentativa + 1, backoff[tentativa]);
+                    await Task.Delay(backoff[tentativa], ct);
+                    continue;
+                }
+                _logger.LogWarning("Llama timeout final; lote cai no fallback.");
+                return (null, ultimoErro);
             }
             catch (Exception ex) when (tentativa < backoff.Length)
             {
+                ultimoErro = $"{ex.GetType().Name}: {ex.Message}";
                 _logger.LogWarning(ex, "Erro no Llama, retry {N} em {Ms}ms.", tentativa + 1, backoff[tentativa]);
                 await Task.Delay(backoff[tentativa], ct);
             }
             catch (Exception ex)
             {
+                ultimoErro = $"{ex.GetType().Name}: {ex.Message}";
                 _logger.LogWarning(ex, "Falha final no Llama; lote cai no fallback.");
-                return null;
+                return (null, ultimoErro);
             }
         }
     }
 
-    private Dictionary<int, ClassificacaoResultado> SeguroParse(string texto)
+    private (Dictionary<int, ClassificacaoResultado> resultado, string? erro) SeguroParse(string texto, IReadOnlyList<int> indices)
     {
-        try { return Categorias.ParseLote(texto); }
+        try
+        {
+            var parsed = Categorias.ParseLoteComFallback(texto, indices);
+            return (parsed, null);
+        }
         catch (Exception ex)
         {
-            _logger.LogWarning(ex, "Falha ao parsear resposta do Llama; lote cai no fallback.");
-            return new();
+            var erro = $"Falha ao parsear resposta do Llama: {ex.Message}. Resposta: {Truncar(texto, 300)}";
+            _logger.LogWarning(ex, "Falha ao parsear resposta do Llama. Texto: {Texto}", Truncar(texto, 500));
+            return (new(), erro);
         }
     }
+
+    private static string Truncar(string s, int max)
+        => s.Length <= max ? s : s[..max] + "…";
 
     private static bool EhTransiente(System.Net.HttpStatusCode s)
         => (int)s == 429 || (int)s == 500 || (int)s == 502 || (int)s == 503 || (int)s == 504;

@@ -24,7 +24,8 @@ public class GeminiGateway : IClassificacaoGateway
     }
 
     public async Task<IReadOnlyList<ClassificacaoResultado>> ClassificarLoteAsync(
-        IReadOnlyList<TicketParaClassificar> itens, CancellationToken ct = default)
+        IReadOnlyList<TicketParaClassificar> itens, CancellationToken ct = default,
+        int loteAtual = 1, int totalLotes = 1, int totalTickets = 0)
     {
         if (itens.Count == 0) return Array.Empty<ClassificacaoResultado>();
 
@@ -33,27 +34,41 @@ public class GeminiGateway : IClassificacaoGateway
         {
             contents = new[]
             {
-                new { parts = new[] { new { text = ClassificacaoPromptBuilder.ConstruirLote(itens) } } }
+                new { parts = new[] { new { text = ClassificacaoPromptBuilder.ConstruirLote(itens, loteAtual, totalLotes, totalTickets) } } }
             },
             generationConfig = new
             {
                 temperature = 0.2,
-                maxOutputTokens = Math.Min(8192, 200 + itens.Count * 120)
+                maxOutputTokens = Math.Max(4096, 500 + itens.Count * 400),
+                thinkingConfig = new { thinkingBudget = 1024 }
             }
         });
 
-        var texto = await ChamarComRetryAsync(url, payloadJson, ct);
-        var porIndice = texto is null
-            ? new Dictionary<int, ClassificacaoResultado>()
-            : SeguroParse(texto);
+        var (texto, erro) = await ChamarComRetryAsync(url, payloadJson, ct);
 
-        // Alinha à ordem de entrada; faltantes recebem fallback.
-        return itens.Select(t => porIndice.GetValueOrDefault(t.Indice, Categorias.Fallback)).ToList();
+        if (texto is null)
+        {
+            var fallback = Categorias.FallbackComErro($"[Gemini] {erro ?? "Erro desconhecido"}");
+            return itens.Select(_ => fallback).ToList();
+        }
+
+        _logger.LogInformation("Gemini resposta bruta ({Len} chars): {Texto}", texto.Length, texto.Length > 1000 ? texto[..1000] + "…" : texto);
+
+        var indices = itens.Select(t => t.Indice).ToList();
+        var (porIndice, parseErro) = SeguroParse(texto, indices);
+        return itens.Select(t =>
+        {
+            if (porIndice.TryGetValue(t.Indice, out var r)) return r;
+            var motivo = parseErro ?? $"[Gemini] Índice {t.Indice} ausente na resposta.";
+            return Categorias.FallbackComErro(motivo);
+        }).ToList();
     }
 
-    private async Task<string?> ChamarComRetryAsync(string url, string payloadJson, CancellationToken ct)
+    private async Task<(string? texto, string? erro)> ChamarComRetryAsync(string url, string payloadJson, CancellationToken ct)
     {
         var backoff = new[] { 1000, 3000, 8000 };
+        string? ultimoErro = null;
+
         for (var tentativa = 0; ; tentativa++)
         {
             try
@@ -67,41 +82,59 @@ public class GeminiGateway : IClassificacaoGateway
 
                 if (EhTransiente(resp.StatusCode) && tentativa < backoff.Length)
                 {
-                    _logger.LogWarning("Gemini {Status} (rate limit?), retry {N} em {Ms}ms.", (int)resp.StatusCode, tentativa + 1, backoff[tentativa]);
+                    ultimoErro = $"HTTP {(int)resp.StatusCode}: {Truncar(body, 300)}";
+                    _logger.LogWarning("Gemini {Status}, retry {N} em {Ms}ms. Body: {Body}", (int)resp.StatusCode, tentativa + 1, backoff[tentativa], Truncar(body, 200));
                     await Task.Delay(backoff[tentativa], ct);
                     continue;
                 }
-                resp.EnsureSuccessStatusCode();
+
+                if (!resp.IsSuccessStatusCode)
+                {
+                    ultimoErro = $"HTTP {(int)resp.StatusCode}: {Truncar(body, 300)}";
+                    _logger.LogWarning("Gemini resposta não-OK: {Status}. Body: {Body}", (int)resp.StatusCode, Truncar(body, 500));
+                    return (null, ultimoErro);
+                }
 
                 using var doc = JsonDocument.Parse(body);
-                return doc.RootElement
+                var parts = doc.RootElement
                     .GetProperty("candidates")[0]
                     .GetProperty("content")
-                    .GetProperty("parts")[0]
-                    .GetProperty("text").GetString();
+                    .GetProperty("parts");
+
+                string? textoSaida = null;
+                foreach (var part in parts.EnumerateArray())
+                {
+                    if (part.TryGetProperty("thought", out var thought) && thought.GetBoolean())
+                        continue;
+                    if (part.TryGetProperty("text", out var textEl))
+                        textoSaida = textEl.GetString();
+                }
+                textoSaida ??= parts[parts.GetArrayLength() - 1].GetProperty("text").GetString();
+                return (textoSaida, null);
             }
             catch (Exception ex) when (tentativa < backoff.Length)
             {
+                ultimoErro = $"{ex.GetType().Name}: {ex.Message}";
                 _logger.LogWarning(ex, "Erro no Gemini, retry {N} em {Ms}ms.", tentativa + 1, backoff[tentativa]);
                 await Task.Delay(backoff[tentativa], ct);
             }
             catch (Exception ex)
             {
+                ultimoErro = $"{ex.GetType().Name}: {ex.Message}";
                 _logger.LogWarning(ex, "Falha final no Gemini; lote cai no fallback.");
-                return null;
+                return (null, ultimoErro);
             }
         }
     }
 
-    private Dictionary<int, ClassificacaoResultado> SeguroParse(string texto)
+    private (Dictionary<int, ClassificacaoResultado> resultado, string? erro) SeguroParse(string texto, IReadOnlyList<int> indices)
     {
-        try { return Categorias.ParseLote(texto); }
-        catch (Exception ex)
-        {
-            _logger.LogWarning(ex, "Falha ao parsear o array do Gemini; lote cai no fallback.");
-            return new();
-        }
+        try { return (Categorias.ParseLoteComFallback(texto, indices), null); }
+        catch (Exception ex) { return (new(), $"Falha ao parsear resposta: {ex.Message}. Resposta: {Truncar(texto, 300)}"); }
     }
+
+    private static string Truncar(string s, int max)
+        => s.Length <= max ? s : s[..max] + "…";
 
     private static bool EhTransiente(System.Net.HttpStatusCode s)
         => (int)s == 429 || (int)s == 500 || (int)s == 502 || (int)s == 503 || (int)s == 504;

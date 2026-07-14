@@ -7,6 +7,7 @@ export function useTicketClassifier(progressHook) {
   const batchAtual = ref(null)
   const erro = ref('')
   const reprocessando = ref(false)
+  const reprocessandoTudo = ref(false)
 
   async function carregarLotes() {
     try {
@@ -28,7 +29,16 @@ export function useTicketClassifier(progressHook) {
     }
   }
 
-  async function enviarArquivo(arquivo, jobId) {
+  async function verificarDuplicata(nomeArquivo) {
+    try {
+      const { data } = await api.get('/tickets/verificar-duplicata', { params: { nomeArquivo } })
+      return data
+    } catch {
+      return { duplicado: false }
+    }
+  }
+
+  async function enviarArquivo(arquivo, jobId, sobrescrever = false) {
     if (!arquivo) return
     erro.value = ''
     progressHook.iniciarPolling(jobId)
@@ -37,7 +47,8 @@ export function useTicketClassifier(progressHook) {
       const form = new FormData()
       form.append('file', arquivo)
       form.append('jobId', jobId)
-      
+      form.append('sobrescrever', sobrescrever)
+
       const { data } = await api.post('/tickets/upload', form)
       await abrirDetalhe(data.batchId)
     } catch (e) {
@@ -61,9 +72,56 @@ export function useTicketClassifier(progressHook) {
     }
   }
 
-  function baixarExportacao() {
+  async function reprocessarTudo() {
+    if (!batchAtual.value) return
+    reprocessandoTudo.value = true
+    erro.value = ''
+    const jobId = crypto.randomUUID()
+    progressHook.iniciarPolling(jobId)
+    try {
+      const { data } = await api.post(
+        `/tickets/batches/${batchAtual.value.batchId}/reprocessar-tudo`,
+        null,
+        { params: { jobId } }
+      )
+      batchAtual.value = data
+    } catch (e) {
+      erro.value = e?.response?.data?.erro || 'Falha ao reprocessar.'
+    } finally {
+      reprocessandoTudo.value = false
+      progressHook.pararPolling()
+    }
+  }
+
+  function baixarExportacao(colunas) {
     if (batchAtual.value) {
-      window.open(`${api.defaults.baseURL}/tickets/batches/${batchAtual.value.batchId}/export`, '_blank')
+      let url = `${api.defaults.baseURL}/tickets/batches/${batchAtual.value.batchId}/export`
+      if (colunas?.length) url += `?colunas=${colunas.join(',')}`
+      window.open(url, '_blank')
+    }
+  }
+
+  async function atualizarTicket(ticketId, dto) {
+    try {
+      const { data } = await api.patch(`/tickets/${ticketId}`, dto)
+      if (batchAtual.value?.tickets) {
+        const idx = batchAtual.value.tickets.findIndex(t => t.id === ticketId)
+        if (idx >= 0) batchAtual.value.tickets[idx] = data
+      }
+      return data
+    } catch (e) {
+      erro.value = e?.response?.data?.erro || 'Falha ao atualizar ticket.'
+      return null
+    }
+  }
+
+  async function obterSimilares(ticketId) {
+    try {
+      const { data } = await api.get(`/tickets/${ticketId}/similares`)
+      return data
+    } catch (e) {
+      erro.value = e?.response?.data?.erro || 'Falha ao buscar similares.'
+      return []
     }
   }
 
@@ -73,10 +131,15 @@ export function useTicketClassifier(progressHook) {
     batchAtual,
     erro,
     reprocessando,
+    reprocessandoTudo,
     carregarLotes,
     abrirDetalhe,
+    verificarDuplicata,
     enviarArquivo,
     reprocessarLote,
+    reprocessarTudo,
     baixarExportacao,
+    atualizarTicket,
+    obterSimilares,
   }
 }

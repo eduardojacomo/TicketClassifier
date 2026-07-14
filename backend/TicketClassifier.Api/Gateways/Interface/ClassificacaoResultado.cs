@@ -7,4 +7,6 @@ public record ClassificacaoResultado(
     string Departamento,
     string Resumo,
     double Confianca,
-    string Justificativa);
+    string Justificativa,
+    string Sentimento,
+    string[] Tags);

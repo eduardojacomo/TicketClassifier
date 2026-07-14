@@ -12,7 +12,21 @@ public class TicketDto
     public string Resumo { get; set; } = string.Empty;
     public double Confianca { get; set; }
     public string Justificativa { get; set; } = string.Empty;
+    public string Sentimento { get; set; } = "neutro";
+    public string[] Tags { get; set; } = Array.Empty<string>();
     public bool ProcessadoOk { get; set; }
+    public bool RegistroModificado { get; set; }
+    public DateTime? DataModificacao { get; set; }
+    public int Similares { get; set; }
+}
+
+public class TicketEditDto
+{
+    public string? Categoria { get; set; }
+    public string? Prioridade { get; set; }
+    public string? Departamento { get; set; }
+    public string? Sentimento { get; set; }
+    public string[]? Tags { get; set; }
 }
 
 public class EstatisticasDto
@@ -22,6 +36,7 @@ public class EstatisticasDto
     public Dictionary<string, int> PorCategoria { get; set; } = new();
     public Dictionary<string, int> PorPrioridade { get; set; } = new();
     public Dictionary<string, int> PorDepartamento { get; set; } = new();
+    public Dictionary<string, int> PorSentimento { get; set; } = new();
     public double ConfiancaMedia { get; set; }
 }
 

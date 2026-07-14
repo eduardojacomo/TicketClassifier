@@ -4,8 +4,7 @@ namespace TicketClassifier.Api.Gateways;
 
 /// <summary>
 /// Seleciona a estratégia de classificação com base em Llm:Provider
-/// (anthropic | gemini | llama | mock). Faz fallback para mock se a chave do
-/// provedor escolhido não estiver configurada.
+/// (anthropic | gemini | llama).
 /// </summary>
 public class ClassificacaoGatewayFactory : IClassificacaoGatewayFactory
 {
@@ -29,7 +28,8 @@ public class ClassificacaoGatewayFactory : IClassificacaoGatewayFactory
             "gemini" when TemChave("Llm:Gemini:ApiKey")
                 => _sp.GetRequiredService<GeminiGateway>(),
             "llama" => _sp.GetRequiredService<LlamaGateway>(),
-            _ => _sp.GetRequiredService<MockGateway>(),
+            _ => throw new InvalidOperationException(
+                $"Nenhum provedor LLM válido configurado. Defina 'Llm:Provider' como 'anthropic', 'gemini' ou 'llama' e forneça a chave de API correspondente."),
         };
     }
 

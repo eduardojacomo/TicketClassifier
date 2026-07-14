@@ -10,6 +10,26 @@ namespace TicketClassifier.Api.Services;
 /// <summary>Leitura e geração de CSV (parse flexível + export enriquecido).</summary>
 public class CsvService
 {
+    public static readonly (string Key, string Label)[] ColunasDisponiveis =
+    {
+        ("id",              "ID"),
+        ("assunto",         "Assunto"),
+        ("descricao",       "Descrição"),
+        ("categoria",       "Categoria"),
+        ("prioridade",      "Prioridade"),
+        ("departamento",    "Departamento"),
+        ("sentimento",      "Sentimento"),
+        ("tags",            "Tags"),
+        ("resumo",          "Resumo"),
+        ("confianca",       "Confiança"),
+        ("justificativa",   "Justificativa"),
+        ("modificado",      "Modificado"),
+        ("dataModificacao", "Data Modificação"),
+    };
+
+    private static readonly HashSet<string> TodasAsChaves =
+        new(ColunasDisponiveis.Select(c => c.Key), StringComparer.OrdinalIgnoreCase);
+
     public List<TicketCsvInput> Parse(Stream csv)
     {
         var config = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -57,31 +77,47 @@ public class CsvService
         return itens;
     }
 
-    public byte[] Export(IEnumerable<Ticket> tickets)
+    public byte[] Export(IEnumerable<Ticket> tickets, IReadOnlyList<string>? colunas = null)
     {
+        var cols = colunas?.Where(c => TodasAsChaves.Contains(c)).ToList();
+        if (cols is null || cols.Count == 0)
+            cols = ColunasDisponiveis.Select(c => c.Key).ToList();
+
+        var labelMap = ColunasDisponiveis.ToDictionary(c => c.Key, c => c.Label, StringComparer.OrdinalIgnoreCase);
+
         using var ms = new MemoryStream();
         using (var writer = new StreamWriter(ms, new UTF8Encoding(true), leaveOpen: true))
         using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
         {
-            csv.WriteField("Id"); csv.WriteField("Assunto"); csv.WriteField("Descricao");
-            csv.WriteField("Categoria"); csv.WriteField("Prioridade"); csv.WriteField("Departamento");
-            csv.WriteField("Resumo"); csv.WriteField("Confianca"); csv.WriteField("Justificativa");
+            foreach (var col in cols)
+                csv.WriteField(labelMap[col]);
             csv.NextRecord();
 
             foreach (var t in tickets)
             {
-                csv.WriteField(t.ExternalId);
-                csv.WriteField(t.Assunto);
-                csv.WriteField(t.Descricao);
-                csv.WriteField(t.Categoria);
-                csv.WriteField(t.Prioridade);
-                csv.WriteField(t.Departamento);
-                csv.WriteField(t.Resumo);
-                csv.WriteField(t.Confianca.ToString("0.00", CultureInfo.InvariantCulture));
-                csv.WriteField(t.Justificativa);
+                foreach (var col in cols)
+                    csv.WriteField(GetValue(t, col));
                 csv.NextRecord();
             }
         }
         return ms.ToArray();
     }
+
+    private static string GetValue(Ticket t, string col) => col.ToLowerInvariant() switch
+    {
+        "id"              => t.ExternalId ?? "",
+        "assunto"         => t.Assunto ?? "",
+        "descricao"       => t.Descricao,
+        "categoria"       => t.Categoria,
+        "prioridade"      => t.Prioridade,
+        "departamento"    => t.Departamento,
+        "sentimento"      => t.Sentimento,
+        "tags"            => t.Tags,
+        "resumo"          => t.Resumo,
+        "confianca"       => t.Confianca.ToString("0.00", CultureInfo.InvariantCulture),
+        "justificativa"   => t.Justificativa,
+        "modificado"      => t.RegistroModificado ? "Sim" : "Não",
+        "datamodificacao" => t.DataModificacao?.ToString("yyyy-MM-dd HH:mm:ss") ?? "",
+        _                 => "",
+    };
 }

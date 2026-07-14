@@ -10,7 +10,7 @@ namespace TicketClassifier.Api.Gateways.Interface;
 public static class Categorias
 {
     public static readonly string[] Lista =
-        { "Login", "Pagamento", "Bug", "Performance", "Integração", "Cadastro", "Financeiro", "Comercial", "Sugestão", "Outro" };
+        { "Dúvida", "Bug", "Reclamação", "Login", "Pagamento", "Financeiro", "Performance", "Integração", "Cadastro", "Comercial", "Sugestão", "Elogio", "Outro" };
 
     public static readonly string[] Prioridades =
         { "Baixa", "Média", "Alta", "Crítica" };
@@ -18,8 +18,17 @@ public static class Categorias
     public static readonly string[] Departamentos =
         { "Suporte", "Financeiro", "Comercial", "Produto", "Desenvolvimento" };
 
+    public static readonly string[] Sentimentos =
+        { "positivo", "negativo", "neutro" };
+
     public static readonly ClassificacaoResultado Fallback =
-        new("Outro", "Média", "Suporte", "", 0.0, "Não classificado.");
+        new("Outro", "Média", "Suporte", "", 0.0, "Não classificado.", "neutro", Array.Empty<string>());
+
+    public static ClassificacaoResultado FallbackComErro(string erro) =>
+        new("Outro", "Média", "Suporte", "", 0.0, erro, "neutro", Array.Empty<string>());
+
+    public static bool EhFallback(ClassificacaoResultado r) =>
+        r.Confianca == 0.0 && r.Categoria == "Outro" && r.Departamento == "Suporte" && string.IsNullOrEmpty(r.Resumo);
 
     private static string Normalizar(string? s)
     {
@@ -38,6 +47,7 @@ public static class Categorias
     public static string CategoriaValida(string? c)    => CasarOu(Lista, c, "Outro");
     public static string PrioridadeValida(string? p)   => CasarOu(Prioridades, p, "Média");
     public static string DepartamentoValido(string? d) => CasarOu(Departamentos, d, "Suporte");
+    public static string SentimentoValido(string? s) => CasarOu(Sentimentos, s, "neutro");
 
     /// <summary>Converte a resposta (array JSON) em dicionário indice → resultado.</summary>
     public static Dictionary<int, ClassificacaoResultado> ParseLote(string textoModelo)
@@ -46,26 +56,80 @@ public static class Categorias
         var j = textoModelo.LastIndexOf(']');
         var json = (i >= 0 && j > i) ? textoModelo[i..(j + 1)] : "[]";
 
-        var resultado = new Dictionary<int, ClassificacaoResultado>();
         using var doc = JsonDocument.Parse(json);
-        if (doc.RootElement.ValueKind != JsonValueKind.Array) return resultado;
+        if (doc.RootElement.ValueKind != JsonValueKind.Array)
+            return new Dictionary<int, ClassificacaoResultado>();
 
-        foreach (var el in doc.RootElement.EnumerateArray())
+        var itens = ParseItens(doc.RootElement);
+        return itens;
+    }
+
+    /// <summary>
+    /// Parse com fallback: tenta primeiro por índice explícito. Se nenhum
+    /// índice bater com os esperados, remapeia pela ordem posicional.
+    /// </summary>
+    public static Dictionary<int, ClassificacaoResultado> ParseLoteComFallback(
+        string textoModelo, IReadOnlyList<int> indicesEsperados)
+    {
+        var i = textoModelo.IndexOf('[');
+        var j = textoModelo.LastIndexOf(']');
+        var json = (i >= 0 && j > i) ? textoModelo[i..(j + 1)] : "[]";
+
+        using var doc = JsonDocument.Parse(json);
+        if (doc.RootElement.ValueKind != JsonValueKind.Array)
+            return new Dictionary<int, ClassificacaoResultado>();
+
+        var porIndice = ParseItens(doc.RootElement);
+
+        var encontrados = indicesEsperados.Count(idx => porIndice.ContainsKey(idx));
+        if (encontrados > 0) return porIndice;
+
+        var elementos = doc.RootElement.EnumerateArray().ToList();
+        var resultado = new Dictionary<int, ClassificacaoResultado>();
+        for (var pos = 0; pos < Math.Min(elementos.Count, indicesEsperados.Count); pos++)
+        {
+            var r = ParseElemento(elementos[pos]);
+            if (r is not null)
+                resultado[indicesEsperados[pos]] = r;
+        }
+        return resultado;
+    }
+
+    private static Dictionary<int, ClassificacaoResultado> ParseItens(JsonElement array)
+    {
+        var resultado = new Dictionary<int, ClassificacaoResultado>();
+        foreach (var el in array.EnumerateArray())
         {
             if (!el.TryGetProperty("indice", out var idxEl) || !idxEl.TryGetInt32(out var idx))
                 continue;
-
-            string? S(string p) => el.TryGetProperty(p, out var v) && v.ValueKind == JsonValueKind.String ? v.GetString() : null;
-            double D(string p) => el.TryGetProperty(p, out var v) && v.TryGetDouble(out var d) ? d : 0.8;
-
-            resultado[idx] = new ClassificacaoResultado(
-                CategoriaValida(S("categoria")),
-                PrioridadeValida(S("prioridade")),
-                DepartamentoValido(S("departamento")),
-                S("resumo") ?? "",
-                Math.Clamp(D("confianca"), 0, 1),
-                S("justificativa") ?? "");
+            var r = ParseElemento(el);
+            if (r is not null) resultado[idx] = r;
         }
         return resultado;
+    }
+
+    private static ClassificacaoResultado? ParseElemento(JsonElement el)
+    {
+        string? S(string p) => el.TryGetProperty(p, out var v) && v.ValueKind == JsonValueKind.String ? v.GetString() : null;
+        double D(string p) => el.TryGetProperty(p, out var v) && v.TryGetDouble(out var d) ? d : 0.8;
+
+        var tags = Array.Empty<string>();
+        if (el.TryGetProperty("tags", out var tagsEl) && tagsEl.ValueKind == JsonValueKind.Array)
+            tags = tagsEl.EnumerateArray()
+                .Where(t => t.ValueKind == JsonValueKind.String)
+                .Select(t => t.GetString()!.Trim().ToLowerInvariant())
+                .Where(t => t.Length > 0)
+                .Distinct()
+                .ToArray();
+
+        return new ClassificacaoResultado(
+            CategoriaValida(S("categoria")),
+            PrioridadeValida(S("prioridade")),
+            DepartamentoValido(S("departamento")),
+            S("resumo") ?? "",
+            Math.Clamp(D("confianca"), 0, 1),
+            S("justificativa") ?? "",
+            SentimentoValido(S("sentimento")),
+            tags);
     }
 }
