@@ -38,6 +38,10 @@ public class TicketsController : ControllerBase
             var resumo = await _service.ProcessarCsvAsync(stream, file.FileName, jobId ?? Guid.NewGuid(), sobrescrever, ct);
             return Ok(resumo);
         }
+        catch (CsvValidationException ex)
+        {
+            return BadRequest(new { erro = ex.Message, codigo = ex.Codigo });
+        }
         catch (InvalidOperationException ex)
         {
             return BadRequest(new { erro = ex.Message });
