@@ -1,0 +1,10 @@
+.env
+appsettings.Development.json
+appsettings.Production.json
+bin/
+obj/
+node_modules/
+dist/
+*.user
+.vs/
+.claude/

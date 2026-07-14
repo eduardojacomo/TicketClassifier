@@ -1,0 +1,1501 @@
+id,subject,description
+1,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? Além disso, poderiam me passar o contato da equipe comercial?"
+2,Alterar forma de pagamento,Quero trocar o cartão de crédito cadastrado para o pagamento.
+3,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Além disso, fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso."
+4,Sistema sempre lento,"O sistema está horrível de lneto, muito decepcionado."
+5,,"Cansei dos problemas, quero cancelar minha assinatura imediatamente."
+6,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete.
+7,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso?"
+8,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. Não consigo trabalhar, preciso de solução imediata."
+9,Insatisfeito com cobrança,"Estou decepcionado, cobranca errada e ninguem resolve. Sem pressa, quando pudreem."
+10,Boleto não chegou,"O boleto da assinatura nao chegou, preciso pagar o pagamento."
+11,Pedido de nova feature,"Poderia adicionar mu modo escuro? Seria um recurso muito útil. Não consigo trabalhar, preciso de solução imediata."
+12,Como exportar relatório,Como faço para exportar o relatório mensal em PDF? Onde fica essa opção?
+13,,"PODERIA ADICIONAR UM MODO ESCURO? SERIA UM RECURSO MUITO ÚTIL. É SÓ UMA DÚVIDA, PODE RESPONDER COM CALMA."
+14,,FUI COBRADO DUAS VEZES NA FATURA DESTE MÊS NO CARTÃO. SOLICITO O REEMBOLSO. ESTOU BLOQUEADO POR CAUSA DISSO.
+15,Como exportar relatório,"Como faço para exportar o relatório mensal em PDF? Onde fica essa opção? É importante, preciso resolver rápido."
+16,Personalizar dashboard,"Solicito a possibilidade de personalizar os cards do dashboard. Não consigo trabalhar, preciso de solução imediata."
+17,Upload falhando,O envio de arquivo falha sempre com mensagem de erro.
+18,Atualização de cadastro,"Preciso atualizar o endereço e o telefone da minha conta. É importante, preciso resolver rápido."
+19,Configurar notificações,"Onde cnofiguro para receber notificações por e-mail? Apenas uma sugestão, sem urgência."
+20,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete. Estou bloqueado por causa disso.
+21,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. É importante, preciso resolver rápido."
+22,Contato do comercial,"Poderiam me passar o contato da equipe comercial? É importante, preciso resolver rápido."
+23,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Não consigo trabalhar, preciso de solução imediata."
+24,Cobrança após cancelamento,Cancelei mês passado mas continuo sendo cobrado na fatura. Estou bloqueado por causa disso.
+25,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo?"
+26,Reembolso pendente,"Pedi o reembolso semana passada e ainda nao caiu no cartao. Alem disso, estou decepcionado, cobranca errada e ninguem resolve."
+27,,"ESQUECI MEU LOGIN, COMO FAÇO PARA RECUPERAR O ACESSO?"
+28,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Apenas uma sugestão, sem urgência."
+29,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Está tudo parado em produção, urgente!"
+30,Alterar forma de pagamento,Quero trocar o cartão de crédito cadastrado para o pagamento.
+31,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante. Está tudo parado em produção, urgente!"
+32,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento."
+33,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. É só uma dúvida, pode responder com calma."
+34,Solicito aumento de limite,Solicito o aumento do limite de usuários da minha ocnta.
+35,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. É só uma dúvida, pode responder com calma."
+36,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. Não consigo trabalhar, preciso de solução imediata."
+37,,CANCELEI MÊS PASSADO MAS CONTINUO SENDO COBRADO NA FATURA.
+38,Novo relatório,"Poderia adicionar um relatório de produtividade por equipe? Apenas uma sugestão, sem urgência."
+39,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente. Além disso, estou muito insatisfeito com o suporte, ninguém resolve nada."
+40,Alterar forma de pagamento,Quero trocar o cartão de crédito cadastrado para o pagamento. Estou bloqueado por causa disso.
+41,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Aguardo com prioridade, por favor."
+42,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. Sem pressa, quando puderem."
+43,Crash no relatório,Ao gerar o relatório o sistema quebra e trava a sessão.
+44,App trava ao abrir,O aplicativo trava e fecha sozinho toda vez que tento abrir.
+45,,"NÃO CONSIGO LOGAR, DÁ ERRO E A PÁGINA RECARREGA SOZINHA."
+46,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Apenas uma sugestão, sem urgência."
+47,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. É só uma dúvida, pode responder com calma."
+48,Crash no relatório,Ao gerar o relatório o sistema quebra e trava a sessão.
+49,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. Sem pressa, quando puderem."
+50,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? Está tudo parado em produção, urgente!"
+51,Erro na fatura,O valor da fatura está diferente do combinado no plano.
+52,Mudança de titularidade,"Preciso transferir a titularidade da conta para outra pessoa. É importante, preciso resolver rápido."
+53,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Sem pressa, quando puderem."
+54,,"SÓ QUERIA DEIXAR UM ELOGIO, O PRODUTO TEM ME AJUDADO BASTANTE. SEM PRESSA, QUANDO PUDEREM."
+55,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve. É importante, preciso resolver rápido."
+56,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete.
+57,,O VALOR DA FATURA ESTÁ DIFERENTE DO COMBINADO NO PLANO. ESTOU BLOQUEADO POR CAUSA DISSO.
+58,Integração com Slack,Poderiam adicionar integração com o Slack para avisos?
+59,Erro ao salvar,Aparece uma falha quando clico em salvar e o botão não funciona. Estou bloqueado por causa disso.
+60,,"NÃO CONSIGO LOGAR, DÁ ERRO E A PÁGINA RECARREGA SOZINHA. SEM PRESSA, QUANDO PUDEREM."
+61,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve. Crítico, resolvam o quanto antes! Além disso, registro uma reclamação: o serviço não entrega o que promete."
+62,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Apenas uma sugestão, sem urgência."
+63,Como exportar relatório,"Como faço para exportar o relatório mensal em PDF? Onde fica essa opção? Aguardo com prioridade, por favor. Além disso, poderiam adicionar integração com o Slack para avisos?"
+64,Sugestão de recurso,"Gostaria que o sistema permitisse adicionar tags nos tickets. É só uma dúvida, pode responder com calma."
+65,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso."
+66,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente."
+67,Exportação em Excel,"Gostaria que tivesse a opção de exportar em Excel além de PDF. Não consigo trabalhar, preciso de solução imediata."
+68,Upload falhando,O envio de arquivo flaha sempre com mensagem de erro.
+69,Informação sobre evento,"Vocês vão participar de algum evento este ano? É só uma dúvida, pode responder com calma."
+70,Cancelar assinatura e reembolso,Quero cancelar e receber o reembolso proporcional da assinatura.
+71,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito. Além disso, onde configuro para receber notificações por e-mail?"
+72,Configurar notificações,Onde configuro para receber notificações por e-mail?
+73,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. Aguardo com prioridade, por favor."
+74,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo?"
+75,Onde altero a senha,Gostaria de saber onde altero minha senha de acesso. Estou bloqueado por causa disso.
+76,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar."
+77,,COMO POSSO CONVIDAR OUTRO USUÁRIO PARA A MINHA CONTA?
+78,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. Além disso, cansei dos problemas, quero cancelar minha assinatura imediatamente."
+79,Informação sobre evento,"Vocês vão participar de algum evento este ano? Sem pressa, quando puderem."
+80,,Como faço para exportar o relatório mensal em PDF? Onde fica essa opção?
+81,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Além disso, como faço para exportar o relatório mensal em PDF? Onde fica essa opção?"
+82,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? Aguardo com prioridade, por favor."
+83,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada. Aguardo com prioridade, por favor. Além disso, quero trocar o cartão de crédito cadastrado para o pagamento."
+84,Novo relatório,"Poderia adicionar um relatório de produtividade por equipe? Além disso, estou decepcionado, cobrança errada e ninguém resolve."
+85,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete. Estou bloqueado por causa disso.
+86,Crash no relatório,Ao gerar o relatório o sistema quebra e trava a sessão.
+87,Login com falha,"Não consgio logar, dá erro e a página recarrega sozinha."
+88,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Não consigo trabalhar, preciso de solução imediata."
+89,,"TEMOS INTERESSE EM UMA PARCERIA COMERCIAL, COM QUEM FALO? APENAS UMA SUGESTÃO, SEM URGÊNCIA."
+90,Sugestão de recurso,Gostaria que o sistema permitisse adicionar tags nos tickets.
+91,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito."
+92,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? É importante, preciso resolver rápido."
+93,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo? Apenas uma sugestão, sem urgência."
+94,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso."
+95,,"ESTOU DECEPCIONADO, COBRANÇA ERRADA E NINGUÉM RESOLVE. É SÓ UMA DÚVIDA, PODE RESPONDER COM CALMA."
+96,Não carrega os dados,"A listagem nao carrega, dá erro 500 e some tudo. Sem pressa, quando puderem. Alem disso, estou decepcionado, cobranca errada e ninguem resolve."
+97,Upload falhando,O envio de arquivo falha sempre com mensagem de erro.
+98,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Apenas uma sugestão, sem urgência."
+99,Como exportar relatório,Como faoc para exportar o relatório mensal em PDF? Onde fica essa opcao?
+100,Atualização de cadastro,Preciso atualizar o endereço e o telefone da minha conta.
+101,Tela em branco,"Depois do último update a tela fica em branco, parece um bug."
+102,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. É só uma dúvida, pode responder com calma."
+103,Solicito aumento de limite,Solicito o aumento do limite de usuários da minha conta.
+104,Exportação em Excel,Gostaria que tivesse a opção de exportar em Excel além de PDF.
+105,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. Sem pressa, quando puderem."
+106,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Crítico, resolvam o quanto antes!"
+107,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada. É importante, preciso resolver rápido. Além disso, o envio de arquivo falha sempre com mensagem de erro."
+108,Sugestão de recurso,"Gostaria que o sistema permitisse adicionar tags nos tickets. É importante, preciso resolver rápido."
+109,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar. Aguardo com prioridade, por favor."
+110,Reclamação formal,"Registro uma reclamação: o serviço não entrega o que promete. É importante, preciso resolver rápido."
+111,Configurar notificações,"Onde configuro para receber notificações por e-mail? Crítico, resolvam o quanto antes!"
+112,API pública,"Gostaria de acesso a uma API para integrar com nosso sistema. Sem pressa, quando puderem."
+113,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+114,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. É importante, preciso resolver rápido."
+115,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguem resolve nada. É só uma dúvida, pod eresponder com calma."
+116,,O envio de arquivo falha sempre com mensagem de erro.
+117,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar. Aguardo com prioridade, por favor."
+118,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. É só uma dúvida, pode responder com calma."
+119,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Além disso, gostaria que tivesse a opção de exportar em Excel além de PDF."
+120,API pública,Gostaria de acesso a uma API para integrar com nosso sistema.
+121,Dúvida sobre integração,Como funciona a integração com o meu sistema atual? Estou bloqueado por causa disso.
+122,Upload falhando,O envio de arqiuvo falha sempre com mensagem de erro.
+123,Sugestão de recurso,"Gostaria que o sistema permitisse adicionar tags nos tickets. Aguardo com prioridade, por favor."
+124,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. Aguardo com prioridade, por favor."
+125,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard. Estou bloqueado por causa disso.
+126,Reembolso pendente,Pedi o reembolso semana passada e ainda não caiu no cartoã.
+127,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Sem pressa, quando puderem."
+128,API pública,"Gostaria de acesso a uma API para integrar com nosso sistema. Crítico, resolvam o quanto antes!"
+129,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Aguardo com prioridade, por favor."
+130,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada  eninguém resolve. Crítico, resolvam o quanto antes!"
+131,Login com falha,"Nao consigo olgar, dá erro e a página recarrega sozinha."
+132,Alterar forma de pagamento,Quero trocar o cartão de crédito cadastrado para o pagamento.
+133,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Sem pressa, quando puderem."
+134,Sugestão de recurso,"Gostaria que o sistema permitisse adicionar tags nos tickets. Não consigo trabalhar, preciso de solução imediata."
+135,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. Não consigo trabalhar, preciso de solução imediata."
+136,Atualização de cadastro,Preciso atualizar o endereço e o telefone da minha conta.
+137,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Está tudo parado em produção, urgente!"
+138,,FUI COBRADO DUAS VEZES NA FATURA DESTE MÊS NO CARTÃO. SOLICITO O REEMBOLSO. ESTOU BLOQUEADO POR CAUSA DISSO.
+139,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Aguardo com prioridade, por favor."
+140,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Aguardo com prioridade, por favor. Além disso, preciso transferir a titularidade da conta para outra pessoa."
+141,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo."
+142,Informação sobre evento,Vocês vão participar de algum evento este ano?
+143,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve. É só uma dúvida, pode responder com calma."
+144,Login com falha,"Nao consigo logar, dá erro e a página recarrega oszinha. Crítico, resolvam o quanto antes!"
+145,Solicito aumento de limite,Solicito o aumento do limite de usuários da minha conta.
+146,Configurar notificações,"Onde configuro para receber notificacões por e-mail? Está tudo parado em producao, urgente! Alem disso, gostaria de acesso a uma API para integrar com nosso sistema."
+147,,QUERO CANCELAR E RECEBER O REEMBOLSO PROPORCIONAL DA ASSINATURA.
+148,Descaso com o cliente,"Faz dias que aguarod retorno e ninguem responde, um descaso. Sem pressa, quando puderem."
+149,Login com falha,"Nao consigo logar, dá erro e a página recarrega sozinha. Estou bloqueado por cauas disso."
+150,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Sem pressa, quando puderem."
+151,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso?"
+152,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente. Aguardo com prioridade, por favor."
+153,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo?"
+154,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete. Estou bloqueado por causa disso.
+155,Tela em branco,"Depois do último update a tela fica em branco, parece um bug."
+156,Erro na fatura,"O valor da fatura está diferente do combinado no plano. É só uma dúvida, pode responder com calma."
+157,Solicito aumento de limite,Solicito o aumento do limite de usuários da minha conta.
+158,API pública,"Gostaria de acesso a uma API para integrar com nosso sistema. Crítico, resolvam o quanto antes!"
+159,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. É só uma dúvida, pode responder com calma."
+160,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Está tudo parado em produção, urgente!"
+161,Sugestão de recurso,"Gostaria que o sistema permitisse adicionar tags nos tickets. Apenas uma sugestão, sem urgência."
+162,API pública,"Gostaria de acesso a uma API para integrar com nosso sistema. Está tudo parado em produção, urgente!"
+163,Erro na fatura,"O valor da fatura está diferente do combinado no plano. É só uma dúvida, pode responder com calma."
+164,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. É importante, preciso resolver rápido."
+165,Atualização de cadastro,"Preciso atualizar o endereço e o telefone da minha conta. Crítico, resolvam o quanto antes! Além disso, quero cancelar e receber o reembolso proporcional da assinatura."
+166,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. É importante, preciso resolver rápido."
+167,Configurar notificações,"Onde configuro para receber notificações por e-mail? Crítico, resolvam o quanto antes! Além disso, o boleto da assinatura não chegou, preciso pagar o pagamento."
+168,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Apenas uma sugestão, sem urgência. Além disso, perdi dados por causa de um erro de vocês, inadmissível."
+169,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Além disso, vocês vão participar de algum evento este ano?"
+170,Exportação em Excel,"Gostaria que tivesse a opção de exportar em Excel além de PDF. É só uma dúvida, pode responder com calma."
+171,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. Apenas uma sugestão, sem urgência. Além disso, o valor da fatura está diferente do combinado no plano."
+172,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? Apenas uma sugestão, sem urgência."
+173,Onde altero a senha,Gostaria de saber onde altero minha senha de acesso. Estou bloqueado por causa disso.
+174,Integração com Slack,Poderiam adicionar integração com o Slack para avisos?
+175,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? É importante, preciso resolver rápido."
+176,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. Aguardo com prioridade, por favor."
+177,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante. É só uma dúvida, pode responder com calma."
+178,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada. Sem pressa, quando puderem."
+179,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. É só uma dúvida, pode responder com calma."
+180,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Sem pressa, quando puderem."
+181,Reembolso pendente,Pedi o reembolso semana passada e ainda não caiu no cartão.
+182,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. É só uma dúvida, pode responder com calma."
+183,Como exportar relatório,Como faco para exportar o relatório mensal em PDF? Onde fica essa opcao?
+184,Exportação em Excel,"Gostaria que tivesse a opção de exportar em Excel além de PDF. É importante, preciso resolver rápido."
+185,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve. Além disso, como posso convidar outro usuário para a minha conta?"
+186,Cancelar assinatura e reembolso,Quero cancelar e receber o reembolso proporcional da assinatura.
+187,Erro na fatura,O valor da fatura está diferente do combinado no plano.
+188,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. Aguardo com prioridade, por favor."
+189,Contato do comercial,Poderiam me passar o contato da equipe comercial?
+190,Produto piorou,"Depois da atualizacao ficou pessimo, estou insatisfeito. Alem disso, como posso convidar outro usuário paraa  minha conta?"
+191,Novo relatório,"Poderia adicionar um relatório de produtividade por equipe? Crítico, resolvam o quanto antes!"
+192,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Apenas uma sugestão, sem urgência."
+193,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? É importante, preciso resolver rápido."
+194,Upload falhando,O envio de arquivo falha sempre com mensagem de erro.
+195,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível. Estou bloqueado por causa disso."
+196,Configurar notificações,"Onde configuro para receber notificações por e-mail? Aguardo com prioridade, por favor. Além disso, solicito a possibilidade de personalizar os cards do dashboard."
+197,,"GOSTARIA QUE O SISTEMA PERMITISSE ADICIONAR TAGS NOS TICKETS. NÃO CONSIGO TRABALHAR, PRECISO DE SOLUÇÃO IMEDIATA."
+198,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Não consigo trabalhar, preciso de solução imediata."
+199,,"O botão de exportar não funciona, nada acontece ao clicar. Estou bloqueado por causa disso."
+200,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Crítico, resolvam o quanto antes!"
+201,,GOSTARIA DE SABER ONDE ALTERO MINHA SENHA DE ACESSO.
+202,,"A LISTAGEM NÃO CARREGA, DÁ ERRO 500 E SOME TUDO. É SÓ UMA DÚVIDA, PODE RESPONDER COM CALMA."
+203,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível."
+204,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. Além disso, qual a diferença entre os planos? Posso trocar quando quiser?"
+205,Crash no relatório,Ao gerar o relatório o sistema quebra e trava a sessao.
+206,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Além disso, não consigo logar, dá erro e a página recarrega sozinha."
+207,,"Pedi o reembolso semana passada e ainda não caiu no cartão. Aguardo com prioridade, por favor."
+208,Alterar forma de pagamento,Quero trocar o cartão de crédito cadastrado para o pagamento.
+209,Integração com Slack,"Poderiam adicionar integração com o Slack para avisos? Aguardo com prioridade, por favor."
+210,Como exportar relatório,Como facop ara exportar o relatório mensal em PDF? Onde fica essa opcao?
+211,Cobrança indevida,Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso.
+212,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser?
+213,,"APARECE UMA FALHA QUANDO CLICO EM SALVAR E O BOTÃO NÃO FUNCIONA. ESTÁ TUDO PARADO EM PRODUÇÃO, URGENTE!"
+214,,"Gostaria de acesso a uma API para integrar com nosso sistema. É só uma dúvida, pode responder com calma."
+215,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Está tudo parado em produção, urgente!"
+216,Onde altero a senha,Gostaria de saber onde altero minha senha de acesso. Estou bloqueado por causa disso.
+217,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. Além disso, estou muito insatisfeito com o suporte, ninguém resolve nada."
+218,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. Crítico, resolvam o quanto antes! Além disso, depois do último update a tela fica em branco, parece um bug."
+219,Configurar notificações,"Onde configuro para receber notificações por e-mail? É importante, preciso resolver rápido."
+220,,PODERIA ADICIONAR UM MODO ESCURO? SERIA UM RECURSO MUITO ÚTIL.
+221,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Aguardo com prioridade, por favor."
+222,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Apenas uma sugestão, sem urgência. Além disso, onde configuro para receber notificações por e-mail?"
+223,,"O SISTEMA ESTÁ HORRÍVEL DE LENTO, MUITO DECEPCIONADO. AGUARDO COM PRIORIDADE, POR FAVOR."
+224,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. É só uma dúvida, pode responde rcom calma."
+225,API pública,"Gostaria de acesso a uma API para integrar com nosso sistema. É importante, preciso resolver rápido."
+226,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Sem pressa, quando puderem."
+227,,O APLICATIVO TRAVA E FECHA SOZINHO TODA VEZ QUE TENTO ABRIR.
+228,Configurar notificações,"Onde configuro para receber notificações por e-mail? Aguardo com prioridade, por favor."
+229,Configurar notificações,Onde configuro para receber notificações por e-mail?
+230,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante."
+231,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Crítico, resolvam o quanto antes!"
+232,Reclamação formal,"Registro uma reclamação: o serviço não entrega o que promete. Crítico, resolvam o quanto antes!"
+233,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? Sem pressa, quando puderem."
+234,,"Só queria deixar um elogio, o produto tem me ajudado bastante."
+235,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível."
+236,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. Apenas uma sugestão, sem urgência."
+237,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante. Estou bloqueado por causa disso."
+238,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete. Estou bloqueado por causa disso.
+239,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. É importante, preciso resolver rápido."
+240,Crash no relatório,Ao gerar o relatório o sistema quebra e trava a sessão.
+241,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Crítico, resolvam o quanto antes!"
+242,Erro na fatura,O valor da fatura está diferente do combinado no plano.
+243,,"QUERO TROCAR O CARTÃO DE CRÉDITO CADASTRADO PARA O PAGAMENTO. É IMPORTANTE, PRECISO RESOLVER RÁPIDO."
+244,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Está tudo parado em producao, urgente!"
+245,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante. Estou bloqueado por causa disso."
+246,,PODERIAM ADICIONAR INTEGRAÇÃO COM O SLACK PARA AVISOS?
+247,,O envio de arquivo falha sempre com mensagem de erro.
+248,,"O SISTEMA ESTÁ HORRÍVEL DE LENTO, MUITO DECEPCIONADO. NÃO CONSIGO TRABALHAR, PRECISO DE SOLUÇÃO IMEDIATA."
+249,Cobrança após cancelamento,"Cancelei mês passado mas continuo snedo cobrado na fatura. É só uma dúvida, pode responder com calma."
+250,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. Crítico, resolvam o quanto antes!"
+251,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. Não consigo trabalhar, preciso de solução imediata."
+252,Exportação em Excel,Gostaria que tivesse a opção de exportar em Excel além de PDF.
+253,Mudança de titularidade,"Preciso transferir a titularidade da conta para outra pessoa. Aguardo com prioridade, por favor."
+254,,"QUERO CANCELAR E RECEBER O REEMBOLSO PROPORCIONAL DA ASSINATURA. É IMPORTANTE, PRECISO RESOLVER RÁPIDO."
+255,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar. Não consigo trabalhar, preciso de solução imediata."
+256,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante. Crítico, resolvam o quanto antes!"
+257,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada."
+258,Informação sobre evento,"Vocês vão participar de algum evento este ano? É importante, preciso resolver rápido. Além disso, registro uma reclamação: o serviço não entrega o que promete."
+259,Sugestão de recurso,Gostaria que o sistema permitisse adicionar tags nos tickets.
+260,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo."
+261,,"PEDI O REEMBOLSO SEMANA PASSADA E AINDA NÃO CAIU NO CARTÃO. SEM PRESSA, QUANDO PUDEREM."
+262,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Crítico, resolvam o quanto antes!"
+263,Reclamação formal,"Registro uma reclamação: o serviço não entrega o que promete. Está tudo parado em produção, urgente!"
+264,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete.
+265,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Estou bloqueado por causa disso. Além disso, esqueci meu login, como faço para recuperar o acesso?"
+266,Mudança de titularidade,"Preciso transferir a titularidade da conta para outra pessoa. Aguardo com prioridade, por favor."
+267,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo? Aguardo com prioridade, por favor."
+268,,"PODERIAM ADICIONAR INTEGRAÇÃO COM O SLACK PARA AVISOS? CRÍTICO, RESOLVAM O QUANTO ANTES!"
+269,Cobrança indevida,Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Estou bloqueado por causa disso.
+270,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Além disso, preciso atualizar o endereço e o telefone da minah conta."
+271,Mudança de titularidade,Preciso transferir a titularidade da conta para outra pessoa.
+272,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. É importante, preciso resolver rápido."
+273,Sugestão de recurso,"Gostaria que o sistema permitisse adicionar tags nos tickets. Aguardo com prioridade, por favor."
+274,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Não consigo trabalhar, preciso de solução imediata."
+275,Exportação em Excel,"Gostaria que itvesse a opcao de exportar em Excel alem de PDF. É importante, preciso resolver rápido."
+276,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Além disso, aparece uma falha quando clico em salvar e o botão não funciona."
+277,Informação sobre evento,Vocês vão participar de algum evento este ano?
+278,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. É importante, preciso resolver rápido."
+279,Configurar notificações,Onde configuro para receber notificacões por e-mail?
+280,,Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Estou bloqueado por causa disso.
+281,Novo relatório,"Poderia adicionar um relatório de produtividade por equipe? É importante, preciso resolver rápido."
+282,Informação sobre evento,Vocês vão participar de algum evento este ano?
+283,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Crítico, resolvam o quanto antes!"
+284,Dúvida sobre plano,"Qual a diferença entre os planos? Posso trocar quando quiser? É só uma dúvida, pode responder com calma."
+285,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguem resolve nada. Aguardo com prioridade, por favor."
+286,Contato do comercial,"Poderiam me passar o contato da equipe comercial? É importante, preciso resolver rápido."
+287,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? Sem pressa, quando puderem."
+288,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. Não consigo trabalhar, preciso de solução imediata. Além disso, como posso convidar outro usuário para a minha conta?"
+289,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Crítico, resolvam o quanto antes!"
+290,Integração com Slack,"Poderiam adicionar integracao com o Slack para avisos? Aguardo com prioridade, por favor."
+291,Configurar notificações,"Onde configuro para receber notificações por e-mail? Sem pressa, quando puderem."
+292,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. Está tudo parado em produção, urgente! Além disso, o sistema está horrível de lento, muito decepcionado."
+293,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento."
+294,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito. Estou bloqueado por causa disso."
+295,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Crítico, resolvam o quanto antes!"
+296,,COMO FUNCIONA A INTEGRAÇÃO COM O MEU SISTEMA ATUAL?
+297,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Não consigo trabalhar, preciso de solução imediata."
+298,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado."
+299,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard. Estou bloqueado por causa disso.
+300,Como filtrar dados,Tem como filtrar os registros por data? Onde encontro isso?
+301,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. Crítico, resolvam o quanto antes!"
+302,Não carrega os dados,"A listagem nao carrega,d á erro 500 e some tudo."
+303,Integração com Slack,Poderiam adicionar integração com o Slack para avisos? Estou bloqueado por causa disso.
+304,App trava ao abrir,O aplicativo trava e fecha sozinho toda vez que tento abrir. Estou bloqueado por causa disso.
+305,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser?
+306,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. É importante, preciso resolver rápido."
+307,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo."
+308,Como exportar relatório,Como faço para exportar o relatório mensal em PDF? Onde fica essa opção?
+309,Reembolso pendente,Pedi o reembolso semana passada e ainda nao caiu no cartao.
+310,Configurar notificações,"Onde configuro para receber notificações por e-mail? É só uma dúvida, pode responder com calma."
+311,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar."
+312,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. Apenas uma sugestão, sem urgência."
+313,Erro ao salvar,Aparece uma falha quando clico em salvar e o botão não funciona. Estou bloqueado por causa disso.
+314,Configurar notificações,"Onde configuro para receber notificações por e-mail? Aguardo com prioridade, por favor."
+315,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível."
+316,Integração com Slack,Poderiam adicionar integração com o Slack para avisos? Estou bloqueado por causa disso.
+317,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Aguardo com prioridade, por favor."
+318,Reclamação formal,"Registro uma reclamação: o serviço não entrega o que promete. Sem pressa, quando puderem."
+319,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. Apenas uma sugestão, sem urgência."
+320,Solicito aumento de limite,Solicito o aumento do limite de usuários da minha conta.
+321,Como convidar usuário,Como posso convidar outro usuário para a minha conta?
+322,Configurar notificações,"Onde configuro para receber notificações por e-mail? É só uma dúvida, pode responder com calma."
+323,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Sem pressa, quando puderem."
+324,Configurar notificações,"Onde configuro para receber notificações por e-mail? Sem pressa, quando puderem. Além disso, como funciona a integração com o meu sistema atual?"
+325,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. Crítico, resolvam o quanto antes! Além disso, o envio de arquivo falha sempre com mensagem de erro."
+326,,"TEMOS INTERESSE EM UMA PARCERIA COMERCIAL, COM QUEM FALO?"
+327,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. Sem pressa, quando puderem."
+328,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha."
+329,Como exportar relatório,"Como faco para exportar o relatório mensal em PDF? Onde fica essa opcao? Apenas uma sugestao, sem urgência."
+330,App trava ao abrir,O aplicativo trava e fecha sozinho toda vez que tento abrir.
+331,Dúvida sobre plano,"Qual a diferença entre os planos? Posos trocar quando quiser? Crítico, resolvam o quanto antes!"
+332,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Apenas uma sugestão, sem urgência."
+333,Reclamação formal,"Regisrto uma reclamação: o serviço não entrega o que promete. Além disso, gostaria que o sistema permitisse adicionar tags nos tickets."
+334,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. Crítico,r esolvam o quanto antes!"
+335,Sugestão de recurso,Gostaria que o sistema permitisse adicionar tags nos tickets.
+336,Configurar notificações,"Onde configuro para receber notificações por e-mail? Sem pressa, quando puderem."
+337,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha."
+338,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. Sem pressa, quando puderem."
+339,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Apenas uma sugestão, sem urgência. Além disso, o valor da fatura está diferente do combinado no plano."
+340,Dúvida sobre plano,"Qual a diferença entre os planos? Posso trocar quando quiser? Não consigo trabalhar, preciso de solução imediata."
+341,,"O valor da fatura está diferente do combinado no plano. Crítico, resolvam o quanto antes!"
+342,Contato do comercial,"Poderiam me passar o contato da equipe comercial? Crítico, resolvam o quanto antes! Além disso, o valor da fatura está diferente do combinado no plano."
+343,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo? Sem pressa, quando puderem."
+344,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete.
+345,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. Está tudo parado em producao, urgente!"
+346,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. Estou bloqueado por causa disso. Além disso, gostaria de acesso a uma API para integrar com nosso sistema."
+347,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso?"
+348,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente. Crítico, resolvam o quanto antes!"
+349,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Apenas uma sugestão, sem urgência."
+350,Cobrança após cancelamento,Cancelei mês passado mas continuo sendo cobrado na fatura.
+351,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente. É só uma dúvida, pode responder com calma. Alem disso, poderia adicionar um relatório de produtividade por equipe?"
+352,Exportação em Excel,Gostaria que tivesse a opção de exportar em Excel além de PDF.
+353,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Apenas uma sugestão, sem urgência."
+354,API pública,"Gostaria de acesso a uma API para integrar com nosso sistema. Crítico, resolvam o quanto antes!"
+355,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. É só uma dúvida, pode responder com calma."
+356,Upload falhando,O envio de arquivo falha sempre com mensagem de erro. Estou bloqueado por causa disso.
+357,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? Não consigo trabalhar, preciso de solução imediata."
+358,Insatisfeito com cobrança,"Estou decepcionado, cobranca errada e ninguem resolve. Estou bloqueadop or causa disso."
+359,Erro ao salvar,Aparece uma falha quando clico em salvar e o botão não funciona.
+360,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso."
+361,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso."
+362,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Alem disso, só queria deixar um elogio, o produto tem me ajudado bastante."
+363,,REGISTRO UMA RECLAMAÇÃO: O SERVIÇO NÃO ENTREGA O QUE PROMETE.
+364,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. É importante, preciso resolver rápido. Além disso, gostaria que tivesse a opção de exportar em Excel além de PDF."
+365,,"REGISTRO UMA RECLAMAÇÃO: O SERVIÇO NÃO ENTREGA O QUE PROMETE. NÃO CONSIGO TRABALHAR, PRECISO DE SOLUÇÃO IMEDIATA."
+366,Pedido de nova feature,Poderia adicionar um modo escuro? Seria um recurso muito útil.
+367,,"SÓ QUERIA DEIXAR UM ELOGIO, O PRODUTO TEM ME AJUDADO BASTANTE."
+368,Cobrança após cancelamento,Cancelei mês passado mas continuo sendo cobrado na fatura.
+369,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante. Além disso, gostaria de saber onde altero minha senha de acesso."
+370,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. É só uma dúvida, pode responder com calma."
+371,Exportação em Excel,Gostaria que tivesse a opção de exportar em Excel além de PDF. Estou bloqueado por causa disso.
+372,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha."
+373,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete.
+374,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar."
+375,Crash no relatório,Ao gerar o relatório o sistema quebra e trava a sessão.
+376,Cobrança após cancelamento,Cancelei mês passado mas continuo sendo cobrado na fatura.
+377,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível."
+378,Tela em branco,"Depois do último update a tela fica em branco, parece um bug."
+379,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. Estou bloqueado por causa disso. Além disso, preciso transferir a titularidade da conta para outra pessoa."
+380,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Aguardo com prioridade, por favor."
+381,Informação sobre evento,"Vocês vão participar de algum evento este ano? Apenas uma sugestão, sem urgência."
+382,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar. Estou bloqueado por causa disso."
+383,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+384,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso. É importante, preciso resolver rápido."
+385,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir .Apenas uma sugestão, sem urgência."
+386,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. Não consigo trabalhar, preciso de solução imediata."
+387,Integração com Slack,"Poderiam adicionar integração com o Slack para avisos? Apenas uma sugestão, sem urgência."
+388,Contato do comercial,"Poderiam me passar o contato da equipe comercial? Crítico, resolvam o quanto antes! lAem disso, perdi dados por causa de um erro de vocês, inadmissível."
+389,Configurar notificações,"Onde configuro para receber notificações por e-mail? Aguardo com prioridade, por favor."
+390,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada. Não consigo trabalhar, preciso de solução imediata."
+391,Erro na fatura,O valor da fatura está diferente do combinado no plano.
+392,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Aguardo com prioridade, por favor."
+393,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. É só uma dúvida, pode responder com calma."
+394,App trava ao abrir,O aplicativo trava e fecha sozinho toda vez que tento abrir.
+395,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha."
+396,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível."
+397,,O ENIVO DE ARQUIVO FALHA SEMPRE COM MENSAGEM DE ERRO.
+398,Erro na fatura,O valor da fatura está diferente do combinado no plano.
+399,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Crítico, resolvam o quanto antes! Além disso, aparece uma falha quando clico em salvar e o botão não funciona."
+400,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Aguardo com prioridade, por favor. Além disso, temos interesse em uma parceria comercial, com quem falo?"
+401,,"TEM COMO FILTRAR OS REGISTROS POR DATA? ONDE ENCONTRO ISSO? AGUARDO COM PRIORIDADE, POR FAVOR."
+402,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito. Além disso, preciso transferir a titularidade da conta para outra pessoa."
+403,Atualização de cadastro,"Preciso atualizar o endereço e o telefone da minha conta. Apenas uma sugestão, sem urgência. Além disso, o aplicativo trava e fecha sozinho toda vez que tento abrir."
+404,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Aguardo com prioridade, por favor."
+405,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. É importante, preciso resolver rápido."
+406,App trava ao abrir,O aplicativo trava e fecha sozinho toda vez que tento abrir.
+407,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. É importante, preciso resolver rápido."
+408,,"COMO POSSO CONVIDAR OUTRO USUÁRIO PARA A MINHA CONTA? CRÍTICO, RESOLVAM O QUANTO ANTES!"
+409,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. É só uma dúvida, pode responder com calma."
+410,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. É importante, preciso resolver rápido."
+411,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Crítico, resolvam o quanto antes!"
+412,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Sem pressa, quando puderem. Além disso, o sistema está horrível de lento, muito decepcionado."
+413,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente. Alem disso, preciso transferir a titularidade da conta para uotra pessoa."
+414,API pública,Gostaria de acesso a uma API para integrar com nosso sistema.
+415,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. É importante, preciso resolver rápido."
+416,,"Cansei dos problemas, quero cancelar minha assinatura imediatamente. Apenas uma sugestão, sem urgência."
+417,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo."
+418,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Sem pressa, quando puderem."
+419,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente."
+420,Upload falhando,O envio de arquivo falha sempre com mensagem de erro. Estou bloqueado por causa disso.
+421,Como filtrar dados,Tem como filtrar os registros pord ata? Onde encontro isso?
+422,Integração com Slack,Poderiam adicionar integração com o Slack para avisos?
+423,Login com falha,"Nao consigo logar, dá erro e a página recarrega sozinha. Aguardo com prioridade, por favor."
+424,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Estou bloqueado por causa disso."
+425,,"PEDI O REEMBOLSO SEMANA PASSADA E AINDA NÃO CAIU NO CARTÃO. SEM PRESSA, QUANDO PUDEREM."
+426,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Aguardo com prioridade, por favor."
+427,Novo relatório,Poderia adicionar um relatório de produtividade por equipe?
+428,API pública,"Gostaria de acesso a uma API para integrar com nosso sistema. Está tudo parado em produção, urgente! Além disso, cansei dos problemas, quero cancelar minha assinatura imediatamente."
+429,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. É importante, preciso resolver rápido."
+430,Mudança de titularidade,"Preciso transferir a titularidade da conta para outra pessoa. Crítico, resolvam o quanto antes!"
+431,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante. É só uma dúvida, pode responder com calma."
+432,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente."
+433,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Estou bloqueado por causa disso. Além disso, a listagem não carrega, dá erro 500 e some tudo."
+434,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível."
+435,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Crítico, resolvam o quanto antes! Além disso, estou muito insatisfeito com o suporte, ninguém resolve nada."
+436,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível. É só uma dúvida, pode responder com calma."
+437,Nota fiscal,Preciso da nota fiscal do pagamento para o financeiro da empresa.
+438,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. É só uam dúvida, pode responder com calma."
+439,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? Crítico, resolvam o quanto antes!"
+440,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. É importante, preciso resolver rápido."
+441,Dúvida sobre plano,"Qual a diferença entre os planos? Posso trocar quando quiser? Apenas uma sugestão, sem urgência."
+442,Cancelar assinatura e reembolso,Quero cancelar e receber o reembolso proporcional da assinatura.
+443,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Aguardo com prioridade, por favor."
+444,Dúvida sobre integração,Como funciona  aintegração com o meu sistema atual?
+445,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. Crítico, resolvam o quanto antes!"
+446,,"FUI COBRADO DUAS VEZES NA FATURA DESTE MÊS NO CARTÃO. SOLICITO O REEMBOLSO. AGUARDO COM PRIORIDADE, POR FAVOR."
+447,,"O boleto da assinatura nao chegou, preciso pagar o pagamento. Estou bloqueado por causa disso."
+448,Alterar forma de pagamento,Quero trocar o cartão de crédito cadastrado para o pagamento.
+449,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve. Sem pressa, quando puderem."
+450,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Crítico, resolvam o quanto antes!"
+451,,"FUI COBRADO DUAS VEZES NA FATURA DESTE MÊS NO CARTÃO. SOLICITO O REEMBOLSO. AGUARDO COM PRIORIDADE, POR FAVOR."
+452,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Sem pressa, quando puderem."
+453,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. Apenas uma sugestão, sem urgência."
+454,Configurar notificações,"Onde configuro para receber notificações por e-mail? É importante, preciso resolver rápido."
+455,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Sem pressa, quando puderem."
+456,Onde altero a senha,Gostaria de saber onde altero minha senha de acesso.
+457,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito."
+458,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+459,,"FUI COBRADO DUAS VEZES NA FATURA DESTE MÊS NO CARTÃO. SOLICITO O REEMBOLSO. É SÓ UMA DÚVIDA, PODE RESPONDER COM CALMA."
+460,Mudança de titularidade,Preciso transferir a titularidade da conta para outra pessoa.
+461,Como exportar relatório,Como faço para exportar o relatório mensal em PDF? Onde fica essa opção?
+462,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Está tudo parado em produção, urgente!"
+463,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito. Aguardo com prioridade, por favor."
+464,Erro na fatura,"O valor da fatura está diferente do combinado no plano. É importante, preciso rseolver rápido."
+465,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Está tudo parado em produção, urgente!"
+466,Cobrança indevida,Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso.
+467,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeit.o Apenas uma sugestão, sem urgência."
+468,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. É só uma dúvida, pode responder com calma."
+469,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento."
+470,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. É importante, preciso resolver rápido."
+471,Configurar notificações,Onde configuro para receber notificações por e-mail? Estou bloqueado por causa disso.
+472,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Aguardo com prioridade, por favor."
+473,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? É importante, preciso resolver rápido."
+474,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito."
+475,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Sem pressa, quando puderem. Além disso, solicito o aumento do limite de usuários da minha conta."
+476,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete.
+477,,"CANCELEI MÊS PASSADO MAS CONTINUO SENDO COBRADO NA FATURA. ESTÁ TUDO PARADO EM PRODUÇÃO, URGENTE!"
+478,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. É só uma dúvida, pode responder com calma."
+479,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Estou bloqueado por causa disso. Além disso, poderiam me passar o contato da equipe comercial?"
+480,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar. Aguardo com prioridade, por favor."
+481,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Estou bloqueado por causa disso."
+482,Reclamação formal,"Registro uma reclamação: o serviço não entrega o que promete. Apenas uma sugestão, sem urgência."
+483,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Estou bloqueado por causa disso."
+484,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Estou bloqueado por causa disso."
+485,Novo relatório,"Poderia adciionar um relatório de produtividade por equipe? Sem pressa, quando puderem."
+486,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Está tudo parado em produção, urgente!"
+487,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Sem pressa, quando puderem. Além disso, cansei dos problemas, quero cancelar minha assinatura imediatamente."
+488,Configurar notificações,"Onde configuro para receber notificacões por e-mail? Sem pressa, quando puderem. Alem disso, como faco para exportar o relatório mensal em PDF? Onde fica essa opcao?"
+489,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve."
+490,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. É só uma dúvida, pode responder com calma."
+491,Alterar forma de pagamento,Quero trocar o cartao de credito cadastrado para o pagamento.
+492,Dúvida sobre plano,"Qual a diferença entre os planos? Posso trocar quando quiser? É importante, preciso resolver rápido."
+493,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar. Sem pressa, quando puderem."
+494,Integração com Slack,"Poderiam adicionar integração com o Slack para avisos? Não consigo trabalhar, preciso de solução imediata."
+495,Reclamação formal,"Registro uma reclamação: o serviço não entrega o que promete. Aguardo com prioridade, por favor."
+496,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso. Estou bloqueado por causa disso."
+497,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito. Aguardo com prioridade, por favor."
+498,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. Estou bloqueado por causa disso. Além disso, poderia adicionar um relatório de produtividade por equipe?"
+499,,"GOSTARIA QUE TIVESSE A OPÇÃO DE EXPORTAR EM EXCEL ALÉM DE PDF. É IMPORTANTE, PRECISO RESOLVER RÁPIDO."
+500,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. É importante, preciso resolver rápido."
+501,Dúvida sobre plano,"Qual a diferença entre os planos? Posso trocar quando quiser? Está tudo parado em produção, urgente!"
+502,Reclamação formal,"Registro uma reclamação: o serviço não entrega o que promete. Sem pressa, quando puderem."
+503,,PRECISO ATUALIZAR O ENDEREÇO E O TELEFONE DA MINHA CONTA. ESTOU BLOQUEADO POR CAUSA DISSO.
+504,Botão quebrado,"O botão de exportar não funciona, nada acontece a oclicar."
+505,,"SÓ QUERIA DEIXAR UM ELOGIO, O PRODUTO TEM ME AJUDADO BASTANTE."
+506,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso. Apenas uma sugestão, sem urgência."
+507,App trava ao abrir,O aplicativo trava e fehca sozinho toda vez que tento abrir.
+508,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso."
+509,Botão quebrado,"O botao de exportar nao funciona, nada acontece ao clicar. É só uma dúvida, pode responder com calma."
+510,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. É importante, preciso resolver rápido."
+511,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+512,Tela em branco,"Depois do último update a tela fica em branco, parece um bug."
+513,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete.
+514,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. É só uma dúvida, pode responder com calma."
+515,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. É só uma dúvida, pode responder com calma."
+516,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente. Está tudo parado em produção, urgente!"
+517,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. Crítico, resolvam o quanto antes!"
+518,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete.
+519,API pública,"Gostaria de acesso a uma API para integrar com nosso sistema. Aguardo com prioridade, por favor."
+520,Cancelar assinatura e reembolso,"Quero cacnelar e receber o reembolso proporcional da assinatura. É só uma dúvida, pode responder com calma. Além disso, o sistema está horrível de lento, muito decepcionado."
+521,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. É importante, preciso resolver rápido."
+522,Integração com Slack,"Poderiam adicionar integração com o Slack para avisos? Está tuod parado em produção, urgente!"
+523,,"PRECISO ATUALIZAR O ENDEREÇO E O TELEFONE DA MINHA CONTA. APENAS UMA SUGESTÃO, SEM URGÊNCIA."
+524,Informação sobre evento,Vocês vão participar de algum evento este ano?
+525,Integração com Slack,"Poderiam adicionar integração com o Slack para avisos? Está tudo parado em produção, urgente!"
+526,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Sem pressa, quando puderem."
+527,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+528,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Apenas uma sugestão, sem urgência."
+529,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? É só uma dúvida, pode responder com calma."
+530,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+531,,"TEM COMO FILTRAR SO REGISTROS POR DATA? ONDE ENCONTRO ISSO? É SÓ UMA DÚVIDA, PODE RESPONDER COM CALMA."
+532,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo? Está tudo parado em produção, urgente!"
+533,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito."
+534,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Não consigo trabalhar, preciso de solução imediata. Além disso, quero cancelar e receber o reembolso proporcional da assinatura."
+535,,Onde configuro para receber notificações por e-mail?
+536,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado."
+537,,"O BOLETO DA ASSINATURA NÃO CHEGOU, PRECISO PAGAR O PAGAMENTO. É SÓ UMA DÚVIDA, PODE RESPONDER COM CALMA."
+538,Como exportar relatório,Como faço para exportar o relatório mensal em PDF? Onde fica essa opção?
+539,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento."
+540,Cobrança indevida,Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso.
+541,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Sem pressa, quando puderem. Além disso, preciso transferir a titularidade da conta para outra pessoa."
+542,Contato do comercial,"Poderiam me passar o contato da equipe comercial? Sem pressa, quando puderem."
+543,Dúvida sobre plano,Qual a diferenca entre os planos? Posso trocar quando quiser? Esotu bloqueado por causa disso.
+544,Reembolso pendente,Pedi o reembolso semana passada e ainda nao caiu no cartao.
+545,Erro na fatura,O valor da fatura está diferente do combinado no plano. Estou bloqueado por causa disso.
+546,Atualização de cadastro,"Preciso atualizar o endereço e o telefone da minha conta. Não consigo trabalhar, preciso de solução imediata."
+547,Como exportar relatório,"Como faço para exportar o relatório mensal em PDF? Onde fica essa opção? Além disso, preciso da nota fiscal do pagamento para o financeiro da empresa."
+548,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Estou bloqueado por causa disso. Alem disso, preciso atualizar o endereco e o telefone da minha conta."
+549,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo? Crítico, resolvam o quanto antes!"
+550,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Aguardo com prioridade, por favor."
+551,Novo relatório,Poderia adicionar um relatório de produtividade por equipe?
+552,API pública,"Gostaria de acesso a uma API para integrar com nosso sistema. Apenas uma sugestão, sem urgência."
+553,Não carrega os dados,"A listagem não carrega, ád erro 500 e some tudo."
+554,,SOLICITO A POSSIBILIDADE DE PERSONALIZAR OS CARDS DO DASHBOARD.
+555,Exportação em Excel,Gostaria que tivesse a opção de exportar em Excel além de PDF.
+556,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve."
+557,Atualização de cadastro,"Preciso atualizar o endereço e o telefone da minha conta. Crítico, resolvam o quanto antes!"
+558,Sugestão de recurso,Gostaria que o sistema permitisse adicionar tags nos tickets. Estou bloqueado por causa disso.
+559,Contato do comercial,"Poderiam me passar o contato da equipe comercial? É importante, preciso resolver rápido."
+560,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguem resolve nada."
+561,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Apenas uma sugestão, sem urgência."
+562,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? É só uma dúvida, pode responder com calma."
+563,Dúvida sobre plano,"Qual a diferença entre os planos? Posso trocar quando quiser? É importante, preciso resolver rápido."
+564,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Aguardo com prioridade, por favor."
+565,Reembolso pendente,Pedi o reembolso semana passada e ainda nao caiu no cartao.
+566,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. É importante, preciso resolver rápido."
+567,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível."
+568,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito. É importante, preciso resolver rápido. Além disso, como faço para exportar o relatório mensal em PDF? Onde fica essa opção?"
+569,Alterar forma de pagamento,Quero trocar o cartão de crédito cadastrado para o pagamento.
+570,Como exportar relatório,"Como faço para exportar o relatório mensal em PDF? Onde fica essa opção? Aguardo com prioridade, por favor."
+571,Solicito aumento de limite,Solicito o aumento do limite de usuários da minh aconta.
+572,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo?"
+573,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Não consigo trabalhar, preciso de solução imediata."
+574,Como filtrar dados,Tem como filtrar os registros por data? Onde encontro isso?
+575,Cobrança após cancelamento,Cancelei mês passado mas continuo sendo cobrado na fatura.
+576,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. É só uma dúvida, pode responder com calma."
+577,Descaso com o cliente,"Faz dias que aguardo retorno e ninguem responde, um descaso. É só uma dúvida, pode responder com calma."
+578,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante. Estou bloqueado por causa disso."
+579,Dúvida sobre plano,"Qual a diferença entre os planos? Posso trocar quando quiser? Apenas uma sugestão, sem urgência."
+580,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve."
+581,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Estou bloqueado por causa disso."
+582,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Não consigo trabalhar, preciso de solução imediata."
+583,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Crítico, resolvam o quanto antes!"
+584,Cobrança após cancelamento,Cancelei mês passado mas continuo sendo cobrado na fatura.
+585,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Está tudo parado em produção, urgente!"
+586,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. É importante, preciso resolver rápido. Além disso, preciso atualizar o endereço e o telefone da minha conta."
+587,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? É importante, preciso resolver rápido. Além disso, como posso conviadr outro usuário para a minha conta?"
+588,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada."
+589,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Aguardo com prioridade, por favor."
+590,,"FAZ DIAS QUE AGUARDO RETORNO E NINGUÉM RESPONDE, UM DESCASO. ESTÁ TUDO PARADO EM PRODUÇÃO, URGENTE!"
+591,App trava ao abrir,O aplicativo trava e fecha sozinho toda vez que tento abrir.
+592,Atualização de cadastro,"Preciso atualizar o endereço e o telefone da minha conta. Está tudo parado em produção, urgente! Além disso, pedi o reembolso semana passada e ainda não caiu no cartão."
+593,,Solicito a possibilidade de personalizar os cards do dashboard.
+594,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso?"
+595,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Crítico, resolvam o quanto antes!"
+596,Como convidar usuário,Como posso convidar outro usuário para a minha conta?
+597,Informação sobre evento,Vocês vão participar de algum evento este ano?
+598,API pública,Gostaria de acesso a uma API para integrar com nosso sistema.
+599,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo?"
+600,Novo relatório,"Poderia adicionra um relatório de produtividade por equipe? Sem pressa, quando puderem."
+601,Erro ao salvar,Aparece uma falha quando clico em salvar e o botão não funciona.
+602,Como exportar relatório,"Como faço para exportar o relatório mensal em PDF? Onde fica essa opção? Aguardo com prioridade, por favor."
+603,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Aguardo com prioridade, por favor."
+604,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. Aguardo com prioridade, por favor."
+605,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso. Estou bloqueado por causa disso."
+606,Cobrança indevida,Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso.
+607,Reclamação formal,"Registro uma reclamação: o serviço não entrega o que promete. É só uma dúvida, pode responder com calma."
+608,Sugestão de recurso,"Gostaria que o sistema permitisse adicionar tags nos tickets. Aguardo com prioridade, por favor."
+609,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado."
+610,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível. É importante, preciso resolver rápido."
+611,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+612,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito. Estou bloqueado por causa disso. Além disso, fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso."
+613,Insatisfeito com cobrança,"Estou decepcionado, cobranca errada e ninguem resolve. É só uma dúvida, pode responder com calma."
+614,Produto piorou,"Depois da atualizacao ficou pessimo, estou insatisfeito. Alem disso, depois do último update a tela fica em branco, parece um bug."
+615,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Está tudo parado em produção, urgente!"
+616,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Além disso, preciso transferir a titularidade da conta para outra pessoa."
+617,Alterar forma de pagamento,Quero trocar o cartao de credito cadastrado para o pagamento.
+618,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. É importante, preciso resolver rápido."
+619,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. É só uma dúvida, pode responder com calma. Além disso, temos interesse em uma parceria comercial, com quem falo?"
+620,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar."
+621,,O ENVIO DE ARQUIVO FALHA SEMPRE COM MENSAGEM DE ERRO.
+622,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Aguardo com prioridade, por favor."
+623,Novo relatório,Poderia adicionar um relatório de produtividade por equipe?
+624,Pedido de nova feature,Poderia adicionar um modo escuro? Seria um recurso muito útil.
+625,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Não consigo trabalhar, preciso de solução imediata."
+626,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Além disso, depois da atualização ficou péssimo, estou insatisfeito."
+627,Dúvida sobre integração,Como funciona a integração com o meu sistema atual?
+628,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Não consigo trabalhar, preciso de solução imediata."
+629,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. Apenas uma sugestão, sem urgência."
+630,Integração com Slack,"Poderiam adicionar integracao com o Slack para avisos? É só uam dúvida, pode responder com calma."
+631,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Aguardo com prioridade, por favor."
+632,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Sem pressa, quando puderem. Além disso, preciso atualizar o endereço e o telefone da minha conta."
+633,Novo relatório,"Poderia adicionar um relatório de produtividade por equipe? Crítico, resolvam o quanto antes!"
+634,,"CANSEI DOS PROBLEMAS, QUERO CANCELAR MINHA ASSINATURA IMEDIATAMENTE. ESTOU BLOQUEADO POR CAUSA DISSO."
+635,,TEM COMO FILTRAR OS REGISTROS POR DATA? ONDE ENCONTRO ISSO?
+636,Sugestão de recurso,Gostaria que o sistema permitisse adicionar tags nos tickets.
+637,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? Aguardo com prioridade, por favor."
+638,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito."
+639,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Apenas uma sugestão, sem urgência."
+640,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar. Crítico, resolvam o quanto antes!"
+641,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar."
+642,Dúvida sobre integração,Como funciona a integração com o meu sistema atual?
+643,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Sem pressa, quando puderem."
+644,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Aguardo com prioridade, por favor. Além disso, aparece uma falha quando clico em salvar e o botão não funciona."
+645,Upload falhando,O envio de arquivo falha sempre com mensagem de erro.
+646,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível."
+647,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível. É importante, preciso resolver rápido."
+648,Integração com Slack,"Poderiam adicionar integracao com o Slack para avisos? Apenas uma sugestao, sem urgência."
+649,,Tem como filtrar os registros por data? Onde encontro isso?
+650,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Sem pressa, quando puderem."
+651,Onde altero a senha,Gostaria de saber onde altero minha senha de acesso.
+652,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Sem pressa, quando puderem."
+653,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. É só uma dúvida, pode responder com calma."
+654,Integração com Slack,"Poderiam adicionar integração com o Slack para avisos? Não consigo trabalhar, preciso de solução imediata."
+655,Integração com Slack,Poderiam adicionar integração com o Slack para avisos?
+656,Erro ao salvar,Aparece uma falha quando clico em salvar e o botao nao funciona.
+657,Erro ao salvar,Aparece uma falha quando clico em salvar e o botão não funciona.
+658,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+659,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. É importante, preciso resolver rápido."
+660,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve."
+661,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. Aguardo com prioridade, por favor."
+662,Upload falhando,O envio de arquivo falha sempre com mensagem de erro. Estou bloqueado por causa disso.
+663,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante. Aguardo com prioridade, por favor."
+664,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. Não consigo trabalhar, preciso de solução imediata."
+665,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Crítico, resolvam o quanto antes!"
+666,Alterar forma de pagamento,Quero trocar o cartão de crédito cadastrado para o pagamento. Estou bloqueado por causa disso.
+667,Nota fiscal,Preciso da nota fiscal do pagamento para o financeiro da empresa.
+668,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Apenas uma sugestão, sem urgência."
+669,Péssimo atendimento,"Estou umito insatisfeito com o suporte, ninguem resolve nada. Apenas uma sugestao, sem urgência. Alem disso, solicito a possibilidade de personalizar os cards do dashboard."
+670,Cobrança indevida,Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso.
+671,,"Preciso transferir a titularidade da conta para outra pessoa. Está tudo parado em produção, urgente!"
+672,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser?
+673,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento."
+674,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. É importante, preciso resolver rápido."
+675,Configurar notificações,"Onde configuro para receber notificações por e-mail? É importante, preciso resolver rápido."
+676,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. Além disso, perdi dados por causa de um erro de vocês, inadmissível."
+677,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. Está tudo parado em produção, urgente!"
+678,,"PRECISO DA NOTA FISCAL DO PAGAMENTO PARA OF INANCEIRO DA EMPRESA. CRÍTICO, RESOLVAM O QUANTO ANTES!"
+679,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada. É só uma dúvida, pode responder com calma."
+680,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. Sem pressa, quando puderem."
+681,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. É só uma dúvida, pode responder com calma."
+682,,Aparece uma falha quando clico em salvar e o botão não funciona. Estou bloqueado por causa disso.
+683,Exportação em Excel,"Gostaria que tivesse a opção de exportar em Excel além de PDF. É importante, preciso resolver rápido."
+684,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso?"
+685,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Além disso, como faço para exportar o relatório mensal em PDF? Onde fica essa opção?"
+686,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. Aguardo com prioridade, por favor."
+687,,VOCÊS VÃO PARTICIPAR DE ALGUM EVENTO ESTE ANO?
+688,Como exportar relatório,"Como faço para exportar o relatório mensal em PDF? Onde fica essa opção? Sem pressa, quando puderem."
+689,Reembolso pendente,Pedi o reembolso semana passada e ainda não caiu no cartão.
+690,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. Aguardo com prioridade, por favor. Além disso, como faço para exportar o relatório mensal em PDF? Onde fica essa opção?"
+691,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Sem pressa, quando pudreem."
+692,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso. Está tudo parado em produção, urgente!"
+693,Mudança de titularidade,"Preciso transferir a titularidade da conta para outra pessoa. Sem pressa, quando puderem."
+694,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo."
+695,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Além disso, pedi o reembolso semana passada e ainda não caiu no cartão."
+696,Atualização de cadastro,"Preciso atualizar o endereço e o telefone da minha conta. Crítico, resolvam o quanto antes!"
+697,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Está tudo parado em produção, urgente! Além disso, o botão de exportar não funciona, nada acontece ao clicar."
+698,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve."
+699,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. É importante, preciso resolver rápido."
+700,Mudança de titularidade,Preciso transferir a titularidade da conta para outra pessoa.
+701,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Crítico, resolvam o quanto antes!"
+702,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso. Apenas uma sugestão, sem urgência."
+703,Tela em branco,"Depois do último update a tela fica em branco, parece um bug."
+704,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. Não consigo trabalhar, preciso de solução imediata."
+705,,"TEM COMO FILTRAR OS REGISTROS POR DATA? ONDE ENCONTRO ISSO? CRÍTICO, RESOLVAM O QUANTO ANTES!"
+706,,"O APLICATIVO TRAVA E FECHA SOZINHO TODA VEZ QUE TENTO ABRIR. SEM PRESSA, QUANDO PUDEREM."
+707,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? É importante, preciso resolver rápido."
+708,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? Crítico, resolvam o quanto antes!"
+709,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Estou bloqueado por causa disso. Além disso, só queria deixar um elogio, o produto tem me ajudado bastante."
+710,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante. É importante, preciso resolver rápido."
+711,Reembolso pendente,Pedi o reembolso semana passada e ainda não caiu no cartão.
+712,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Apenas uma sugestão, sem urgência."
+713,Contato do comercial,"Poderiam me passar o contato da equipe comercial? É só uma dúvida, pode responder com calma."
+714,Exportação em Excel,Gostaria que tivesse a opção de exportar em Excel além de PDF. Estou bloqueado por causa disso.
+715,Reembolso pendente,Pedi o reembolso semana passada e ainda não caiu no cartão.
+716,Upload falhando,O envio de arquivo falha sempre com mensagem de erro.
+717,,"Gostaria de saber onde altero minha senha de acesso. Sem pressa, quando puderem."
+718,API pública,"Gostaria de acesso a uma API para integrar com nosso sistema. Além disso, o valor da fatura está diferente do combinado no plano."
+719,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Além disso, gostaria que o sistema permitisse adicionar tags nos tickets."
+720,Reembolso pendente,Pedi o reembolso semana passada e ainda não caiu no cartão.
+721,,TEM COMO FILTRAR OS REGISTROS POR DATA? ONDE ENCONTRO ISSO?
+722,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? É só uma dúvida, pode responder com calma."
+723,Contato do comercial,"Poderiam me passar o contato da equipe comercial? Sem pressa, quando puderem."
+724,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. Além disso, preciso da nota fiscal do pagamento para o financeiro da empresa."
+725,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser?
+726,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente."
+727,Erro na fatura,O valor da fatura está diferente do combinado no plano.
+728,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível. É importante, preciso resolver rápido."
+729,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Apenas uma sugestão, sem urgência."
+730,Dúvida sobre integração,Como funciona a integração com o meu sistema atual?
+731,,Preciso atualizar o endereço e o telefone da minha conta. Estou bloqueado por causa disso.
+732,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botao nao funciona. Nao consigo trabalhar, preciso de solucao imediata. Alem disso, tem como filtrar os registros por data? Onde encontro isso?"
+733,Login com falha,"Nao consigo logar, dá erro e a página recarrega sozinha."
+734,Integração com Slack,"Poderiam adicionar integração com o Slack para avisos? É importante, preciso resolver rápido."
+735,Dúvida sobre integração,Como funciona a integração com o meu sistema atual?
+736,Novo relatório,"Poderia adicionar um relatório de produtividade por equipe? Apenas uma sugestão, sem urgência. Além disso, pedi o reembolso semana passada e ainda não caiu no cartão."
+737,Dúvida sobre integração,Como funciona a integracao com o meu sistema atual?
+738,Tela em branco,"Depois do último update a tela fica em branco, parece um bug."
+739,,"CANSEI DOS PROBLEMAS, QUERO CANCELAR MINHA ASSINATURA IMEDIATAMENTE. É IMPORTANTE, PRECISO RESOLVER RÁPIDO."
+740,Botão quebrado,"O botao de exportar nao funciona, nada acontece ao clicar. É importante, preciso resolver rápido."
+741,Dúvida sobre plano,"Qual a diferença entre os planos? Posso trocar quando quiser? Sem pressa, quando puderem."
+742,Reembolso pendente,Pedi o reembolso semana passada e ainda não caiu no cartão.
+743,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. É só uma dúvida, pode responder com calma."
+744,Mudança de titularidade,"Preciso transferir a titularidade da conta para outra pessoa. Crítico, resolvam o quanto antes!"
+745,Onde altero a senha,Gostaria de saber onde altero minha senha de acesso.
+746,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? Sem pressa, quando puderem."
+747,Não carrega os dados,"A listagem nao carrega, dá erro 500 e some tudo."
+748,Pedido de nova feature,Poderia adicionar um modo escuro? Seria um recurso muito útil.
+749,Cobrança indevida,Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso.
+750,Configurar notificações,Onde configuro para receber notificações por e-mail? Estou bloqueado por causa disso.
+751,Upload falhando,O envio de arquivo falha sempre com mensagem de erro.
+752,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha."
+753,Reembolso pendente,Pedi o reembolso semana passada e ainda não caiu no cartão. Estou bloqueado por causa disso.
+754,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Não consigo trabalhar, preciso de solução imediata."
+755,Upload falhando,O envio de arquivo falha sempre com mensagem de erro.
+756,Cobrança indevida,Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso.
+757,Nota fiscal,"Preciso da nota fiscal do pagamento para o fiannceiro da empresa. É importante, preciso resolver rápido. Além disso, preciso da nota fiscal do pagamento para o financeiro da empresa."
+758,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Não consigo trabalhar, preciso de solução imediata."
+759,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Apenas uma sugestão, sem urgência."
+760,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. Aguardo com prioridade, por favor."
+761,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tentoa brir. Nao consigo trabalhar, preciso de solucao imediata."
+762,Personalizar dashboard,"Solicito a possibilidade de personalizar os cards do dashboard. Não consigo trabalhar, preciso de solução imediata."
+763,Reembolso pendente,Pedi o reembolso semana passada e ainda nao caiu no cartao.
+764,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito. Aguardo com prioridade, por favor."
+765,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar. Estou bloqueado por causa disso."
+766,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. É importante, preciso resolver rápido."
+767,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Sem pressa, quando puderem. Além disso, como faço para exportar o relatório mensal em PDF? Onde fica essa opção?"
+768,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Não consigo trabalhar, preciso de solução imediata."
+769,,SOLICITO A POSSIBILIDADE DE PERSONALIZAR OS CARDS DO DASHBOARD. ESTOU BLOQUEADO POR CAUSA DISSO.
+770,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser?
+771,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. Nao consigo trabalhar, preciso de solucao imediata."
+772,,"FUI COBRADO DUAS VEZES NA FATURA DESTE MÊS NO CARTÃO. SOLICITO O REEMBOLSO. É SÓ UMA DÚVIDA, PODE RESPONDER COM CALMA."
+773,Erro ao salvar,Aparece uma falha quanod clico em salvar e o botão não funciona.
+774,Tela em branco,"Depois do último update a tela fica em branco, parece um bug."
+775,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser?
+776,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Crítico, resolvam o quanto antes!"
+777,,"PODERIAM ADICIONAR INTEGRAÇÃO COM O SLACK PARA AVISOS? AGUARDO COM PRIORIDADE, POR FAVOR."
+778,Contato do comercial,Poderiam me passar o contato da equipe comercial?
+779,Erro ao salvar,Aparece uma falha quando clico em salvar e o botão não funciona. Estou bloqueado por causa disso.
+780,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. Não consigo trabalhar, preciso de solução imediata. Além disso, depois do último update a tela fica em branco, parece um bug."
+781,,"Onde configuro para receber notificações por e-mail? Sem pressa, quando puderem."
+782,Como filtrar dados,Tem como filtrar os registros por data? Onde encontro isso?
+783,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. Estou bloqueado por causa disso. Além disso, o envio de arquivo falha sempre com mensagem de erro."
+784,Como exportar relatório,Como faco para exportar o relatório mensal em PDF? Onde fica essa opcao?
+785,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Aguardo com prioridade, por favor."
+786,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Aguardo com prioridade, por favor."
+787,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso?"
+788,Alterar forma de pagamento,Quero trocar o cartão de crédito cadastrado para o pagamento.
+789,Recuperar acesso,"Esqueci meu login, como faco paar recuperar o acesso?"
+790,,"PEDI O REEMBOLSO SEMANA PASSADA E AINDA NÃO CAIU NO CARTÃO. CRÍTICO, RESOLVAM O QUANTO ANTES!"
+791,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Aguardo com prioridade, por favor."
+792,Novo relatório,Poderia adicionar um relatório de produtividade por equipe?
+793,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Apenas uma sugestão, sem urgência."
+794,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Além disso, solicito a possibilidade de personalizar os cards do dashboard."
+795,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Crítico, resolvam o quanto antes!"
+796,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente. Sem pressa, quando puderem."
+797,Novo relatório,Poderia adicionar um relatório de produtividade por equipe?
+798,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. É só uma dúvida, pode responder com calma."
+799,Dúvida sobre integração,Como funciona a integraãço com o meu sistema atual?
+800,Como exportar relatório,Como faço para exportar o relatório mensal em PDF? Onde fica essa opção?
+801,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Sem pressa, quando puderem."
+802,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Além disso, como faço para exportar o relatório mensal em PDF? Onde fica essa opção?"
+803,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. É só uma dúvida, pode responder com calma."
+804,Cancelar assinatura e reembolso,Quero cancelar e receber o reembolso proporcional da assinatura. Estou bloqueado por causa disso.
+805,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Apenas uma sugestão, sem urgência."
+806,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Aguardo com prioridade, por favor."
+807,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso. É importante, preciso resolver rápido."
+808,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado."
+809,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? É só uma dúvida, pode responder com calma."
+810,Configurar notificações,"Onde configuro para receber notificações por e-mail? Apenas uma sugestão, sem urgência."
+811,Como filtrar dados,Tem como filtrar os registros por data? Onde encontro isso?
+812,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. Sem pressa, quando puderem."
+813,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo?"
+814,API pública,Gostaria de acesso a uma API para integrar com nosso sistema.
+815,Configurar notificações,Onde configuro para receber notificações por e-mail?
+816,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso."
+817,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Sem pressa, quando puderem. Além disso, a listagem não carrega, dá erro 500 e some tudo."
+818,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? É só uma dúvida, pode responder com calma."
+819,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar. Não consigo trabalhar, preciso de solução imediata."
+820,Cobrança indevida,Fui cobrado duas vezes na fatura destem ês no cartão. Solicito o reembolso.
+821,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível."
+822,Dúvida sobre plano,"Qual a diferença entre os planos? Posso trocar quando quiser? Aguardo com prioridade, por favor."
+823,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Sem pressa, quando puderem."
+824,Cobrança após cancelamento,Cancelei mês passado mas continuo sendo cobrado na fatura.
+825,Erro ao salvar,Aparece uma falha quando clico em salvar e o botão não funciona. Estou bloqueado por causa disso.
+826,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. Apenas uma sugestão, sem urgência."
+827,Erro na fatura,O valor da fatura está diferente do combinado no plano.
+828,,COMO FUNCIONA A INTEGRAÇÃO COM O MEU SISTEMA ATUAL?
+829,Cobrança indevida,Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso.
+830,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo?"
+831,Como filtrar dados,Tem como filtrar os registros por data? Onde encontro isso? Estou bloqueado por causa disso.
+832,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? É importante, preciso resolver rápido."
+833,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível."
+834,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+835,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito. É só uma dúvida, pode responder com calma."
+836,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Sem pressa, quando puderem."
+837,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Além disso, gostaria que tivesse a opção de exportar em Excel além de PDF."
+838,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Está tudo parado em produção, urgente!"
+839,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente."
+840,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? Além disso, como funciona a integração com o meu sistema atual?"
+841,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Estou bloqueado por causa disso."
+842,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso. Está tudo parado em produção, urgente!"
+843,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. Além disso, só queria deixar um elogio, o produto tem me ajudado bastante."
+844,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. Aguardo com prioridade, por favor. Além disso, poderiam me passar o contato da equipe comercial?"
+845,Insatisfeito com cobrança,"Estou decepcionado, cobranca errada e ninguem resolve."
+846,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito. Estou bloqueado por causa disso."
+847,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo."
+848,,"ESQUECI MEU LOGIN, COMO FAÇO PARA RECUPERAR O ACESSO?"
+849,Como filtrar dados,Tem como filtrar os registros por data? Onde encontro isso?
+850,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. É só uma dúvida, pode responder com calma."
+851,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha."
+852,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. Está tudo parado em produção, urgente!"
+853,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Crítico, resolvam o quanto antes!"
+854,,"COMO FUNCIONA A INTEGRAÇÃO COM O MEU SISTEMA ATUAL? CRÍTICO, RESOLVAM O QUANTO ANTES!"
+855,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? Não consigo trabalhar, preciso de solução imediata."
+856,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Está tudo parado em produção, urgente!"
+857,Dúvida sobre integração,Como funciona a integração com o meu sistema atual?
+858,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. É só uma dúvida, pode responder com calma."
+859,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante. Apenas uma sugestão, sem urgência."
+860,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. É miportante, preciso resolver rápido."
+861,Crash no relatório,Ao gerar o relatório o sistema quebra e trava a sessão.
+862,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Está tudo parado em produção, urgente!"
+863,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito. Apenas uma sugestão, sem urgência."
+864,Contato do comercial,"Poderiam me passar o contato da equipe comercial? Além disso, a listagem não carrega, dá erro 500 e some tudo."
+865,Personalizar dashboard,"Solicito a possibilidade de personalizar os cards do dashboard. Crítico, resolvam o quanto antes!"
+866,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. É importante, preciso resolver rápido."
+867,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Sem pressa, quando puderem."
+868,Mudança de titularidade,Preciso transferir a titularidade da conta para outra pessoa.
+869,Como exportar relatório,Como faço para exportar o relatório mensal em PDF? Onde fica essa opção?
+870,,"O botão de exportar não funciona, nada acontece ao clicar. Estou bloqueado por causa disso."
+871,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Aguardo com prioridade, por favor. Além disso, preciso da nota fiscal do pagamento para o financeiro da empresa."
+872,Integração com Slack,Poderiam adicionar integração com o Slack para avisos?
+873,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. É só uma dúvida, pode responder com calma."
+874,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Não consigo trabalhar, preciso de solução imediata."
+875,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. Crítico, resolvam o quanto antes!"
+876,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser?
+877,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. É só uma dúvida, pode responder com calma."
+878,Integração com Slack,Poderiam adicionar integração com o Slack para avisos?
+879,Erro ao salvar,Aparece uma falha quando clico em salvar e o botão não funciona.
+880,Como filtrar dados,Tem como filtrar os registros por data? Onde encontro isso?
+881,,GOSTARIA DE SABER ONDE ALTERO MINHA SENHA DE ACESSO.
+882,,PEDI O REEMBOLSO SEMANA PASSADA E AINDA NÃO CAIU NO CARTÃO.
+883,Personalizar dashboard,"Solicito a possibilidade de personalizar os cards do dashboard. É só uma dúvida, pode responder com calma."
+884,Reclamação formal,Registro uma reclamacao: o servico nao entrega o que promete.
+885,,"O BOLETO DA ASSINATURA NÃO CHEGOU, PRECISO PAGAR O PAGAMENTO. SEM PRESSA, QUANDO PUDEREM."
+886,Novo relatório,"Poderia adicionar um relatório de produtividade por equipe? Aguardo com prioridade, por favor."
+887,,Gostaria de acesso a uma API para integrar com nosso sistema.
+888,Exportação em Excel,Gostaria que tivesse a opção de exportar em Excel além de PDF.
+889,API pública,Gostaria de acesso a uma API para integrar com nosso sistema.
+890,,"O ENVIO DE ARQUIVO FALHA SEMPRE COM MENSAGEM DE ERRO. NÃO CONSIGO TRABALHAR, PRECISO DE SOLUÇÃO IMEDIATA."
+891,Informação sobre evento,"Vocês vão participar de algum evento este ano? Não consigo trabalhar, preciso de solução imediata."
+892,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. Crítico, resolvam o quanto antes!"
+893,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Não consigo trabalhar, preciso de solução imediata."
+894,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. É importante, preciso resolver rápido."
+895,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Aguardo com prioridade, por favor."
+896,,"QUERO CANCELAR E RECEBER O REEMBOLSO PROPORCIONAL DA ASSINATURA. É SÓ UMA DÚVIDA, PODE RESPONDER COM CALMA."
+897,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. Apenas uma sugestão, sem urgência."
+898,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? Não consigo trabalhar, preciso de solução imediata."
+899,Dúvida sobre integração,Como funciona a integração com o meu sistema atual?
+900,,Poderiam adicionar integração com o Slack para avisos?
+901,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Além disso, poderia adicionar um relatório de produtividade por equipe?"
+902,App trava ao abrir,O aplicativo trava e fecha sozinho toda vez que tento abrir.
+903,Solicito aumento de limite,Solicito o aumento do limite de usuários da minha conta.
+904,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. É só uma dúvida, pode responder com calma."
+905,Como exportar relatório,Como faço para exportar o relatório mensal em PDF? Onde fica essa opção?
+906,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado."
+907,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento."
+908,,"O SISTEMA ESTÁ HORRÍVEL DE LENTO, MUITO DECEPCIONADO."
+909,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente."
+910,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Estou bloqueado por causa disso."
+911,Como exportar relatório,Como faço para exportar o relatório mensal em PDF? Onde fica essa opção? Estou bloqueado por causa disso.
+912,Crash no relatório,Ao gerar o relatório o sistema quebra e trava a sessão.
+913,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Além disso, gostaria de acesso a uma API para integrar com nosso sistema."
+914,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete.
+915,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. Não consigo trabalhar, preciso de solução imediata."
+916,Cobrança após cancelamento,Cancelei mês passado mas continuo sendo cobrado na fatura.
+917,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada."
+918,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito. Apenas uma sugestão, sem urgência."
+919,,SOLICITO A POSSIBILIDADE DE PERSONALIZAR OS CARDS DO DASHBOARD.
+920,Reembolso pendente,Pedi o reembolso semana passada e ainda não caiu no cartão.
+921,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+922,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar. Crítico, resolvam o quanto antes!"
+923,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. Apenas uma sugestão, sem urgência."
+924,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. Crítico, resolvam o quanto antes!"
+925,Atualização de cadastro,Preciso atualizar o endereço e o telefone da minha conta.
+926,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Crítico, resolvam o quanto antes!"
+927,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Sem pressa, quando puderem."
+928,Erro na fatura,O valor da fatura está diferente do combinado no plano. Estou bloqueado por causa disso.
+929,Reembolso pendente,Pedi o reembolso semana passada e ainda nao caiu no cartao.
+930,Reclamação formal,"Registro uma reclamação: o serviço não entrega o que promete. Sem pressa, quando puderem."
+931,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. Sem pressa, quando puderem."
+932,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Apenas uma sugestão, sem urgência."
+933,Cobrança após cancelamento,Cancelei mês passado mas continuo sendo cobrado na fatura.
+934,API pública,"Gostaria de acesso a uma API para integrar com nosso sistema. Além disso, tem como filtrar os registros por data? Onde encontro isso?"
+935,Erro ao salvar,Aparece uma falha quando clico em salvar e o botao nao funciona.
+936,Atualização de cadastro,Preciso autalizar o endereço e o telefone da minha conta.
+937,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar."
+938,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente."
+939,Configurar notificações,"Onde configuro para receber notificacões por e-mail? Aguardo com prioridade, por favor."
+940,Configurar notificações,"Onde configuro para receber notificações por e-mail? É só uma dúvida, pode responder com calma."
+941,Solicito aumento de limite,Solicito o aumento do limite de usuários da minha conta.
+942,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. Crítico, resolvam o quanto antes!"
+943,API pública,Gostaria de acesso a uma API para integrar com nosso sistema. Estou bloqueado por causa disso.
+944,Onde altero a senha,Gostaria de saber onde altero minha senha de acesso.
+945,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito. Sem pressa, quando puderem."
+946,Exportação em Excel,Gostaria que tivesse a opção de exportar em Excel além de PDF.
+947,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo?"
+948,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve. Crítico, resolvam o quanto antes!"
+949,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. É importante, preciso resolver rápido."
+950,Configurar notificações,"Onde configuro para receber notificações por e-mail? Está tudo parado em produção, urgente!"
+951,Erro ao salvar,Aparece uma falha quando clico em salvar e o botão não funciona. Estou bloqueado por causa idsso.
+952,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Está tudo parado em produção, urgente!"
+953,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Está tudo parado em produção, urgente!"
+954,Cobrança após cancelamento,Cancelei mês passado mas continuo sendo cobrado na fatura.
+955,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. É só uma dúvida, pode responder com calma."
+956,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. Aguardo com prioridade, por favor."
+957,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso. Além disso, cansei dos problemas, quero cancelar minha assinatura imediatamente."
+958,Cobrança após cancelamento,Cancelei mês passado mas continuo sendo cobrado na fatura.
+959,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. Não consigo trabalhar, preciso de solução imediata."
+960,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+961,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser?
+962,Onde altero a senha,Gostaria de saber onde altero minha senha de acesso.
+963,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso."
+964,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+965,Dúvida sobre integração,Como funciona a integração com o meu sistema atual? Estou bloqueado por causa disso.
+966,,"CANSEI DOS PROBLEMAS, QUERO CANCELAR MINHA ASSINATURA IMEDIATAMENTE."
+967,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente. Apenas uma sugestão, sem urgência."
+968,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Apenas uma sugestão, sem urgência."
+969,Cobrança após cancelamento,"Cnacelei mês passado mas continuo sendo cobrado na fatura. Aguardo com prioridade, por favor."
+970,Como exportar relatório,Como faço para exportar o relatório mensal em PDF? Onde fica essa opção?
+971,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar."
+972,Atualização de cadastro,"Preciso atualizar o endereco e o telefone da minha conta. Aguardo com prioridade, por favor."
+973,Configurar notificações,"Onde configuro para receber notificacões por e-mail? É só uma dúviad, pode responder com calma. Alem disso, qual a diferenca entre os planos? Posso trocar quando quiser?"
+974,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante."
+975,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada."
+976,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? Não consigo trabalhar, preciso de solução imediata."
+977,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. É só uma dúvida, pode responder com calma."
+978,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Sem pressa, quando puderem."
+979,,Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Estou bloqueado por causa disso.
+980,Não carrega os dados,"A listagem nao carrgea, dá erro 500 e some tudo."
+981,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. Não consigo trabalhar, preciso de solução imediata."
+982,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+983,Atualização de cadastro,Preciso atualizar o endereco e o telefone da minha conta.
+984,Boleto não chegou,"O boleto da assinatuar nao chegou, preciso pagar o pagamento."
+985,,"O SISTEMA ESTÁ HORRÍVEL DE LENTO, MUITO DECEPCIONADO."
+986,,"NÃO CONSIGO LOGAR, DÁ ERRO E A PÁGINA RECARREGA SOZINHA. CRÍTICO, RESOLVAM O QUANTO ANTES!"
+987,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. Aguardo com prioridade, por favor."
+988,Nota fiscal,Preciso da nota fiscal do pagamento para o financeiro da empresa.
+989,Como exportar relatório,"Como faco para exportar o relatório mensal em PDF? Onde fica essa opcao? É só uma dúvida, pode responder com calma."
+990,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Além disso, depois da atualização ficou péssimo, estou insatisfeito."
+991,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. É importante, preciso resolver rápido."
+992,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo? Aguardo com prioridade, por favor."
+993,Como exportar relatório,"Como faço para exportar o relatório mensal em PDF? Onde fica essa opção? Apenas uma sugestão, sem urgência."
+994,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível. É ipmortante, preciso resolver rápido."
+995,Novo relatório,"Poderia adicionar um relatório de produtividade por equipe? É só uma dúvida, pode responder com calma."
+996,Configurar notificações,"Onde configuro para receber notificacões por e-mail? Sem perssa, quando puderem. Alem disso, o envio de arquivo falha sempre com mensagem de erro."
+997,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Aguardo com prioridade, por favor."
+998,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível. É importante, preciso resolver rápido."
+999,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. É importante, preciso resolver rápido."
+1000,Como exportar relatório,"Como faço para exportar o relatório mensal em PDF? Onde fica essa opção? Estou bloqueado por causa disso. Além disso, pedi o reembolso semana passada e ainda não caiu no cartão."
+1001,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. É importante, preciso resolver rápido."
+1002,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. É importante, preciso resolver rápido."
+1003,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser?
+1004,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Está tudo parado em producao, urgente!"
+1005,Erro na fatura,O valor da fatura está diferente do combinado no plano.
+1006,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito."
+1007,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve. É importante, preciso resolver rápido."
+1008,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. Apenas uma sugestão, sem urgência."
+1009,Reembolso pendente,Pedi o reembolso semana passada e ainda não caiu no cartão. Estou bloqueado por causa disso.
+1010,Informação sobre evento,Vocês vão participar de algum evento este ano? Estou bloqueado por causa disso.
+1011,Exportação em Excel,"Gostaria que tivesse a opcao de exportar em Excel alem de PDF. É importante, preciso resolver rápido."
+1012,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser?
+1013,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. Aguardo com prioridade, por favor."
+1014,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. É só uma dúvida, pode responder com calma."
+1015,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. É importante, preciso resolver rápido."
+1016,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. Aguardo com prioridade, por favor."
+1017,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso. Está tudo parado em produção, urgente!"
+1018,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Aguardo com prioridade, por favor."
+1019,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser?
+1020,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada."
+1021,Informação sobre evento,Vocês vão participar de algum evento este ano?
+1022,Informação sobre evento,"Vocês vão participar de algum evento este ano? Aguardo com prioridade, por favor."
+1023,Nota fiscal,Preciso da nota fiscal do pagamento para o financeiro da empresa.
+1024,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? Apenas uma sugestão, sem urgência."
+1025,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada. Aguardo com prioridade, por favor."
+1026,Novo relatório,Poderia adicionar um relatório de produtividade por equipe?
+1027,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso?"
+1028,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Além disso, cancelei mês passado mas continuo sendo cobrado na fatura."
+1029,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Não consigo trabalhar, preciso de solução imediata. Além disso, ao gerar o relatório o sistema quebra e trava a sessão."
+1030,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Está tudo parado em produção, urgente!"
+1031,Não carrega os dados,"A listaegm não carrega, dá erro 500 e some tudo. Não consigo trabalhar, preciso de solução imediata."
+1032,Como exportar relatório,Como faço para exportar o relatório mensal em PDF? Onde fica essa opção? Estou bloqueado por causa disso.
+1033,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Sem pressa, quando puderem."
+1034,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Aguardo com prioridade, por favor."
+1035,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. É importante, preciso resolver rápido."
+1036,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso. Apenas uma sugestão, sem urgência."
+1037,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Estou bloqueado por causa disso."
+1038,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível."
+1039,Novo relatório,"Poderia adicionar um relatório de produtividade por equipe? Aguardo com prioridade, por favor. Além disso, o sistema está horrível de lento, muito decepcionado."
+1040,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante. Além disso, poderiam me passar o contato da equipe comercial?"
+1041,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso."
+1042,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. Está tudo parado em produção, urgente!"
+1043,,"QUAL A DIFERENÇA ENTRE OS PLANOS? POSSO TROCAR QUANDO QUISER? AGUARDO COM PRIORIDADE, POR FAVOR."
+1044,Cancelar assinatura e reembolso,Quero cancelar e receber o reembolso proporcional da assinatura.
+1045,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. Além disso, preciso transferir a titularidade da conta para outra pessoa."
+1046,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Sem pressa, quando puderem."
+1047,Alterar forma de pagamento,"Quero trocar o cartao de credito cadastrado para o pagamento. Alem disso, aparece uma falha quando clico em salvar e o botao nao funciona."
+1048,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. Alem disso, pedi o reembolso semana passada e ainda nao caiu no cartao."
+1049,App trava ao abrir,O aplicativo trava e fecha sozinho toda vez que tento abrir.
+1050,Pedido de nova feature,Poderia adicionar um modo escuro? Seria um recurso muito útil. Estou bloqueado por causa disso.
+1051,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha."
+1052,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Está tudo parado em produção, urgente!"
+1053,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. É importante, preciso resolver rápido."
+1054,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Crítico, resolvam o quanto antes! Além disso, quero cancelar e receber o reembolso proporcional da assinatura."
+1055,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo."
+1056,,"GOSTARIA DE SABER ONDE ALTERO MINHA SENHA DE ACESSO. É IMPORTANTE, PRECISO RESOLVER RÁPIDO."
+1057,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Sem pressa, quando puderem."
+1058,Sugestão de recurso,"Gostaria que o sistema permitisse adicionar tags nos tickets. Está tudo parado em produção, urgente!"
+1059,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento."
+1060,Alterar forma de pagamento,Quero trocar o cartão de crédito cadastrado para o pagamento.
+1061,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. Aguardo com prioridade, por favor."
+1062,,"PRECISO TRANSFERIR A TITULARIDADE DA CONTA PARA OUTRA PESSOA. É SÓ UMA DÚVIDA, PODE RESPONDER COM CALMA."
+1063,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Apenas uma sugestão, sem urgência."
+1064,Recuperar acesso,"Esqueci mue login, como faco para recuperar o acesso?"
+1065,Como exportar relatório,"Como faço para exportar o relatório mensal em PDF? Onde fica essa opção? Aguardo com prioridade, por favor."
+1066,Personalizar dashboard,"Solicito a possibilidade de personalizar os cards do dashboard. Não consigo trabalhar, preciso de solução imediata."
+1067,Cobrança após cancelamento,Cancelei mês passado mas continuo sendo cobrado na fatura.
+1068,Como exportar relatório,Como faço para exportar o relatório mensal em PDF? Onde fica essa opção?
+1069,Cobrança após cancelamento,"Cancelei mês passado masc ontinuo sendo cobrado na fatura. Sem pressa, quando puderem."
+1070,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Alem disso, como posso convidar outro usuário para a minha conta?"
+1071,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? É importante, preciso resolver rápido."
+1072,,O valor da fatura está diferente do combinado no plano. Estou bloqueado por causa disso.
+1073,Dúvida sobre plano,"Qual a diferença entre os planos? Posso trocar quando quiser? É só uma dúvida, pode responder com calma."
+1074,Novo relatório,"Poderia adicionar um relatório de produtividade por equipe? Não consigo trabalhar, preciso de solução imediata."
+1075,Reembolso pendente,Pedi o reembolso semana passada e ainda não caiu no cartão. Estou bloqueado por causa disso.
+1076,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa .Está tudo parado em produção, urgente!"
+1077,Personalizar dashboard,"Solicito a possibilidade de personalizar os cards do dashboard. É só uma dúvida, pode responder com calma."
+1078,,"TEM COMO FILTRAR OS REGISTROS POR DATA? ONDE ENCONTRO ISSO? AGUARDO COM PRIORIDADE, POR FAVOR."
+1079,Atualização de cadastro,"Preciso atualizar o endereço e o telefone da minha conta. Aguardo com prioridade, por favor. Além disso, poderiam adicionar integração com o Slack para avisos?"
+1080,Personalizar dashboard,"Solicito a possibilidade de personalizar os cards do dashboard. É só uma dúvida, pode responder com calma."
+1081,Login com falha,"Nao consigo logar, dá erro e a página recarrega sozinha."
+1082,Sugestão de recurso,Gostaria que o sistema permitisse adicionar tags nos tickets.
+1083,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. Aguardo com prioridade, por favor."
+1084,Erro ao salvar,Aparece uma falha quando clico em salvar e o botão não funciona.
+1085,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Sem pressa, quando puderem."
+1086,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. Apenas uma sugestão, sem urgência."
+1087,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. Crítico, resolvam o quanto antes!"
+1088,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo."
+1089,Informação sobre evento,"Vocês vão participar de algum evento este ano? Está tudo parado em produção, urgente!"
+1090,Configurar notificações,"Onde configuro para receber notificações por e-mail? Além disso, pedi o reembolso semana passada e ainda não caiu no cartão."
+1091,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Sem pressa, quando puderem."
+1092,App trava ao abrir,O aplicativo trava e fecha sozinho toda vez que tento abrir.
+1093,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Além disso, o boleto da assinatura não chegou, preciso pagar o pagamento."
+1094,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Está tudo parado em produção, urgente!"
+1095,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. É importante, preciso resolver rápido."
+1096,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Sem pressa, quando puderem."
+1097,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo?"
+1098,Cancelar assinatura e reembolso,Quero cancelar e receber o reembolso proporcional da assinatura.
+1099,Dúvida sobre integração,Como funciona a integracao com o meu sistema atual?
+1100,Upload falhando,O envio de arquivo falha sempre com mensagem de erro.
+1101,Atualização de cadastro,Preciso atualizar o endereço e o telefone da minha conta.
+1102,Exportação em Excel,"Gostaria que tivesse a opção de exportar em Excel além de PDF. Aguardo com prioridade, por favor."
+1103,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Crítico, resolvam o quanto antes!"
+1104,Crash no relatório,Ao gerar o relatório o sistema quebra e trava a sessão.
+1105,Exportação em Excel,Gostaria que tivesse a opção de exportar em Excel além de PDF.
+1106,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha."
+1107,Pedido de nova feature,Poderia adicionar um modo escuro? Seria um recurso muito útil.
+1108,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Está tudo parado em produção, urgente!"
+1109,Nota fiscal,Preciso da nota fiscal do pagamento para o financeiro da empresa. Estou bloqueado por causa disso.
+1110,Erro na fatura,"O valor da fatura está diferente do combiando no plano. Aguardo com prioridade, por favor."
+1111,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito. Estou bloqueado por causa disso."
+1112,Solicito aumento de limite,Solicito o aumento do limite de usuários da minha conta.
+1113,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete.
+1114,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Aguardo com prioridade, por favor."
+1115,API pública,Gostaria de acesso a uma API para integrar com onsso sistema.
+1116,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Além disso, pedi o reembolso semana passada e ainda não caiu no cartão."
+1117,Contato do comercial,Poderiam me passar o contato da equipe comercial?
+1118,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha."
+1119,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. Apenas uma sugestao, sem urgência."
+1120,Configurar notificações,Onde configuro para receber notificações por e-mail?
+1121,Reembolso pendente,Pedi o reembolso semana passada e ainda não caiu no cartão.
+1122,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. Aguardo com prioridade, por favor. Além disso, poderiam me passar o contato da equipe comercial?"
+1123,,"ESTOU DECEPCIONADO, COBRANÇA ERRADA E NINGUÉM RESOLVE. ESTOU BLOQUEADO POR CAUSA DISSO."
+1124,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo."
+1125,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve."
+1126,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente."
+1127,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+1128,Como convidar usuário,Como posso convidar outro usuário para a minha conta?
+1129,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada."
+1130,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. É só uma dúvida, pode responder com calma."
+1131,Sugestão de recurso,"Gostaria que o sistema permitisse adicionar tags nos tickets. Aguardo com prioridade, por favor. Além disso, esqueci meu login, como faço para recuperar o acesso?"
+1132,,Pedi o reembolso semana passada e ainda não caiu no cartão.
+1133,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. Crítico, resolvam o quanto antes!"
+1134,Mudança de titularidade,Preciso transferir a titularidade da conta para outra pessoa.
+1135,Reembolso pendente,Pedi o reembolso semana passada e ainda não caiu no cartão.
+1136,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado."
+1137,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? É importante, preciso resolver rápido. Além disso, o envio de arquivo falha sempre com mensagem de erro."
+1138,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso. Crítico, resolvam o quanto antes!"
+1139,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. Além disso, gostaria de acesso a uma API para integrar com nosso sistema."
+1140,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. Crítico, resolvam o quanto antes! Além disso, preciso atualizar o endereço e o telefone da minha conta."
+1141,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve. Crítico, resolvam o quanto antes!"
+1142,Exportação em Excel,Gostaria que tivesse a opção de exprotar em Excel além de PDF.
+1143,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Está tudo parado em produção, urgente!"
+1144,,"O BOTÃO DE EXPORTAR NÃO FUNCIONA, NADA ACONTECE AO CLICAR."
+1145,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Alem disso, preciso atualizar o endereco e o telefone da minha conta."
+1146,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito."
+1147,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+1148,Sugestão de recurso,"Gostaria que o sistema permitisse adicionar tags nos tickets. É importante, preciso resolver rápido. Além disso, qual a diferença entre os planos? Posso trocar quando quiser?"
+1149,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessao. Aguardo com prioridade, por favor."
+1150,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível. É só uma dúvida, pode responder com calma."
+1151,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Crítico, resolvam o quanto antes!"
+1152,Personalizar dashboard,"Solicito a possibilidade de personalizar os cards do dashboard. Apenas uma sugestão, sem urgência."
+1153,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser? Estou bloqueado por causa disso.
+1154,Configurar notificações,"Onde configuro para receber notificações por e-mail? Está tudo parado em produção, urgente!"
+1155,Onde altero a senha,Gostaria de asber onde altero minha senha de acesso. Estou bloqueado por causa disso.
+1156,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? É importante, preciso resolver rápido."
+1157,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. Não consigo trabalhar, preciso de solução imediata."
+1158,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Além disso, solicito o aumento do limite de usuários da minha conta."
+1159,API pública,"Gostaria de acesso a uma API para integrar com nosso sistema. Sem pressa, quando puderem."
+1160,Solicito aumento de limite,"Solicito o aumento do limite de usuários da minha conta. Crítico, resolvam o quanto antes!"
+1161,Exportação em Excel,Gostaria que tivesse a opção de exportar em Excel além de PDF.
+1162,Cancelar assinatura e reembolso,Quero cancelar e receber o reembolso proporcional da assinatura.
+1163,Erro na fatura,"O valor da fatura está diferente do combinado no plano. É importante, preciso resolver rápido."
+1164,,GOSTARIA DE SABER ONDE ALTERO MINHA SENHA DE ACESSO.
+1165,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar. É só uma dúvida, pode responder com calma."
+1166,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante. Apenas uma sugestão, sem urgência."
+1167,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Apenas uma sugestão, sem urgência. Além disso, preciso atualizar o endereço e o telefone da minha conta."
+1168,Personalizar dashboard,"Solicito a possibilidade de personalizar os cards do dashboard. Aguardo com prioridade, por favor."
+1169,,PODERIAM ME PASSAR O CONTATO DA EQUIPE COMERCIAL?
+1170,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Estou bloqueado por causa disso."
+1171,Informação sobre evento,"Vocês vão participar de algum evento este ano? Sem pressa, quando pudreem."
+1172,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Estou bloqueado por causa disso."
+1173,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar."
+1174,Insatisfeito com cobrança,"Estou decepcionado, cobranca errada e ninguem resolve."
+1175,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Crítico, resolvam o quanto antes! Alem disso, fui cobrado duas vezes na faturad este mês no cartao. Solicito o reembolso."
+1176,,"PERDI DADOS POR CAUSA DE UM ERRO DE VOCÊS, INADMISSÍVEL. NÃO CONSIGO TRABALHAR, PRECISO DE SOLUÇÃO IMEDIATA."
+1177,Como filtrar dados,Tem como filtrar os registros por data? Onde encontro isso? Estou bloqueado por causa disso.
+1178,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Não consigo trabalhar, preciso de solução imediata."
+1179,Login com falha,"Nao consigo logar, dá erro e a página recarrega sozinha. Crítico, resolvam o quanto antes! Alem disso, onde configuro para receber notificacões por e-mail?"
+1180,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente."
+1181,Atualização de cadastro,"Preciso atualizar o endereço e o telefone da minha conta. Apenas uma sugestão, sem urgência."
+1182,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Apenas uma sugestão, sem urgência."
+1183,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. Além disso, fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso."
+1184,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Apenas uma sugestão, sem urgência."
+1185,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? Não consigo trabalhar, preciso de soluãço imediata."
+1186,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar."
+1187,Erro ao salvar,Aparece uma falha quando clico em salvar e o botão não funciona.
+1188,,"GOSTARIA QUE TIVESSE A OPÇÃO DE EXPORTAR EM EXCEL ALÉM DE PDF. NÃO CONSIGO TRABALHAR, PRECISO DE SOLUÇÃO IMEDIATA."
+1189,,"Vocês vao participar de algum evento este ano? Está tudo parado em producao, urgente!"
+1190,Exportação em Excel,Gostaria que tivesse a opção de exportar em Excel além de PDF. Estou bloqueado por causa disso.
+1191,Integração com Slack,"Poderiam adicionar integração com o Slack para avisos? Não consigo trabalhar, preciso de solução imediata."
+1192,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Além disso, o aplicativo trava e fecha sozinho toda vez que tento abrir."
+1193,Configurar notificações,"Onde configuro para receber notificações por e-mail? Apenas uma sugestão, sem urgência. Além disso, onde configuro para receber notificações por e-mail?"
+1194,,"ONDE CONFIGURO PARA RECEBER NOTIFICAÇÕES POR E-MAIL? CRÍTICO, RESOLVAM O QUANTO ANTES!"
+1195,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete. Estou bloqueado por causa disso.
+1196,Erro na fatura,O valor da fatura está diferente do combinado no plano.
+1197,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente."
+1198,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso."
+1199,,"GOSTARIA QUE TIVESSE A OPÇÃO DE EXPORTAR EM EXCEL ALÉM DE PDF. SEM PRESAS, QUANDO PUDEREM."
+1200,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo? Apenas uma sugestão, sem urgência. Além disso, poderia adicionar um modo escuro? Seria um recurso muito útil."
+1201,Cobrança indevida,Fui cobrado duas vezes na fatura deste mês no cartao. Solicito o reembolso. Estou bloqueado por causa disso.
+1202,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso."
+1203,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Aguardo com prioridade, por favor."
+1204,Configurar notificações,"Onde configuro para receber notificações por e-mail? É importante, preciso resolver rápido. Além disso, como faço para exportar o relatório mensal em PDF? Onde fica essa opção?"
+1205,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve. Apenas uma sugestão, sem urgência."
+1206,Configurar notificações,"Onde configuro para receber notificações por e-mail? Sem pressa, quando puderem."
+1207,Dúvida sobre plano,Qual a diferenç aentre os planos? Posso trocar quando quiser?
+1208,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante. Sem pressa, quando puderem."
+1209,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo? Crítico, resolvam o quanto antes!"
+1210,Botão quebrado,"O botao de exportar nao funciona, nada acontece ao clicar. É importante, preciso resolver rápido."
+1211,Configurar notificações,Onde configuro para receber notificações por e-mail?
+1212,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado."
+1213,Como convidar usuário,Como posso convidar outro usuário para a minha conta?
+1214,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. É importante, preciso resolver rápido."
+1215,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Está tudo parado em produção, urgente!"
+1216,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. Além disso, fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso."
+1217,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível. Além disso, gostaria de saber onde altero minha senha de acesso."
+1218,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. Crítico, resolvam o quanto antes! Além disso, aparece uma falha quando clico em salvar e o botão não funciona."
+1219,App trava ao abrir,O aplicatvio trava e fecha sozinho toda vez que tento abrir.
+1220,Contato do comercial,"Poderiam me passar o contato da equipe comercial? Está tudo parado em produção, urgente!"
+1221,Exportação em Excel,"Gostaria que tivesse a opção de exportar em Excel além de PDF. Crítico, resolvam o quanto antes!"
+1222,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? É importante, preciso resolver rápido."
+1223,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Além disso, o boleto da assinatura não chegou, preciso pagar o pagamento."
+1224,,"CANSEI DOS PROBLEMAS, QUERO CANCELAR MINHA ASSINATURA IMEDIATAMENTE. ESTÁ TUDO PARADO EM PRODUÇÃO, URGENTE!"
+1225,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar. Aguardo com prioridade, por favor."
+1226,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Sem pressa, quando puderem."
+1227,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Além disso, o aplicativo trava e fecha sozinho toda vez que tento abrir."
+1228,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. Apenas uma sugestão, sem urgência."
+1229,Integração com Slack,"Poderiam adicionar integração com o Slack para avisos? É importante, preciso resolver rápido."
+1230,Configurar notificações,Onde configuro para receber notificacões por e-mail?
+1231,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Estou bloqueado por causa disso."
+1232,Atualização de cadastro,"Preciso atualizar o endereço e o telefone da minha conta. Não consigo trabalhar, preciso de solução imediata."
+1233,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Estou bloqueado por causa disso."
+1234,Cobrança após cancelamento,Cancelei mês passado mas continuo sendo cobrado na fatura.
+1235,Como filtrar dados,"Tem como filtrar os registros por data? Onde encontro isso? É só uma dúvida, pode responder com calma."
+1236,Recuperar acesso,"Esqueci meu login, como faco para recuperar o acesso? Apenas uma sugestao, sem urgência."
+1237,App trava ao abrir,O aplicativo trava e fecha sozinho toda vez que tento abrir. Estou bloqueado por causa disso.
+1238,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. É importante, preciso resolver rápido."
+1239,,"FAZ DIAS QUE AGUARDO RETORNO E NINGUÉM RESPONDE, UM DESCASO. É IMPORTANTE, PRECISO RESOLVER RÁPIDO."
+1240,Como exportar relatório,Como faco para exportar o relatório mensal em PDF? Onde fica essa opcao?
+1241,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. Não consigo trabalhar, preciso de solução imediata. Além disso, gostaria de saber onde altero minha senha de acesso."
+1242,Novo relatório,Poderia adicionar um relatório de produtividade por equipe?
+1243,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso?"
+1244,,"APARECE UMA FALHA QUANDO CLICO EM SALVAR E O BOTÃO NÃO FUNCIONA. AGUARDO COM PRIORIDADE, POR FAVOR."
+1245,Cobrança indevida,Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Estou bloqueado por causa disso.
+1246,Alterar forma de pagamento,Quero trocar o cartão de crédito cadastrado para o pagamento.
+1247,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. É importante, preciso resolver rápido."
+1248,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Sem pressa, quando puderem."
+1249,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve. Apenas uma sugestão, sem urgência."
+1250,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. Além disso, aparece uma falha quando clico em salvar e o botão não funciona."
+1251,,"O BOTÃO DE EXPORTAR NÃO FUNCIONA, NADA ACONTECE AO CLICAR. É IMPORTANTE, PRECISO RESOLVER RÁPIDO."
+1252,Integração com Slack,"Poderiam adicionar integracao com o Slack para avisos? É importante, preciso resolver rápido."
+1253,,"Preciso da nota fiscal do pagamento para o financeiro da empresa. Não consigo trabalhar, preciso de solução imediata."
+1254,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo?"
+1255,Dúvida sobre integração,Como funciona a integracao com o meu sistema atual?
+1256,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Não consigo trabalhar, preciso de solução imediata."
+1257,,"DEPOIS DO ÚLTIMO UPDATE A TELA FICA EM BRANCO, PARECE UM BUG. ESTOU BLOQUEADO POR CAUSA DISSO."
+1258,Feedback geral,"Só queria deixar um elogio, o produto tem me ajudado bastante."
+1259,Solicito aumento de limite,Solicito o aumento do limite de usuários da minha conta.
+1260,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Sem pressa, quando puderem."
+1261,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível. Crítico, resolvam o quanto antes!"
+1262,Erro ao salvar,Aparece uma falha quando clico em salvar e o botão não funciona.
+1263,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. Não consigo trabalhar, preciso de solução imediata."
+1264,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. É só uma dúvida, pode responder com calma."
+1265,,"O botão de exportar não funciona, nada acontece ao clicar. És ó uma dúvida, pode responder com calma."
+1266,Informação sobre evento,"Vocês vão participar de algum evento este ano? Além disso, o envio de arquivo falha sempre com mensagem de erro."
+1267,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente. Apenas uma sugestão, sem urgência."
+1268,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? É só uma dúvida, pode responder com calma."
+1269,App trava ao abrir,O aplicativo trava e fecha sozinho toda vez que tento abrir.
+1270,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. É importante, preciso resolver rápido."
+1271,Como filtrar dados,Tem como filtrar os registros por data? Onde encontro isso?
+1272,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. Está tudo parado em produção, urgente!"
+1273,,VOCÊS VÃO PARTICIPAR DE ALGUM EVENTO ESTE ANO? ESTOU BLOQUEADO POR CAUSA DISSO.
+1274,Erro na fatura,O valor da fatura está diferente do combinado no plano.
+1275,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Além disso, como funciona a integração com o meu sistema atual?"
+1276,Informação sobre evento,"Vocês vão participar de algum evento este ano? Não consigo trabalhar, preciso de solução imediata."
+1277,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo."
+1278,Dúvida sobre plano,"Qual a diferença entre os planos? Posso trocar quando quiser? Está tudo parado em produção, urgente!"
+1279,Como convidar usuário,Como posso convidar outro usuário para a minha conta?
+1280,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Estou bloqueado por causa disso. Além disso, cancelei mês passado mas continuo sendo cobrado na fatura."
+1281,Reembolso pendente,Pedi o reembolso semana passada e ainda não caiu no cartão.
+1282,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Apenas uma sugestão, sem urgência. Além disso, preciso transferir a titularidade da conta para outra pessoa."
+1283,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. Não consigo trabalhar, preciso de solução imediata."
+1284,,"ESQUECI MEU LOGIN, COMO FAÇO PARA RECUPERAR O ACESSO? AGUARDO COM PRIORIDADE, POR FAVOR."
+1285,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente."
+1286,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Apenas uma sugestão, sem urgência."
+1287,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo."
+1288,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. Não consigo trabalhar, preciso de solução imediata."
+1289,Novo relatório,"Poderia adicionar um relatório de produtividade por equipe? É só uma dúvida, pode responder com calma."
+1290,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Está tudo parado em produção, urgente!"
+1291,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. É só uma dúvida, pode responder com calma."
+1292,Integração com Slack,Poderiam adicionar integração com o Slack para avisos?
+1293,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botão não funciona. Além disso, preciso atualizar o endereço e o telefone da minha conta."
+1294,Como filtrar dados,Tem como filtrar os registros por data? Onde encontro isso?
+1295,Sugestão de recurso,Gostaria que o sistema permitisse adicionar tags nos tickets.
+1296,Upload falhando,O envio de arquivo falha sempre com mensagem de erro.
+1297,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. Não consigo trabalhar, preciso de solução imediata."
+1298,Configurar notificações,Ond econfiguro para receber notificações por e-mail? Estou bloqueado por causa disso.
+1299,Crash no relatório,Ao gerar o relatório o sistema quebra e trava a sessão.
+1300,Dúvida sobre plano,Qual a diferença entre os planos? Posso torcar quando quiser?
+1301,Como exportar relatório,Como faço para exportar o relatório mensal em PDF? Onde fica essa opção?
+1302,Crash no relatório,"Ao gerar o relatório o sistema quebra e trava a sessão. É só uma dúvida, pode responder com calma."
+1303,Erro ao salvar,Aparece uma falha quando clico em salvar e o botão não funciona.
+1304,Integração com Slack,"Poderiam adicionar integracao com o Slack para avisos? Alem disso, o valor da fatura está diferent edo combinado no plano."
+1305,Cobrança indevida,Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso.
+1306,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no carãto. Solicito o reembolso. Além disso, solicito a possibilidade de personalizar os cards do dashboard."
+1307,Erro na fatura,O valor da fatura está diferente do combinado no plano.
+1308,Como exportar relatório,"Como faço para exportar o relatório mensal em PDF? Onde fica essa opção? É importante, preciso resolver rápido."
+1309,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Crítico, resolvam o quanto antes! Além disso, onde configuro para receber notificações por e-mail?"
+1310,Erro ao salvar,"Aparece uma falha quando clico em salvar e o botao nao funciona. É só uma dúvida, pode responder com calma."
+1311,,TEM COMO FILTRAR OS REGISTROS POR DATA? ONDE ENCONTRO ISSO?
+1312,Dúvida sobre integração,Como funciona a integracao com o meu sistema atual?
+1313,Sugestão de recurso,"Gostaria que o sistema permitisse adicionar tags nos tickets. Não consigo trabalhar, preciso de solução imediata."
+1314,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Aguardo com prioridade, por favor."
+1315,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. Estou bloqueado por causa disso. Além disso, como faço para exportar o relatório mensal em PDF? Onde fica essa opção?"
+1316,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Estou bloqueado por causa disso. Além disso, ao gerar o relatório o sistema quebra e trava a sessão."
+1317,Novo relatório,Poderia adicionar um relatório de produtividade por equipe?
+1318,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? É importante, preciso resolver rápido."
+1319,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Crítico, resolvam o quanto antes!"
+1320,Informação sobre evento,"Vocês vão participar de algum evento este ano? É só uma dúvida, pode responder com calma."
+1321,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado."
+1322,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Sem pressa, quando puderem."
+1323,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? É importante, preciso resolver rápido. Além disso, cancelei mês passado mas continuo sendo cobrado na fatura."
+1324,Onde altero a senha,Gostaria de saber onde altero minha senha de acesso. Estou bloqueado por causa disso.
+1325,Crash no relatório,Ao gerar o relatório o sistema quebra e trava a sessão.
+1326,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Aguardo com prioridade, por favor."
+1327,Mudança de titularidade,"Preciso transferir a titularidade da conta para outra pessoa. Crítico, resolvam o quanto antes!"
+1328,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? É importante, preciso resolver rápido."
+1329,Informação sobre evento,"Vocês vao participar de algum evento este ano? Nao consigo trabalhar, preciso de solucao imediata. Alem disso, cancelei mês passado mas continuo sedno cobrado na fatura."
+1330,,VOCÊS VÃO PARTICIPAR DE ALGUM EVENTO ESTE ANO? ESTOU BLOQUEADO POR CAUSA DISSO.
+1331,,QUERO CANCELAR E RECEBER O REEMBOLSO PROPORCIONAL DA ASSINATURA.
+1332,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Apenas uma sugestão, sem urgência."
+1333,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar."
+1334,Atualização de cadastro,Preciso atualizar o endereco e o telefone da minha conta.
+1335,Crash no relatório,Ao gerar o relatório o sistema quebra e trava a sessao.
+1336,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada."
+1337,,"O SISTEMA ESTÁ HORRÍVEL DE LENTO, MUITO DECEPCIONADO. NÃO CONSIGO TRABALHAR, PRECISO DE SOLUÇÃO IMEDIATA."
+1338,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. É importante, preciso resolver rápido."
+1339,Crash no relatório,Ao gerar o relatório o sistema quebra e trava a sessão.
+1340,Informação sobre evento,Vocês vão participar de algum evento este ano?
+1341,Como filtrar dados,Tem como filtrar os registros por data? Onde encontro isso?
+1342,Exportação em Excel,"Gostaria que tivesse a opção de exportar em Excel além de PDF. Não consigo trabalhar, preciso de solução imediata."
+1343,Descaso com o cliente,"Faz dias que aguardo retorno e ninguem responde, um descaso."
+1344,App trava ao abrir,O aplicativo trava e fecha sozinho toda vez que tento abrir.
+1345,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Aguardo com prioridade, por favor."
+1346,Configurar notificações,Onde configuro para receber notificações por e-mail?
+1347,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Estou bloqueado por causa disso."
+1348,Exportação em Excel,"Gostaria que tivesse a opcao de exportar em Excel alem de PDF. Alem disso, cancelei mês passado mas continuo sendo cobrado na fatura."
+1349,Solicito aumento de limite,"Solciito o aumento do limite de usuários da minha conta. Sem pressa, quando puderem."
+1350,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa .É importante, preciso resolver rápido."
+1351,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Nao consigo trabalhar, preciso de solucao imediata."
+1352,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Apenas uma sugestão, sem urgência."
+1353,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento."
+1354,App trava ao abrir,O aplicativo trava e fecha sozinho toda vez que tento abirr.
+1355,API pública,"Gostaria de acesso a uma API para integrar com nosso sistema. É importante, preciso resolver rápido."
+1356,Novo relatório,"Poderia adicionar um relatório de produtividade por equipe? É importante, preciso resolver rápido."
+1357,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Crítico, resolvam o quanto antes!"
+1358,,"GSOTARIA QUE TIVESSE A OPÇÃO DE EXPORTAR EM EXCEL ALÉM DE PDF. AGUARDO COM PRIORIDADE, POR FAVOR."
+1359,API pública,"Gostaria de acesso a uma API para integrar com nosso sistema. É importante, preciso resolver rápido."
+1360,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. É só uma dúvida, pode responder com calma."
+1361,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Está tudo parado em produção, urgente!"
+1362,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente."
+1363,Cancelar assinatura e reembolso,Quero cancelar e receber o reembolso proporcional da assinatura.
+1364,Como exportar relatório,Como faço para exportar o relatório mensal em PDF? Onde fica essa opção?
+1365,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. Crítico, resolvam o quanto antes!"
+1366,Login com falha,"Nao consigo logar, dá erro e a página recarregas ozinha."
+1367,,"Gostaria de acesso a uma API para integrar com nosso sistema. Aguardo com prioridade, por favor."
+1368,Onde altero a senha,Gostaria de saber onde altero minha senha de acesso.
+1369,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve."
+1370,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso?"
+1371,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. É só uma dúvida, pode responder com calma."
+1372,Onde altero a senha,Gostaria de saber onde altero minha senha de acesso.
+1373,Reembolso pendente,"Pedi o reembolso semana passada e ainda não caiu no cartão. É só uma dúvida, pode responder com calma."
+1374,,"ONDE CONFIGURO PARA RECEBER NOTIFICAÇÕES POR E-MAIL? NÃO CONSIGO TRABALHAR, PRECISO DE SOLUÇÃO IMEDIATA."
+1375,Botão quebrado,"O botao de exportar nao funciona, nada acontece ao clicar. Nao consigo trabalhar, preciso de solucao imediata."
+1376,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser?
+1377,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito. Estou bloqueado por causa disso."
+1378,Onde altero a senha,Gostaria de saber onde altero minha senha de acesso.
+1379,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha."
+1380,Exportação em Excel,Gostaria que tivesse a opção de exportar em Excel além de PDF. Estou bloqueado por causa disso.
+1381,Upload falhando,"O envio de arquivo falha sempre com mensagem de erro. É só uma dúvida, pode responder com calma."
+1382,Upload falhando,O envio de arquivo falha sempre com mensagem de erro.
+1383,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? É só uma dúvida, pode responder com calma."
+1384,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada."
+1385,Alterar forma de pagamento,Quero trocar o cartão de crédito cadastrado para o pagamento.
+1386,Integração com Slack,"Poderiam adicionar integração com o Slack para avisos? Não consigo trabalhar, preciso de solução imediata. Além disso, preciso atualizar o endereço e o telefone da minha conta."
+1387,,Poderia adicionar um relatório de produtividade por equipe?
+1388,Atualização de cadastro,"Preciso atualizar o endereço e o telefone da minha conta. É importante, preciso resolver rápido."
+1389,Sugestão de recurso,"Gostaria que o sistema permitisse adicionar tags nos tickets. Crítico, resolvam o quanto antes!"
+1390,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Apenas uma sugestão, sem urgência."
+1391,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser? Estou bloqueado por causa disso.
+1392,Descaso com o cliente,"Faz dias que aguardo retorno e ninguem responde, um descaso. Está tudo parado em producao, urgente! Alem disso, aparece uma falhaq uando clico em salvar e o botao nao funciona."
+1393,Cobrança indevida,Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso.
+1394,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo."
+1395,,"PODERIA ADICIONAR UM MODO ESCURO? SERIA UM RECURSO MUITO ÚTIL. APNEAS UMA SUGESTÃO, SEM URGÊNCIA."
+1396,Exportação em Excel,"Gostaria que tivesse a opção de exportar em Excel além de PDF. É só uma dúvida, pode responder com calma."
+1397,Recuperar acesso,"Esqueci meu login, como faco para recuperar o acesso? Alem disso, gostaria de acesso a uma API para integrar com nosso sistema."
+1398,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar. Crítico, resolvam o quanto antes!"
+1399,Crash no relatório,Ao gerar o relatório o sistema quebra e trava a sessão.
+1400,Dúvida sobre plano,"Qual a diferença entre os planos? Posso trocar quando quiser? Aguardo com prioridade, por favor."
+1401,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. É importante, preciso resolver rápido."
+1402,Dúvida sobre plano,"Qual a diferença entre os planos? Posso trocar quando quiser? Aguardo com prioridade, por favor."
+1403,Insatisfeito com cobrança,"Estou decepcionado, cobrança errada e ninguém resolve. Estou bloqueado por causa disso."
+1404,Integração com Slack,"Poderiam adicionar integração com o Slack para avisos? Não consigo trabalhar, preciso de solução imediata."
+1405,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. Está tudo parado em produca,o urgente!"
+1406,Erro na fatura,O valor da fatura está diferente do combinado no plano.
+1407,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser?
+1408,Atualização de cadastro,"Preciso atualizar o endereço e o telefone da minha conta. Além disso, preciso atualizar o endereço e o telefone da minha conta."
+1409,Como exportar relatório,Como faço para exportar o relatório mensal em PDF? Onde fica essa opção?
+1410,Como convidar usuário,Como posso convidar outro usuário para a minha conta? Estou bloqueado por causa disso.
+1411,Tela em branco,"Depois do último update a tela fica em branco, parece um bug. Apenas uma sugestão, sem urgência."
+1412,Exportação em Excel,"Gostaria que tivesse a opção de exportar em Excel além de PDF. Está tudo parado em produção, urgente!"
+1413,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Aguardo com prioridade, por favor."
+1414,Novo relatório,"Poderia adicionar um relatório de produtividade por equipe? É importante, preciso resolver rápido."
+1415,Dúvida sobre plano,Qual a diferença entre os planos? Posso trocar quando quiser?
+1416,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Crítico, resolvam o quanto antes!"
+1417,Como convidar usuário,Como posso convidar outro usuário para a minha conta?
+1418,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Está tudo parado em produção, urgente!"
+1419,,"PODERIAM ME PASSAR O CONTATO DA EQUIPE COMERCIAL? AGUARDO COM PRIORIDADE, POR FAVOR."
+1420,Upload falhando,O envio de arquivo falha sempre com mensagem de erro.
+1421,Login com falha,"Nao consigo logar, dá erro e a página recarrega sozinha. Estou bloqueado por causa disso."
+1422,Como exportar relatório,"Como faço para exportar o relatório mensal em PDF? Onde fica essa opção? É importante, preciso resolver rápido."
+1423,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. É importante, preciso resolver rápido."
+1424,Boleto não chegou,"O boleto da assinatura não cheguo, preciso pagar o pagamento."
+1425,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. É só uma dúvida, pode responder com calma."
+1426,Como exportar relatório,"Como faço para exportar o relatório mensal em PDF? Onde fica essa opção? Está tudo parado em produção, urgente!"
+1427,Sugestão de recurso,"Gostaria que o sistema permitisse adicionar tags nos tickets. Sem pressa, quando puderem."
+1428,Login com falha,"Não consigo logar, dá erro e a página recarrega sozinha. Sem pressa, quando puderem."
+1429,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo? Estou bloqueado por causa disso."
+1430,,COMO FAÇO PARA EXPORTAR O RELATÓRIO MENSAL EM PDF? ONDE FICA ESSA OPÇÃO?
+1431,Sistema sempre lento,"O sistema está horrível de lento, muito decepcionado. Não consigo trabalhar, preciso de solução imediata. Além disso, ao gerar o relatório o sistema quebra e trava a sessão."
+1432,Exportação em Excel,"Gostaria que tivesse a opção de exportar em Excel além de PDF. Além disso, poderia adicionar um relatório de produtividade por equipe?"
+1433,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. Aguardo com prioridade, por favor."
+1434,Descaso com o cliente,"Faz dias que aguardo retorno e ninguém responde, um descaso. É só uma dúvida, pode responder com calma."
+1435,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? É só uma dúvida, pode responder com calma."
+1436,Crash no relatório,Ao gerar o relatório o sistema quebra e trava a sessão.
+1437,Como convidar usuário,Como posso convidar outro usuário para a minha conta?
+1438,Como convidar usuário,"Como posso convidar outro usuário para a minha conta? Crítico, resolvam o quanto antes!"
+1439,,PODERIA ADICIONAR UM RELATÓRIO DE PRODUTIVIDADE POR EQUIPE?
+1440,,"ESQUECI MEU LOGIN, COMO FAÇO PARA RECUPERAR O ACESSO? É IMPORTANTE, PRECISO RESOLVER RÁPIDO."
+1441,Como exportar relatório,Como faco para exportar o relatório mensal em PDF? Ondef ica essa opcao?
+1442,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Não consigo trabalhar, preciso de solução imediata."
+1443,Personalizar dashboard,Solicito a possibilidade de personalizar os cards do dashboard.
+1444,Cobrança indevida,"Fui cobrado duas vezes na fatura deste mês no cartão. Solicito o reembolso. Aguardo com prioridade, por favor."
+1445,Sugestão de recurso,Gostaria que o sistema permitisse adicionar tags nos tickets.
+1446,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo?"
+1447,Alterar forma de pagamento,Quero trocar o cartão de crédito cadastrado para o pagamento. Estou bloqueado por causa disso.
+1448,Como exportar relatório,"Como faco para exportar o relatório mensal em PDF? Onde fica essa opcao? Aguardo com prioridade, por favor."
+1449,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Não consigo trabalhar, preciso de solução imediata."
+1450,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada. Crítico, resolvam o quanto antes!"
+1451,,"ESTOU DECEPCIONADO, COBRANÇA ERRADA E NINGUÉM RESOLVE. É SÓ UMA DÚVIDA, PODE RESPONDER COM CALMA."
+1452,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. Está tudo parado em produção, urgente!"
+1453,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. É só uma dúvida, pode responder com calma."
+1454,Quero cancelar,"Cansei dos problemas, quero cancelar minha assinatura imediatamente. É importante, preciso resolver rápido. Além disso, estou muiot insatisfeito com o suporte, ninguém resolve nada."
+1455,Reclamação formal,"Registro uma reclamação: o serviço não entrega o que promete. Crítico, resolvam o quanto antes!"
+1456,Parceria comercial,"Temos interesse em uma parceria comercial, com quem falo? Nao cosnigo trabalhar, preciso de solucao imediata."
+1457,Boleto não chegou,"O boleto da assinatura não chegou, preciso pagar o pagamento. Estou bloqueado por causa disso."
+1458,Pedido de nova feature,Poderia adicionar um modo escuro? Seria um recurso muito útil.
+1459,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso?"
+1460,Como exportar relatório,"Como faço para exportar o rleatório mensal em PDF? Onde fica essa opção? É importante, preciso resolver rápido."
+1461,Reclamação formal,Registro uma reclamação: o serviço não entrega o que promete.
+1462,,"SOLICITO O AUMENTO DO LIMITE DE USUÁRIOS DA MINHA CONTA. AGUARDOC OM PRIORIDADE, POR FAVOR."
+1463,Mudança de titularidade,"Preciso transferir a titularidade da conta para outra pessoa. É só uma dúvida, pode responder com calma."
+1464,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. É importante, preciso resolver rápido."
+1465,Como convidar usuário,Como posso convidar outro usuário para a minha conta?
+1466,Novo relatório,Poderia adicionar um relatório de produtividade por equipe?
+1467,Onde altero a senha,Gostaria de saber onde altero minha senha de acesso.
+1468,Cobrança após cancelamento,"Cancelei mês passado mas continuo sendo cobrado na fatura. É importante, preciso resolver rápido."
+1469,Integração com Slack,Poderiam adicionar integracao com o Slack para avisos?
+1470,Upload falhando,O envio de arquivo falha sempre com mensagem de erro.
+1471,Péssimo atendimento,"Estou muito insatisfeito com o suporte, ninguém resolve nada. Estou bloqueado por causa disso."
+1472,Mudança de titularidade,"Preciso transferir a titularidade da conta para outra pessoa. Est átudo parado em producao, urgente!"
+1473,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível."
+1474,Alterar forma de pagamento,"Quero trocar o cartão de crédito cadastrado para o pagamento. Não consigo trabalhar, preciso de solução imediata."
+1475,Atualização de cadastro,"Preciso atualizar o endereço e o telefone da minha conta. Não consigo trabalhar, preciso de solução imediata."
+1476,API pública,Gostaria de acesso a uma API para integrar com nosso sistema. Estou bloqueado por causa disso.
+1477,Pedido de nova feature,"Poderia adicionar um modo escuro? Seria um recurso muito útil. É importante, preciso resolver rápido."
+1478,API pública,"Gostaria de acesso a uma API para integrar com nosso sistema. É importante, preciso resolver rápido."
+1479,Atualização de cadastro,Preciso atualizar o endereço e o telefone da minha conta. Estou bloqueado por causa disso.
+1480,Perdi dados importantes,"Perdi dados por causa de um erro de vocês, inadmissível. Estou bloqueado por causa disso."
+1481,Exportação em Excel,"Gostaria que tivesse a opção de exportar em Excel além de PDF. É só uma dúvida, pode responder com calma."
+1482,Botão quebrado,"O botão de exportar não funciona, nada acontece ao clicar. Estou bloqueado por causa disso."
+1483,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito."
+1484,Não carrega os dados,"A listagem não carrega, dá erro 500 e some tudo. Além disso, qual a diferença entre os planos? Posso trocar quando quiser?"
+1485,Erro na fatura,"O valor da fatura está diferente do combinado no plano. Está tudo parado em produção, urgente!"
+1486,Informação sobre evento,Vocês vão participar de algum evento este ano?
+1487,Onde altero a senha,Gostaria de saber onde altero minha senha de acesso.
+1488,Tela em branco,"Depois do último update a tela fica em branco, parcee um bug."
+1489,Onde altero a senha,"Gostaria de saber onde altero minha senha de acesso. Aguardo com prioridade, por favor."
+1490,Pedido de nova feature,Poderia adicionar um modo escuro? Seria um recurso muito útil.
+1491,Cancelar assinatura e reembolso,"Quero cancelar e receber o reembolso proporcional da assinatura. Aguardo com prioridade, por favor."
+1492,App trava ao abrir,"O aplicativo trava e fecha sozinho toda vez que tento abrir. Aguardo com prioridade, por favor."
+1493,Integração com Slack,"Poderiam adicionar integração com o Slack para avisos? É só uma dúvida, pode responder com calma."
+1494,,Como posso convidar outro usuário para a minha conta?
+1495,Exportação em Excel,"Gostaria que tivesse a opção de exportar em Excel além de PDF. Está tudo parado em produção, urgente!"
+1496,Sugestão de recurso,"Gostaria que o sistema permitisse adicionar tags nos tickets. É só uma dúvida, pode responder com calma."
+1497,Dúvida sobre integração,"Como funciona a integração com o meu sistema atual? Apenas uma sugestão, sem urgência."
+1498,Produto piorou,"Depois da atualização ficou péssimo, estou insatisfeito."
+1499,Nota fiscal,"Preciso da nota fiscal do pagamento para o financeiro da empresa. É importante, preciso resolver rápido. Além disso, cancelei mês passado mas continuo sendo cobrado na fatura."
+1500,Recuperar acesso,"Esqueci meu login, como faço para recuperar o acesso? Não consigo trabalhar, preciso de solução imediata."

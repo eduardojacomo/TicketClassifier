@@ -1,0 +1,87 @@
+using System.Globalization;
+using System.Text;
+using CsvHelper;
+using CsvHelper.Configuration;
+using TicketClassifier.Api.Dtos.Input;
+using TicketClassifier.Api.Models;
+
+namespace TicketClassifier.Api.Services;
+
+/// <summary>Leitura e geração de CSV (parse flexível + export enriquecido).</summary>
+public class CsvService
+{
+    public List<TicketCsvInput> Parse(Stream csv)
+    {
+        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+            HasHeaderRecord = true,
+            MissingFieldFound = null,
+            HeaderValidated = null,
+            BadDataFound = null,
+            DetectDelimiter = true,
+        };
+
+        using var reader = new StreamReader(csv);
+        using var csvReader = new CsvReader(reader, config);
+
+        csvReader.Read();
+        csvReader.ReadHeader();
+        var headers = csvReader.HeaderRecord ?? Array.Empty<string>();
+
+        string? Col(params string[] nomes) =>
+            headers.FirstOrDefault(h => nomes.Any(n => h.Trim().Equals(n, StringComparison.OrdinalIgnoreCase)));
+
+        var colId        = Col("id", "ticket_id", "ticketid", "número", "numero");
+        var colAssunto   = Col("subject", "assunto", "title", "título", "titulo");
+        var colDescricao = Col("description", "descricao", "descrição", "body", "message", "mensagem", "texto", "text");
+
+        var itens = new List<TicketCsvInput>();
+        while (csvReader.Read())
+        {
+            var assunto   = colAssunto   != null ? csvReader.GetField(colAssunto)   : null;
+            var descricao = colDescricao != null ? csvReader.GetField(colDescricao) : null;
+
+            if (string.IsNullOrWhiteSpace(descricao))
+                descricao = string.Join(" ", headers.Select(h => csvReader.GetField(h)).Where(v => !string.IsNullOrWhiteSpace(v)));
+
+            if (string.IsNullOrWhiteSpace(assunto) && string.IsNullOrWhiteSpace(descricao))
+                continue;
+
+            itens.Add(new TicketCsvInput
+            {
+                ExternalId = colId != null ? csvReader.GetField(colId) : null,
+                Assunto = assunto,
+                Descricao = descricao ?? "",
+            });
+        }
+        return itens;
+    }
+
+    public byte[] Export(IEnumerable<Ticket> tickets)
+    {
+        using var ms = new MemoryStream();
+        using (var writer = new StreamWriter(ms, new UTF8Encoding(true), leaveOpen: true))
+        using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+        {
+            csv.WriteField("Id"); csv.WriteField("Assunto"); csv.WriteField("Descricao");
+            csv.WriteField("Categoria"); csv.WriteField("Prioridade"); csv.WriteField("Departamento");
+            csv.WriteField("Resumo"); csv.WriteField("Confianca"); csv.WriteField("Justificativa");
+            csv.NextRecord();
+
+            foreach (var t in tickets)
+            {
+                csv.WriteField(t.ExternalId);
+                csv.WriteField(t.Assunto);
+                csv.WriteField(t.Descricao);
+                csv.WriteField(t.Categoria);
+                csv.WriteField(t.Prioridade);
+                csv.WriteField(t.Departamento);
+                csv.WriteField(t.Resumo);
+                csv.WriteField(t.Confianca.ToString("0.00", CultureInfo.InvariantCulture));
+                csv.WriteField(t.Justificativa);
+                csv.NextRecord();
+            }
+        }
+        return ms.ToArray();
+    }
+}

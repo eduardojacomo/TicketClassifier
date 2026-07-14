@@ -1,0 +1,77 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ticket
+      POSTGRES_PASSWORD: ticket
+      POSTGRES_DB: ticketclassifier
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ticket -d ticketclassifier"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      ConnectionStrings__DataBase: "Host=db;Port=5432;Database=ticketclassifier;Username=ticket;Password=ticket"
+      Processing__TamanhoLote: "${TAMANHO_LOTE:-20}"
+      Processing__LotesParalelos: "${LOTES_PARALELOS:-3}"
+      Processing__LoteUnico: "${LOTE_UNICO:-false}"
+      Llm__Provider: "${LLM_PROVIDER:-mock}"
+      Llm__Anthropic__ApiKey: "${ANTHROPIC_API_KEY:-}"
+      Llm__Anthropic__Model: "${ANTHROPIC_MODEL:-claude-haiku-4-5-20251001}"
+      Llm__Gemini__ApiKey: "${GEMINI_API_KEY:-}"
+      Llm__Gemini__Model: "${GEMINI_MODEL:-gemini-2.5-flash}"
+      Llm__Llama__BaseUrl: "http://llama-server:8080"
+      ASPNETCORE_URLS: "http://+:8080"
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+      llama-server:
+        condition: service_healthy
+
+  llama-server:
+    image: ghcr.io/ggml-org/llama.cpp:server
+    container_name: local-gemma-chat-model
+    ports:
+      - "8081:8080"
+    environment:
+      - LLAMA_CACHE=/cache
+    volumes:
+      - llama-cache:/cache
+    command:
+      - "-hf"
+      - "ggml-org/gemma-4-E2B-it-GGUF"
+      - "--port"
+      - "8080"
+      - "--host"
+      - "0.0.0.0"
+      - "-c"
+      - "8192"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8080/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 120s
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5174:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+  llama-cache:
