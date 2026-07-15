@@ -66,9 +66,27 @@ public static class Categorias
     private static string ExtrairJson(string texto)
     {
         var limpo = LimparMarkdown(texto);
-        var i = limpo.IndexOf('[');
-        var j = limpo.LastIndexOf(']');
-        return (i >= 0 && j > i) ? limpo[i..(j + 1)] : "[]";
+
+        var iArr = limpo.IndexOf('[');
+        var iObj = limpo.IndexOf('{');
+
+        // Se '[' vem antes de '{', é um array externo
+        if (iArr >= 0 && (iObj < 0 || iArr < iObj))
+        {
+            var jArr = limpo.LastIndexOf(']');
+            if (jArr > iArr)
+                return limpo[iArr..(jArr + 1)];
+        }
+
+        // Objeto único — envolver em array
+        if (iObj >= 0)
+        {
+            var jObj = limpo.LastIndexOf('}');
+            if (jObj > iObj)
+                return "[" + limpo[iObj..(jObj + 1)] + "]";
+        }
+
+        return "[]";
     }
 
     /// <summary>Converte a resposta (array JSON) em dicionário indice → resultado.</summary>
