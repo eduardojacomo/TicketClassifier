@@ -14,10 +14,10 @@ const props = defineProps({
 const paletaCores = ['#4f46e5','#0ea5e9','#8b5cf6','#ec4899','#f59e0b','#10b981','#6366f1','#f43f5e','#14b8a6','#64748b']
 
 const coresPrioridadeChart = {
-  'Baixa': '#10b981',
-  'Média': '#3b82f6',
-  'Alta': '#f59e0b',
-  'Crítica': '#ef4444',
+  'Low': '#10b981',
+  'Medium': '#3b82f6',
+  'High': '#f59e0b',
+  'Critical': '#ef4444',
 }
 
 const chartData = computed(() => {
@@ -82,7 +82,7 @@ const chartOptions = {
   <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
     <div class="flex items-center justify-between">
       <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider">{{ titulo }}</h3>
-      <span class="text-[10px] text-slate-400 font-medium">Distribuicao</span>
+      <span class="text-[10px] text-slate-400 font-medium">Distribution</span>
     </div>
     <div class="h-64 flex items-center justify-center relative">
       <Doughnut :data="chartData" :options="chartOptions" />

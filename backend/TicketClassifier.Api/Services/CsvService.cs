@@ -24,18 +24,18 @@ public class CsvService
     public static readonly (string Key, string Label)[] ColunasDisponiveis =
     {
         ("id",              "ID"),
-        ("assunto",         "Assunto"),
-        ("descricao",       "Descrição"),
-        ("categoria",       "Categoria"),
-        ("prioridade",      "Prioridade"),
-        ("departamento",    "Departamento"),
-        ("sentimento",      "Sentimento"),
+        ("assunto",         "Subject"),
+        ("descricao",       "Description"),
+        ("categoria",       "Category"),
+        ("prioridade",      "Priority"),
+        ("departamento",    "Department"),
+        ("sentimento",      "Sentiment"),
         ("tags",            "Tags"),
-        ("resumo",          "Resumo"),
-        ("confianca",       "Confiança"),
-        ("justificativa",   "Justificativa"),
-        ("modificado",      "Modificado"),
-        ("dataModificacao", "Data Modificação"),
+        ("resumo",          "Summary"),
+        ("confianca",       "Confidence"),
+        ("justificativa",   "Justification"),
+        ("modificado",      "Modified"),
+        ("dataModificacao", "Modified Date"),
     };
 
     private static readonly HashSet<string> TodasAsChaves =
@@ -59,7 +59,7 @@ public class CsvService
     private static void ValidarStream(Stream csv)
     {
         if (csv is null || !csv.CanRead)
-            throw new CsvValidationException("STREAM_INVALIDO", "O arquivo não pôde ser lido. Verifique se o arquivo não está corrompido.");
+            throw new CsvValidationException("STREAM_INVALIDO", "The file could not be read. Check that the file is not corrupted.");
     }
 
     private static MemoryStream CopiarComLimite(Stream csv)
@@ -72,11 +72,11 @@ public class CsvService
         {
             total += lido;
             if (total > MaxTamanhoBytes)
-                throw new CsvValidationException("ARQUIVO_GRANDE", $"O arquivo excede o limite de {MaxTamanhoBytes / (1024 * 1024)} MB.");
+                throw new CsvValidationException("ARQUIVO_GRANDE", $"The file exceeds the {MaxTamanhoBytes / (1024 * 1024)} MB limit.");
             ms.Write(buffer, 0, lido);
         }
         if (total == 0)
-            throw new CsvValidationException("ARQUIVO_VAZIO", "O arquivo está vazio.");
+            throw new CsvValidationException("ARQUIVO_VAZIO", "The file is empty.");
         ms.Position = 0;
         return ms;
     }
@@ -95,7 +95,7 @@ public class CsvService
             if (bytes[i] == 0x00) nulos++;
         }
         if (nulos > amostra * 0.05)
-            throw new CsvValidationException("ARQUIVO_BINARIO", "O arquivo parece ser binário (PDF, imagem, etc.), não um CSV de texto.");
+            throw new CsvValidationException("ARQUIVO_BINARIO", "The file appears to be binary (PDF, image, etc.), not a text CSV.");
     }
 
     internal static string DecodificarTexto(byte[] bytes)
@@ -127,20 +127,20 @@ public class CsvService
     internal static void ValidarConteudoTexto(string texto)
     {
         if (string.IsNullOrWhiteSpace(texto))
-            throw new CsvValidationException("ARQUIVO_VAZIO", "O arquivo está vazio ou contém apenas espaços em branco.");
+            throw new CsvValidationException("ARQUIVO_VAZIO", "The file is empty or contains only whitespace.");
 
         var primeiraLinha = texto.AsSpan();
         var fimLinha = texto.IndexOfAny(new[] { '\r', '\n' });
         if (fimLinha > 0) primeiraLinha = texto.AsSpan(0, fimLinha);
 
         if (primeiraLinha.Length > 0 && (primeiraLinha[0] == '{' || primeiraLinha[0] == '['))
-            throw new CsvValidationException("FORMATO_JSON", "O arquivo parece estar em formato JSON, não CSV.");
+            throw new CsvValidationException("FORMATO_JSON", "The file appears to be in JSON format, not CSV.");
 
         if (primeiraLinha.StartsWith("<?xml") || primeiraLinha.StartsWith("<html", StringComparison.OrdinalIgnoreCase))
-            throw new CsvValidationException("FORMATO_XML_HTML", "O arquivo parece estar em formato XML/HTML, não CSV.");
+            throw new CsvValidationException("FORMATO_XML_HTML", "The file appears to be in XML/HTML format, not CSV.");
 
         if (primeiraLinha.StartsWith("%PDF"))
-            throw new CsvValidationException("FORMATO_PDF", "O arquivo é um PDF, não um CSV.");
+            throw new CsvValidationException("FORMATO_PDF", "The file is a PDF, not a CSV.");
     }
 
     private List<TicketCsvInput> ParseInterno(Stream stream)
@@ -158,15 +158,15 @@ public class CsvService
         using var csvReader = new CsvReader(reader, config);
 
         if (!csvReader.Read() || !csvReader.ReadHeader())
-            throw new CsvValidationException("SEM_CABECALHO", "O arquivo não possui linha de cabeçalho válida.");
+            throw new CsvValidationException("SEM_CABECALHO", "The file does not have a valid header row.");
 
         var headers = csvReader.HeaderRecord ?? Array.Empty<string>();
 
         if (headers.Length == 0)
-            throw new CsvValidationException("SEM_CABECALHO", "Não foi possível identificar colunas no cabeçalho.");
+            throw new CsvValidationException("SEM_CABECALHO", "Could not identify columns in the header.");
 
         if (headers.Length > MaxColunas)
-            throw new CsvValidationException("EXCESSO_COLUNAS", $"O arquivo possui {headers.Length} colunas, o limite é {MaxColunas}.");
+            throw new CsvValidationException("EXCESSO_COLUNAS", $"The file has {headers.Length} columns, the limit is {MaxColunas}.");
 
         // Mapear headers originais para versões limpas (para matching)
         var headersOriginais = headers.ToArray();
@@ -192,7 +192,7 @@ public class CsvService
         {
             linha++;
             if (linha > MaxLinhas + 1)
-                throw new CsvValidationException("EXCESSO_LINHAS", $"O arquivo excede o limite de {MaxLinhas:N0} linhas.");
+                throw new CsvValidationException("EXCESSO_LINHAS", $"The file exceeds the limit of {MaxLinhas:N0} rows.");
 
             string? assunto = null;
             string? descricao = null;
@@ -309,7 +309,7 @@ public class CsvService
         "resumo"          => t.Resumo,
         "confianca"       => t.Confianca.ToString("0.00", CultureInfo.InvariantCulture),
         "justificativa"   => t.Justificativa,
-        "modificado"      => t.RegistroModificado ? "Sim" : "Não",
+        "modificado"      => t.RegistroModificado ? "Yes" : "No",
         "datamodificacao" => t.DataModificacao?.ToString("yyyy-MM-dd HH:mm:ss") ?? "",
         _                 => "",
     };

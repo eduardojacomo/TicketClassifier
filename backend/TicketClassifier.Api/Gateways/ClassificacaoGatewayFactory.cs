@@ -29,7 +29,7 @@ public class ClassificacaoGatewayFactory : IClassificacaoGatewayFactory
                 => _sp.GetRequiredService<GeminiGateway>(),
             "llama" => _sp.GetRequiredService<LlamaGateway>(),
             _ => throw new InvalidOperationException(
-                $"Nenhum provedor LLM válido configurado. Defina 'Llm:Provider' como 'anthropic', 'gemini' ou 'llama' e forneça a chave de API correspondente."),
+                $"No valid LLM provider configured. Set 'Llm:Provider' to 'anthropic', 'gemini', or 'llama' and provide the corresponding API key."),
         };
     }
 

@@ -1,5 +1,5 @@
 export const paletaCores = ['#14b8a6','#3b82f6','#a78bfa','#f472b6','#f59e0b','#10b981','#60a5fa','#f87171','#34d399','#94a3b8']
-export const coresPrioridade = { Baixa:'#94a3b8', Média:'#3b82f6', Alta:'#eab308', Crítica:'#ef4444' }
+export const coresPrioridade = { Low:'#94a3b8', Medium:'#3b82f6', High:'#eab308', Critical:'#ef4444' }
 
 export function mapearDicionarioParaBarras(dic, coresFixas = null) {
   const entradas = Object.entries(dic || {}).filter(([, v]) => v > 0)
@@ -20,5 +20,5 @@ export function mapearDicionarioParaBarras(dic, coresFixas = null) {
 }
 
 export function formatarData(iso) {
-  return iso ? new Date(iso).toLocaleString('pt-BR') : ''
+  return iso ? new Date(iso).toLocaleString('en-US') : ''
 }

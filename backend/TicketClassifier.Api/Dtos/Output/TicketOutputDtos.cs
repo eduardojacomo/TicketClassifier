@@ -12,7 +12,7 @@ public class TicketDto
     public string Resumo { get; set; } = string.Empty;
     public double Confianca { get; set; }
     public string Justificativa { get; set; } = string.Empty;
-    public string Sentimento { get; set; } = "neutro";
+    public string Sentimento { get; set; } = "neutral";
     public string[] Tags { get; set; } = Array.Empty<string>();
     public bool ProcessadoOk { get; set; }
     public bool RegistroModificado { get; set; }

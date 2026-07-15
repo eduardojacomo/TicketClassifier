@@ -41,7 +41,7 @@ const carregandoSimilares = ref(false)
 const stats = computed(() => props.batch?.estatisticas)
 const extrairOpcoes = (dic) => Object.entries(dic || {}).filter(([, v]) => v > 0).map(([k]) => k)
 
-const coresSentimento = { positivo: '#10b981', negativo: '#ef4444', neutro: '#94a3b8' }
+const coresSentimento = { positive: '#10b981', negative: '#ef4444', neutral: '#94a3b8' }
 
 const totalModificados = computed(() => (props.batch?.tickets ?? []).filter(t => t.registroModificado).length)
 
@@ -51,11 +51,11 @@ const kpis = computed(() => {
   const topCat = categoriasOrdenadas[0]
 
   return [
-    { rot: 'Total Processado', val: s.total, ico: 'fa-list', bg: 'bg-slate-100', iconColor: 'text-slate-600' },
-    { rot: 'Criticos', val: s.porPrioridade?.['Crítica'] ?? 0, ico: 'fa-circle-exclamation', bg: 'bg-rose-50', iconColor: 'text-rose-600' },
-    { rot: 'Falhas', val: s.falhas, ico: 'fa-rotate', bg: 'bg-amber-50', iconColor: 'text-amber-600' },
-    { rot: 'Confianca Media', val: `${Math.round((s.confiancaMedia || 0) * 100)}%`, ico: 'fa-bullseye', bg: 'bg-indigo-50', iconColor: 'text-indigo-600' },
-    { rot: 'Modificados', val: totalModificados.value, ico: 'fa-pen-fancy', bg: 'bg-violet-50', iconColor: 'text-violet-600' },
+    { rot: 'Total Processed', val: s.total, ico: 'fa-list', bg: 'bg-slate-100', iconColor: 'text-slate-600' },
+    { rot: 'Critical', val: s.porPrioridade?.['Critical'] ?? 0, ico: 'fa-circle-exclamation', bg: 'bg-rose-50', iconColor: 'text-rose-600' },
+    { rot: 'Failures', val: s.falhas, ico: 'fa-rotate', bg: 'bg-amber-50', iconColor: 'text-amber-600' },
+    { rot: 'Avg Confidence', val: `${Math.round((s.confiancaMedia || 0) * 100)}%`, ico: 'fa-bullseye', bg: 'bg-indigo-50', iconColor: 'text-indigo-600' },
+    { rot: 'Modified', val: totalModificados.value, ico: 'fa-pen-fancy', bg: 'bg-violet-50', iconColor: 'text-violet-600' },
   ]
 })
 
@@ -84,10 +84,10 @@ watch([fCategoria, fPrioridade, fDepartamento, fSentimento, fBusca, fSoBaixaConf
 
 function getPriorityStyle(p) {
   switch (p) {
-    case 'Crítica': return 'bg-rose-100 text-rose-800 border-rose-200'
-    case 'Alta': return 'bg-amber-100 text-amber-800 border-amber-200'
-    case 'Média': return 'bg-blue-100 text-blue-800 border-blue-200'
-    case 'Baixa': return 'bg-emerald-100 text-emerald-800 border-emerald-200'
+    case 'Critical': return 'bg-rose-100 text-rose-800 border-rose-200'
+    case 'High': return 'bg-amber-100 text-amber-800 border-amber-200'
+    case 'Medium': return 'bg-blue-100 text-blue-800 border-blue-200'
+    case 'Low': return 'bg-emerald-100 text-emerald-800 border-emerald-200'
     default: return 'bg-slate-100 text-slate-700 border-slate-200'
   }
 }
@@ -101,16 +101,16 @@ function getConfStyle(c) {
 
 function getSentimentoStyle(s) {
   switch (s) {
-    case 'positivo': return 'bg-emerald-100 text-emerald-800 border-emerald-200'
-    case 'negativo': return 'bg-rose-100 text-rose-800 border-rose-200'
+    case 'positive': return 'bg-emerald-100 text-emerald-800 border-emerald-200'
+    case 'negative': return 'bg-rose-100 text-rose-800 border-rose-200'
     default: return 'bg-slate-100 text-slate-600 border-slate-200'
   }
 }
 
 function getSentimentoIcon(s) {
   switch (s) {
-    case 'positivo': return 'fa-face-smile'
-    case 'negativo': return 'fa-face-frown'
+    case 'positive': return 'fa-face-smile'
+    case 'negative': return 'fa-face-frown'
     default: return 'fa-face-meh'
   }
 }
@@ -166,23 +166,23 @@ function exportarComColunas(cols) {
         </button>
         <div>
           <h2 class="text-2xl font-bold tracking-tight text-slate-900">{{ batch.nomeArquivo }}</h2>
-          <p class="text-sm text-slate-500">Resultados da classificacao por IA</p>
+          <p class="text-sm text-slate-500">AI classification results</p>
         </div>
       </div>
       <div class="flex items-center gap-3">
         <button v-if="stats?.falhas > 0" :disabled="reprocessando" @click="emit('reprocessar')"
                 class="bg-amber-500 hover:bg-amber-400 disabled:opacity-50 text-white px-4 py-2.5 rounded-xl font-medium text-sm transition flex items-center gap-2 shadow-md cursor-pointer">
           <i class="fa-solid fa-rotate" :class="{ 'animate-spin': reprocessando }"></i>
-          {{ reprocessando ? 'Reprocessando...' : `Reprocessar ${stats.falhas} falha(s)` }}
+          {{ reprocessando ? 'Reprocessing...' : `Reprocess ${stats.falhas} failure(s)` }}
         </button>
         <button :disabled="reprocessandoTudo" @click="emit('reprocessar-tudo')"
                 class="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white px-4 py-2.5 rounded-xl font-medium text-sm transition flex items-center gap-2 shadow-md cursor-pointer">
           <i class="fa-solid fa-arrows-rotate" :class="{ 'animate-spin': reprocessandoTudo }"></i>
-          {{ reprocessandoTudo ? 'Reprocessando...' : 'Reprocessar tudo' }}
+          {{ reprocessandoTudo ? 'Reprocessing...' : 'Reprocess all' }}
         </button>
         <button @click="mostrarExport = true" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2.5 rounded-xl font-medium text-sm transition flex items-center gap-2 shadow-md cursor-pointer">
           <i class="fa-solid fa-file-export"></i>
-          Exportar CSV
+          Export CSV
         </button>
       </div>
     </div>
@@ -202,18 +202,18 @@ function exportarComColunas(cols) {
 
     <!-- Charts -->
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-      <BarChart titulo="POR CATEGORIA" :dados="stats?.porCategoria" />
-      <BarChart titulo="POR DEPARTAMENTO" :dados="stats?.porDepartamento" />
-      <DoughnutChart titulo="POR PRIORIDADE" :dados="stats?.porPrioridade" :cores="coresPrioridade" />
-      <DoughnutChart titulo="POR SENTIMENTO" :dados="stats?.porSentimento" :cores="coresSentimento" />
+      <BarChart titulo="BY CATEGORY" :dados="stats?.porCategoria" />
+      <BarChart titulo="BY DEPARTMENT" :dados="stats?.porDepartamento" />
+      <DoughnutChart titulo="BY PRIORITY" :dados="stats?.porPrioridade" :cores="coresPrioridade" />
+      <DoughnutChart titulo="BY SENTIMENT" :dados="stats?.porSentimento" :cores="coresSentimento" />
     </div>
 
     <!-- Data Table -->
     <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h3 class="text-lg font-bold text-slate-900">Resultados Individuais</h3>
-          <p class="text-xs text-slate-500">Navegacao e filtragem por tickets classificados pela IA.</p>
+          <h3 class="text-lg font-bold text-slate-900">Individual Results</h3>
+          <p class="text-xs text-slate-500">Browse and filter AI-classified tickets.</p>
         </div>
       </div>
 
@@ -221,33 +221,33 @@ function exportarComColunas(cols) {
       <div class="flex flex-wrap items-center gap-2">
         <div class="relative max-w-xs">
           <i class="fa-solid fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
-          <input v-model="fBusca" type="text" placeholder="Buscar..." class="pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full" />
+          <input v-model="fBusca" type="text" placeholder="Search..." class="pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full" />
         </div>
         <select v-model="fCategoria" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
-          <option value="">Categoria: todas</option>
+          <option value="">Category: all</option>
           <option v-for="o in extrairOpcoes(stats?.porCategoria)" :key="o">{{ o }}</option>
         </select>
         <select v-model="fPrioridade" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
-          <option value="">Prioridade: todas</option>
+          <option value="">Priority: all</option>
           <option v-for="o in extrairOpcoes(stats?.porPrioridade)" :key="o">{{ o }}</option>
         </select>
         <select v-model="fDepartamento" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
-          <option value="">Departamento: todos</option>
+          <option value="">Department: all</option>
           <option v-for="o in extrairOpcoes(stats?.porDepartamento)" :key="o">{{ o }}</option>
         </select>
         <select v-model="fSentimento" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
-          <option value="">Sentimento: todos</option>
-          <option value="positivo">Positivo</option>
-          <option value="negativo">Negativo</option>
-          <option value="neutro">Neutro</option>
+          <option value="">Sentiment: all</option>
+          <option value="positive">Positive</option>
+          <option value="negative">Negative</option>
+          <option value="neutral">Neutral</option>
         </select>
         <label class="flex items-center gap-2 text-xs text-slate-500 cursor-pointer bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl hover:bg-slate-100 transition">
           <input type="checkbox" v-model="fSoBaixaConfianca" class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
-          So &lt; 70%
+          Only &lt; 70%
         </label>
         <label class="flex items-center gap-2 text-xs text-slate-500 cursor-pointer bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl hover:bg-slate-100 transition">
           <input type="checkbox" v-model="fSoModificados" class="rounded border-slate-300 text-amber-600 focus:ring-amber-500" />
-          Modificados
+          Modified
         </label>
       </div>
 
@@ -257,15 +257,15 @@ function exportarComColunas(cols) {
           <thead>
             <tr class="bg-slate-50 border-b border-slate-100 text-xs font-bold text-slate-400 uppercase tracking-wider">
               <th class="p-4">ID</th>
-              <th class="p-4">Assunto</th>
-              <th class="p-4">Categoria</th>
-              <th class="p-4">Prioridade</th>
-              <th class="p-4">Depto</th>
-              <th class="p-4">Sentimento</th>
+              <th class="p-4">Subject</th>
+              <th class="p-4">Category</th>
+              <th class="p-4">Priority</th>
+              <th class="p-4">Dept</th>
+              <th class="p-4">Sentiment</th>
               <th class="p-4">Tags</th>
               <th class="p-4 text-center">Conf.</th>
               <th class="p-4 text-center">Sim.</th>
-              <th class="p-4 text-center">Acoes</th>
+              <th class="p-4 text-center">Actions</th>
             </tr>
           </thead>
           <tbody class="text-sm divide-y divide-slate-100">
@@ -275,7 +275,7 @@ function exportarComColunas(cols) {
               <td class="p-4 font-mono font-bold text-slate-400 text-xs">
                 <div class="flex items-center gap-1.5">
                   {{ t.externalId }}
-                  <i v-if="t.registroModificado" class="fa-solid fa-pen-fancy text-[10px] text-amber-500" title="Modificado manualmente"></i>
+                  <i v-if="t.registroModificado" class="fa-solid fa-pen-fancy text-[10px] text-amber-500" title="Manually modified"></i>
                 </div>
               </td>
               <td class="p-4 text-slate-900 font-medium max-w-[160px] truncate">{{ t.assunto }}</td>
@@ -294,7 +294,7 @@ function exportarComColunas(cols) {
               <td class="p-4">
                 <span :class="getSentimentoStyle(t.sentimento)" class="px-2 py-1 rounded-full text-[10px] font-bold uppercase border inline-flex items-center gap-1">
                   <i class="fa-solid" :class="getSentimentoIcon(t.sentimento)"></i>
-                  {{ t.sentimento || 'neutro' }}
+                  {{ t.sentimento || 'neutral' }}
                 </span>
               </td>
               <td class="p-4 max-w-[180px]">
@@ -321,10 +321,10 @@ function exportarComColunas(cols) {
               </td>
               <td class="p-4 text-center">
                 <div class="flex items-center justify-center gap-1.5">
-                  <button @click="abrirDetalhe(t)" class="p-1.5 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-indigo-600 transition cursor-pointer" title="Visualizar">
+                  <button @click="abrirDetalhe(t)" class="p-1.5 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-indigo-600 transition cursor-pointer" title="View">
                     <i class="fa-solid fa-eye text-sm"></i>
                   </button>
-                  <button @click="abrirEdicao(t)" class="p-1.5 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-amber-600 transition cursor-pointer" title="Editar">
+                  <button @click="abrirEdicao(t)" class="p-1.5 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-amber-600 transition cursor-pointer" title="Edit">
                     <i class="fa-solid fa-pen text-sm"></i>
                   </button>
                 </div>
@@ -333,7 +333,7 @@ function exportarComColunas(cols) {
             <tr v-if="!ticketsFiltrados.length">
               <td colspan="10" class="p-8 text-center text-slate-400">
                 <i class="fa-solid fa-filter-circle-xmark text-2xl text-slate-300 block mb-2"></i>
-                Nenhum ticket encontrado para o filtro aplicado.
+                No tickets found for the applied filter.
               </td>
             </tr>
           </tbody>
@@ -343,7 +343,7 @@ function exportarComColunas(cols) {
       <!-- Pagination -->
       <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs">
         <span class="text-slate-400">
-          Exibindo <b class="text-slate-700">{{ ticketsFiltrados.length ? (pagina - 1) * tamanhoPagina + 1 : 0 }}-{{ Math.min(pagina * tamanhoPagina, ticketsFiltrados.length) }}</b> de <b class="text-slate-700">{{ ticketsFiltrados.length }}</b>
+          Showing <b class="text-slate-700">{{ ticketsFiltrados.length ? (pagina - 1) * tamanhoPagina + 1 : 0 }}-{{ Math.min(pagina * tamanhoPagina, ticketsFiltrados.length) }}</b> of <b class="text-slate-700">{{ ticketsFiltrados.length }}</b>
         </span>
         <div class="flex items-center space-x-2">
           <button :disabled="pagina <= 1" @click="pagina--" class="p-2 border border-slate-200 rounded-lg hover:bg-slate-50 disabled:opacity-50 transition cursor-pointer">

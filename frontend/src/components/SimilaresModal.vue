@@ -17,18 +17,18 @@ function remover(id) {
 
 function getSentimentoStyle(s) {
   switch (s) {
-    case 'positivo': return 'bg-emerald-100 text-emerald-800'
-    case 'negativo': return 'bg-rose-100 text-rose-800'
+    case 'positive': return 'bg-emerald-100 text-emerald-800'
+    case 'negative': return 'bg-rose-100 text-rose-800'
     default: return 'bg-slate-100 text-slate-600'
   }
 }
 
 function getPriorityStyle(p) {
   switch (p) {
-    case 'Crítica': return 'bg-rose-100 text-rose-800'
-    case 'Alta': return 'bg-amber-100 text-amber-800'
-    case 'Média': return 'bg-blue-100 text-blue-800'
-    case 'Baixa': return 'bg-emerald-100 text-emerald-800'
+    case 'Critical': return 'bg-rose-100 text-rose-800'
+    case 'High': return 'bg-amber-100 text-amber-800'
+    case 'Medium': return 'bg-blue-100 text-blue-800'
+    case 'Low': return 'bg-emerald-100 text-emerald-800'
     default: return 'bg-slate-100 text-slate-700'
   }
 }
@@ -39,7 +39,7 @@ function getPriorityStyle(p) {
     <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
       <div class="sticky top-0 bg-white border-b border-slate-200 p-5 flex items-center justify-between rounded-t-2xl z-10">
         <div>
-          <span class="text-[10px] uppercase font-bold text-violet-600 tracking-widest block">Problemas Similares</span>
+          <span class="text-[10px] uppercase font-bold text-violet-600 tracking-widest block">Similar Issues</span>
           <h3 class="text-lg font-bold text-slate-900">
             {{ ticket.externalId || ticket.id?.substring(0, 8) }}
             <span class="text-sm font-normal text-slate-500 ml-2">{{ ticket.categoria }} · {{ ticket.departamento }}</span>
@@ -53,7 +53,7 @@ function getPriorityStyle(p) {
       <div class="p-6 space-y-4">
         <!-- Ticket de referencia -->
         <div class="bg-indigo-50 rounded-xl border border-indigo-100 p-4">
-          <span class="text-[10px] font-bold text-indigo-500 uppercase tracking-wider block mb-2">Ticket de referencia</span>
+          <span class="text-[10px] font-bold text-indigo-500 uppercase tracking-wider block mb-2">Reference ticket</span>
           <p class="text-sm text-slate-900 font-medium">{{ ticket.assunto }}</p>
           <div class="flex flex-wrap gap-1.5 mt-2">
             <span v-for="tag in (ticket.tags || [])" :key="tag" class="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded text-[10px] font-medium">{{ tag }}</span>
@@ -63,14 +63,14 @@ function getPriorityStyle(p) {
         <!-- Carregando -->
         <div v-if="carregando" class="text-center py-8">
           <i class="fa-solid fa-spinner animate-spin text-2xl text-slate-300"></i>
-          <p class="text-sm text-slate-400 mt-2">Buscando similares...</p>
+          <p class="text-sm text-slate-400 mt-2">Searching for similar tickets...</p>
         </div>
 
         <!-- Lista de similares -->
         <div v-else-if="similares.length > 0" class="space-y-2">
           <p class="text-xs text-slate-500 font-medium">
             <i class="fa-solid fa-link text-violet-500 mr-1"></i>
-            {{ similares.length }} ticket(s) com tags, categoria e departamento em comum
+            {{ similares.length }} ticket(s) with matching tags, category, and department
           </p>
 
           <div v-for="s in similares" :key="s.id"
@@ -82,7 +82,7 @@ function getPriorityStyle(p) {
                 <span class="font-mono text-[10px] font-bold text-slate-400">{{ s.externalId }}</span>
                 <span :class="getPriorityStyle(s.prioridade)" class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase">{{ s.prioridade }}</span>
                 <span :class="getSentimentoStyle(s.sentimento)" class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase">{{ s.sentimento }}</span>
-                <span v-if="s.registroModificado" class="text-[10px] text-amber-600" title="Registro modificado manualmente">
+                <span v-if="s.registroModificado" class="text-[10px] text-amber-600" title="Manually modified record">
                   <i class="fa-solid fa-pen-fancy"></i>
                 </span>
               </div>
@@ -98,10 +98,10 @@ function getPriorityStyle(p) {
             </div>
 
             <div class="flex flex-col gap-1.5 shrink-0">
-              <button @click="emit('ver-ticket', s)" class="p-1.5 rounded-lg hover:bg-indigo-50 text-slate-400 hover:text-indigo-600 transition cursor-pointer" title="Ver detalhes">
+              <button @click="emit('ver-ticket', s)" class="p-1.5 rounded-lg hover:bg-indigo-50 text-slate-400 hover:text-indigo-600 transition cursor-pointer" title="View details">
                 <i class="fa-solid fa-eye text-sm"></i>
               </button>
-              <button @click="remover(s.id)" class="p-1.5 rounded-lg hover:bg-rose-50 text-slate-400 hover:text-rose-600 transition cursor-pointer" title="Remover associacao">
+              <button @click="remover(s.id)" class="p-1.5 rounded-lg hover:bg-rose-50 text-slate-400 hover:text-rose-600 transition cursor-pointer" title="Remove association">
                 <i class="fa-solid fa-link-slash text-sm"></i>
               </button>
             </div>
@@ -111,8 +111,8 @@ function getPriorityStyle(p) {
         <!-- Sem similares -->
         <div v-else class="text-center py-8">
           <i class="fa-solid fa-circle-nodes text-3xl text-slate-300 block mb-2"></i>
-          <p class="text-sm text-slate-400">Nenhum ticket similar encontrado neste lote.</p>
-          <p class="text-xs text-slate-400 mt-1">A similaridade usa tags + categoria + departamento.</p>
+          <p class="text-sm text-slate-400">No similar tickets found in this batch.</p>
+          <p class="text-xs text-slate-400 mt-1">Similarity is based on tags + category + department.</p>
         </div>
       </div>
     </div>

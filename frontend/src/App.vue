@@ -71,8 +71,8 @@ function enviarComOpcao(sobrescrever) {
           <div class="flex items-center gap-3">
             <div class="w-5 h-5 border-3 border-slate-600 border-t-indigo-400 rounded-full animate-spin"></div>
             <div>
-              <span class="text-[10px] uppercase font-bold text-indigo-400 tracking-widest block">Pipeline Ativo</span>
-              <h3 class="text-lg font-bold">Classificando tickets...</h3>
+              <span class="text-[10px] uppercase font-bold text-indigo-400 tracking-widest block">Active Pipeline</span>
+              <h3 class="text-lg font-bold">Classifying tickets...</h3>
             </div>
             <span class="ml-auto text-sm font-mono font-semibold text-indigo-400 bg-indigo-950 px-3 py-1 rounded-full">
               {{ progressHook.pctConcluido.value }}%
@@ -88,8 +88,8 @@ function enviarComOpcao(sobrescrever) {
           </div>
 
           <p class="text-sm text-slate-600">
-            <b class="text-slate-900">{{ progressHook.prog.value.processados }}/{{ progressHook.prog.value.total || '...' }}</b> tickets processados
-            <span v-if="progressHook.prog.value.totalLotes" class="text-slate-400"> · lote {{ progressHook.prog.value.lotesConcluidos }}/{{ progressHook.prog.value.totalLotes }}</span>
+            <b class="text-slate-900">{{ progressHook.prog.value.processados }}/{{ progressHook.prog.value.total || '...' }}</b> tickets processed
+            <span v-if="progressHook.prog.value.totalLotes" class="text-slate-400"> · batch {{ progressHook.prog.value.lotesConcluidos }}/{{ progressHook.prog.value.totalLotes }}</span>
             <span v-if="progressHook.tempoRestanteEstima.value" class="text-slate-400"> · {{ progressHook.tempoRestanteEstima.value }}</span>
           </p>
 
@@ -97,10 +97,11 @@ function enviarComOpcao(sobrescrever) {
           <div class="grid grid-cols-4 gap-3">
             <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
               <span class="block text-[10px] text-slate-400 uppercase font-bold tracking-wider">Total</span>
+
               <span class="text-xl font-bold text-slate-800">{{ progressHook.prog.value.total }}</span>
             </div>
             <div class="bg-amber-50/50 p-3 rounded-xl border border-amber-100 text-center">
-              <span class="block text-[10px] text-amber-500 uppercase font-bold tracking-wider">Pendente</span>
+              <span class="block text-[10px] text-amber-500 uppercase font-bold tracking-wider">Pending</span>
               <span class="text-xl font-bold text-amber-700">{{ Math.max(0, progressHook.prog.value.total - progressHook.prog.value.processados) }}</span>
             </div>
             <div class="bg-emerald-50/50 p-3 rounded-xl border border-emerald-100 text-center">
@@ -108,7 +109,7 @@ function enviarComOpcao(sobrescrever) {
               <span class="text-xl font-bold text-emerald-700">{{ progressHook.prog.value.ok }}</span>
             </div>
             <div class="bg-rose-50/50 p-3 rounded-xl border border-rose-100 text-center">
-              <span class="block text-[10px] text-rose-500 uppercase font-bold tracking-wider">Falhas</span>
+              <span class="block text-[10px] text-rose-500 uppercase font-bold tracking-wider">Failures</span>
               <span class="text-xl font-bold text-rose-700">{{ progressHook.prog.value.falhas }}</span>
             </div>
           </div>
@@ -141,7 +142,7 @@ function enviarComOpcao(sobrescrever) {
                 HelpDesk AI
                 <span class="text-[10px] bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full font-medium border border-indigo-100">Classifier</span>
               </h1>
-              <p class="text-xs text-slate-500">Classificacao inteligente de chamados</p>
+              <p class="text-xs text-slate-500">Intelligent ticket classification</p>
             </div>
           </div>
 
@@ -161,7 +162,7 @@ function enviarComOpcao(sobrescrever) {
               class="px-4 py-1.5 rounded-md text-sm font-medium transition duration-150 flex items-center gap-2 cursor-pointer"
             >
               <i class="fa-solid fa-history"></i>
-              Lotes
+              Batches
             </button>
             <button
               @click="classifier.view.value = 'parametros'"
@@ -169,7 +170,7 @@ function enviarComOpcao(sobrescrever) {
               class="px-4 py-1.5 rounded-md text-sm font-medium transition duration-150 flex items-center gap-2 cursor-pointer"
             >
               <i class="fa-solid fa-sliders"></i>
-              Regras
+              Rules
             </button>
           </nav>
 
@@ -217,9 +218,9 @@ function enviarComOpcao(sobrescrever) {
         <!-- Hero Banner -->
         <div class="bg-linear-to-r from-slate-900 via-indigo-950 to-slate-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl">
           <div class="space-y-3 max-w-2xl">
-            <h2 class="text-2xl font-bold tracking-tight">Classificacao de Tickets por IA</h2>
+            <h2 class="text-2xl font-bold tracking-tight">AI Ticket Classification</h2>
             <p class="text-slate-300 text-sm leading-relaxed">
-              Envie sua planilha de suporte em formato CSV. O sistema classifica automaticamente categoria, prioridade e departamento usando inteligencia artificial, processando em lotes para evitar gargalos.
+              Upload your support spreadsheet in CSV format. The system automatically classifies category, priority, and department using artificial intelligence, processing in batches to avoid bottlenecks.
             </p>
           </div>
         </div>
@@ -241,9 +242,9 @@ function enviarComOpcao(sobrescrever) {
                 <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-4 hover:scale-105 transition-transform">
                   <i class="fa-solid fa-file-csv text-3xl text-indigo-600"></i>
                 </div>
-                <h3 class="text-lg font-bold text-slate-900">Arraste seu arquivo CSV ou clique para navegar</h3>
+                <h3 class="text-lg font-bold text-slate-900">Drag your CSV file or click to browse</h3>
                 <p class="text-xs text-slate-500 mt-2 max-w-xs mx-auto">
-                  Colunas reconhecidas: subject/assunto, description/descricao/body, id (opcional)
+                  Recognized columns: subject/assunto, description/descricao/body, id (optional)
                 </p>
               </label>
 
@@ -262,20 +263,20 @@ function enviarComOpcao(sobrescrever) {
                     class="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white px-6 py-3 rounded-xl font-semibold text-sm transition shadow-lg shadow-indigo-100 flex items-center gap-2 cursor-pointer"
                   >
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    Classificar tickets
+                    Classify tickets
                   </button>
                   <label for="csv-upload" class="border border-slate-300 hover:bg-slate-50 text-slate-700 px-5 py-3 rounded-xl font-semibold text-sm transition cursor-pointer flex items-center gap-2">
                     <i class="fa-solid fa-arrows-rotate"></i>
-                    Trocar arquivo
+                    Change file
                   </label>
                 </div>
               </div>
 
               <!-- Format hints -->
               <div v-if="!arquivoLocal" class="mt-8 pt-6 border-t border-slate-100 w-full max-w-md flex justify-around text-xs text-slate-400">
-                <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> ID do Ticket</span>
-                <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Descricao</span>
-                <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Assunto</span>
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Ticket ID</span>
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Description</span>
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Subject</span>
               </div>
             </div>
           </div>
@@ -285,7 +286,7 @@ function enviarComOpcao(sobrescrever) {
             <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
               <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
                 <i class="fa-solid fa-network-wired text-indigo-600"></i>
-                Arquitetura do Sistema
+                System Architecture
               </h3>
 
               <div class="space-y-3.5 text-xs text-slate-600">
@@ -293,28 +294,28 @@ function enviarComOpcao(sobrescrever) {
                   <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">1</span>
                   <div>
                     <p class="font-semibold text-slate-800">Upload CSV (.NET API)</p>
-                    <p class="text-slate-500">Arquivo parseado e persistido no PostgreSQL via EF Core.</p>
+                    <p class="text-slate-500">File parsed and persisted in PostgreSQL via EF Core.</p>
                   </div>
                 </div>
                 <div class="flex items-start gap-2.5">
                   <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">2</span>
                   <div>
-                    <p class="font-semibold text-slate-800">Processamento em Lote</p>
-                    <p class="text-slate-500">Tickets divididos em lotes paralelos com throttling.</p>
+                    <p class="font-semibold text-slate-800">Batch Processing</p>
+                    <p class="text-slate-500">Tickets split into parallel batches with throttling.</p>
                   </div>
                 </div>
                 <div class="flex items-start gap-2.5">
                   <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">3</span>
                   <div>
-                    <p class="font-semibold text-slate-800">Classificacao por LLM</p>
-                    <p class="text-slate-500">Gemini, Claude, Llama local ou investigação mock.</p>
+                    <p class="font-semibold text-slate-800">LLM Classification</p>
+                    <p class="text-slate-500">Gemini, Claude, local Llama or mock investigation.</p>
                   </div>
                 </div>
                 <div class="flex items-start gap-2.5">
                   <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">4</span>
                   <div>
-                    <p class="font-semibold text-slate-800">Dashboard de Resultados</p>
-                    <p class="text-slate-500">Visualizacao interativa com Chart.js e filtros.</p>
+                    <p class="font-semibold text-slate-800">Results Dashboard</p>
+                    <p class="text-slate-500">Interactive visualization with Chart.js and filters.</p>
                   </div>
                 </div>
               </div>
@@ -327,29 +328,29 @@ function enviarComOpcao(sobrescrever) {
       <div v-else-if="classifier.view.value === 'lotes'" class="space-y-6">
         <div class="flex items-center justify-between">
           <div>
-            <h2 class="text-2xl font-bold tracking-tight text-slate-900">Lotes Processados</h2>
-            <p class="text-sm text-slate-500">Historico de todas as planilhas processadas.</p>
+            <h2 class="text-2xl font-bold tracking-tight text-slate-900">Processed Batches</h2>
+            <p class="text-sm text-slate-500">History of all processed spreadsheets.</p>
           </div>
           <button @click="classifier.view.value = 'upload'" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2.5 rounded-xl font-medium text-sm transition flex items-center gap-2 shadow-md cursor-pointer">
             <i class="fa-solid fa-plus"></i>
-            Novo Upload
+            New Upload
           </button>
         </div>
 
         <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
           <p v-if="!classifier.lotes.value.length" class="text-center text-slate-400 py-12">
             <i class="fa-solid fa-inbox text-4xl text-slate-300 block mb-3"></i>
-            Nenhum lote processado ainda. Envie um CSV para comecar.
+            No batches processed yet. Upload a CSV to get started.
           </p>
 
           <div v-else class="overflow-x-auto rounded-xl border border-slate-100">
             <table class="w-full text-left border-collapse">
               <thead>
                 <tr class="bg-slate-50 border-b border-slate-100 text-xs font-bold text-slate-400 uppercase tracking-wider">
-                  <th class="p-4">Arquivo</th>
+                  <th class="p-4">File</th>
                   <th class="p-4 text-center">Tickets</th>
-                  <th class="p-4">Data</th>
-                  <th class="p-4 text-center">Acoes</th>
+                  <th class="p-4">Date</th>
+                  <th class="p-4 text-center">Actions</th>
                 </tr>
               </thead>
               <tbody class="text-sm divide-y divide-slate-100">
@@ -365,7 +366,7 @@ function enviarComOpcao(sobrescrever) {
                   <td class="p-4 text-center">
                     <button @click="classifier.abrirDetalhe(l.batchId)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-lg text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 mx-auto">
                       <i class="fa-solid fa-chart-line text-indigo-600"></i>
-                      Abrir
+                      Open
                     </button>
                   </td>
                 </tr>

@@ -16,11 +16,11 @@ export function useTicketProgress() {
     const { processados, total } = prog.value
     if (processados <= 0 || processados >= total) return ''
     const segundos = Math.ceil((total - processados) * ((Date.now() - progInicio) / 1000 / processados))
-    return segundos > 0 ? `~${segundos}s restantes` : ''
+    return segundos > 0 ? `~${segundos}s remaining` : ''
   })
 
   function adicionarLog(msg) {
-    logs.value.push(`[${new Date().toLocaleTimeString('pt-BR')}] ${msg}`)
+    logs.value.push(`[${new Date().toLocaleTimeString('en-US')}] ${msg}`)
   }
 
   function iniciarPolling(jobId) {
@@ -29,7 +29,7 @@ export function useTicketProgress() {
     logs.value = []
     ultLotes = 0
     progInicio = Date.now()
-    adicionarLog('Lendo o arquivo CSV…')
+    adicionarLog('Reading CSV file...')
 
     progTimer = setInterval(async () => {
       try {
@@ -37,14 +37,14 @@ export function useTicketProgress() {
         if (!data.total) return
 
         if (prog.value.total === 0) {
-          adicionarLog(`Arquivo mapeado: ${data.total} tickets em ${data.totalLotes} lote(s).`)
+          adicionarLog(`File mapped: ${data.total} tickets in ${data.totalLotes} batch(es).`)
         }
         
         prog.value = data
         
         if (data.lotesConcluidos > ultLotes) {
           for (let l = ultLotes + 1; l <= data.lotesConcluidos; l++) {
-            adicionarLog(`Lote ${l}/${data.totalLotes} classificado — ${data.ok} ok, ${data.falhas} falha(s) acumulada(s).`)
+            adicionarLog(`Batch ${l}/${data.totalLotes} classified — ${data.ok} ok, ${data.falhas} accumulated failure(s).`)
           }
           ultLotes = data.lotesConcluidos
         }

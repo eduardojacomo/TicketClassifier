@@ -14,13 +14,13 @@ const mostrarForm = ref(false)
 const salvando = ref(false)
 
 const tipoLabels = {
-  categoria: 'Categoria',
-  prioridade: 'Prioridade',
-  departamento: 'Departamento',
-  pergunta: 'Pergunta',
-  reclamacao: 'Reclamação',
-  sentimento_positivo: 'Sentimento Positivo',
-  sentimento_negativo: 'Sentimento Negativo',
+  categoria: 'Category',
+  prioridade: 'Priority',
+  departamento: 'Department',
+  pergunta: 'Question',
+  reclamacao: 'Complaint',
+  sentimento_positivo: 'Positive Sentiment',
+  sentimento_negativo: 'Negative Sentiment',
   tag: 'Tag',
 }
 
@@ -73,7 +73,7 @@ async function carregarParametros() {
     const { data } = await api.get('/parametros')
     parametros.value = data
   } catch (e) {
-    erro.value = 'Erro ao carregar parâmetros: ' + (e.response?.data ?? e.message)
+    erro.value = 'Failed to load parameters: ' + (e.response?.data ?? e.message)
   } finally {
     carregando.value = false
   }
@@ -115,7 +115,7 @@ async function salvar() {
     fecharForm()
     await carregarParametros()
   } catch (e) {
-    erro.value = 'Erro ao salvar: ' + (e.response?.data ?? e.message)
+    erro.value = 'Failed to save: ' + (e.response?.data ?? e.message)
   } finally {
     salvando.value = false
   }
@@ -126,7 +126,7 @@ async function toggleAtivo(p) {
     await api.put(`/parametros/${p.id}`, { ...p, ativo: !p.ativo })
     p.ativo = !p.ativo
   } catch (e) {
-    erro.value = 'Erro ao atualizar: ' + (e.response?.data ?? e.message)
+    erro.value = 'Failed to update: ' + (e.response?.data ?? e.message)
   }
 }
 
@@ -139,7 +139,7 @@ async function excluir(id) {
     confirmandoExclusao.value = null
     await carregarParametros()
   } catch (e) {
-    erro.value = 'Erro ao excluir: ' + (e.response?.data ?? e.message)
+    erro.value = 'Failed to delete: ' + (e.response?.data ?? e.message)
   }
 }
 
@@ -156,15 +156,15 @@ onMounted(async () => {
     <div class="bg-linear-to-r from-slate-900 via-indigo-950 to-slate-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl">
       <div class="flex items-center justify-between flex-wrap gap-4">
         <div class="space-y-2">
-          <h2 class="text-2xl font-bold tracking-tight">Regras de Classificação</h2>
+          <h2 class="text-2xl font-bold tracking-tight">Classification Rules</h2>
           <p class="text-slate-300 text-sm leading-relaxed max-w-xl">
-            Gerencie os parâmetros que orientam a IA na classificação dos tickets.
-            Categorias, prioridades, departamentos, perguntas, reclamações, sentimentos e tags.
+            Manage the parameters that guide the AI in ticket classification.
+            Categories, priorities, departments, questions, complaints, sentiments, and tags.
           </p>
         </div>
         <button @click="abrirNovo()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition shadow-lg flex items-center gap-2 cursor-pointer">
           <i class="fa-solid fa-plus"></i>
-          Novo Parâmetro
+          New Parameter
         </button>
       </div>
     </div>
@@ -184,7 +184,7 @@ onMounted(async () => {
         class="px-4 py-2 rounded-lg text-xs font-semibold transition cursor-pointer flex items-center gap-2"
       >
         <i class="fa-solid fa-layer-group"></i>
-        Todos
+        All
         <span class="bg-white/20 text-[10px] px-1.5 py-0.5 rounded-full" :class="!tipoSelecionado ? 'bg-white/20' : 'bg-slate-100'">{{ parametros.length }}</span>
       </button>
       <button
@@ -202,18 +202,18 @@ onMounted(async () => {
     <!-- Loading -->
     <div v-if="carregando" class="text-center py-12">
       <div class="w-8 h-8 border-3 border-slate-200 border-t-indigo-500 rounded-full animate-spin mx-auto mb-3"></div>
-      <p class="text-sm text-slate-400">Carregando parâmetros...</p>
+      <p class="text-sm text-slate-400">Loading parameters...</p>
     </div>
 
     <!-- Empty state -->
     <div v-else-if="parametrosFiltrados.length === 0" class="bg-white rounded-2xl border border-slate-200 p-12 text-center shadow-sm">
       <i class="fa-solid fa-sliders text-4xl text-slate-300 mb-3 block"></i>
       <p class="text-slate-500 text-sm">
-        {{ tipoSelecionado ? `Nenhum parâmetro do tipo "${tipoLabels[tipoSelecionado]}" cadastrado.` : 'Nenhum parâmetro cadastrado.' }}
+        {{ tipoSelecionado ? `No parameters of type "${tipoLabels[tipoSelecionado]}" registered.` : 'No parameters registered.' }}
       </p>
       <button @click="abrirNovo(tipoSelecionado)" class="mt-4 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer inline-flex items-center gap-2 transition">
         <i class="fa-solid fa-plus"></i>
-        Adicionar
+        Add
       </button>
     </div>
 
@@ -223,11 +223,11 @@ onMounted(async () => {
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-slate-50 border-b border-slate-100 text-xs font-bold text-slate-400 uppercase tracking-wider">
-              <th class="p-4">Tipo</th>
-              <th class="p-4">Termo</th>
-              <th class="p-4">Alvo</th>
+              <th class="p-4">Type</th>
+              <th class="p-4">Term</th>
+              <th class="p-4">Target</th>
               <th class="p-4 text-center">Status</th>
-              <th class="p-4 text-center">Ações</th>
+              <th class="p-4 text-center">Actions</th>
             </tr>
           </thead>
           <tbody class="text-sm divide-y divide-slate-100">
@@ -241,25 +241,25 @@ onMounted(async () => {
               <td class="p-4 text-slate-900 font-medium">{{ p.termo }}</td>
               <td class="p-4 text-slate-500">{{ p.alvo || '—' }}</td>
               <td class="p-4 text-center">
-                <button @click="toggleAtivo(p)" class="cursor-pointer" :title="p.ativo ? 'Desativar' : 'Ativar'">
+                <button @click="toggleAtivo(p)" class="cursor-pointer" :title="p.ativo ? 'Deactivate' : 'Activate'">
                   <span v-if="p.ativo" class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold px-2.5 py-1 rounded-full inline-flex items-center gap-1">
-                    <i class="fa-solid fa-circle-check text-[10px]"></i> Ativo
+                    <i class="fa-solid fa-circle-check text-[10px]"></i> Active
                   </span>
                   <span v-else class="bg-slate-100 text-slate-500 border border-slate-200 text-xs font-semibold px-2.5 py-1 rounded-full inline-flex items-center gap-1">
-                    <i class="fa-solid fa-circle-xmark text-[10px]"></i> Inativo
+                    <i class="fa-solid fa-circle-xmark text-[10px]"></i> Inactive
                   </span>
                 </button>
               </td>
               <td class="p-4 text-center">
                 <div class="flex items-center justify-center gap-1">
-                  <button @click="abrirEdicao(p)" class="bg-slate-100 hover:bg-slate-200 text-slate-600 p-2 rounded-lg transition cursor-pointer" title="Editar">
+                  <button @click="abrirEdicao(p)" class="bg-slate-100 hover:bg-slate-200 text-slate-600 p-2 rounded-lg transition cursor-pointer" title="Edit">
                     <i class="fa-solid fa-pen-to-square text-xs"></i>
                   </button>
-                  <button v-if="confirmandoExclusao !== p.id" @click="confirmandoExclusao = p.id" class="bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-rose-600 p-2 rounded-lg transition cursor-pointer" title="Excluir">
+                  <button v-if="confirmandoExclusao !== p.id" @click="confirmandoExclusao = p.id" class="bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-rose-600 p-2 rounded-lg transition cursor-pointer" title="Delete">
                     <i class="fa-solid fa-trash text-xs"></i>
                   </button>
                   <button v-else @click="excluir(p.id)" class="bg-rose-500 hover:bg-rose-600 text-white p-2 rounded-lg transition cursor-pointer text-xs font-semibold px-3">
-                    Confirmar
+                    Confirm
                   </button>
                 </div>
               </td>
@@ -278,8 +278,8 @@ onMounted(async () => {
               <i class="fa-solid fa-sliders text-indigo-600 text-lg"></i>
             </div>
             <div>
-              <span class="text-[10px] uppercase font-bold text-indigo-600 tracking-widest block">{{ editandoId ? 'Editar' : 'Novo' }}</span>
-              <h3 class="text-lg font-bold text-slate-900">Parâmetro de Classificação</h3>
+              <span class="text-[10px] uppercase font-bold text-indigo-600 tracking-widest block">{{ editandoId ? 'Edit' : 'New' }}</span>
+              <h3 class="text-lg font-bold text-slate-900">Classification Parameter</h3>
             </div>
           </div>
         </div>
@@ -287,7 +287,7 @@ onMounted(async () => {
         <form @submit.prevent="salvar" class="p-6 space-y-4">
           <!-- Tipo -->
           <div>
-            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Tipo</label>
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Type</label>
             <select v-model="formulario.tipo" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
               <option v-for="t in Object.keys(tipoLabels)" :key="t" :value="t">{{ tipoLabels[t] }}</option>
             </select>
@@ -295,15 +295,15 @@ onMounted(async () => {
 
           <!-- Termo -->
           <div>
-            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Termo</label>
-            <input v-model="formulario.termo" type="text" placeholder="Ex: Bug, Financeiro, login_falhou..."
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Term</label>
+            <input v-model="formulario.termo" type="text" placeholder="E.g.: Bug, Finance, login_failed..."
               class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" required>
           </div>
 
           <!-- Alvo -->
           <div>
-            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Alvo <span class="text-slate-400 font-normal">(opcional)</span></label>
-            <input v-model="formulario.alvo" type="text" placeholder="Ex: Departamento destino, ação..."
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Target <span class="text-slate-400 font-normal">(optional)</span></label>
+            <input v-model="formulario.alvo" type="text" placeholder="E.g.: Target department, action..."
               class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
           </div>
 
@@ -314,7 +314,7 @@ onMounted(async () => {
               class="relative w-10 h-5.5 rounded-full transition cursor-pointer">
               <span :class="formulario.ativo ? 'translate-x-5' : 'translate-x-0.5'" class="absolute top-0.5 w-4.5 h-4.5 bg-white rounded-full shadow transition-transform"></span>
             </button>
-            <span class="text-sm text-slate-700 font-medium">{{ formulario.ativo ? 'Ativo' : 'Inativo' }}</span>
+            <span class="text-sm text-slate-700 font-medium">{{ formulario.ativo ? 'Active' : 'Inactive' }}</span>
           </div>
 
           <!-- Actions -->
@@ -323,11 +323,11 @@ onMounted(async () => {
               class="grow bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition cursor-pointer flex items-center justify-center gap-2">
               <i v-if="salvando" class="fa-solid fa-spinner animate-spin"></i>
               <i v-else class="fa-solid fa-check"></i>
-              {{ editandoId ? 'Salvar' : 'Criar' }}
+              {{ editandoId ? 'Save' : 'Create' }}
             </button>
             <button type="button" @click="fecharForm"
               class="border border-slate-200 hover:bg-slate-50 text-slate-600 px-5 py-2.5 rounded-xl text-sm font-medium transition cursor-pointer">
-              Cancelar
+              Cancel
             </button>
           </div>
         </form>

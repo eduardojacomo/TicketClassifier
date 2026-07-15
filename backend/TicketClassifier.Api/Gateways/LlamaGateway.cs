@@ -43,11 +43,11 @@ public class LlamaGateway : IClassificacaoGateway
 
         if (texto is null)
         {
-            var fallback = Categorias.FallbackComErro($"[Llama] {erro ?? "Erro desconhecido"}");
+            var fallback = Categorias.FallbackComErro($"[Llama] {erro ?? "Unknown error"}");
             return itens.Select(_ => fallback).ToList();
         }
 
-        _logger.LogInformation("Llama resposta bruta ({Len} chars): {Texto}", texto.Length, texto.Length > 1000 ? texto[..1000] + "…" : texto);
+        _logger.LogInformation("Llama raw response ({Len} chars): {Texto}", texto.Length, texto.Length > 1000 ? texto[..1000] + "..." : texto);
 
         var indices = itens.Select(t => t.Indice).ToList();
         var (porIndice, parseErro) = SeguroParse(texto, indices);
@@ -55,7 +55,7 @@ public class LlamaGateway : IClassificacaoGateway
         return itens.Select(t =>
         {
             if (porIndice.TryGetValue(t.Indice, out var r)) return r;
-            var motivo = parseErro ?? $"[Llama] Índice {t.Indice} ausente na resposta. Resposta parcial: {Truncar(texto, 200)}";
+            var motivo = parseErro ?? $"[Llama] Index {t.Indice} missing in response. Partial response: {Truncar(texto, 200)}";
             return Categorias.FallbackComErro(motivo);
         }).ToList();
     }
@@ -79,7 +79,7 @@ public class LlamaGateway : IClassificacaoGateway
                 if (EhTransiente(resp.StatusCode) && tentativa < backoff.Length)
                 {
                     ultimoErro = $"HTTP {(int)resp.StatusCode}: {Truncar(body, 300)}";
-                    _logger.LogWarning("Llama {Status}, retry {N} em {Ms}ms. Body: {Body}", (int)resp.StatusCode, tentativa + 1, backoff[tentativa], Truncar(body, 200));
+                    _logger.LogWarning("Llama {Status}, retry {N} in {Ms}ms. Body: {Body}", (int)resp.StatusCode, tentativa + 1, backoff[tentativa], Truncar(body, 200));
                     await Task.Delay(backoff[tentativa], ct);
                     continue;
                 }
@@ -87,7 +87,7 @@ public class LlamaGateway : IClassificacaoGateway
                 if (!resp.IsSuccessStatusCode)
                 {
                     ultimoErro = $"HTTP {(int)resp.StatusCode}: {Truncar(body, 300)}";
-                    _logger.LogWarning("Llama resposta não-OK: {Status}. Body: {Body}", (int)resp.StatusCode, Truncar(body, 500));
+                    _logger.LogWarning("Llama non-OK response: {Status}. Body: {Body}", (int)resp.StatusCode, Truncar(body, 500));
                     return (null, ultimoErro);
                 }
 
@@ -101,26 +101,26 @@ public class LlamaGateway : IClassificacaoGateway
             }
             catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
             {
-                ultimoErro = $"Timeout após {_http.Timeout.TotalSeconds}s aguardando resposta do Llama";
+                ultimoErro = $"Timeout after {_http.Timeout.TotalSeconds}s waiting for Llama response";
                 if (tentativa < backoff.Length)
                 {
-                    _logger.LogWarning("Llama timeout, retry {N} em {Ms}ms.", tentativa + 1, backoff[tentativa]);
+                    _logger.LogWarning("Llama timeout, retry {N} in {Ms}ms.", tentativa + 1, backoff[tentativa]);
                     await Task.Delay(backoff[tentativa], ct);
                     continue;
                 }
-                _logger.LogWarning("Llama timeout final; lote cai no fallback.");
+                _logger.LogWarning("Llama final timeout; batch falls back to default.");
                 return (null, ultimoErro);
             }
             catch (Exception ex) when (tentativa < backoff.Length)
             {
                 ultimoErro = $"{ex.GetType().Name}: {ex.Message}";
-                _logger.LogWarning(ex, "Erro no Llama, retry {N} em {Ms}ms.", tentativa + 1, backoff[tentativa]);
+                _logger.LogWarning(ex, "Llama error, retry {N} in {Ms}ms.", tentativa + 1, backoff[tentativa]);
                 await Task.Delay(backoff[tentativa], ct);
             }
             catch (Exception ex)
             {
                 ultimoErro = $"{ex.GetType().Name}: {ex.Message}";
-                _logger.LogWarning(ex, "Falha final no Llama; lote cai no fallback.");
+                _logger.LogWarning(ex, "Final failure in Llama; batch falls back to default.");
                 return (null, ultimoErro);
             }
         }
@@ -135,8 +135,8 @@ public class LlamaGateway : IClassificacaoGateway
         }
         catch (Exception ex)
         {
-            var erro = $"Falha ao parsear resposta do Llama: {ex.Message}. Resposta: {Truncar(texto, 300)}";
-            _logger.LogWarning(ex, "Falha ao parsear resposta do Llama. Texto: {Texto}", Truncar(texto, 500));
+            var erro = $"Failed to parse Llama response: {ex.Message}. Response: {Truncar(texto, 300)}";
+            _logger.LogWarning(ex, "Failed to parse Llama response. Text: {Texto}", Truncar(texto, 500));
             return (new(), erro);
         }
     }

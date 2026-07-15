@@ -15,7 +15,7 @@ export function useTicketClassifier(progressHook) {
       lotes.value = response.data ?? []
       view.value = 'lotes'
     } catch {
-      erro.value = 'Falha ao carregar lotes.'
+      erro.value = 'Failed to load batches.'
     }
   }
 
@@ -25,7 +25,7 @@ export function useTicketClassifier(progressHook) {
       batchAtual.value = response.data
       view.value = 'detalhe'
     } catch {
-      erro.value = 'Falha ao carregar detalhes do lote.'
+      erro.value = 'Failed to load batch details.'
     }
   }
 
@@ -52,7 +52,7 @@ export function useTicketClassifier(progressHook) {
       const { data } = await api.post('/tickets/upload', form)
       await abrirDetalhe(data.batchId)
     } catch (e) {
-      erro.value = e?.response?.data?.erro || e?.message || 'Falha ao processar o CSV.'
+      erro.value = e?.response?.data?.erro || e?.message || 'Failed to process CSV.'
     } finally {
       progressHook.pararPolling()
     }
@@ -66,7 +66,7 @@ export function useTicketClassifier(progressHook) {
       const { data } = await api.post(`/tickets/batches/${batchAtual.value.batchId}/reprocessar`)
       batchAtual.value = data
     } catch (e) {
-      erro.value = e?.response?.data?.erro || 'Falha ao reprocessar.'
+      erro.value = e?.response?.data?.erro || 'Failed to reprocess.'
     } finally {
       reprocessando.value = false
     }
@@ -86,7 +86,7 @@ export function useTicketClassifier(progressHook) {
       )
       batchAtual.value = data
     } catch (e) {
-      erro.value = e?.response?.data?.erro || 'Falha ao reprocessar.'
+      erro.value = e?.response?.data?.erro || 'Failed to reprocess.'
     } finally {
       reprocessandoTudo.value = false
       progressHook.pararPolling()
@@ -110,7 +110,7 @@ export function useTicketClassifier(progressHook) {
       }
       return data
     } catch (e) {
-      erro.value = e?.response?.data?.erro || 'Falha ao atualizar ticket.'
+      erro.value = e?.response?.data?.erro || 'Failed to update ticket.'
       return null
     }
   }
@@ -120,7 +120,7 @@ export function useTicketClassifier(progressHook) {
       const { data } = await api.get(`/tickets/${ticketId}/similares`)
       return data
     } catch (e) {
-      erro.value = e?.response?.data?.erro || 'Falha ao buscar similares.'
+      erro.value = e?.response?.data?.erro || 'Failed to search similar tickets.'
       return []
     }
   }

@@ -49,18 +49,18 @@ public class GeminiGateway : IClassificacaoGateway
 
         if (texto is null)
         {
-            var fallback = Categorias.FallbackComErro($"[Gemini] {erro ?? "Erro desconhecido"}");
+            var fallback = Categorias.FallbackComErro($"[Gemini] {erro ?? "Unknown error"}");
             return itens.Select(_ => fallback).ToList();
         }
 
-        _logger.LogInformation("Gemini resposta bruta ({Len} chars): {Texto}", texto.Length, texto.Length > 1000 ? texto[..1000] + "…" : texto);
+        _logger.LogInformation("Gemini raw response ({Len} chars): {Texto}", texto.Length, texto.Length > 1000 ? texto[..1000] + "..." : texto);
 
         var indices = itens.Select(t => t.Indice).ToList();
         var (porIndice, parseErro) = SeguroParse(texto, indices);
         return itens.Select(t =>
         {
             if (porIndice.TryGetValue(t.Indice, out var r)) return r;
-            var motivo = parseErro ?? $"[Gemini] Índice {t.Indice} ausente na resposta.";
+            var motivo = parseErro ?? $"[Gemini] Index {t.Indice} missing in response.";
             return Categorias.FallbackComErro(motivo);
         }).ToList();
     }
@@ -84,7 +84,7 @@ public class GeminiGateway : IClassificacaoGateway
                 if (EhTransiente(resp.StatusCode) && tentativa < backoff.Length)
                 {
                     ultimoErro = $"HTTP {(int)resp.StatusCode}: {Truncar(body, 300)}";
-                    _logger.LogWarning("Gemini {Status}, retry {N} em {Ms}ms. Body: {Body}", (int)resp.StatusCode, tentativa + 1, backoff[tentativa], Truncar(body, 200));
+                    _logger.LogWarning("Gemini {Status}, retry {N} in {Ms}ms. Body: {Body}", (int)resp.StatusCode, tentativa + 1, backoff[tentativa], Truncar(body, 200));
                     await Task.Delay(backoff[tentativa], ct);
                     continue;
                 }
@@ -92,7 +92,7 @@ public class GeminiGateway : IClassificacaoGateway
                 if (!resp.IsSuccessStatusCode)
                 {
                     ultimoErro = $"HTTP {(int)resp.StatusCode}: {Truncar(body, 300)}";
-                    _logger.LogWarning("Gemini resposta não-OK: {Status}. Body: {Body}", (int)resp.StatusCode, Truncar(body, 500));
+                    _logger.LogWarning("Gemini non-OK response: {Status}. Body: {Body}", (int)resp.StatusCode, Truncar(body, 500));
                     return (null, ultimoErro);
                 }
 
@@ -116,13 +116,13 @@ public class GeminiGateway : IClassificacaoGateway
             catch (Exception ex) when (tentativa < backoff.Length)
             {
                 ultimoErro = $"{ex.GetType().Name}: {ex.Message}";
-                _logger.LogWarning(ex, "Erro no Gemini, retry {N} em {Ms}ms.", tentativa + 1, backoff[tentativa]);
+                _logger.LogWarning(ex, "Gemini error, retry {N} in {Ms}ms.", tentativa + 1, backoff[tentativa]);
                 await Task.Delay(backoff[tentativa], ct);
             }
             catch (Exception ex)
             {
                 ultimoErro = $"{ex.GetType().Name}: {ex.Message}";
-                _logger.LogWarning(ex, "Falha final no Gemini; lote cai no fallback.");
+                _logger.LogWarning(ex, "Final failure in Gemini; batch falls back to default.");
                 return (null, ultimoErro);
             }
         }
@@ -131,7 +131,7 @@ public class GeminiGateway : IClassificacaoGateway
     private (Dictionary<int, ClassificacaoResultado> resultado, string? erro) SeguroParse(string texto, IReadOnlyList<int> indices)
     {
         try { return (Categorias.ParseLoteComFallback(texto, indices), null); }
-        catch (Exception ex) { return (new(), $"Falha ao parsear resposta: {ex.Message}. Resposta: {Truncar(texto, 300)}"); }
+        catch (Exception ex) { return (new(), $"Failed to parse response: {ex.Message}. Response: {Truncar(texto, 300)}"); }
     }
 
     private static string Truncar(string s, int max)

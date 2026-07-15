@@ -41,18 +41,18 @@ public class AnthropicGateway : IClassificacaoGateway
 
         if (texto is null)
         {
-            var fallback = Categorias.FallbackComErro($"[Anthropic] {erro ?? "Erro desconhecido"}");
+            var fallback = Categorias.FallbackComErro($"[Anthropic] {erro ?? "Unknown error"}");
             return itens.Select(_ => fallback).ToList();
         }
 
-        _logger.LogInformation("Anthropic resposta bruta ({Len} chars): {Texto}", texto.Length, texto.Length > 1000 ? texto[..1000] + "…" : texto);
+        _logger.LogInformation("Anthropic raw response ({Len} chars): {Texto}", texto.Length, texto.Length > 1000 ? texto[..1000] + "..." : texto);
 
         var indices = itens.Select(t => t.Indice).ToList();
         var (porIndice, parseErro) = SeguroParse(texto, indices);
         return itens.Select(t =>
         {
             if (porIndice.TryGetValue(t.Indice, out var r)) return r;
-            var motivo = parseErro ?? $"[Anthropic] Índice {t.Indice} ausente na resposta.";
+            var motivo = parseErro ?? $"[Anthropic] Index {t.Indice} missing in response.";
             return Categorias.FallbackComErro(motivo);
         }).ToList();
     }
@@ -84,7 +84,7 @@ public class AnthropicGateway : IClassificacaoGateway
                 if (!resp.IsSuccessStatusCode)
                 {
                     ultimoErro = $"HTTP {(int)resp.StatusCode}: {Truncar(body, 300)}";
-                    _logger.LogWarning("Anthropic resposta não-OK: {Status}. Body: {Body}", (int)resp.StatusCode, Truncar(body, 500));
+                    _logger.LogWarning("Anthropic non-OK response: {Status}. Body: {Body}", (int)resp.StatusCode, Truncar(body, 500));
                     return (null, ultimoErro);
                 }
 
@@ -94,13 +94,13 @@ public class AnthropicGateway : IClassificacaoGateway
             catch (Exception ex) when (tentativa < backoff.Length)
             {
                 ultimoErro = $"{ex.GetType().Name}: {ex.Message}";
-                _logger.LogWarning(ex, "Erro no Anthropic, retry {N}.", tentativa + 1);
+                _logger.LogWarning(ex, "Anthropic error, retry {N}.", tentativa + 1);
                 await Task.Delay(backoff[tentativa], ct);
             }
             catch (Exception ex)
             {
                 ultimoErro = $"{ex.GetType().Name}: {ex.Message}";
-                _logger.LogWarning(ex, "Falha final no Anthropic; lote cai no fallback.");
+                _logger.LogWarning(ex, "Final failure in Anthropic; batch falls back to default.");
                 return (null, ultimoErro);
             }
         }
@@ -109,7 +109,7 @@ public class AnthropicGateway : IClassificacaoGateway
     private (Dictionary<int, ClassificacaoResultado> resultado, string? erro) SeguroParse(string texto, IReadOnlyList<int> indices)
     {
         try { return (Categorias.ParseLoteComFallback(texto, indices), null); }
-        catch (Exception ex) { return (new(), $"Falha ao parsear resposta: {ex.Message}. Resposta: {Truncar(texto, 300)}"); }
+        catch (Exception ex) { return (new(), $"Failed to parse response: {ex.Message}. Response: {Truncar(texto, 300)}"); }
     }
 
     private static string Truncar(string s, int max)

@@ -19,21 +19,21 @@ public class ClassificacaoPromptBuilder
         foreach (var t in itens)
         {
             var desc = t.Descricao.Length > 600 ? t.Descricao[..600] : t.Descricao;
-            lista.Append($"[{t.Indice}] Assunto: {t.Assunto} | Descrição: {desc}\n");
+            lista.Append($"[{t.Indice}] Subject: {t.Assunto} | Description: {desc}\n");
         }
 
         var totalReal = totalTickets > 0 ? totalTickets : itens.Count;
 
         var sb = new StringBuilder();
-        sb.Append("Você é um analista de suporte técnico experiente. Classifique CADA ticket da lista com precisão.\n\n");
+        sb.Append("You are an experienced technical support analyst. Classify EACH ticket in the list with precision.\n\n");
 
-        sb.Append($"CONTEXTO DO LOTE: Você está processando o lote {loteAtual} de {totalLotes} ");
-        sb.Append($"(total de {totalReal} tickets no arquivo). Este lote contém {itens.Count} tickets. ");
-        sb.Append("Responda TODOS os tickets deste lote — não omita nenhum.\n\n");
+        sb.Append($"BATCH CONTEXT: You are processing batch {loteAtual} of {totalLotes} ");
+        sb.Append($"(total of {totalReal} tickets in the file). This batch contains {itens.Count} tickets. ");
+        sb.Append("Respond to ALL tickets in this batch — do not omit any.\n\n");
 
-        sb.Append("Responda SOMENTE com um ARRAY JSON válido (sem markdown, sem ```). Um objeto por ticket, ");
-        sb.Append("incluindo o campo \"indice\" IGUAL ao número entre colchetes do ticket. Use EXATAMENTE um dos ");
-        sb.Append("valores permitidos, com a mesma acentuação.\n\n");
+        sb.Append("Respond ONLY with a valid JSON ARRAY (no markdown, no ```). One object per ticket, ");
+        sb.Append("including the \"indice\" field EQUAL to the number in brackets of the ticket. Use EXACTLY one of the ");
+        sb.Append("allowed values, matching case exactly.\n\n");
 
         sb.AppendLine($"categoria: {string.Join(" | ", Categorias.Lista)}");
         sb.AppendLine($"prioridade: {string.Join(" | ", Categorias.Prioridades)}");
@@ -46,19 +46,19 @@ public class ClassificacaoPromptBuilder
         MontarRegrasSentimento(sb);
         MontarSecaoTags(sb);
 
-        sb.Append("Campo \"confianca\" (0.0 a 1.0): indica o quão seguro você está na classificação.\n");
-        sb.Append("- 0.90–1.00: ticket muito claro, palavras-chave explícitas, classificação óbvia.\n");
-        sb.Append("- 0.75–0.89: boa certeza, contexto suficiente para decidir.\n");
-        sb.Append("- 0.50–0.74: ambíguo, poderia ser outra categoria/prioridade.\n");
-        sb.Append("- abaixo de 0.50: muito vago, informação insuficiente.\n");
-        sb.Append("Varie a confiança de acordo com a clareza de CADA ticket. NÃO use o mesmo valor para todos.\n\n");
+        sb.Append("Field \"confianca\" (0.0 to 1.0): indicates how confident you are in the classification.\n");
+        sb.Append("- 0.90–1.00: very clear ticket, explicit keywords, obvious classification.\n");
+        sb.Append("- 0.75–0.89: good certainty, sufficient context to decide.\n");
+        sb.Append("- 0.50–0.74: ambiguous, could be another category/priority.\n");
+        sb.Append("- below 0.50: very vague, insufficient information.\n");
+        sb.Append("Vary confidence according to the clarity of EACH ticket. Do NOT use the same value for all.\n\n");
 
-        sb.Append("Formato de cada item:\n");
+        sb.Append("Format for each item:\n");
         sb.Append("{\"indice\":0,\"categoria\":\"\",\"prioridade\":\"\",\"departamento\":\"\",\"resumo\":\"\",\"sentimento\":\"\",\"tags\":[],\"confianca\":0.85,\"justificativa\":\"\"}\n\n");
 
         sb.Append("--- TICKETS ---\n");
         sb.Append(lista);
-        sb.Append("--- FIM ---");
+        sb.Append("--- END ---");
 
         return sb.ToString();
     }
@@ -69,38 +69,38 @@ public class ClassificacaoPromptBuilder
     private void MontarRegrasCategoria(StringBuilder sb)
     {
         var regrasCategoria = Ativos("categoria")
-            .GroupBy(p => p.Alvo ?? "Outro")
+            .GroupBy(p => p.Alvo ?? "Other")
             .ToDictionary(g => g.Key, g => g.Select(p => p.Termo).ToList());
 
         var perguntaIndicadores = Ativos("pergunta").Select(p => p.Termo).ToList();
         var reclamacaoIndicadores = Ativos("reclamacao").Select(p => p.Termo).ToList();
 
-        sb.Append("REGRAS DE CATEGORIA (aplique com atenção — o padrão NÃO é 'Outro'):\n");
+        sb.Append("CATEGORY RULES (apply carefully — the default is NOT 'Other'):\n");
 
-        if (perguntaIndicadores.Count > 0 || regrasCategoria.ContainsKey("Dúvida"))
+        if (perguntaIndicadores.Count > 0 || regrasCategoria.ContainsKey("Question"))
         {
             var indicadores = perguntaIndicadores.Count > 0
                 ? string.Join("\", \"", perguntaIndicadores.Take(8))
-                : "como faço, onde fica, é possível, ?";
-            sb.Append($"- Dúvida: o cliente faz uma PERGUNTA ou pede orientação. Indicadores: \"{indicadores}\". ");
-            sb.Append("IMPORTANTE: se o texto é uma pergunta sobre como usar algo e NÃO relata um erro/falha, a categoria é Dúvida, não Bug.\n");
+                : "how do I, where is, is it possible, ?";
+            sb.Append($"- Question: the customer asks a QUESTION or seeks guidance. Indicators: \"{indicadores}\". ");
+            sb.Append("IMPORTANT: if the text is a question about how to use something and does NOT report an error/failure, the category is Question, not Bug.\n");
         }
 
         foreach (var cat in Categorias.Lista)
         {
-            if (cat == "Dúvida" || cat == "Outro") continue;
+            if (cat == "Question" || cat == "Other") continue;
 
-            if (cat == "Reclamação" && reclamacaoIndicadores.Count > 0)
+            if (cat == "Complaint" && reclamacaoIndicadores.Count > 0)
             {
                 var ind = string.Join("\", \"", reclamacaoIndicadores.Take(8));
-                sb.Append($"- Reclamação: o cliente expressa INSATISFAÇÃO com o serviço/atendimento. Indicadores: \"{ind}\".\n");
+                sb.Append($"- Complaint: the customer expresses DISSATISFACTION with the service/support. Indicators: \"{ind}\".\n");
                 continue;
             }
 
             if (regrasCategoria.TryGetValue(cat, out var termos) && termos.Count > 0)
             {
                 var ind = string.Join("\", \"", termos.Take(8));
-                sb.Append($"- {cat}: indicadores: \"{ind}\".\n");
+                sb.Append($"- {cat}: indicators: \"{ind}\".\n");
             }
             else
             {
@@ -108,32 +108,32 @@ public class ClassificacaoPromptBuilder
             }
         }
 
-        sb.Append("- Outro: SOMENTE se nenhuma das categorias acima se aplica.\n\n");
+        sb.Append("- Other: ONLY if none of the above categories apply.\n\n");
 
         var regrasDept = Ativos("departamento");
         if (regrasDept.Count > 0)
         {
-            sb.Append("REGRAS DE DEPARTAMENTO (baseado na categoria):\n");
+            sb.Append("DEPARTMENT RULES (based on category):\n");
             foreach (var r in regrasDept)
-                sb.Append($"- Categoria \"{r.Termo}\" → Departamento \"{r.Alvo}\".\n");
-            sb.Append("- Demais categorias → Departamento \"Suporte\".\n\n");
+                sb.Append($"- Category \"{r.Termo}\" → Department \"{r.Alvo}\".\n");
+            sb.Append("- Remaining categories → Department \"Support\".\n\n");
         }
     }
 
     private void MontarRegrasPrioridade(StringBuilder sb)
     {
         var regrasPrioridade = Ativos("prioridade")
-            .GroupBy(p => p.Alvo ?? "Média")
+            .GroupBy(p => p.Alvo ?? "Medium")
             .ToDictionary(g => g.Key, g => g.Select(p => p.Termo).ToList());
 
-        sb.Append("Critérios de PRIORIDADE (não use 'Média' por padrão — escolha de fato):\n");
+        sb.Append("PRIORITY criteria (do not default to 'Medium' — make an actual choice):\n");
 
         foreach (var prio in Categorias.Prioridades.Reverse())
         {
             if (regrasPrioridade.TryGetValue(prio, out var termos) && termos.Count > 0)
             {
                 var ind = string.Join("\", \"", termos.Take(8));
-                sb.Append($"- {prio}: indicadores: \"{ind}\".\n");
+                sb.Append($"- {prio}: indicators: \"{ind}\".\n");
             }
             else
             {
@@ -149,42 +149,42 @@ public class ClassificacaoPromptBuilder
         var positivos = Ativos("sentimento_positivo").Select(p => p.Termo).ToList();
         var negativos = Ativos("sentimento_negativo").Select(p => p.Termo).ToList();
 
-        sb.Append("Campo \"sentimento\": analise o tom do texto do cliente.\n");
+        sb.Append("Field \"sentimento\": analyze the tone of the customer's text.\n");
 
         if (positivos.Count > 0)
         {
             var ind = string.Join("\", \"", positivos.Take(8));
-            sb.Append($"- positivo: indicadores: \"{ind}\".\n");
+            sb.Append($"- positive: indicators: \"{ind}\".\n");
         }
         else
         {
-            sb.Append("- positivo: elogio, satisfação, agradecimento, sugestão construtiva.\n");
+            sb.Append("- positive: praise, satisfaction, gratitude, constructive suggestion.\n");
         }
 
         if (negativos.Count > 0)
         {
             var ind = string.Join("\", \"", negativos.Take(8));
-            sb.Append($"- negativo: indicadores: \"{ind}\".\n");
+            sb.Append($"- negative: indicators: \"{ind}\".\n");
         }
         else
         {
-            sb.Append("- negativo: reclamação, frustração, raiva, insatisfação, urgência com irritação.\n");
+            sb.Append("- negative: complaint, frustration, anger, dissatisfaction, urgency with irritation.\n");
         }
 
-        sb.Append("- neutro: tom informativo, dúvida objetiva, solicitação factual.\n\n");
+        sb.Append("- neutral: informative tone, objective question, factual request.\n\n");
     }
 
     private void MontarSecaoTags(StringBuilder sb)
     {
         var tagKeywords = Ativos("tag").Select(p => p.Termo).ToList();
 
-        sb.Append("Campo \"tags\": array com 2 a 5 palavras-chave relevantes extraídas do ticket (em minúsculas). ");
-        sb.Append("Devem representar os temas centrais do ticket.");
+        sb.Append("Field \"tags\": array with 2 to 5 relevant keywords extracted from the ticket (lowercase). ");
+        sb.Append("Should represent the central themes of the ticket.");
 
         if (tagKeywords.Count > 0)
         {
             var exemplos = string.Join("\", \"", tagKeywords.Take(15));
-            sb.Append($" Vocabulário de referência: [\"{exemplos}\"].");
+            sb.Append($" Reference vocabulary: [\"{exemplos}\"].");
         }
 
         sb.Append("\n\n");

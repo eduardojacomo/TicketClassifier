@@ -17,45 +17,46 @@ const emit = defineEmits(['sobrescrever', 'novo', 'cancelar'])
             <i class="fa-solid fa-triangle-exclamation text-amber-600 text-lg"></i>
           </div>
           <div>
-            <span class="text-[10px] uppercase font-bold text-amber-600 tracking-widest block">Arquivo duplicado</span>
-            <h3 class="text-lg font-bold text-slate-900">Registro existente</h3>
+            <span class="text-[10px] uppercase font-bold text-amber-600 tracking-widest block">Duplicate file</span>
+            <h3 class="text-lg font-bold text-slate-900">Existing record</h3>
           </div>
         </div>
       </div>
 
       <div class="p-6 space-y-4">
         <p class="text-sm text-slate-600">
-          Ja existe um lote processado com o arquivo <b class="text-slate-900">{{ nomeArquivo }}</b>.
+          A processed batch already exists with the file <b class="text-slate-900">{{ nomeArquivo }}</b>.
         </p>
 
         <div class="bg-slate-50 rounded-xl border border-slate-100 p-4 space-y-2">
           <div class="flex items-center justify-between text-sm">
             <span class="text-slate-500">Tickets</span>
+
             <span class="font-bold text-slate-900">{{ batchExistente.total }}</span>
           </div>
           <div class="flex items-center justify-between text-sm">
-            <span class="text-slate-500">Processado em</span>
+            <span class="text-slate-500">Processed on</span>
             <span class="font-medium text-slate-700">{{ formatarData(batchExistente.dataCriacao) }}</span>
           </div>
         </div>
 
-        <p class="text-xs text-slate-500">O que deseja fazer?</p>
+        <p class="text-xs text-slate-500">What would you like to do?</p>
       </div>
 
       <div class="border-t border-slate-200 p-5 flex flex-col gap-2">
         <button @click="emit('sobrescrever')"
           class="w-full bg-amber-500 hover:bg-amber-400 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition cursor-pointer flex items-center justify-center gap-2">
           <i class="fa-solid fa-arrows-rotate"></i>
-          Sobrescrever registro existente
+          Overwrite existing record
         </button>
         <button @click="emit('novo')"
           class="w-full bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition cursor-pointer flex items-center justify-center gap-2">
           <i class="fa-solid fa-plus"></i>
-          Inserir como novo registro
+          Insert as new record
         </button>
         <button @click="emit('cancelar')"
           class="w-full border border-slate-200 hover:bg-slate-50 text-slate-600 px-4 py-2.5 rounded-xl text-sm font-medium transition cursor-pointer">
-          Cancelar
+          Cancel
         </button>
       </div>
     </div>

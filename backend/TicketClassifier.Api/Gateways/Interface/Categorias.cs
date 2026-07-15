@@ -10,25 +10,25 @@ namespace TicketClassifier.Api.Gateways.Interface;
 public static class Categorias
 {
     public static readonly string[] Lista =
-        { "Dúvida", "Bug", "Reclamação", "Login", "Pagamento", "Financeiro", "Performance", "Integração", "Cadastro", "Comercial", "Sugestão", "Elogio", "Outro" };
+        { "Question", "Bug", "Complaint", "Login", "Payment", "Financial", "Performance", "Integration", "Registration", "Sales", "Suggestion", "Praise", "Other" };
 
     public static readonly string[] Prioridades =
-        { "Baixa", "Média", "Alta", "Crítica" };
+        { "Low", "Medium", "High", "Critical" };
 
     public static readonly string[] Departamentos =
-        { "Suporte", "Financeiro", "Comercial", "Produto", "Desenvolvimento" };
+        { "Support", "Financial", "Sales", "Product", "Development" };
 
     public static readonly string[] Sentimentos =
-        { "positivo", "negativo", "neutro" };
+        { "positive", "negative", "neutral" };
 
     public static readonly ClassificacaoResultado Fallback =
-        new("Outro", "Média", "Suporte", "", 0.0, "Não classificado.", "neutro", Array.Empty<string>());
+        new("Other", "Medium", "Support", "", 0.0, "Not classified.", "neutral", Array.Empty<string>());
 
     public static ClassificacaoResultado FallbackComErro(string erro) =>
-        new("Outro", "Média", "Suporte", "", 0.0, erro, "neutro", Array.Empty<string>());
+        new("Other", "Medium", "Support", "", 0.0, erro, "neutral", Array.Empty<string>());
 
     public static bool EhFallback(ClassificacaoResultado r) =>
-        r.Confianca == 0.0 && r.Categoria == "Outro" && r.Departamento == "Suporte" && string.IsNullOrEmpty(r.Resumo);
+        r.Confianca == 0.0 && r.Categoria == "Other" && r.Departamento == "Support" && string.IsNullOrEmpty(r.Resumo);
 
     private static string Normalizar(string? s)
     {
@@ -44,10 +44,10 @@ public static class Categorias
     private static string CasarOu(string[] valores, string? valor, string padrao)
         => valores.FirstOrDefault(x => Normalizar(x) == Normalizar(valor)) ?? padrao;
 
-    public static string CategoriaValida(string? c)    => CasarOu(Lista, c, "Outro");
-    public static string PrioridadeValida(string? p)   => CasarOu(Prioridades, p, "Média");
-    public static string DepartamentoValido(string? d) => CasarOu(Departamentos, d, "Suporte");
-    public static string SentimentoValido(string? s) => CasarOu(Sentimentos, s, "neutro");
+    public static string CategoriaValida(string? c)    => CasarOu(Lista, c, "Other");
+    public static string PrioridadeValida(string? p)   => CasarOu(Prioridades, p, "Medium");
+    public static string DepartamentoValido(string? d) => CasarOu(Departamentos, d, "Support");
+    public static string SentimentoValido(string? s) => CasarOu(Sentimentos, s, "neutral");
 
     private static string LimparMarkdown(string texto)
     {

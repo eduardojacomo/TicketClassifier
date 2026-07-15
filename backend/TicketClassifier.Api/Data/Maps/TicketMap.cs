@@ -26,17 +26,17 @@ public class TicketMap : IEntityTypeConfiguration<Ticket>
         builder.Property(x => x.Categoria)
             .IsRequired()
             .HasMaxLength(50)
-            .HasDefaultValue("Outro");
+            .HasDefaultValue("Other");
 
         builder.Property(x => x.Prioridade)
             .IsRequired()
             .HasMaxLength(50)
-            .HasDefaultValue("Média");
+            .HasDefaultValue("Medium");
 
         builder.Property(x => x.Departamento)
             .IsRequired()
             .HasMaxLength(50)
-            .HasDefaultValue("Suporte");
+            .HasDefaultValue("Support");
 
         builder.Property(x => x.Resumo)
             .HasDefaultValue(string.Empty);
@@ -50,7 +50,7 @@ public class TicketMap : IEntityTypeConfiguration<Ticket>
         builder.Property(x => x.Sentimento)
             .IsRequired()
             .HasMaxLength(20)
-            .HasDefaultValue("neutro");
+            .HasDefaultValue("neutral");
 
         builder.Property(x => x.Tags)
             .IsRequired()

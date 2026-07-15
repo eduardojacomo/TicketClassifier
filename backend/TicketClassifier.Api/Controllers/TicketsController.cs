@@ -30,7 +30,7 @@ public class TicketsController : ControllerBase
     public async Task<IActionResult> Upload(IFormFile file, [FromForm] Guid? jobId, [FromForm] bool sobrescrever, CancellationToken ct)
     {
         if (file is null || file.Length == 0)
-            return BadRequest(new { erro = "Nenhum arquivo enviado." });
+            return BadRequest(new { erro = "No file uploaded." });
 
         try
         {

@@ -83,7 +83,7 @@ const chartOptions = {
   <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
     <div class="flex items-center justify-between">
       <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider">{{ titulo }}</h3>
-      <span class="text-[10px] text-slate-400 font-medium">Volumetria</span>
+      <span class="text-[10px] text-slate-400 font-medium">Volume</span>
     </div>
     <div class="h-52">
       <Bar :data="chartData" :options="chartOptions" />

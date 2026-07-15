@@ -7,18 +7,18 @@ public class CategoriasTests
     [Fact]
     public void ParseLote_ArrayJson_RetornaResultados()
     {
-        var json = """[{"indice":0,"categoria":"Bug","prioridade":"Alta","departamento":"Desenvolvimento","resumo":"Erro no login","sentimento":"negativo","tags":["login","erro"],"confianca":0.9,"justificativa":"Falha clara"}]""";
+        var json = """[{"indice":0,"categoria":"Bug","prioridade":"High","departamento":"Development","resumo":"Login error","sentimento":"negative","tags":["login","error"],"confianca":0.9,"justificativa":"Clear failure"}]""";
         var result = Categorias.ParseLote(json);
 
         Assert.Single(result);
         Assert.Equal("Bug", result[0].Categoria);
-        Assert.Equal("Alta", result[0].Prioridade);
+        Assert.Equal("High", result[0].Prioridade);
     }
 
     [Fact]
     public void ParseLote_ObjetoUnico_RetornaResultado()
     {
-        var json = """{"indice":0,"categoria":"Login","prioridade":"Alta","departamento":"Suporte","resumo":"Erro","sentimento":"negativo","tags":[],"confianca":0.85,"justificativa":""}""";
+        var json = """{"indice":0,"categoria":"Login","prioridade":"High","departamento":"Support","resumo":"Error","sentimento":"negative","tags":[],"confianca":0.85,"justificativa":""}""";
         var result = Categorias.ParseLote(json);
 
         Assert.Single(result);
@@ -28,7 +28,7 @@ public class CategoriasTests
     [Fact]
     public void ParseLote_ObjetoComMarkdown_RetornaResultado()
     {
-        var json = "```json\n{\"indice\":0,\"categoria\":\"Bug\",\"prioridade\":\"Média\",\"departamento\":\"Suporte\",\"resumo\":\"\",\"sentimento\":\"neutro\",\"tags\":[],\"confianca\":0.9,\"justificativa\":\"\"}\n```";
+        var json = "```json\n{\"indice\":0,\"categoria\":\"Bug\",\"prioridade\":\"Medium\",\"departamento\":\"Support\",\"resumo\":\"\",\"sentimento\":\"neutral\",\"tags\":[],\"confianca\":0.9,\"justificativa\":\"\"}\n```";
         var result = Categorias.ParseLote(json);
 
         Assert.Single(result);
@@ -42,16 +42,16 @@ public class CategoriasTests
         var result = Categorias.ParseLote(json);
 
         Assert.Single(result);
-        Assert.Equal("Outro", result[0].Categoria);
-        Assert.Equal("Média", result[0].Prioridade);
-        Assert.Equal("Suporte", result[0].Departamento);
-        Assert.Equal("neutro", result[0].Sentimento);
+        Assert.Equal("Other", result[0].Categoria);
+        Assert.Equal("Medium", result[0].Prioridade);
+        Assert.Equal("Support", result[0].Departamento);
+        Assert.Equal("neutral", result[0].Sentimento);
     }
 
     [Fact]
     public void ParseLoteComFallback_IndicesCorretos_UsaIndices()
     {
-        var json = """[{"indice":0,"categoria":"Bug","prioridade":"Alta","departamento":"Desenvolvimento","resumo":"","sentimento":"negativo","tags":[],"confianca":0.85,"justificativa":""}]""";
+        var json = """[{"indice":0,"categoria":"Bug","prioridade":"High","departamento":"Development","resumo":"","sentimento":"negative","tags":[],"confianca":0.85,"justificativa":""}]""";
         var result = Categorias.ParseLoteComFallback(json, new[] { 0 });
 
         Assert.Single(result);
@@ -62,7 +62,7 @@ public class CategoriasTests
     [Fact]
     public void ParseLoteComFallback_IndicesErrados_UsaPosicional()
     {
-        var json = """[{"indice":99,"categoria":"Login","prioridade":"Alta","departamento":"Suporte","resumo":"","sentimento":"neutro","tags":[],"confianca":0.8,"justificativa":""}]""";
+        var json = """[{"indice":99,"categoria":"Login","prioridade":"High","departamento":"Support","resumo":"","sentimento":"neutral","tags":[],"confianca":0.8,"justificativa":""}]""";
         var result = Categorias.ParseLoteComFallback(json, new[] { 0 });
 
         Assert.Single(result);
@@ -79,28 +79,28 @@ public class CategoriasTests
     [Fact]
     public void EhFallback_FallbackComErro_RetornaTrue()
     {
-        var f = Categorias.FallbackComErro("Erro qualquer");
+        var f = Categorias.FallbackComErro("Some error");
         Assert.True(Categorias.EhFallback(f));
     }
 
     [Fact]
     public void EhFallback_ResultadoReal_RetornaFalse()
     {
-        var r = new ClassificacaoResultado("Bug", "Alta", "Desenvolvimento", "Resumo", 0.9, "Justificativa", "negativo", new[] { "login" });
+        var r = new ClassificacaoResultado("Bug", "High", "Development", "Summary", 0.9, "Justification", "negative", new[] { "login" });
         Assert.False(Categorias.EhFallback(r));
     }
 
     [Fact]
-    public void CategoriaValida_ComAcento_Reconhece()
+    public void CategoriaValida_CaseInsensitive_Reconhece()
     {
-        Assert.Equal("Dúvida", Categorias.CategoriaValida("duvida"));
-        Assert.Equal("Reclamação", Categorias.CategoriaValida("reclamacao"));
+        Assert.Equal("Question", Categorias.CategoriaValida("question"));
+        Assert.Equal("Complaint", Categorias.CategoriaValida("complaint"));
     }
 
     [Fact]
     public void CategoriaValida_Invalida_RetornaOutro()
     {
-        Assert.Equal("Outro", Categorias.CategoriaValida("inexistente"));
-        Assert.Equal("Outro", Categorias.CategoriaValida(null));
+        Assert.Equal("Other", Categorias.CategoriaValida("nonexistent"));
+        Assert.Equal("Other", Categorias.CategoriaValida(null));
     }
 }

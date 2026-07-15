@@ -11,13 +11,13 @@ public class Ticket
     public string Descricao { get; set; } = string.Empty;
 
     // Resultado da classificação
-    public string Categoria { get; set; } = "Outro";
-    public string Prioridade { get; set; } = "Média";
-    public string Departamento { get; set; } = "Suporte";
+    public string Categoria { get; set; } = "Other";
+    public string Prioridade { get; set; } = "Medium";
+    public string Departamento { get; set; } = "Support";
     public string Resumo { get; set; } = string.Empty;
     public double Confianca { get; set; }
     public string Justificativa { get; set; } = string.Empty;
-    public string Sentimento { get; set; } = "neutro";
+    public string Sentimento { get; set; } = "neutral";
     public string Tags { get; set; } = "[]";
 
     /// <summary>False quando a classificação falhou (caiu no fallback) — permite reprocessar.</summary>

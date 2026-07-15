@@ -42,7 +42,7 @@ app.Logger.LogInformation(
     app.Environment.EnvironmentName,
     app.Configuration["Llm:Provider"],
     geminiKey.Length,
-    string.IsNullOrEmpty(geminiKey) ? "(vazia)" : mascarada);
+    string.IsNullOrEmpty(geminiKey) ? "(empty)" : mascarada);
 
 // Aplica migrations pendentes no startup (aguarda o Postgres subir).
 using (var scope = app.Services.CreateScope())
@@ -79,7 +79,7 @@ using (var scope = app.Services.CreateScope())
         }
         catch (Exception ex) when (i < 9)
         {
-            app.Logger.LogWarning(ex, "Aguardando banco de dados (tentativa {N}/10)...", i + 1);
+            app.Logger.LogWarning(ex, "Waiting for database (attempt {N}/10)...", i + 1);
             Thread.Sleep(2000);
         }
     }
@@ -93,12 +93,12 @@ using (var scope = app.Services.CreateScope())
         {
             var seed = ParametroSeed.Gerar();
             await repo.AdicionarParametrosAsync(seed);
-            app.Logger.LogInformation("Seed: {Count} parâmetros de classificação inseridos.", seed.Count);
+            app.Logger.LogInformation("Seed: {Count} classification parameters inserted.", seed.Count);
         }
     }
     catch (Exception ex)
     {
-        app.Logger.LogWarning(ex, "Falha ao executar seed dos parâmetros.");
+        app.Logger.LogWarning(ex, "Failed to execute parameter seed.");
     }
 }
 
@@ -106,6 +106,6 @@ app.UseSwagger();
 app.UseSwaggerUI();
 app.UseCors(CorsPolicy);
 app.MapControllers();
-app.MapGet("/", () => Results.Ok(new { status = "ok", servico = "TicketClassifier API" }));
+app.MapGet("/", () => Results.Ok(new { status = "ok", service = "TicketClassifier API" }));
 
 app.Run();

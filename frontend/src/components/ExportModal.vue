@@ -8,26 +8,26 @@ const emit = defineEmits(['fechar', 'exportar'])
 
 const colunas = [
   { key: 'id', label: 'ID', grupo: 'original' },
-  { key: 'assunto', label: 'Assunto', grupo: 'original' },
-  { key: 'descricao', label: 'Descrição', grupo: 'original' },
-  { key: 'categoria', label: 'Categoria', grupo: 'classificacao' },
-  { key: 'prioridade', label: 'Prioridade', grupo: 'classificacao' },
-  { key: 'departamento', label: 'Departamento', grupo: 'classificacao' },
-  { key: 'sentimento', label: 'Sentimento', grupo: 'classificacao' },
+  { key: 'assunto', label: 'Subject', grupo: 'original' },
+  { key: 'descricao', label: 'Description', grupo: 'original' },
+  { key: 'categoria', label: 'Category', grupo: 'classificacao' },
+  { key: 'prioridade', label: 'Priority', grupo: 'classificacao' },
+  { key: 'departamento', label: 'Department', grupo: 'classificacao' },
+  { key: 'sentimento', label: 'Sentiment', grupo: 'classificacao' },
   { key: 'tags', label: 'Tags', grupo: 'classificacao' },
-  { key: 'resumo', label: 'Resumo', grupo: 'classificacao' },
-  { key: 'confianca', label: 'Confiança', grupo: 'classificacao' },
-  { key: 'justificativa', label: 'Justificativa', grupo: 'classificacao' },
-  { key: 'modificado', label: 'Modificado', grupo: 'auditoria' },
-  { key: 'dataModificacao', label: 'Data Modificação', grupo: 'auditoria' },
+  { key: 'resumo', label: 'Summary', grupo: 'classificacao' },
+  { key: 'confianca', label: 'Confidence', grupo: 'classificacao' },
+  { key: 'justificativa', label: 'Justification', grupo: 'classificacao' },
+  { key: 'modificado', label: 'Modified', grupo: 'auditoria' },
+  { key: 'dataModificacao', label: 'Modification Date', grupo: 'auditoria' },
 ]
 
 const selecionadas = ref(new Set(colunas.map(c => c.key)))
 
 const grupos = [
-  { id: 'original', label: 'Dados Originais', ico: 'fa-file-lines', cor: 'text-slate-600' },
-  { id: 'classificacao', label: 'Classificação IA', ico: 'fa-robot', cor: 'text-indigo-600' },
-  { id: 'auditoria', label: 'Auditoria', ico: 'fa-clock-rotate-left', cor: 'text-amber-600' },
+  { id: 'original', label: 'Original Data', ico: 'fa-file-lines', cor: 'text-slate-600' },
+  { id: 'classificacao', label: 'AI Classification', ico: 'fa-robot', cor: 'text-indigo-600' },
+  { id: 'auditoria', label: 'Audit', ico: 'fa-clock-rotate-left', cor: 'text-amber-600' },
 ]
 
 const totalSelecionadas = computed(() => selecionadas.value.size)
@@ -67,8 +67,8 @@ function exportar() {
     <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-md w-full">
       <div class="border-b border-slate-200 p-5 flex items-center justify-between">
         <div>
-          <span class="text-[10px] uppercase font-bold text-emerald-600 tracking-widest block">Exportar CSV</span>
-          <h3 class="text-lg font-bold text-slate-900">Configurar colunas</h3>
+          <span class="text-[10px] uppercase font-bold text-emerald-600 tracking-widest block">Export CSV</span>
+          <h3 class="text-lg font-bold text-slate-900">Configure columns</h3>
         </div>
         <button @click="emit('fechar')" class="text-slate-400 hover:text-slate-600 p-2 cursor-pointer">
           <i class="fa-solid fa-xmark text-lg"></i>
@@ -79,12 +79,12 @@ function exportar() {
         <!-- Quick actions -->
         <div class="flex items-center justify-between">
           <span class="text-xs text-slate-500">
-            <b class="text-slate-700">{{ totalSelecionadas }}</b> de {{ colunas.length }} colunas
+            <b class="text-slate-700">{{ totalSelecionadas }}</b> of {{ colunas.length }} columns
           </span>
           <div class="flex gap-2">
-            <button @click="selecionarTodas" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium cursor-pointer">Todas</button>
+            <button @click="selecionarTodas" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium cursor-pointer">All</button>
             <span class="text-slate-300">|</span>
-            <button @click="limparTodas" class="text-xs text-slate-500 hover:text-slate-700 font-medium cursor-pointer">Nenhuma</button>
+            <button @click="limparTodas" class="text-xs text-slate-500 hover:text-slate-700 font-medium cursor-pointer">None</button>
           </div>
         </div>
 
@@ -111,12 +111,12 @@ function exportar() {
 
       <div class="border-t border-slate-200 p-5 flex justify-end gap-3">
         <button @click="emit('fechar')" class="px-4 py-2.5 border border-slate-200 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50 transition cursor-pointer">
-          Cancelar
+          Cancel
         </button>
         <button @click="exportar" :disabled="totalSelecionadas === 0"
           class="bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition cursor-pointer flex items-center gap-2">
           <i class="fa-solid fa-file-export"></i>
-          Exportar {{ totalSelecionadas }} coluna(s)
+          Export {{ totalSelecionadas }} column(s)
         </button>
       </div>
     </div>

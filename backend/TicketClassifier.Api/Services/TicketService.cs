@@ -44,7 +44,7 @@ public class TicketService : ITicketService
     {
         var entradas = _csv.Parse(csv);
         if (entradas.Count == 0)
-            throw new InvalidOperationException("CSV fora da estrutura padrão. Inclua colunas de acordo com o padrão estabelecido. ex: 'subject'/'description'.");
+            throw new InvalidOperationException("CSV is not in the expected format. Include columns as per the standard structure. e.g.: 'subject'/'description'.");
 
         if (sobrescrever)
         {
