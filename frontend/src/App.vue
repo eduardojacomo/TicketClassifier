@@ -4,8 +4,8 @@ import { useTicketProgress } from './composables/useTicketProgress'
 import { useTicketClassifier } from './composables/useTicketClassifier'
 import { formatDate } from './utils/chartMappers'
 import BatchDashboard from './components/BatchDashboard.vue'
-import DuplicataModal from './components/DuplicataModal.vue'
-import ParametrosManager from './components/ParametrosManager.vue'
+import DuplicateModal from './components/DuplicateModal.vue'
+import ParametersManager from './components/ParametersManager.vue'
 
 const progressHook = useTicketProgress()
 const classifier = useTicketClassifier(progressHook)
@@ -55,7 +55,7 @@ function sendWithOption(overwrite) {
   <div class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
 
     <!-- Duplicate Modal -->
-    <DuplicataModal
+    <DuplicateModal
       v-if="duplicateInfo"
       :file-name="localFile?.name ?? ''"
       :existing-batch="duplicateInfo"
@@ -377,7 +377,7 @@ function sendWithOption(overwrite) {
       </div>
 
       <!-- PARAMETROS VIEW -->
-      <ParametrosManager v-else-if="classifier.view.value === 'parametros'" />
+      <ParametersManager v-else-if="classifier.view.value === 'parametros'" />
 
       <!-- BATCH DETAIL VIEW -->
       <BatchDashboard

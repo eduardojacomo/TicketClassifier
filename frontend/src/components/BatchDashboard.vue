@@ -5,7 +5,7 @@ import BarChart from './BarChart.vue'
 import DoughnutChart from './DoughnutChart.vue'
 import TicketDetailModal from './TicketDetailModal.vue'
 import TicketEditModal from './TicketEditModal.vue'
-import SimilaresModal from './SimilaresModal.vue'
+import SimilarTicketsModal from './SimilarTicketsModal.vue'
 import ExportModal from './ExportModal.vue'
 
 const props = defineProps({
@@ -154,7 +154,7 @@ function exportWithColumns(cols) {
     <!-- Modals -->
     <TicketDetailModal v-if="ticketDetail" :ticket="ticketDetail" @close="ticketDetail = null" @edit="openEdit" />
     <TicketEditModal v-if="ticketEditing" :ticket="ticketEditing" :saving="savingEdit" @close="ticketEditing = null" @save="saveEdit" />
-    <SimilaresModal v-if="ticketSimilar" :ticket="ticketSimilar" :similars="similarList" :loading="loadingSimilars"
+    <SimilarTicketsModal v-if="ticketSimilar" :ticket="ticketSimilar" :similars="similarList" :loading="loadingSimilars"
       @close="ticketSimilar = null" @view-ticket="viewSimilarTicket" />
     <ExportModal v-if="showExport" :batch-id="batch.batchId" @close="showExport = false" @export="exportWithColumns" />
 
