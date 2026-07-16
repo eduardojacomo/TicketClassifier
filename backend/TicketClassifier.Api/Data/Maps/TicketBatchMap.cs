@@ -13,7 +13,6 @@ public class TicketBatchMap : IEntityTypeConfiguration<TicketBatch>
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.FileName)
-            .HasColumnName("NomeArquivo")
             .IsRequired()
             .HasMaxLength(500);
 
@@ -21,7 +20,6 @@ public class TicketBatchMap : IEntityTypeConfiguration<TicketBatch>
             .IsRequired();
 
         builder.Property(x => x.CreatedDate)
-            .HasColumnName("DataCriacao")
             .IsRequired();
 
         builder.HasMany(x => x.Tickets)

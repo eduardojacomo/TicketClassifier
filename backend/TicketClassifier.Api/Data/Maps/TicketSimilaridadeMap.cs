@@ -8,7 +8,7 @@ public class TicketSimilarityMap : IEntityTypeConfiguration<TicketSimilarity>
 {
     public void Configure(EntityTypeBuilder<TicketSimilarity> builder)
     {
-        builder.ToTable("Similaridades");
+        builder.ToTable("Similarities");
 
         builder.HasKey(x => x.Id);
 
@@ -16,20 +16,16 @@ public class TicketSimilarityMap : IEntityTypeConfiguration<TicketSimilarity>
         builder.HasIndex(x => x.RelatedTicketId);
 
         builder.Property(x => x.SourceTicketId)
-            .HasColumnName("TicketOrigemId")
             .IsRequired();
 
         builder.Property(x => x.RelatedTicketId)
-            .HasColumnName("TicketRelacionadoId")
             .IsRequired();
 
         builder.Property(x => x.SharedTags)
-            .HasColumnName("TagsCompartilhadas")
             .IsRequired()
             .HasDefaultValue("[]");
 
         builder.Property(x => x.CreatedDate)
-            .HasColumnName("DataCriacao")
             .IsRequired();
     }
 }
