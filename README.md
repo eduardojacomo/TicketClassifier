@@ -1,94 +1,134 @@
-# AI Ticket Classifier
+# HelpDesk AI — Ticket Classifier
 
-Classifica **tipo** e **prioridade** de tickets de suporte a partir de um CSV usando um LLM,
-gera estatísticas e exporta um CSV enriquecido.
+Automatically classifies support tickets by **category**, **priority**, **department**, and **sentiment** using AI. Upload a CSV, get instant insights through an interactive dashboard, and export enriched results.
 
-- **Backend:** .NET 8 Web API + EF Core
-- **Frontend:** Vue 3 + Vite
-- **Banco:** PostgreSQL
-- **Orquestração:** Docker Compose
-- **IA:** Anthropic (Claude), Google Gemini ou modo `mock` (heurística local, roda sem chave)
+## Features
 
-## Arquitetura (padrão em camadas)
+- **AI-powered classification** — category, priority, department, sentiment, summary, justification, and tags per ticket
+- **Multiple LLM providers** — Google Gemini, Anthropic Claude, local Llama, or keyword-based mock (no API key required)
+- **Batch processing** — parallel batches with throttling and real-time progress tracking
+- **Interactive dashboard** — KPI cards, bar/doughnut charts, filterable data table with pagination
+- **Duplicate detection** — warns before uploading a file that was already processed
+- **Similar ticket detection** — automatically finds and links related tickets by shared tags
+- **Reprocessing** — reprocess failed tickets or the entire batch with one click
+- **CSV export** — download enriched results with customizable column selection
+- **Classification rules** — manage keyword-based parameters that guide AI classification (categories, priorities, departments, questions, complaints, sentiments, tags)
+- **Ticket editing** — manually edit any ticket's classification and track modifications
+- **Dynamic AI prompts** — prompt builder uses database-driven rules and keyword indicators for context-aware classification
+- **Login attempt limiting** — security feature to prevent brute-force attacks
+
+## Architecture
 
 ```
 Controller → Service → Repository → DbContext
-                 └→ Gateways (estratégias de IA) via Factory
+                 └→ Gateways (AI strategies) via Factory
 ```
 
-- **Controllers** finos: só orquestram.
-- **Services** (`ITicketService`): regra de negócio (parse, classificar, estatísticas).
-- **Repositories** (`ITicketRepository`): acesso a dados.
-- **Gateways** + **Factory** + **Strategy**: `IClassificacaoGateway` com implementações
-  `AnthropicGateway`, `GeminiGateway`, `MockGateway`; a `ClassificacaoGatewayFactory`
-  seleciona a estratégia por `Llm:Provider`.
-- **Mappers** (`TicketMapper`): entidade ↔ DTO.
-- **DTOs** de entrada (`Dtos/Input`) e saída (`Dtos/Output`).
+- **Controllers** — thin orchestration layer
+- **Services** (`ITicketService`) — business logic: CSV parsing, classification, statistics
+- **Repositories** (`ITicketRepository`) — data access via EF Core
+- **Gateways** + **Factory** + **Strategy** — `IClassificationGateway` with `GeminiGateway`, `AnthropicGateway`, `LlamaGateway`; the `ClassificationGatewayFactory` selects the strategy based on `Llm:Provider` config
+- **Mappers** (`TicketMapper`) — entity ↔ DTO conversion
+- **DTOs** — separate input (`Dtos/Input`) and output (`Dtos/Output`) models
 
-## Como rodar (Docker)
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Backend | .NET 8 Web API, EF Core |
+| Frontend | Vue 3, Vite, Tailwind CSS, Chart.js |
+| Database | PostgreSQL |
+| Orchestration | Docker Compose |
+| AI | Gemini, Claude, Llama, or mock |
+
+## Quick Start (Docker)
 
 ```bash
-cd c:\dev\TicketClassifier
-copy .env.example .env      # (opcional) ajuste o provedor de IA
+git clone https://github.com/eduardojacomo/TicketClassifier.git
+cd TicketClassifier
+cp .env.example .env       # optional: configure AI provider
 docker compose up --build
 ```
 
-- Frontend: http://localhost:5174
-- API (Swagger): http://localhost:8080/swagger
-- Postgres: localhost:5433
+- **Frontend:** http://localhost:5174
+- **API (Swagger):** http://localhost:8080/swagger
+- **PostgreSQL:** localhost:5433
 
-Suba um CSV (use o `sample-tickets.csv` incluso), veja as estatísticas e baixe o CSV enriquecido.
+Upload a CSV (use the included `sample-tickets-small.csv`), view the dashboard, and export enriched results.
 
-## IA: mock / Anthropic / Gemini
+## AI Providers
 
-Por padrão roda em `mock` (heurística por palavras-chave) — funciona sem chave.
-Para usar um LLM, no `.env`:
+By default runs in `mock` mode (keyword heuristics) — works without any API key.
+To use an LLM, set in `.env`:
 
-```
-# Claude
+```env
+# Google Gemini
+LLM_PROVIDER=gemini
+GEMINI_API_KEY=your-key
+GEMINI_MODEL=gemini-2.5-flash
+
+# Anthropic Claude
 LLM_PROVIDER=anthropic
 ANTHROPIC_API_KEY=sk-ant-...
 ANTHROPIC_MODEL=claude-haiku-4-5-20251001
 
-# ou Gemini
-LLM_PROVIDER=gemini
-GEMINI_API_KEY=...
-GEMINI_MODEL=gemini-2.5-flash
+# Local Llama
+LLM_PROVIDER=llama
+# Llama server runs as a Docker service on port 8081
 ```
 
-Se a chave do provedor escolhido não estiver setada, a factory faz fallback para `mock`.
+If the chosen provider's key is not set, the factory falls back to `mock`.
 
-## Formato do CSV de entrada
+## CSV Input Format
 
-Colunas reconhecidas (case-insensitive, detecta o delimitador):
+Recognized columns (case-insensitive, delimiter auto-detected):
 - `subject` / `assunto` / `title`
 - `description` / `descricao` / `body` / `message` / `text`
-- `id` (opcional)
+- `id` (optional)
 
-Se não houver coluna de descrição, o texto de todas as colunas é usado.
+If no description column is found, all column text is concatenated.
 
-## CSV enriquecido (saída)
+## Classification Output
 
-`Id, Assunto, Descricao, Tipo, Prioridade, Confianca`
+Each ticket receives:
 
-- **Tipo:** Bug | Dúvida | Financeiro | Solicitação | Reclamação | Outros
-- **Prioridade:** Baixa | Média | Alta | Urgente
+| Field | Values |
+|-------|--------|
+| Category | Bug, Question, Complaint, Login, Payment, Financial, Performance, Integration, Registration, Sales, Suggestion, Praise, Other |
+| Priority | Low, Medium, High, Critical |
+| Department | Support, Development, Financial, Sales, Product |
+| Sentiment | positive, negative, neutral |
+| Confidence | 0.0 – 1.0 |
+| Summary | AI-generated one-line summary |
+| Justification | AI reasoning for the classification |
+| Tags | Relevant keywords extracted from the ticket |
 
-## Endpoints
+## API Endpoints
 
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| POST | `/api/tickets/upload` | Envia CSV, classifica e persiste o lote |
-| GET  | `/api/tickets/batches` | Lista lotes |
-| GET  | `/api/tickets/batches/{id}` | Lote + tickets + estatísticas |
-| GET  | `/api/tickets/batches/{id}/export` | Baixa o CSV enriquecido |
+| Method | Route | Description |
+|--------|-------|-------------|
+| POST | `/api/tickets/upload` | Upload CSV, classify, and persist the batch |
+| GET | `/api/tickets/batches` | List all batches |
+| GET | `/api/tickets/batches/{id}` | Batch detail with tickets and statistics |
+| POST | `/api/tickets/batches/{id}/reprocess` | Reprocess failed tickets |
+| POST | `/api/tickets/batches/{id}/reprocess-all` | Reprocess all tickets in batch |
+| GET | `/api/tickets/batches/{id}/export` | Download enriched CSV |
+| GET | `/api/tickets/check-duplicate` | Check if a file was already uploaded |
+| PATCH | `/api/tickets/{ticketId}` | Edit a ticket's classification |
+| GET | `/api/tickets/{ticketId}/similar` | Find similar tickets |
+| GET | `/api/tickets/progress/{jobId}` | Real-time processing progress |
+| GET | `/api/parameters` | List classification parameters |
+| POST | `/api/parameters` | Create a new parameter |
+| PUT | `/api/parameters/{id}` | Update a parameter |
+| DELETE | `/api/parameters/{id}` | Delete a parameter |
+| GET | `/api/parameters/types` | List available parameter types |
 
-## Rodar sem Docker (dev)
+## Development (without Docker)
 
 **Backend:**
 ```bash
 cd backend/TicketClassifier.Api
-# Postgres em localhost:5433 (ou ajuste a connection string em appsettings.json)
+# PostgreSQL on localhost:5433 (or adjust connection string in appsettings.json)
 dotnet run
 ```
 
@@ -97,4 +137,10 @@ dotnet run
 cd frontend
 npm install
 npm run dev
+```
+
+**Tests:**
+```bash
+cd backend
+dotnet test    # 54 tests
 ```
