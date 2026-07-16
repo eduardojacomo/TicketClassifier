@@ -2,34 +2,34 @@ import { ref, computed } from 'vue'
 import api from '../api'
 
 export function useTicketProgress() {
-  const processando = ref(false)
-  const prog = ref({ total: 0, processados: 0, ok: 0, falhas: 0, totalLotes: 0, lotesConcluidos: 0 })
+  const processing = ref(false)
+  const prog = ref({ total: 0, processed: 0, ok: 0, failures: 0, totalBatches: 0, batchesCompleted: 0 })
   const logs = ref([])
-  
-  let progTimer = null
-  let progInicio = 0
-  let ultLotes = 0
 
-  const pctConcluido = computed(() => (prog.value.total ? Math.round((prog.value.processados / prog.value.total) * 100) : 0))
-  
-  const tempoRestanteEstima = computed(() => {
-    const { processados, total } = prog.value
-    if (processados <= 0 || processados >= total) return ''
-    const segundos = Math.ceil((total - processados) * ((Date.now() - progInicio) / 1000 / processados))
-    return segundos > 0 ? `~${segundos}s remaining` : ''
+  let progTimer = null
+  let progStart = 0
+  let lastBatches = 0
+
+  const pctComplete = computed(() => (prog.value.total ? Math.round((prog.value.processed / prog.value.total) * 100) : 0))
+
+  const estimatedTimeRemaining = computed(() => {
+    const { processed, total } = prog.value
+    if (processed <= 0 || processed >= total) return ''
+    const seconds = Math.ceil((total - processed) * ((Date.now() - progStart) / 1000 / processed))
+    return seconds > 0 ? `~${seconds}s remaining` : ''
   })
 
-  function adicionarLog(msg) {
+  function addLog(msg) {
     logs.value.push(`[${new Date().toLocaleTimeString('en-US')}] ${msg}`)
   }
 
-  function iniciarPolling(jobId) {
-    processando.value = true
-    prog.value = { total: 0, processados: 0, ok: 0, falhas: 0, totalLotes: 0, lotesConcluidos: 0 }
+  function startPolling(jobId) {
+    processing.value = true
+    prog.value = { total: 0, processed: 0, ok: 0, failures: 0, totalBatches: 0, batchesCompleted: 0 }
     logs.value = []
-    ultLotes = 0
-    progInicio = Date.now()
-    adicionarLog('Reading CSV file...')
+    lastBatches = 0
+    progStart = Date.now()
+    addLog('Reading CSV file...')
 
     progTimer = setInterval(async () => {
       try {
@@ -37,33 +37,33 @@ export function useTicketProgress() {
         if (!data.total) return
 
         if (prog.value.total === 0) {
-          adicionarLog(`File mapped: ${data.total} tickets in ${data.totalLotes} batch(es).`)
+          addLog(`File mapped: ${data.total} tickets in ${data.totalBatches} batch(es).`)
         }
-        
+
         prog.value = data
-        
-        if (data.lotesConcluidos > ultLotes) {
-          for (let l = ultLotes + 1; l <= data.lotesConcluidos; l++) {
-            adicionarLog(`Batch ${l}/${data.totalLotes} classified — ${data.ok} ok, ${data.falhas} accumulated failure(s).`)
+
+        if (data.batchesCompleted > lastBatches) {
+          for (let l = lastBatches + 1; l <= data.batchesCompleted; l++) {
+            addLog(`Batch ${l}/${data.totalBatches} classified — ${data.ok} ok, ${data.failures} accumulated failure(s).`)
           }
-          ultLotes = data.lotesConcluidos
+          lastBatches = data.batchesCompleted
         }
       } catch { /* Fail silent no polling */ }
     }, 500)
   }
 
-  function pararPolling() {
+  function stopPolling() {
     clearInterval(progTimer)
-    processando.value = false
+    processing.value = false
   }
 
   return {
-    processando,
+    processing,
     prog,
     logs,
-    pctConcluido,
-    tempoRestanteEstima,
-    iniciarPolling,
-    pararPolling,
+    pctComplete,
+    estimatedTimeRemaining,
+    startPolling,
+    stopPolling,
   }
 }

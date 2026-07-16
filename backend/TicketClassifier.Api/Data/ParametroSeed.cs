@@ -2,14 +2,14 @@ using TicketClassifier.Api.Models;
 
 namespace TicketClassifier.Api.Data;
 
-public static class ParametroSeed
+public static class ParameterSeed
 {
-    public static List<ParametroClassificacao> Gerar()
+    public static List<ClassificationParameter> Generate()
     {
-        var lista = new List<ParametroClassificacao>();
+        var list = new List<ClassificationParameter>();
 
-        void Add(string tipo, string termo, string? alvo = null)
-            => lista.Add(new() { Tipo = tipo, Termo = termo, Alvo = alvo });
+        void Add(string type, string term, string? target = null)
+            => list.Add(new() { Type = type, Term = term, Target = target });
 
         // ── Category rules (term → target category) ─────────────────
         foreach (var t in new[] { "login", "password", "access", "log in", "authentication", "sign in", "can't access" })
@@ -117,6 +117,6 @@ public static class ParametroSeed
             "question", "how to", "tutorial" })
             Add("tag", t);
 
-        return lista;
+        return list;
     }
 }

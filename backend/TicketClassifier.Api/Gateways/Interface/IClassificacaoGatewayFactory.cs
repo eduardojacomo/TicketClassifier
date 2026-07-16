@@ -1,7 +1,7 @@
 namespace TicketClassifier.Api.Gateways.Interface;
 
-/// <summary>Fábrica que resolve a estratégia de classificação conforme a configuração.</summary>
-public interface IClassificacaoGatewayFactory
+/// <summary>Factory that resolves the classification strategy based on configuration.</summary>
+public interface IClassificationGatewayFactory
 {
-    IClassificacaoGateway Criar();
+    IClassificationGateway Create();
 }

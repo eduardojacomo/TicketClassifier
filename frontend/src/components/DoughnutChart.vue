@@ -6,14 +6,14 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 const props = defineProps({
-  titulo: { type: String, default: '' },
-  dados: { type: Object, default: () => ({}) },
-  cores: { type: Object, default: null },
+  title: { type: String, default: '' },
+  data: { type: Object, default: () => ({}) },
+  colors: { type: Object, default: null },
 })
 
-const paletaCores = ['#6366f1', '#8b5cf6', '#a78bfa', '#c084fc', '#818cf8', '#7c3aed', '#6d28d9', '#5b21b6', '#4f46e5', '#4338ca']
+const colorPalette = ['#6366f1', '#8b5cf6', '#a78bfa', '#c084fc', '#818cf8', '#7c3aed', '#6d28d9', '#5b21b6', '#4f46e5', '#4338ca']
 
-const coresPrioridadeChart = {
+const priorityChartColors = {
   'Low': '#10b981',
   'Medium': '#3b82f6',
   'High': '#f59e0b',
@@ -21,18 +21,18 @@ const coresPrioridadeChart = {
 }
 
 const entries = computed(() => {
-  return Object.entries(props.dados || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1])
+  return Object.entries(props.data || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1])
 })
 
 const total = computed(() => {
-  return Object.values(props.dados || {}).reduce((s, v) => s + v, 0)
+  return Object.values(props.data || {}).reduce((s, v) => s + v, 0)
 })
 
 const chartData = computed(() => {
   const labels = entries.value.map(([k]) => k)
   const values = entries.value.map(([, v]) => v)
-  const resolvedCores = props.cores || {}
-  const colors = labels.map((l, i) => resolvedCores[l] ?? coresPrioridadeChart[l] ?? paletaCores[i % paletaCores.length])
+  const resolvedColors = props.colors || {}
+  const colors = labels.map((l, i) => resolvedColors[l] ?? priorityChartColors[l] ?? colorPalette[i % colorPalette.length])
 
   return {
     labels,
@@ -48,12 +48,12 @@ const chartData = computed(() => {
 })
 
 const legendItems = computed(() => {
-  const resolvedCores = props.cores || {}
+  const resolvedColors = props.colors || {}
   return entries.value.map(([k, v], i) => ({
     label: k,
     value: v,
     pct: total.value ? Math.round((v / total.value) * 100) : 0,
-    color: resolvedCores[k] ?? coresPrioridadeChart[k] ?? paletaCores[i % paletaCores.length],
+    color: resolvedColors[k] ?? priorityChartColors[k] ?? colorPalette[i % colorPalette.length],
   }))
 })
 
@@ -100,7 +100,7 @@ const chartOptions = {
 <template>
   <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
     <div class="flex items-center justify-between mb-4">
-      <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-widest">{{ titulo }}</h3>
+      <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-widest">{{ title }}</h3>
       <span class="text-[10px] text-slate-400 font-medium bg-slate-50 px-2 py-0.5 rounded-full">{{ total }} total</span>
     </div>
 

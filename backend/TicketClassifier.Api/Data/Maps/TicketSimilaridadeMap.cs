@@ -4,28 +4,32 @@ using TicketClassifier.Api.Models;
 
 namespace TicketClassifier.Api.Data.Maps;
 
-public class TicketSimilaridadeMap : IEntityTypeConfiguration<TicketSimilaridade>
+public class TicketSimilarityMap : IEntityTypeConfiguration<TicketSimilarity>
 {
-    public void Configure(EntityTypeBuilder<TicketSimilaridade> builder)
+    public void Configure(EntityTypeBuilder<TicketSimilarity> builder)
     {
         builder.ToTable("Similaridades");
 
         builder.HasKey(x => x.Id);
 
-        builder.HasIndex(x => x.TicketOrigemId);
-        builder.HasIndex(x => x.TicketRelacionadoId);
+        builder.HasIndex(x => x.SourceTicketId);
+        builder.HasIndex(x => x.RelatedTicketId);
 
-        builder.Property(x => x.TicketOrigemId)
+        builder.Property(x => x.SourceTicketId)
+            .HasColumnName("TicketOrigemId")
             .IsRequired();
 
-        builder.Property(x => x.TicketRelacionadoId)
+        builder.Property(x => x.RelatedTicketId)
+            .HasColumnName("TicketRelacionadoId")
             .IsRequired();
 
-        builder.Property(x => x.TagsCompartilhadas)
+        builder.Property(x => x.SharedTags)
+            .HasColumnName("TagsCompartilhadas")
             .IsRequired()
             .HasDefaultValue("[]");
 
-        builder.Property(x => x.DataCriacao)
+        builder.Property(x => x.CreatedDate)
+            .HasColumnName("DataCriacao")
             .IsRequired();
     }
 }

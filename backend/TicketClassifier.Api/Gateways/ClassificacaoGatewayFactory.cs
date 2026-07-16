@@ -3,29 +3,29 @@ using TicketClassifier.Api.Gateways.Interface;
 namespace TicketClassifier.Api.Gateways;
 
 /// <summary>
-/// Seleciona a estratégia de classificação com base em Llm:Provider
+/// Selects the classification strategy based on Llm:Provider
 /// (anthropic | gemini | llama).
 /// </summary>
-public class ClassificacaoGatewayFactory : IClassificacaoGatewayFactory
+public class ClassificationGatewayFactory : IClassificationGatewayFactory
 {
     private readonly IServiceProvider _sp;
     private readonly IConfiguration _cfg;
 
-    public ClassificacaoGatewayFactory(IServiceProvider sp, IConfiguration cfg)
+    public ClassificationGatewayFactory(IServiceProvider sp, IConfiguration cfg)
     {
         _sp = sp;
         _cfg = cfg;
     }
 
-    public IClassificacaoGateway Criar()
+    public IClassificationGateway Create()
     {
         var provider = _cfg["Llm:Provider"]?.Trim().ToLowerInvariant();
 
         return provider switch
         {
-            "anthropic" when TemChave("Llm:Anthropic:ApiKey")
+            "anthropic" when HasKey("Llm:Anthropic:ApiKey")
                 => _sp.GetRequiredService<AnthropicGateway>(),
-            "gemini" when TemChave("Llm:Gemini:ApiKey")
+            "gemini" when HasKey("Llm:Gemini:ApiKey")
                 => _sp.GetRequiredService<GeminiGateway>(),
             "llama" => _sp.GetRequiredService<LlamaGateway>(),
             _ => throw new InvalidOperationException(
@@ -33,5 +33,5 @@ public class ClassificacaoGatewayFactory : IClassificacaoGatewayFactory
         };
     }
 
-    private bool TemChave(string key) => !string.IsNullOrWhiteSpace(_cfg[key]);
+    private bool HasKey(string key) => !string.IsNullOrWhiteSpace(_cfg[key]);
 }

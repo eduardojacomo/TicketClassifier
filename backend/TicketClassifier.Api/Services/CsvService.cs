@@ -9,19 +9,19 @@ namespace TicketClassifier.Api.Services;
 
 public class CsvValidationException : Exception
 {
-    public string Codigo { get; }
-    public CsvValidationException(string codigo, string mensagem) : base(mensagem) => Codigo = codigo;
+    public string Code { get; }
+    public CsvValidationException(string code, string message) : base(message) => Code = code;
 }
 
-/// <summary>Leitura e geração de CSV (parse flexível + export enriquecido).</summary>
+/// <summary>CSV reading and generation (flexible parsing + enriched export).</summary>
 public class CsvService
 {
-    public const int MaxTamanhoBytes = 50 * 1024 * 1024; // 50 MB
-    public const int MaxLinhas = 100_000;
-    public const int MaxColunas = 100;
-    public const int MaxTamanhoCampo = 50_000;
+    public const int MaxSizeBytes = 50 * 1024 * 1024; // 50 MB
+    public const int MaxLines = 100_000;
+    public const int MaxColumns = 100;
+    public const int MaxFieldSize = 50_000;
 
-    public static readonly (string Key, string Label)[] ColunasDisponiveis =
+    public static readonly (string Key, string Label)[] AvailableColumns =
     {
         ("id",              "ID"),
         ("assunto",         "Subject"),
@@ -38,42 +38,42 @@ public class CsvService
         ("dataModificacao", "Modified Date"),
     };
 
-    private static readonly HashSet<string> TodasAsChaves =
-        new(ColunasDisponiveis.Select(c => c.Key), StringComparer.OrdinalIgnoreCase);
+    private static readonly HashSet<string> AllKeys =
+        new(AvailableColumns.Select(c => c.Key), StringComparer.OrdinalIgnoreCase);
 
     public List<TicketCsvInput> Parse(Stream csv)
     {
-        ValidarStream(csv);
+        ValidateStream(csv);
 
-        var ms = CopiarComLimite(csv);
+        var ms = CopyWithLimit(csv);
         var bytes = ms.ToArray();
 
-        ValidarConteudoBinario(bytes);
-        var texto = DecodificarTexto(bytes);
-        ValidarConteudoTexto(texto);
+        ValidateBinaryContent(bytes);
+        var text = DecodeText(bytes);
+        ValidateTextContent(text);
 
-        using var textStream = new MemoryStream(Encoding.UTF8.GetBytes(texto));
-        return ParseInterno(textStream);
+        using var textStream = new MemoryStream(Encoding.UTF8.GetBytes(text));
+        return ParseInternal(textStream);
     }
 
-    private static void ValidarStream(Stream csv)
+    private static void ValidateStream(Stream csv)
     {
         if (csv is null || !csv.CanRead)
             throw new CsvValidationException("STREAM_INVALIDO", "The file could not be read. Check that the file is not corrupted.");
     }
 
-    private static MemoryStream CopiarComLimite(Stream csv)
+    private static MemoryStream CopyWithLimit(Stream csv)
     {
         var ms = new MemoryStream();
         var buffer = new byte[8192];
         long total = 0;
-        int lido;
-        while ((lido = csv.Read(buffer, 0, buffer.Length)) > 0)
+        int read;
+        while ((read = csv.Read(buffer, 0, buffer.Length)) > 0)
         {
-            total += lido;
-            if (total > MaxTamanhoBytes)
-                throw new CsvValidationException("ARQUIVO_GRANDE", $"The file exceeds the {MaxTamanhoBytes / (1024 * 1024)} MB limit.");
-            ms.Write(buffer, 0, lido);
+            total += read;
+            if (total > MaxSizeBytes)
+                throw new CsvValidationException("ARQUIVO_GRANDE", $"The file exceeds the {MaxSizeBytes / (1024 * 1024)} MB limit.");
+            ms.Write(buffer, 0, read);
         }
         if (total == 0)
             throw new CsvValidationException("ARQUIVO_VAZIO", "The file is empty.");
@@ -81,38 +81,38 @@ public class CsvService
         return ms;
     }
 
-    internal static void ValidarConteudoBinario(byte[] bytes)
+    internal static void ValidateBinaryContent(byte[] bytes)
     {
-        // UTF-16 com BOM tem bytes nulos intercalados — não é binário
+        // UTF-16 with BOM has interleaved null bytes — not binary
         if (bytes.Length >= 2 &&
             ((bytes[0] == 0xFF && bytes[1] == 0xFE) || (bytes[0] == 0xFE && bytes[1] == 0xFF)))
             return;
 
-        var amostra = Math.Min(bytes.Length, 8192);
-        int nulos = 0;
-        for (var i = 0; i < amostra; i++)
+        var sample = Math.Min(bytes.Length, 8192);
+        int nullCount = 0;
+        for (var i = 0; i < sample; i++)
         {
-            if (bytes[i] == 0x00) nulos++;
+            if (bytes[i] == 0x00) nullCount++;
         }
-        if (nulos > amostra * 0.05)
+        if (nullCount > sample * 0.05)
             throw new CsvValidationException("ARQUIVO_BINARIO", "The file appears to be binary (PDF, image, etc.), not a text CSV.");
     }
 
-    internal static string DecodificarTexto(byte[] bytes)
+    internal static string DecodeText(byte[] bytes)
     {
-        // BOM UTF-8
+        // UTF-8 BOM
         if (bytes.Length >= 3 && bytes[0] == 0xEF && bytes[1] == 0xBB && bytes[2] == 0xBF)
             return Encoding.UTF8.GetString(bytes, 3, bytes.Length - 3);
 
-        // BOM UTF-16 LE
+        // UTF-16 LE BOM
         if (bytes.Length >= 2 && bytes[0] == 0xFF && bytes[1] == 0xFE)
             return Encoding.Unicode.GetString(bytes, 2, bytes.Length - 2);
 
-        // BOM UTF-16 BE
+        // UTF-16 BE BOM
         if (bytes.Length >= 2 && bytes[0] == 0xFE && bytes[1] == 0xFF)
             return Encoding.BigEndianUnicode.GetString(bytes, 2, bytes.Length - 2);
 
-        // Tenta UTF-8 primeiro; se falhar, usa Latin1
+        // Try UTF-8 first; if it fails, use Latin1
         try
         {
             var utf8 = new UTF8Encoding(false, throwOnInvalidBytes: true);
@@ -124,26 +124,26 @@ public class CsvService
         }
     }
 
-    internal static void ValidarConteudoTexto(string texto)
+    internal static void ValidateTextContent(string text)
     {
-        if (string.IsNullOrWhiteSpace(texto))
+        if (string.IsNullOrWhiteSpace(text))
             throw new CsvValidationException("ARQUIVO_VAZIO", "The file is empty or contains only whitespace.");
 
-        var primeiraLinha = texto.AsSpan();
-        var fimLinha = texto.IndexOfAny(new[] { '\r', '\n' });
-        if (fimLinha > 0) primeiraLinha = texto.AsSpan(0, fimLinha);
+        var firstLine = text.AsSpan();
+        var lineEnd = text.IndexOfAny(new[] { '\r', '\n' });
+        if (lineEnd > 0) firstLine = text.AsSpan(0, lineEnd);
 
-        if (primeiraLinha.Length > 0 && (primeiraLinha[0] == '{' || primeiraLinha[0] == '['))
+        if (firstLine.Length > 0 && (firstLine[0] == '{' || firstLine[0] == '['))
             throw new CsvValidationException("FORMATO_JSON", "The file appears to be in JSON format, not CSV.");
 
-        if (primeiraLinha.StartsWith("<?xml") || primeiraLinha.StartsWith("<html", StringComparison.OrdinalIgnoreCase))
+        if (firstLine.StartsWith("<?xml") || firstLine.StartsWith("<html", StringComparison.OrdinalIgnoreCase))
             throw new CsvValidationException("FORMATO_XML_HTML", "The file appears to be in XML/HTML format, not CSV.");
 
-        if (primeiraLinha.StartsWith("%PDF"))
+        if (firstLine.StartsWith("%PDF"))
             throw new CsvValidationException("FORMATO_PDF", "The file is a PDF, not a CSV.");
     }
 
-    private List<TicketCsvInput> ParseInterno(Stream stream)
+    private List<TicketCsvInput> ParseInternal(Stream stream)
     {
         var config = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
@@ -165,93 +165,93 @@ public class CsvService
         if (headers.Length == 0)
             throw new CsvValidationException("SEM_CABECALHO", "Could not identify columns in the header.");
 
-        if (headers.Length > MaxColunas)
-            throw new CsvValidationException("EXCESSO_COLUNAS", $"The file has {headers.Length} columns, the limit is {MaxColunas}.");
+        if (headers.Length > MaxColumns)
+            throw new CsvValidationException("EXCESSO_COLUNAS", $"The file has {headers.Length} columns, the limit is {MaxColumns}.");
 
-        // Mapear headers originais para versões limpas (para matching)
-        var headersOriginais = headers.ToArray();
-        var headersLimpos = headers.Select(LimparTexto).ToArray();
+        // Map original headers to cleaned versions (for matching)
+        var originalHeaders = headers.ToArray();
+        var cleanedHeaders = headers.Select(CleanText).ToArray();
 
-        string? Col(params string[] nomes)
+        string? Col(params string[] names)
         {
-            for (var i = 0; i < headersLimpos.Length; i++)
-                if (nomes.Any(n => headersLimpos[i].Equals(n, StringComparison.OrdinalIgnoreCase)))
-                    return headersOriginais[i];
+            for (var i = 0; i < cleanedHeaders.Length; i++)
+                if (names.Any(n => cleanedHeaders[i].Equals(n, StringComparison.OrdinalIgnoreCase)))
+                    return originalHeaders[i];
             return null;
         }
 
-        var colId        = Col("id", "ticket_id", "ticketid", "número", "numero");
-        var colAssunto   = Col("subject", "assunto", "title", "título", "titulo");
-        var colDescricao = Col("description", "descricao", "descrição", "body", "message", "mensagem", "texto", "text");
+        var colId          = Col("id", "ticket_id", "ticketid", "número", "numero");
+        var colSubject     = Col("subject", "assunto", "title", "título", "titulo");
+        var colDescription = Col("description", "descricao", "descrição", "body", "message", "mensagem", "texto", "text");
 
-        var itens = new List<TicketCsvInput>();
-        var linhasIgnoradas = 0;
-        var linha = 1;
+        var items = new List<TicketCsvInput>();
+        var skippedLines = 0;
+        var lineNumber = 1;
 
         while (csvReader.Read())
         {
-            linha++;
-            if (linha > MaxLinhas + 1)
-                throw new CsvValidationException("EXCESSO_LINHAS", $"The file exceeds the limit of {MaxLinhas:N0} rows.");
+            lineNumber++;
+            if (lineNumber > MaxLines + 1)
+                throw new CsvValidationException("EXCESSO_LINHAS", $"The file exceeds the limit of {MaxLines:N0} rows.");
 
-            string? assunto = null;
-            string? descricao = null;
+            string? subject = null;
+            string? description = null;
             string? externalId = null;
 
             try
             {
-                assunto = colAssunto != null ? LimparCampo(csvReader.GetField(colAssunto)) : null;
-                descricao = colDescricao != null ? LimparCampo(csvReader.GetField(colDescricao)) : null;
+                subject = colSubject != null ? CleanField(csvReader.GetField(colSubject)) : null;
+                description = colDescription != null ? CleanField(csvReader.GetField(colDescription)) : null;
                 externalId = colId != null ? csvReader.GetField(colId)?.Trim() : null;
             }
             catch (CsvHelper.MissingFieldException)
             {
-                linhasIgnoradas++;
+                skippedLines++;
                 continue;
             }
 
-            if (string.IsNullOrWhiteSpace(descricao))
+            if (string.IsNullOrWhiteSpace(description))
             {
-                var partes = new List<string>();
-                foreach (var h in headersOriginais)
+                var parts = new List<string>();
+                foreach (var h in originalHeaders)
                 {
                     try
                     {
                         var v = csvReader.GetField(h);
-                        if (!string.IsNullOrWhiteSpace(v)) partes.Add(v.Trim());
+                        if (!string.IsNullOrWhiteSpace(v)) parts.Add(v.Trim());
                     }
-                    catch { /* campo ausente nesta linha */ }
+                    catch { /* field missing in this row */ }
                 }
-                descricao = string.Join(" ", partes);
+                description = string.Join(" ", parts);
             }
 
-            if (string.IsNullOrWhiteSpace(assunto) && string.IsNullOrWhiteSpace(descricao))
+            if (string.IsNullOrWhiteSpace(subject) && string.IsNullOrWhiteSpace(description))
             {
-                linhasIgnoradas++;
+                skippedLines++;
                 continue;
             }
 
-            if (descricao?.Length > MaxTamanhoCampo)
-                descricao = descricao[..MaxTamanhoCampo];
-            if (assunto?.Length > MaxTamanhoCampo)
-                assunto = assunto[..MaxTamanhoCampo];
+            if (description?.Length > MaxFieldSize)
+                description = description[..MaxFieldSize];
+            if (subject?.Length > MaxFieldSize)
+                subject = subject[..MaxFieldSize];
 
-            itens.Add(new TicketCsvInput
+            items.Add(new TicketCsvInput
             {
                 ExternalId = externalId,
-                Assunto = assunto,
-                Descricao = descricao ?? "",
+                Subject = subject,
+                Description = description ?? "",
             });
         }
 
-        return itens;
+        return items;
     }
 
-    internal static string LimparTexto(string texto)
+    internal static string CleanText(string text)
     {
-        if (string.IsNullOrEmpty(texto)) return texto;
-        var sb = new StringBuilder(texto.Length);
-        foreach (var ch in texto)
+        if (string.IsNullOrEmpty(text)) return text;
+        var sb = new StringBuilder(text.Length);
+        foreach (var ch in text)
         {
             if (ch == '﻿' || ch == '​' || ch == '‌' || ch == '‍' || ch == '￾')
                 continue;
@@ -260,23 +260,23 @@ public class CsvService
         return sb.ToString().Trim();
     }
 
-    internal static string? LimparCampo(string? valor)
+    internal static string? CleanField(string? value)
     {
-        if (valor is null) return null;
-        var limpo = valor
+        if (value is null) return null;
+        var cleaned = value
             .Replace("\0", "")
             .Replace("﻿", "")
             .Replace("�", "");
-        return limpo.Trim();
+        return cleaned.Trim();
     }
 
-    public byte[] Export(IEnumerable<Ticket> tickets, IReadOnlyList<string>? colunas = null)
+    public byte[] Export(IEnumerable<Ticket> tickets, IReadOnlyList<string>? columns = null)
     {
-        var cols = colunas?.Where(c => TodasAsChaves.Contains(c)).ToList();
+        var cols = columns?.Where(c => AllKeys.Contains(c)).ToList();
         if (cols is null || cols.Count == 0)
-            cols = ColunasDisponiveis.Select(c => c.Key).ToList();
+            cols = AvailableColumns.Select(c => c.Key).ToList();
 
-        var labelMap = ColunasDisponiveis.ToDictionary(c => c.Key, c => c.Label, StringComparer.OrdinalIgnoreCase);
+        var labelMap = AvailableColumns.ToDictionary(c => c.Key, c => c.Label, StringComparer.OrdinalIgnoreCase);
 
         using var ms = new MemoryStream();
         using (var writer = new StreamWriter(ms, new UTF8Encoding(true), leaveOpen: true))
@@ -299,18 +299,18 @@ public class CsvService
     private static string GetValue(Ticket t, string col) => col.ToLowerInvariant() switch
     {
         "id"              => t.ExternalId ?? "",
-        "assunto"         => t.Assunto ?? "",
-        "descricao"       => t.Descricao,
-        "categoria"       => t.Categoria,
-        "prioridade"      => t.Prioridade,
-        "departamento"    => t.Departamento,
-        "sentimento"      => t.Sentimento,
+        "assunto"         => t.Subject ?? "",
+        "descricao"       => t.Description,
+        "categoria"       => t.Category,
+        "prioridade"      => t.Priority,
+        "departamento"    => t.Department,
+        "sentimento"      => t.Sentiment,
         "tags"            => t.Tags,
-        "resumo"          => t.Resumo,
-        "confianca"       => t.Confianca.ToString("0.00", CultureInfo.InvariantCulture),
-        "justificativa"   => t.Justificativa,
-        "modificado"      => t.RegistroModificado ? "Yes" : "No",
-        "datamodificacao" => t.DataModificacao?.ToString("yyyy-MM-dd HH:mm:ss") ?? "",
+        "resumo"          => t.Summary,
+        "confianca"       => t.Confidence.ToString("0.00", CultureInfo.InvariantCulture),
+        "justificativa"   => t.Justification,
+        "modificado"      => t.RecordModified ? "Yes" : "No",
+        "datamodificacao" => t.ModifiedDate?.ToString("yyyy-MM-dd HH:mm:ss") ?? "",
         _                 => "",
     };
 }

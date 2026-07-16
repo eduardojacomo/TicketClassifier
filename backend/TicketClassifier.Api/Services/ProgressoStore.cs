@@ -2,62 +2,62 @@ using System.Collections.Concurrent;
 
 namespace TicketClassifier.Api.Services;
 
-public class Progresso
+public class Progress
 {
     public int Total { get; set; }
-    public int Processados { get; set; }
+    public int Processed { get; set; }
     public int Ok { get; set; }
-    public int Falhas { get; set; }
-    public int TotalLotes { get; set; }
-    public int LotesConcluidos { get; set; }
-    public bool Concluido { get; set; }
+    public int Failures { get; set; }
+    public int TotalBatches { get; set; }
+    public int BatchesCompleted { get; set; }
+    public bool Completed { get; set; }
     public Guid? BatchId { get; set; }
-    public DateTime Inicio { get; set; } = DateTime.UtcNow;
+    public DateTime StartedAt { get; set; } = DateTime.UtcNow;
 }
 
-public interface IProgressoStore
+public interface IProgressStore
 {
-    void Iniciar(Guid jobId, int total, int totalLotes);
-    void ReportarLote(Guid jobId, int processados, int ok);
-    void Concluir(Guid jobId, Guid batchId);
-    Progresso? Obter(Guid jobId);
+    void Start(Guid jobId, int total, int totalBatches);
+    void ReportBatch(Guid jobId, int processed, int ok);
+    void Complete(Guid jobId, Guid batchId);
+    Progress? Get(Guid jobId);
 }
 
 /// <summary>
-/// Rastreia o progresso do processamento por jobId (em memória). O frontend
-/// consulta durante o upload para exibir contadores, barra e log.
+/// Tracks processing progress per jobId (in memory). The frontend
+/// polls during the upload to display counters, the bar and the log.
 /// </summary>
-public class ProgressoStore : IProgressoStore
+public class ProgressStore : IProgressStore
 {
-    private readonly ConcurrentDictionary<Guid, Progresso> _map = new();
+    private readonly ConcurrentDictionary<Guid, Progress> _map = new();
 
-    public void Iniciar(Guid jobId, int total, int totalLotes)
-        => _map[jobId] = new Progresso { Total = total, TotalLotes = totalLotes };
+    public void Start(Guid jobId, int total, int totalBatches)
+        => _map[jobId] = new Progress { Total = total, TotalBatches = totalBatches };
 
-    public void ReportarLote(Guid jobId, int processados, int ok)
+    public void ReportBatch(Guid jobId, int processed, int ok)
     {
         if (_map.TryGetValue(jobId, out var p))
             lock (p)
             {
-                p.Processados += processados;
+                p.Processed += processed;
                 p.Ok += ok;
-                p.Falhas += processados - ok;
-                p.LotesConcluidos++;
+                p.Failures += processed - ok;
+                p.BatchesCompleted++;
             }
     }
 
-    public void Concluir(Guid jobId, Guid batchId)
+    public void Complete(Guid jobId, Guid batchId)
     {
         if (_map.TryGetValue(jobId, out var p))
             lock (p)
             {
-                p.Processados = p.Total;
-                p.Concluido = true;
+                p.Processed = p.Total;
+                p.Completed = true;
                 p.BatchId = batchId;
             }
-        // Limpeza tardia para o frontend ler o estado final.
+        // Delayed cleanup so the frontend can read the final state.
         _ = Task.Delay(TimeSpan.FromMinutes(2)).ContinueWith(t => _map.TryRemove(jobId, out _));
     }
 
-    public Progresso? Obter(Guid jobId) => _map.GetValueOrDefault(jobId);
+    public Progress? Get(Guid jobId) => _map.GetValueOrDefault(jobId);
 }

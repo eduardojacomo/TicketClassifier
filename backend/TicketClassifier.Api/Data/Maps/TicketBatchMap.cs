@@ -12,14 +12,16 @@ public class TicketBatchMap : IEntityTypeConfiguration<TicketBatch>
 
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.NomeArquivo)
+        builder.Property(x => x.FileName)
+            .HasColumnName("NomeArquivo")
             .IsRequired()
             .HasMaxLength(500);
 
         builder.Property(x => x.Total)
             .IsRequired();
 
-        builder.Property(x => x.DataCriacao)
+        builder.Property(x => x.CreatedDate)
+            .HasColumnName("DataCriacao")
             .IsRequired();
 
         builder.HasMany(x => x.Tickets)

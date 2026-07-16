@@ -17,37 +17,46 @@ public class TicketMap : IEntityTypeConfiguration<Ticket>
         builder.Property(x => x.ExternalId)
             .HasMaxLength(100);
 
-        builder.Property(x => x.Assunto)
+        builder.Property(x => x.Subject)
+            .HasColumnName("Assunto")
             .HasMaxLength(500);
 
-        builder.Property(x => x.Descricao)
+        builder.Property(x => x.Description)
+            .HasColumnName("Descricao")
             .IsRequired();
 
-        builder.Property(x => x.Categoria)
+        builder.Property(x => x.Category)
+            .HasColumnName("Categoria")
             .IsRequired()
             .HasMaxLength(50)
             .HasDefaultValue("Other");
 
-        builder.Property(x => x.Prioridade)
+        builder.Property(x => x.Priority)
+            .HasColumnName("Prioridade")
             .IsRequired()
             .HasMaxLength(50)
             .HasDefaultValue("Medium");
 
-        builder.Property(x => x.Departamento)
+        builder.Property(x => x.Department)
+            .HasColumnName("Departamento")
             .IsRequired()
             .HasMaxLength(50)
             .HasDefaultValue("Support");
 
-        builder.Property(x => x.Resumo)
+        builder.Property(x => x.Summary)
+            .HasColumnName("Resumo")
             .HasDefaultValue(string.Empty);
 
-        builder.Property(x => x.Confianca)
+        builder.Property(x => x.Confidence)
+            .HasColumnName("Confianca")
             .IsRequired();
 
-        builder.Property(x => x.Justificativa)
+        builder.Property(x => x.Justification)
+            .HasColumnName("Justificativa")
             .HasDefaultValue(string.Empty);
 
-        builder.Property(x => x.Sentimento)
+        builder.Property(x => x.Sentiment)
+            .HasColumnName("Sentimento")
             .IsRequired()
             .HasMaxLength(20)
             .HasDefaultValue("neutral");
@@ -56,14 +65,17 @@ public class TicketMap : IEntityTypeConfiguration<Ticket>
             .IsRequired()
             .HasDefaultValue("[]");
 
-        builder.Property(x => x.ProcessadoOk)
+        builder.Property(x => x.ProcessedOk)
+            .HasColumnName("ProcessadoOk")
             .IsRequired()
             .HasDefaultValue(true);
 
-        builder.Property(x => x.RegistroModificado)
+        builder.Property(x => x.RecordModified)
+            .HasColumnName("RegistroModificado")
             .IsRequired()
             .HasDefaultValue(false);
 
-        builder.Property(x => x.DataModificacao);
+        builder.Property(x => x.ModifiedDate)
+            .HasColumnName("DataModificacao");
     }
 }

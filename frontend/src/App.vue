@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useTicketProgress } from './composables/useTicketProgress'
 import { useTicketClassifier } from './composables/useTicketClassifier'
-import { formatarData } from './utils/chartMappers'
+import { formatDate } from './utils/chartMappers'
 import BatchDashboard from './components/BatchDashboard.vue'
 import DuplicataModal from './components/DuplicataModal.vue'
 import ParametrosManager from './components/ParametrosManager.vue'
@@ -10,43 +10,43 @@ import ParametrosManager from './components/ParametrosManager.vue'
 const progressHook = useTicketProgress()
 const classifier = useTicketClassifier(progressHook)
 
-const arquivoLocal = ref(null)
+const localFile = ref(null)
 const dragOver = ref(false)
 
-const duplicataInfo = ref(null)
+const duplicateInfo = ref(null)
 
-function tratarSelecaoArquivo(e) {
-  arquivoLocal.value = e.target.files?.[0] ?? null
-  classifier.erro.value = ''
+function handleFileSelection(e) {
+  localFile.value = e.target.files?.[0] ?? null
+  classifier.error.value = ''
 }
 
 function handleDrop(e) {
   dragOver.value = false
   const file = e.dataTransfer.files?.[0]
   if (file && file.name.endsWith('.csv')) {
-    arquivoLocal.value = file
-    classifier.erro.value = ''
+    localFile.value = file
+    classifier.error.value = ''
   }
 }
 
-async function dispararUpload() {
-  if (!arquivoLocal.value) return
+async function triggerUpload() {
+  if (!localFile.value) return
 
-  const { duplicado, batch } = await classifier.verificarDuplicata(arquivoLocal.value.name)
-  if (duplicado && batch) {
-    duplicataInfo.value = batch
+  const { duplicate, batch } = await classifier.checkDuplicate(localFile.value.name)
+  if (duplicate && batch) {
+    duplicateInfo.value = batch
     return
   }
 
-  enviarComOpcao(false)
+  sendWithOption(false)
 }
 
-function enviarComOpcao(sobrescrever) {
-  duplicataInfo.value = null
-  if (!arquivoLocal.value) return
+function sendWithOption(overwrite) {
+  duplicateInfo.value = null
+  if (!localFile.value) return
   const jobId = self.crypto?.randomUUID?.() ?? ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c => (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16))
-  classifier.enviarArquivo(arquivoLocal.value, jobId, sobrescrever).then(() => {
-    arquivoLocal.value = null
+  classifier.uploadFile(localFile.value, jobId, overwrite).then(() => {
+    localFile.value = null
   })
 }
 </script>
@@ -54,18 +54,18 @@ function enviarComOpcao(sobrescrever) {
 <template>
   <div class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
 
-    <!-- Duplicata Modal -->
+    <!-- Duplicate Modal -->
     <DuplicataModal
-      v-if="duplicataInfo"
-      :nome-arquivo="arquivoLocal?.name ?? ''"
-      :batch-existente="duplicataInfo"
-      @sobrescrever="enviarComOpcao(true)"
-      @novo="enviarComOpcao(false)"
-      @cancelar="duplicataInfo = null"
+      v-if="duplicateInfo"
+      :file-name="localFile?.name ?? ''"
+      :existing-batch="duplicateInfo"
+      @overwrite="sendWithOption(true)"
+      @create="sendWithOption(false)"
+      @cancel="duplicateInfo = null"
     />
 
     <!-- Processing Modal Overlay -->
-    <div v-if="progressHook.processando.value" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+    <div v-if="progressHook.processing.value" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
       <div class="bg-white rounded-2xl border border-slate-200 shadow-2xl max-w-xl w-full overflow-hidden">
         <div class="bg-slate-900 text-white p-5">
           <div class="flex items-center gap-3">
@@ -75,7 +75,7 @@ function enviarComOpcao(sobrescrever) {
               <h3 class="text-lg font-bold">Classifying tickets...</h3>
             </div>
             <span class="ml-auto text-sm font-mono font-semibold text-indigo-400 bg-indigo-950 px-3 py-1 rounded-full">
-              {{ progressHook.pctConcluido.value }}%
+              {{ progressHook.pctComplete.value }}%
             </span>
           </div>
         </div>
@@ -84,13 +84,13 @@ function enviarComOpcao(sobrescrever) {
           <!-- Progress Bar -->
           <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
             <div class="bg-linear-to-r from-indigo-500 to-violet-600 h-full rounded-full transition-all duration-300"
-                 :style="{ width: progressHook.pctConcluido.value + '%' }"></div>
+                 :style="{ width: progressHook.pctComplete.value + '%' }"></div>
           </div>
 
           <p class="text-sm text-slate-600">
-            <b class="text-slate-900">{{ progressHook.prog.value.processados }}/{{ progressHook.prog.value.total || '...' }}</b> tickets processed
-            <span v-if="progressHook.prog.value.totalLotes" class="text-slate-400"> · batch {{ progressHook.prog.value.lotesConcluidos }}/{{ progressHook.prog.value.totalLotes }}</span>
-            <span v-if="progressHook.tempoRestanteEstima.value" class="text-slate-400"> · {{ progressHook.tempoRestanteEstima.value }}</span>
+            <b class="text-slate-900">{{ progressHook.prog.value.processed }}/{{ progressHook.prog.value.total || '...' }}</b> tickets processed
+            <span v-if="progressHook.prog.value.totalBatches" class="text-slate-400"> · batch {{ progressHook.prog.value.batchesCompleted }}/{{ progressHook.prog.value.totalBatches }}</span>
+            <span v-if="progressHook.estimatedTimeRemaining.value" class="text-slate-400"> · {{ progressHook.estimatedTimeRemaining.value }}</span>
           </p>
 
           <!-- Mini KPIs -->
@@ -102,7 +102,7 @@ function enviarComOpcao(sobrescrever) {
             </div>
             <div class="bg-amber-50/50 p-3 rounded-xl border border-amber-100 text-center">
               <span class="block text-[10px] text-amber-500 uppercase font-bold tracking-wider">Pending</span>
-              <span class="text-xl font-bold text-amber-700">{{ Math.max(0, progressHook.prog.value.total - progressHook.prog.value.processados) }}</span>
+              <span class="text-xl font-bold text-amber-700">{{ Math.max(0, progressHook.prog.value.total - progressHook.prog.value.processed) }}</span>
             </div>
             <div class="bg-emerald-50/50 p-3 rounded-xl border border-emerald-100 text-center">
               <span class="block text-[10px] text-emerald-500 uppercase font-bold tracking-wider">OK</span>
@@ -110,7 +110,7 @@ function enviarComOpcao(sobrescrever) {
             </div>
             <div class="bg-rose-50/50 p-3 rounded-xl border border-rose-100 text-center">
               <span class="block text-[10px] text-rose-500 uppercase font-bold tracking-wider">Failures</span>
-              <span class="text-xl font-bold text-rose-700">{{ progressHook.prog.value.falhas }}</span>
+              <span class="text-xl font-bold text-rose-700">{{ progressHook.prog.value.failures }}</span>
             </div>
           </div>
 
@@ -157,8 +157,8 @@ function enviarComOpcao(sobrescrever) {
               Upload
             </button>
             <button
-              @click="classifier.carregarLotes"
-              :class="(classifier.view.value === 'lotes' || classifier.view.value === 'detalhe') ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900'"
+              @click="classifier.loadBatches"
+              :class="(classifier.view.value === 'batches' || classifier.view.value === 'detail') ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900'"
               class="px-4 py-1.5 rounded-md text-sm font-medium transition duration-150 flex items-center gap-2 cursor-pointer"
             >
               <i class="fa-solid fa-history"></i>
@@ -184,8 +184,8 @@ function enviarComOpcao(sobrescrever) {
               <i class="fa-solid fa-cloud-arrow-up"></i>
             </button>
             <button
-              @click="classifier.carregarLotes"
-              :class="(classifier.view.value === 'lotes' || classifier.view.value === 'detalhe') ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'"
+              @click="classifier.loadBatches"
+              :class="(classifier.view.value === 'batches' || classifier.view.value === 'detail') ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'"
               class="p-2.5 rounded-lg text-sm cursor-pointer"
             >
               <i class="fa-solid fa-history"></i>
@@ -206,10 +206,10 @@ function enviarComOpcao(sobrescrever) {
     <main class="grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
       <!-- Error Toast -->
-      <div v-if="classifier.erro.value" class="mb-6 bg-rose-50 border border-rose-200 text-rose-700 px-5 py-4 rounded-xl flex items-center gap-3">
+      <div v-if="classifier.error.value" class="mb-6 bg-rose-50 border border-rose-200 text-rose-700 px-5 py-4 rounded-xl flex items-center gap-3">
         <i class="fa-solid fa-triangle-exclamation text-rose-500"></i>
-        <span class="text-sm font-medium">{{ classifier.erro.value }}</span>
-        <button @click="classifier.erro.value = ''" class="ml-auto text-rose-400 hover:text-rose-600 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+        <span class="text-sm font-medium">{{ classifier.error.value }}</span>
+        <button @click="classifier.error.value = ''" class="ml-auto text-rose-400 hover:text-rose-600 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <!-- UPLOAD VIEW -->
@@ -232,13 +232,13 @@ function enviarComOpcao(sobrescrever) {
               @dragover.prevent="dragOver = true"
               @dragleave="dragOver = false"
               @drop.prevent="handleDrop"
-              :class="dragOver ? 'border-indigo-500 bg-indigo-50/50' : arquivoLocal ? 'border-emerald-400 bg-emerald-50/30' : 'border-slate-300 bg-white hover:border-slate-400'"
+              :class="dragOver ? 'border-indigo-500 bg-indigo-50/50' : localFile ? 'border-emerald-400 bg-emerald-50/30' : 'border-slate-300 bg-white hover:border-slate-400'"
               class="border-2 border-dashed rounded-2xl p-12 text-center transition-all duration-150 flex flex-col items-center justify-center min-h-[320px]"
             >
-              <input type="file" id="csv-upload" class="hidden" accept=".csv" @change="tratarSelecaoArquivo">
+              <input type="file" id="csv-upload" class="hidden" accept=".csv" @change="handleFileSelection">
 
               <!-- No file selected -->
-              <label v-if="!arquivoLocal" for="csv-upload" class="cursor-pointer flex flex-col items-center">
+              <label v-if="!localFile" for="csv-upload" class="cursor-pointer flex flex-col items-center">
                 <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-4 hover:scale-105 transition-transform">
                   <i class="fa-solid fa-file-csv text-3xl text-indigo-600"></i>
                 </div>
@@ -253,13 +253,13 @@ function enviarComOpcao(sobrescrever) {
                 <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
                   <i class="fa-solid fa-file-circle-check text-3xl text-emerald-600"></i>
                 </div>
-                <h3 class="text-lg font-bold text-slate-900">{{ arquivoLocal.name }}</h3>
-                <p class="text-xs text-slate-500 mt-1">{{ (arquivoLocal.size / 1024).toFixed(1) }} KB</p>
+                <h3 class="text-lg font-bold text-slate-900">{{ localFile.name }}</h3>
+                <p class="text-xs text-slate-500 mt-1">{{ (localFile.size / 1024).toFixed(1) }} KB</p>
 
                 <div class="flex gap-3 mt-6">
                   <button
-                    @click="dispararUpload"
-                    :disabled="progressHook.processando.value"
+                    @click="triggerUpload"
+                    :disabled="progressHook.processing.value"
                     class="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white px-6 py-3 rounded-xl font-semibold text-sm transition shadow-lg shadow-indigo-100 flex items-center gap-2 cursor-pointer"
                   >
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
@@ -273,7 +273,7 @@ function enviarComOpcao(sobrescrever) {
               </div>
 
               <!-- Format hints -->
-              <div v-if="!arquivoLocal" class="mt-8 pt-6 border-t border-slate-100 w-full max-w-md flex justify-around text-xs text-slate-400">
+              <div v-if="!localFile" class="mt-8 pt-6 border-t border-slate-100 w-full max-w-md flex justify-around text-xs text-slate-400">
                 <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Ticket ID</span>
                 <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Description</span>
                 <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-500"></i> Subject</span>
@@ -325,7 +325,7 @@ function enviarComOpcao(sobrescrever) {
       </div>
 
       <!-- BATCH LIST VIEW -->
-      <div v-else-if="classifier.view.value === 'lotes'" class="space-y-6">
+      <div v-else-if="classifier.view.value === 'batches'" class="space-y-6">
         <div class="flex items-center justify-between">
           <div>
             <h2 class="text-2xl font-bold tracking-tight text-slate-900">Processed Batches</h2>
@@ -338,7 +338,7 @@ function enviarComOpcao(sobrescrever) {
         </div>
 
         <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
-          <p v-if="!classifier.lotes.value.length" class="text-center text-slate-400 py-12">
+          <p v-if="!classifier.batches.value.length" class="text-center text-slate-400 py-12">
             <i class="fa-solid fa-inbox text-4xl text-slate-300 block mb-3"></i>
             No batches processed yet. Upload a CSV to get started.
           </p>
@@ -354,17 +354,17 @@ function enviarComOpcao(sobrescrever) {
                 </tr>
               </thead>
               <tbody class="text-sm divide-y divide-slate-100">
-                <tr v-for="l in classifier.lotes.value" :key="l.batchId" class="hover:bg-slate-50/50 transition duration-150">
+                <tr v-for="l in classifier.batches.value" :key="l.batchId" class="hover:bg-slate-50/50 transition duration-150">
                   <td class="p-4 text-slate-900 font-semibold flex items-center gap-2">
                     <i class="fa-solid fa-file-csv text-indigo-600"></i>
-                    {{ l.nomeArquivo }}
+                    {{ l.fileName }}
                   </td>
                   <td class="p-4 text-center">
                     <span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-full text-xs font-bold">{{ l.total }}</span>
                   </td>
-                  <td class="p-4 text-slate-500">{{ formatarData(l.dataCriacao) }}</td>
+                  <td class="p-4 text-slate-500">{{ formatDate(l.createdDate) }}</td>
                   <td class="p-4 text-center">
-                    <button @click="classifier.abrirDetalhe(l.batchId)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-lg text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 mx-auto">
+                    <button @click="classifier.openDetail(l.batchId)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-lg text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 mx-auto">
                       <i class="fa-solid fa-chart-line text-indigo-600"></i>
                       Open
                     </button>
@@ -381,16 +381,16 @@ function enviarComOpcao(sobrescrever) {
 
       <!-- BATCH DETAIL VIEW -->
       <BatchDashboard
-        v-else-if="classifier.view.value === 'detalhe' && classifier.batchAtual.value"
-        :batch="classifier.batchAtual.value"
-        :reprocessando="classifier.reprocessando.value"
-        :reprocessando-tudo="classifier.reprocessandoTudo.value"
-        @voltar="classifier.carregarLotes"
-        @reprocessar="classifier.reprocessarLote"
-        @reprocessar-tudo="classifier.reprocessarTudo"
-        @baixar="(cols) => classifier.baixarExportacao(cols)"
-        @atualizar-ticket="(id, dto, done) => classifier.atualizarTicket(id, dto).finally(done)"
-        @obter-similares="(id, cb) => classifier.obterSimilares(id).then(cb)"
+        v-else-if="classifier.view.value === 'detail' && classifier.currentBatch.value"
+        :batch="classifier.currentBatch.value"
+        :reprocessando="classifier.reprocessing.value"
+        :reprocessando-tudo="classifier.reprocessingAll.value"
+        @back="classifier.loadBatches"
+        @reprocess="classifier.reprocessBatch"
+        @reprocess-all="classifier.reprocessAll"
+        @download="(cols) => classifier.downloadExport(cols)"
+        @update-ticket="(id, dto, done) => classifier.updateTicket(id, dto).finally(done)"
+        @get-similars="(id, cb) => classifier.getSimilars(id).then(cb)"
       />
     </main>
 

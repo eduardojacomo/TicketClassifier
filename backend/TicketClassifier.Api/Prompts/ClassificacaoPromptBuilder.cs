@@ -4,47 +4,47 @@ using TicketClassifier.Api.Models;
 
 namespace TicketClassifier.Api.Prompts;
 
-public class ClassificacaoPromptBuilder
+public class ClassificationPromptBuilder
 {
-    private readonly IReadOnlyList<ParametroClassificacao> _parametros;
+    private readonly IReadOnlyList<ClassificationParameter> _parameters;
 
-    public ClassificacaoPromptBuilder(IReadOnlyList<ParametroClassificacao> parametros)
+    public ClassificationPromptBuilder(IReadOnlyList<ClassificationParameter> parameters)
     {
-        _parametros = parametros;
+        _parameters = parameters;
     }
 
-    public string ConstruirLote(IReadOnlyList<TicketParaClassificar> itens, int loteAtual = 1, int totalLotes = 1, int totalTickets = 0)
+    public string BuildBatch(IReadOnlyList<TicketToClassify> items, int currentBatch = 1, int totalBatches = 1, int totalTickets = 0)
     {
-        var lista = new StringBuilder();
-        foreach (var t in itens)
+        var list = new StringBuilder();
+        foreach (var t in items)
         {
-            var desc = t.Descricao.Length > 600 ? t.Descricao[..600] : t.Descricao;
-            lista.Append($"[{t.Indice}] Subject: {t.Assunto} | Description: {desc}\n");
+            var desc = t.Description.Length > 600 ? t.Description[..600] : t.Description;
+            list.Append($"[{t.Index}] Subject: {t.Subject} | Description: {desc}\n");
         }
 
-        var totalReal = totalTickets > 0 ? totalTickets : itens.Count;
+        var actualTotal = totalTickets > 0 ? totalTickets : items.Count;
 
         var sb = new StringBuilder();
         sb.Append("You are an experienced technical support analyst. Classify EACH ticket in the list with precision.\n\n");
 
-        sb.Append($"BATCH CONTEXT: You are processing batch {loteAtual} of {totalLotes} ");
-        sb.Append($"(total of {totalReal} tickets in the file). This batch contains {itens.Count} tickets. ");
+        sb.Append($"BATCH CONTEXT: You are processing batch {currentBatch} of {totalBatches} ");
+        sb.Append($"(total of {actualTotal} tickets in the file). This batch contains {items.Count} tickets. ");
         sb.Append("Respond to ALL tickets in this batch — do not omit any.\n\n");
 
         sb.Append("Respond ONLY with a valid JSON ARRAY (no markdown, no ```). One object per ticket, ");
         sb.Append("including the \"indice\" field EQUAL to the number in brackets of the ticket. Use EXACTLY one of the ");
         sb.Append("allowed values, matching case exactly.\n\n");
 
-        sb.AppendLine($"categoria: {string.Join(" | ", Categorias.Lista)}");
-        sb.AppendLine($"prioridade: {string.Join(" | ", Categorias.Prioridades)}");
-        sb.AppendLine($"departamento: {string.Join(" | ", Categorias.Departamentos)}");
-        sb.AppendLine($"sentimento: {string.Join(" | ", Categorias.Sentimentos)}");
+        sb.AppendLine($"categoria: {string.Join(" | ", Categories.CategoryList)}");
+        sb.AppendLine($"prioridade: {string.Join(" | ", Categories.PriorityList)}");
+        sb.AppendLine($"departamento: {string.Join(" | ", Categories.DepartmentList)}");
+        sb.AppendLine($"sentimento: {string.Join(" | ", Categories.SentimentList)}");
         sb.AppendLine();
 
-        MontarRegrasCategoria(sb);
-        MontarRegrasPrioridade(sb);
-        MontarRegrasSentimento(sb);
-        MontarSecaoTags(sb);
+        BuildCategoryRules(sb);
+        BuildPriorityRules(sb);
+        BuildSentimentRules(sb);
+        BuildTagsSection(sb);
 
         sb.Append("Field \"confianca\" (0.0 to 1.0): indicates how confident you are in the classification.\n");
         sb.Append("- 0.90–1.00: very clear ticket, explicit keywords, obvious classification.\n");
@@ -57,49 +57,49 @@ public class ClassificacaoPromptBuilder
         sb.Append("{\"indice\":0,\"categoria\":\"\",\"prioridade\":\"\",\"departamento\":\"\",\"resumo\":\"\",\"sentimento\":\"\",\"tags\":[],\"confianca\":0.85,\"justificativa\":\"\"}\n\n");
 
         sb.Append("--- TICKETS ---\n");
-        sb.Append(lista);
+        sb.Append(list);
         sb.Append("--- END ---");
 
         return sb.ToString();
     }
 
-    private IReadOnlyList<ParametroClassificacao> Ativos(string tipo) =>
-        _parametros.Where(p => p.Tipo == tipo && p.Ativo).ToList();
+    private IReadOnlyList<ClassificationParameter> Active(string type) =>
+        _parameters.Where(p => p.Type == type && p.Active).ToList();
 
-    private void MontarRegrasCategoria(StringBuilder sb)
+    private void BuildCategoryRules(StringBuilder sb)
     {
-        var regrasCategoria = Ativos("categoria")
-            .GroupBy(p => p.Alvo ?? "Other")
-            .ToDictionary(g => g.Key, g => g.Select(p => p.Termo).ToList());
+        var categoryRules = Active("categoria")
+            .GroupBy(p => p.Target ?? "Other")
+            .ToDictionary(g => g.Key, g => g.Select(p => p.Term).ToList());
 
-        var perguntaIndicadores = Ativos("pergunta").Select(p => p.Termo).ToList();
-        var reclamacaoIndicadores = Ativos("reclamacao").Select(p => p.Termo).ToList();
+        var questionIndicators = Active("pergunta").Select(p => p.Term).ToList();
+        var complaintIndicators = Active("reclamacao").Select(p => p.Term).ToList();
 
         sb.Append("CATEGORY RULES (apply carefully — the default is NOT 'Other'):\n");
 
-        if (perguntaIndicadores.Count > 0 || regrasCategoria.ContainsKey("Question"))
+        if (questionIndicators.Count > 0 || categoryRules.ContainsKey("Question"))
         {
-            var indicadores = perguntaIndicadores.Count > 0
-                ? string.Join("\", \"", perguntaIndicadores.Take(8))
+            var indicators = questionIndicators.Count > 0
+                ? string.Join("\", \"", questionIndicators.Take(8))
                 : "how do I, where is, is it possible, ?";
-            sb.Append($"- Question: the customer asks a QUESTION or seeks guidance. Indicators: \"{indicadores}\". ");
+            sb.Append($"- Question: the customer asks a QUESTION or seeks guidance. Indicators: \"{indicators}\". ");
             sb.Append("IMPORTANT: if the text is a question about how to use something and does NOT report an error/failure, the category is Question, not Bug.\n");
         }
 
-        foreach (var cat in Categorias.Lista)
+        foreach (var cat in Categories.CategoryList)
         {
             if (cat == "Question" || cat == "Other") continue;
 
-            if (cat == "Complaint" && reclamacaoIndicadores.Count > 0)
+            if (cat == "Complaint" && complaintIndicators.Count > 0)
             {
-                var ind = string.Join("\", \"", reclamacaoIndicadores.Take(8));
+                var ind = string.Join("\", \"", complaintIndicators.Take(8));
                 sb.Append($"- Complaint: the customer expresses DISSATISFACTION with the service/support. Indicators: \"{ind}\".\n");
                 continue;
             }
 
-            if (regrasCategoria.TryGetValue(cat, out var termos) && termos.Count > 0)
+            if (categoryRules.TryGetValue(cat, out var terms) && terms.Count > 0)
             {
-                var ind = string.Join("\", \"", termos.Take(8));
+                var ind = string.Join("\", \"", terms.Take(8));
                 sb.Append($"- {cat}: indicators: \"{ind}\".\n");
             }
             else
@@ -110,29 +110,29 @@ public class ClassificacaoPromptBuilder
 
         sb.Append("- Other: ONLY if none of the above categories apply.\n\n");
 
-        var regrasDept = Ativos("departamento");
-        if (regrasDept.Count > 0)
+        var departmentRules = Active("departamento");
+        if (departmentRules.Count > 0)
         {
             sb.Append("DEPARTMENT RULES (based on category):\n");
-            foreach (var r in regrasDept)
-                sb.Append($"- Category \"{r.Termo}\" → Department \"{r.Alvo}\".\n");
+            foreach (var r in departmentRules)
+                sb.Append($"- Category \"{r.Term}\" → Department \"{r.Target}\".\n");
             sb.Append("- Remaining categories → Department \"Support\".\n\n");
         }
     }
 
-    private void MontarRegrasPrioridade(StringBuilder sb)
+    private void BuildPriorityRules(StringBuilder sb)
     {
-        var regrasPrioridade = Ativos("prioridade")
-            .GroupBy(p => p.Alvo ?? "Medium")
-            .ToDictionary(g => g.Key, g => g.Select(p => p.Termo).ToList());
+        var priorityRules = Active("prioridade")
+            .GroupBy(p => p.Target ?? "Medium")
+            .ToDictionary(g => g.Key, g => g.Select(p => p.Term).ToList());
 
         sb.Append("PRIORITY criteria (do not default to 'Medium' — make an actual choice):\n");
 
-        foreach (var prio in Categorias.Prioridades.Reverse())
+        foreach (var prio in Categories.PriorityList.Reverse())
         {
-            if (regrasPrioridade.TryGetValue(prio, out var termos) && termos.Count > 0)
+            if (priorityRules.TryGetValue(prio, out var terms) && terms.Count > 0)
             {
-                var ind = string.Join("\", \"", termos.Take(8));
+                var ind = string.Join("\", \"", terms.Take(8));
                 sb.Append($"- {prio}: indicators: \"{ind}\".\n");
             }
             else
@@ -144,16 +144,16 @@ public class ClassificacaoPromptBuilder
         sb.AppendLine();
     }
 
-    private void MontarRegrasSentimento(StringBuilder sb)
+    private void BuildSentimentRules(StringBuilder sb)
     {
-        var positivos = Ativos("sentimento_positivo").Select(p => p.Termo).ToList();
-        var negativos = Ativos("sentimento_negativo").Select(p => p.Termo).ToList();
+        var positiveIndicators = Active("sentimento_positivo").Select(p => p.Term).ToList();
+        var negativeIndicators = Active("sentimento_negativo").Select(p => p.Term).ToList();
 
         sb.Append("Field \"sentimento\": analyze the tone of the customer's text.\n");
 
-        if (positivos.Count > 0)
+        if (positiveIndicators.Count > 0)
         {
-            var ind = string.Join("\", \"", positivos.Take(8));
+            var ind = string.Join("\", \"", positiveIndicators.Take(8));
             sb.Append($"- positive: indicators: \"{ind}\".\n");
         }
         else
@@ -161,9 +161,9 @@ public class ClassificacaoPromptBuilder
             sb.Append("- positive: praise, satisfaction, gratitude, constructive suggestion.\n");
         }
 
-        if (negativos.Count > 0)
+        if (negativeIndicators.Count > 0)
         {
-            var ind = string.Join("\", \"", negativos.Take(8));
+            var ind = string.Join("\", \"", negativeIndicators.Take(8));
             sb.Append($"- negative: indicators: \"{ind}\".\n");
         }
         else
@@ -174,17 +174,17 @@ public class ClassificacaoPromptBuilder
         sb.Append("- neutral: informative tone, objective question, factual request.\n\n");
     }
 
-    private void MontarSecaoTags(StringBuilder sb)
+    private void BuildTagsSection(StringBuilder sb)
     {
-        var tagKeywords = Ativos("tag").Select(p => p.Termo).ToList();
+        var tagKeywords = Active("tag").Select(p => p.Term).ToList();
 
         sb.Append("Field \"tags\": array with 2 to 5 relevant keywords extracted from the ticket (lowercase). ");
         sb.Append("Should represent the central themes of the ticket.");
 
         if (tagKeywords.Count > 0)
         {
-            var exemplos = string.Join("\", \"", tagKeywords.Take(15));
-            sb.Append($" Reference vocabulary: [\"{exemplos}\"].");
+            var examples = string.Join("\", \"", tagKeywords.Take(15));
+            sb.Append($" Reference vocabulary: [\"{examples}\"].");
         }
 
         sb.Append("\n\n");

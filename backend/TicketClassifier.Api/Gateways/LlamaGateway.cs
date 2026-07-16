@@ -5,14 +5,14 @@ using TicketClassifier.Api.Prompts;
 
 namespace TicketClassifier.Api.Gateways;
 
-/// <summary>Estratégia via llama.cpp server (API compatível com OpenAI).</summary>
-public class LlamaGateway : IClassificacaoGateway
+/// <summary>Strategy via a llama.cpp server (OpenAI-compatible API).</summary>
+public class LlamaGateway : IClassificationGateway
 {
     private readonly HttpClient _http;
     private readonly string _baseUrl;
     private readonly ILogger<LlamaGateway> _logger;
 
-    public string Nome => "llama";
+    public string Name => "llama";
 
     public LlamaGateway(HttpClient http, IConfiguration cfg, ILogger<LlamaGateway> logger)
     {
@@ -21,51 +21,51 @@ public class LlamaGateway : IClassificacaoGateway
         _baseUrl = cfg["Llm:Llama:BaseUrl"]?.TrimEnd('/') ?? "http://llama-server:8080";
     }
 
-    public async Task<IReadOnlyList<ClassificacaoResultado>> ClassificarLoteAsync(
-        IReadOnlyList<TicketParaClassificar> itens, ClassificacaoPromptBuilder promptBuilder,
+    public async Task<IReadOnlyList<ClassificationResult>> ClassifyBatchAsync(
+        IReadOnlyList<TicketToClassify> items, ClassificationPromptBuilder promptBuilder,
         CancellationToken ct = default,
-        int loteAtual = 1, int totalLotes = 1, int totalTickets = 0)
+        int currentBatch = 1, int totalBatches = 1, int totalTickets = 0)
     {
-        if (itens.Count == 0) return Array.Empty<ClassificacaoResultado>();
+        if (items.Count == 0) return Array.Empty<ClassificationResult>();
 
         var url = $"{_baseUrl}/v1/chat/completions";
         var payloadJson = JsonSerializer.Serialize(new
         {
             messages = new[]
             {
-                new { role = "user", content = promptBuilder.ConstruirLote(itens, loteAtual, totalLotes, totalTickets) }
+                new { role = "user", content = promptBuilder.BuildBatch(items, currentBatch, totalBatches, totalTickets) }
             },
             temperature = 0.2,
-            max_tokens = Math.Max(4096, 500 + itens.Count * 400)
+            max_tokens = Math.Max(4096, 500 + items.Count * 400)
         });
 
-        var (texto, erro) = await ChamarComRetryAsync(url, payloadJson, ct);
+        var (text, error) = await CallWithRetryAsync(url, payloadJson, ct);
 
-        if (texto is null)
+        if (text is null)
         {
-            var fallback = Categorias.FallbackComErro($"[Llama] {erro ?? "Unknown error"}");
-            return itens.Select(_ => fallback).ToList();
+            var fallback = Categories.FallbackWithError($"[Llama] {error ?? "Unknown error"}");
+            return items.Select(_ => fallback).ToList();
         }
 
-        _logger.LogInformation("Llama raw response ({Len} chars): {Texto}", texto.Length, texto.Length > 1000 ? texto[..1000] + "..." : texto);
+        _logger.LogInformation("Llama raw response ({Len} chars): {Text}", text.Length, text.Length > 1000 ? text[..1000] + "..." : text);
 
-        var indices = itens.Select(t => t.Indice).ToList();
-        var (porIndice, parseErro) = SeguroParse(texto, indices);
+        var indices = items.Select(t => t.Index).ToList();
+        var (byIndex, parseError) = SafeParse(text, indices);
 
-        return itens.Select(t =>
+        return items.Select(t =>
         {
-            if (porIndice.TryGetValue(t.Indice, out var r)) return r;
-            var motivo = parseErro ?? $"[Llama] Index {t.Indice} missing in response. Partial response: {Truncar(texto, 200)}";
-            return Categorias.FallbackComErro(motivo);
+            if (byIndex.TryGetValue(t.Index, out var r)) return r;
+            var reason = parseError ?? $"[Llama] Index {t.Index} missing in response. Partial response: {Truncate(text, 200)}";
+            return Categories.FallbackWithError(reason);
         }).ToList();
     }
 
-    private async Task<(string? texto, string? erro)> ChamarComRetryAsync(string url, string payloadJson, CancellationToken ct)
+    private async Task<(string? text, string? error)> CallWithRetryAsync(string url, string payloadJson, CancellationToken ct)
     {
         var backoff = new[] { 2000, 5000, 10000 };
-        string? ultimoErro = null;
+        string? lastError = null;
 
-        for (var tentativa = 0; ; tentativa++)
+        for (var attempt = 0; ; attempt++)
         {
             try
             {
@@ -76,19 +76,19 @@ public class LlamaGateway : IClassificacaoGateway
                 using var resp = await _http.SendAsync(req, ct);
                 var body = await resp.Content.ReadAsStringAsync(ct);
 
-                if (EhTransiente(resp.StatusCode) && tentativa < backoff.Length)
+                if (IsTransient(resp.StatusCode) && attempt < backoff.Length)
                 {
-                    ultimoErro = $"HTTP {(int)resp.StatusCode}: {Truncar(body, 300)}";
-                    _logger.LogWarning("Llama {Status}, retry {N} in {Ms}ms. Body: {Body}", (int)resp.StatusCode, tentativa + 1, backoff[tentativa], Truncar(body, 200));
-                    await Task.Delay(backoff[tentativa], ct);
+                    lastError = $"HTTP {(int)resp.StatusCode}: {Truncate(body, 300)}";
+                    _logger.LogWarning("Llama {Status}, retry {N} in {Ms}ms. Body: {Body}", (int)resp.StatusCode, attempt + 1, backoff[attempt], Truncate(body, 200));
+                    await Task.Delay(backoff[attempt], ct);
                     continue;
                 }
 
                 if (!resp.IsSuccessStatusCode)
                 {
-                    ultimoErro = $"HTTP {(int)resp.StatusCode}: {Truncar(body, 300)}";
-                    _logger.LogWarning("Llama non-OK response: {Status}. Body: {Body}", (int)resp.StatusCode, Truncar(body, 500));
-                    return (null, ultimoErro);
+                    lastError = $"HTTP {(int)resp.StatusCode}: {Truncate(body, 300)}";
+                    _logger.LogWarning("Llama non-OK response: {Status}. Body: {Body}", (int)resp.StatusCode, Truncate(body, 500));
+                    return (null, lastError);
                 }
 
                 using var doc = JsonDocument.Parse(body);
@@ -101,49 +101,49 @@ public class LlamaGateway : IClassificacaoGateway
             }
             catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException)
             {
-                ultimoErro = $"Timeout after {_http.Timeout.TotalSeconds}s waiting for Llama response";
-                if (tentativa < backoff.Length)
+                lastError = $"Timeout after {_http.Timeout.TotalSeconds}s waiting for Llama response";
+                if (attempt < backoff.Length)
                 {
-                    _logger.LogWarning("Llama timeout, retry {N} in {Ms}ms.", tentativa + 1, backoff[tentativa]);
-                    await Task.Delay(backoff[tentativa], ct);
+                    _logger.LogWarning("Llama timeout, retry {N} in {Ms}ms.", attempt + 1, backoff[attempt]);
+                    await Task.Delay(backoff[attempt], ct);
                     continue;
                 }
                 _logger.LogWarning("Llama final timeout; batch falls back to default.");
-                return (null, ultimoErro);
+                return (null, lastError);
             }
-            catch (Exception ex) when (tentativa < backoff.Length)
+            catch (Exception ex) when (attempt < backoff.Length)
             {
-                ultimoErro = $"{ex.GetType().Name}: {ex.Message}";
-                _logger.LogWarning(ex, "Llama error, retry {N} in {Ms}ms.", tentativa + 1, backoff[tentativa]);
-                await Task.Delay(backoff[tentativa], ct);
+                lastError = $"{ex.GetType().Name}: {ex.Message}";
+                _logger.LogWarning(ex, "Llama error, retry {N} in {Ms}ms.", attempt + 1, backoff[attempt]);
+                await Task.Delay(backoff[attempt], ct);
             }
             catch (Exception ex)
             {
-                ultimoErro = $"{ex.GetType().Name}: {ex.Message}";
+                lastError = $"{ex.GetType().Name}: {ex.Message}";
                 _logger.LogWarning(ex, "Final failure in Llama; batch falls back to default.");
-                return (null, ultimoErro);
+                return (null, lastError);
             }
         }
     }
 
-    private (Dictionary<int, ClassificacaoResultado> resultado, string? erro) SeguroParse(string texto, IReadOnlyList<int> indices)
+    private (Dictionary<int, ClassificationResult> result, string? error) SafeParse(string text, IReadOnlyList<int> indices)
     {
         try
         {
-            var parsed = Categorias.ParseLoteComFallback(texto, indices);
+            var parsed = Categories.ParseBatchWithFallback(text, indices);
             return (parsed, null);
         }
         catch (Exception ex)
         {
-            var erro = $"Failed to parse Llama response: {ex.Message}. Response: {Truncar(texto, 300)}";
-            _logger.LogWarning(ex, "Failed to parse Llama response. Text: {Texto}", Truncar(texto, 500));
-            return (new(), erro);
+            var error = $"Failed to parse Llama response: {ex.Message}. Response: {Truncate(text, 300)}";
+            _logger.LogWarning(ex, "Failed to parse Llama response. Text: {Text}", Truncate(text, 500));
+            return (new(), error);
         }
     }
 
-    private static string Truncar(string s, int max)
+    private static string Truncate(string s, int max)
         => s.Length <= max ? s : s[..max] + "…";
 
-    private static bool EhTransiente(System.Net.HttpStatusCode s)
+    private static bool IsTransient(System.Net.HttpStatusCode s)
         => (int)s == 429 || (int)s == 500 || (int)s == 502 || (int)s == 503 || (int)s == 504;
 }

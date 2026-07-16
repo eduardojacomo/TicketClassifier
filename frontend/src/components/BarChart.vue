@@ -14,23 +14,23 @@ import {
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 const props = defineProps({
-  titulo: { type: String, default: '' },
-  dados: { type: Object, default: () => ({}) },
-  cores: { type: Object, default: null },
+  title: { type: String, default: '' },
+  data: { type: Object, default: () => ({}) },
+  colors: { type: Object, default: null },
 })
 
-const paletaCores = [
+const colorPalette = [
   '#6366f1', '#8b5cf6', '#a78bfa', '#c084fc',
   '#818cf8', '#7c3aed', '#6d28d9', '#5b21b6',
   '#4f46e5', '#4338ca',
 ]
 
 const chartData = computed(() => {
-  const entradas = Object.entries(props.dados || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1])
-  const labels = entradas.map(([k]) => k)
-  const values = entradas.map(([, v]) => v)
+  const entries = Object.entries(props.data || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1])
+  const labels = entries.map(([k]) => k)
+  const values = entries.map(([, v]) => v)
   const total = values.reduce((s, v) => s + v, 0)
-  const colors = labels.map((l, i) => props.cores?.[l] ?? paletaCores[i % paletaCores.length])
+  const colors = labels.map((l, i) => props.colors?.[l] ?? colorPalette[i % colorPalette.length])
 
   return {
     labels,
@@ -107,11 +107,11 @@ const chartOptions = computed(() => ({
 }))
 
 const totalItems = computed(() => {
-  return Object.values(props.dados || {}).reduce((s, v) => s + v, 0)
+  return Object.values(props.data || {}).reduce((s, v) => s + v, 0)
 })
 
 const topEntries = computed(() => {
-  return Object.entries(props.dados || {})
+  return Object.entries(props.data || {})
     .filter(([, v]) => v > 0)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 3)
@@ -122,7 +122,7 @@ const topEntries = computed(() => {
 <template>
   <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
     <div class="flex items-center justify-between mb-1">
-      <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-widest">{{ titulo }}</h3>
+      <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-widest">{{ title }}</h3>
       <span class="text-[10px] text-slate-400 font-medium bg-slate-50 px-2 py-0.5 rounded-full">{{ totalItems }} total</span>
     </div>
 

@@ -7,54 +7,54 @@ namespace TicketClassifier.Api.Mappers;
 
 public static class TicketMapper
 {
-    public static Ticket ToEntity(TicketCsvInput input, Guid batchId, ClassificacaoResultado c, bool ok) => new()
+    public static Ticket ToEntity(TicketCsvInput input, Guid batchId, ClassificationResult c, bool ok) => new()
     {
         BatchId = batchId,
         ExternalId = input.ExternalId,
-        Assunto = input.Assunto,
-        Descricao = input.Descricao,
-        Categoria = c.Categoria,
-        Prioridade = c.Prioridade,
-        Departamento = c.Departamento,
-        Resumo = c.Resumo,
-        Confianca = c.Confianca,
-        Justificativa = c.Justificativa,
-        Sentimento = c.Sentimento,
+        Subject = input.Subject,
+        Description = input.Description,
+        Category = c.Category,
+        Priority = c.Priority,
+        Department = c.Department,
+        Summary = c.Summary,
+        Confidence = c.Confidence,
+        Justification = c.Justification,
+        Sentiment = c.Sentiment,
         Tags = System.Text.Json.JsonSerializer.Serialize(c.Tags),
-        ProcessadoOk = ok,
+        ProcessedOk = ok,
     };
 
-    public static void AplicarResultado(Ticket t, ClassificacaoResultado c, bool ok)
+    public static void ApplyResult(Ticket t, ClassificationResult c, bool ok)
     {
-        t.Categoria = c.Categoria;
-        t.Prioridade = c.Prioridade;
-        t.Departamento = c.Departamento;
-        t.Resumo = c.Resumo;
-        t.Confianca = c.Confianca;
-        t.Justificativa = c.Justificativa;
-        t.Sentimento = c.Sentimento;
+        t.Category = c.Category;
+        t.Priority = c.Priority;
+        t.Department = c.Department;
+        t.Summary = c.Summary;
+        t.Confidence = c.Confidence;
+        t.Justification = c.Justification;
+        t.Sentiment = c.Sentiment;
         t.Tags = System.Text.Json.JsonSerializer.Serialize(c.Tags);
-        t.ProcessadoOk = ok;
+        t.ProcessedOk = ok;
     }
 
-    public static TicketDto ToDto(Ticket t, int similares = 0) => new()
+    public static TicketDto ToDto(Ticket t, int similarCount = 0) => new()
     {
         Id = t.Id,
         ExternalId = t.ExternalId,
-        Assunto = t.Assunto,
-        Descricao = t.Descricao,
-        Categoria = t.Categoria,
-        Prioridade = t.Prioridade,
-        Departamento = t.Departamento,
-        Resumo = t.Resumo,
-        Confianca = t.Confianca,
-        Justificativa = t.Justificativa,
-        Sentimento = t.Sentimento,
+        Subject = t.Subject,
+        Description = t.Description,
+        Category = t.Category,
+        Priority = t.Priority,
+        Department = t.Department,
+        Summary = t.Summary,
+        Confidence = t.Confidence,
+        Justification = t.Justification,
+        Sentiment = t.Sentiment,
         Tags = ParseTags(t.Tags),
-        ProcessadoOk = t.ProcessadoOk,
-        RegistroModificado = t.RegistroModificado,
-        DataModificacao = t.DataModificacao,
-        Similares = similares,
+        ProcessedOk = t.ProcessedOk,
+        RecordModified = t.RecordModified,
+        ModifiedDate = t.ModifiedDate,
+        SimilarCount = similarCount,
     };
 
     private static string[] ParseTags(string? json)
@@ -64,36 +64,36 @@ public static class TicketMapper
         catch { return Array.Empty<string>(); }
     }
 
-    public static EstatisticasDto ToEstatisticas(IReadOnlyCollection<Ticket> tickets) => new()
+    public static StatisticsDto ToStatistics(IReadOnlyCollection<Ticket> tickets) => new()
     {
         Total = tickets.Count,
-        Falhas = tickets.Count(x => !x.ProcessadoOk),
-        PorCategoria = Categorias.Lista.ToDictionary(c => c, c => tickets.Count(x => x.Categoria == c)),
-        PorPrioridade = Categorias.Prioridades.ToDictionary(p => p, p => tickets.Count(x => x.Prioridade == p)),
-        PorDepartamento = Categorias.Departamentos.ToDictionary(d => d, d => tickets.Count(x => x.Departamento == d)),
-        PorSentimento = Categorias.Sentimentos.ToDictionary(s => s, s => tickets.Count(x => x.Sentimento == s)),
-        ConfiancaMedia = tickets.Count > 0 ? Math.Round(tickets.Average(x => x.Confianca), 2) : 0,
+        Failures = tickets.Count(x => !x.ProcessedOk),
+        ByCategory = Categories.CategoryList.ToDictionary(c => c, c => tickets.Count(x => x.Category == c)),
+        ByPriority = Categories.PriorityList.ToDictionary(p => p, p => tickets.Count(x => x.Priority == p)),
+        ByDepartment = Categories.DepartmentList.ToDictionary(d => d, d => tickets.Count(x => x.Department == d)),
+        BySentiment = Categories.SentimentList.ToDictionary(s => s, s => tickets.Count(x => x.Sentiment == s)),
+        AverageConfidence = tickets.Count > 0 ? Math.Round(tickets.Average(x => x.Confidence), 2) : 0,
     };
 
-    public static BatchResumoDto ToResumo(TicketBatch b, IReadOnlyCollection<Ticket>? tickets = null) => new()
+    public static BatchSummaryDto ToSummary(TicketBatch b, IReadOnlyCollection<Ticket>? tickets = null) => new()
     {
         BatchId = b.Id,
-        NomeArquivo = b.NomeArquivo,
+        FileName = b.FileName,
         Total = b.Total,
-        DataCriacao = b.DataCriacao,
-        Estatisticas = tickets != null ? ToEstatisticas(tickets) : null,
+        CreatedDate = b.CreatedDate,
+        Statistics = tickets != null ? ToStatistics(tickets) : null,
     };
 
-    public static BatchDetalheDto ToDetalhe(TicketBatch b, IReadOnlyCollection<Ticket> tickets, Dictionary<Guid, int>? similaridadeCount = null)
+    public static BatchDetailDto ToDetail(TicketBatch b, IReadOnlyCollection<Ticket> tickets, Dictionary<Guid, int>? similarityCount = null)
     {
         return new()
         {
             BatchId = b.Id,
-            NomeArquivo = b.NomeArquivo,
+            FileName = b.FileName,
             Total = b.Total,
-            DataCriacao = b.DataCriacao,
-            Estatisticas = ToEstatisticas(tickets),
-            Tickets = tickets.Select(t => ToDto(t, similaridadeCount?.GetValueOrDefault(t.Id) ?? 0)).ToList(),
+            CreatedDate = b.CreatedDate,
+            Statistics = ToStatistics(tickets),
+            Tickets = tickets.Select(t => ToDto(t, similarityCount?.GetValueOrDefault(t.Id) ?? 0)).ToList(),
         };
     }
 }

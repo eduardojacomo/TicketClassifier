@@ -4,59 +4,59 @@ public class TicketDto
 {
     public Guid Id { get; set; }
     public string? ExternalId { get; set; }
-    public string? Assunto { get; set; }
-    public string Descricao { get; set; } = string.Empty;
-    public string Categoria { get; set; } = string.Empty;
-    public string Prioridade { get; set; } = string.Empty;
-    public string Departamento { get; set; } = string.Empty;
-    public string Resumo { get; set; } = string.Empty;
-    public double Confianca { get; set; }
-    public string Justificativa { get; set; } = string.Empty;
-    public string Sentimento { get; set; } = "neutral";
+    public string? Subject { get; set; }
+    public string Description { get; set; } = string.Empty;
+    public string Category { get; set; } = string.Empty;
+    public string Priority { get; set; } = string.Empty;
+    public string Department { get; set; } = string.Empty;
+    public string Summary { get; set; } = string.Empty;
+    public double Confidence { get; set; }
+    public string Justification { get; set; } = string.Empty;
+    public string Sentiment { get; set; } = "neutral";
     public string[] Tags { get; set; } = Array.Empty<string>();
-    public bool ProcessadoOk { get; set; }
-    public bool RegistroModificado { get; set; }
-    public DateTime? DataModificacao { get; set; }
-    public int Similares { get; set; }
+    public bool ProcessedOk { get; set; }
+    public bool RecordModified { get; set; }
+    public DateTime? ModifiedDate { get; set; }
+    public int SimilarCount { get; set; }
 }
 
 public class TicketEditDto
 {
-    public string? Categoria { get; set; }
-    public string? Prioridade { get; set; }
-    public string? Departamento { get; set; }
-    public string? Sentimento { get; set; }
+    public string? Category { get; set; }
+    public string? Priority { get; set; }
+    public string? Department { get; set; }
+    public string? Sentiment { get; set; }
     public string[]? Tags { get; set; }
 }
 
-public class EstatisticasDto
+public class StatisticsDto
 {
     public int Total { get; set; }
-    public int Falhas { get; set; }
-    public Dictionary<string, int> PorCategoria { get; set; } = new();
-    public Dictionary<string, int> PorPrioridade { get; set; } = new();
-    public Dictionary<string, int> PorDepartamento { get; set; } = new();
-    public Dictionary<string, int> PorSentimento { get; set; } = new();
-    public double ConfiancaMedia { get; set; }
+    public int Failures { get; set; }
+    public Dictionary<string, int> ByCategory { get; set; } = new();
+    public Dictionary<string, int> ByPriority { get; set; } = new();
+    public Dictionary<string, int> ByDepartment { get; set; } = new();
+    public Dictionary<string, int> BySentiment { get; set; } = new();
+    public double AverageConfidence { get; set; }
 }
 
-/// <summary>Resumo do lote (listagem e retorno do upload).</summary>
-public class BatchResumoDto
+/// <summary>Batch summary (listing and upload return).</summary>
+public class BatchSummaryDto
 {
     public Guid BatchId { get; set; }
-    public string NomeArquivo { get; set; } = string.Empty;
+    public string FileName { get; set; } = string.Empty;
     public int Total { get; set; }
-    public DateTime DataCriacao { get; set; }
-    public EstatisticasDto? Estatisticas { get; set; }
+    public DateTime CreatedDate { get; set; }
+    public StatisticsDto? Statistics { get; set; }
 }
 
-/// <summary>Detalhe do lote: resumo + tickets.</summary>
-public class BatchDetalheDto
+/// <summary>Batch detail: summary + tickets.</summary>
+public class BatchDetailDto
 {
     public Guid BatchId { get; set; }
-    public string NomeArquivo { get; set; } = string.Empty;
+    public string FileName { get; set; } = string.Empty;
     public int Total { get; set; }
-    public DateTime DataCriacao { get; set; }
-    public EstatisticasDto Estatisticas { get; set; } = new();
+    public DateTime CreatedDate { get; set; }
+    public StatisticsDto Statistics { get; set; } = new();
     public List<TicketDto> Tickets { get; set; } = new();
 }

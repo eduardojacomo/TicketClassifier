@@ -3,16 +3,16 @@ using TicketClassifier.Api.Prompts;
 namespace TicketClassifier.Api.Gateways.Interface;
 
 /// <summary>
-/// Estratégia de classificação. Trabalha em LOTE — vários tickets por chamada —
-/// para reduzir drasticamente o número de requisições ao provedor.
+/// Classification strategy. Works in BATCHES — several tickets per call —
+/// to drastically reduce the number of requests to the provider.
 /// </summary>
-public interface IClassificacaoGateway
+public interface IClassificationGateway
 {
-    string Nome { get; }
+    string Name { get; }
 
-    /// <summary>Classifica um lote; retorna os resultados na MESMA ordem da entrada.</summary>
-    Task<IReadOnlyList<ClassificacaoResultado>> ClassificarLoteAsync(
-        IReadOnlyList<TicketParaClassificar> itens, ClassificacaoPromptBuilder promptBuilder,
+    /// <summary>Classifies a batch; returns the results in the SAME order as the input.</summary>
+    Task<IReadOnlyList<ClassificationResult>> ClassifyBatchAsync(
+        IReadOnlyList<TicketToClassify> items, ClassificationPromptBuilder promptBuilder,
         CancellationToken ct = default,
-        int loteAtual = 1, int totalLotes = 1, int totalTickets = 0);
+        int currentBatch = 1, int totalBatches = 1, int totalTickets = 0);
 }

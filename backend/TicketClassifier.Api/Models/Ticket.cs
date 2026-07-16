@@ -1,28 +1,28 @@
 namespace TicketClassifier.Api.Models;
 
-/// <summary>Um ticket individual, com a classificação da IA.</summary>
+/// <summary>An individual ticket, with the AI classification.</summary>
 public class Ticket
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public Guid BatchId { get; set; }
 
     public string? ExternalId { get; set; }
-    public string? Assunto { get; set; }
-    public string Descricao { get; set; } = string.Empty;
+    public string? Subject { get; set; }
+    public string Description { get; set; } = string.Empty;
 
-    // Resultado da classificação
-    public string Categoria { get; set; } = "Other";
-    public string Prioridade { get; set; } = "Medium";
-    public string Departamento { get; set; } = "Support";
-    public string Resumo { get; set; } = string.Empty;
-    public double Confianca { get; set; }
-    public string Justificativa { get; set; } = string.Empty;
-    public string Sentimento { get; set; } = "neutral";
+    // Classification result
+    public string Category { get; set; } = "Other";
+    public string Priority { get; set; } = "Medium";
+    public string Department { get; set; } = "Support";
+    public string Summary { get; set; } = string.Empty;
+    public double Confidence { get; set; }
+    public string Justification { get; set; } = string.Empty;
+    public string Sentiment { get; set; } = "neutral";
     public string Tags { get; set; } = "[]";
 
-    /// <summary>False quando a classificação falhou (caiu no fallback) — permite reprocessar.</summary>
-    public bool ProcessadoOk { get; set; } = true;
+    /// <summary>False when classification failed (fell back to default) — allows reprocessing.</summary>
+    public bool ProcessedOk { get; set; } = true;
 
-    public bool RegistroModificado { get; set; }
-    public DateTime? DataModificacao { get; set; }
+    public bool RecordModified { get; set; }
+    public DateTime? ModifiedDate { get; set; }
 }

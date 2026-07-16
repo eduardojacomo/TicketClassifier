@@ -16,28 +16,28 @@ public class CsvServiceTests
     // ── Valid files ─────────────────────────────────────────────────
 
     [Fact]
-    public void Parse_CsvValido_RetornaTickets()
+    public void Parse_ValidCsv_ReturnsTickets()
     {
         var csv = "subject,description\nLogin error,Cannot access my account\nPayment,Duplicate billing";
         var result = _sut.Parse(ToStream(csv));
 
         Assert.Equal(2, result.Count);
-        Assert.Equal("Login error", result[0].Assunto);
-        Assert.Equal("Cannot access my account", result[0].Descricao);
+        Assert.Equal("Login error", result[0].Subject);
+        Assert.Equal("Cannot access my account", result[0].Description);
     }
 
     [Fact]
-    public void Parse_CsvComPontoEVirgula_RetornaTickets()
+    public void Parse_CsvWithSemicolon_ReturnsTickets()
     {
         var csv = "subject;description\nError;System issue\nBug;Broken screen";
         var result = _sut.Parse(ToStream(csv));
 
         Assert.Equal(2, result.Count);
-        Assert.Equal("Error", result[0].Assunto);
+        Assert.Equal("Error", result[0].Subject);
     }
 
     [Fact]
-    public void Parse_CsvComTab_RetornaTickets()
+    public void Parse_CsvWithTab_ReturnsTickets()
     {
         var csv = "subject\tdescription\nError\tSystem issue";
         var result = _sut.Parse(ToStream(csv));
@@ -46,7 +46,7 @@ public class CsvServiceTests
     }
 
     [Fact]
-    public void Parse_CsvComId_PreservaExternalId()
+    public void Parse_CsvWithId_PreservesExternalId()
     {
         var csv = "id,subject,description\nTK-001,Error,Issue";
         var result = _sut.Parse(ToStream(csv));
@@ -56,86 +56,86 @@ public class CsvServiceTests
     }
 
     [Fact]
-    public void Parse_HeadersAlternativos_Reconhece()
+    public void Parse_AlternativeHeaders_Recognizes()
     {
         var csv = "titulo,body\nLogin error,Cannot access";
         var result = _sut.Parse(ToStream(csv));
 
         Assert.Single(result);
-        Assert.Equal("Login error", result[0].Assunto);
-        Assert.Equal("Cannot access", result[0].Descricao);
+        Assert.Equal("Login error", result[0].Subject);
+        Assert.Equal("Cannot access", result[0].Description);
     }
 
     [Fact]
-    public void Parse_HeaderDescription_Reconhece()
+    public void Parse_DescriptionHeader_Recognizes()
     {
         var csv = "description\nSystem issue";
         var result = _sut.Parse(ToStream(csv));
 
         Assert.Single(result);
-        Assert.Equal("System issue", result[0].Descricao);
+        Assert.Equal("System issue", result[0].Description);
     }
 
     [Fact]
-    public void Parse_SemColunaReconhecida_UsaFallbackConcatenado()
+    public void Parse_NoRecognizedColumn_UsesConcatenatedFallback()
     {
         var csv = "campo1,campo2\nvalue1,value2";
         var result = _sut.Parse(ToStream(csv));
 
         Assert.Single(result);
-        Assert.Contains("value1", result[0].Descricao);
-        Assert.Contains("value2", result[0].Descricao);
+        Assert.Contains("value1", result[0].Description);
+        Assert.Contains("value2", result[0].Description);
     }
 
     // ── Special characters and encoding ──────────────────────────────
 
     [Fact]
-    public void Parse_CaracteresEspeciais_MantemConteudo()
+    public void Parse_SpecialCharacters_KeepsContent()
     {
         var csv = "subject,description\n\"Error: login & password\",\"User cannot <access> the 'system'\"";
         var result = _sut.Parse(ToStream(csv));
 
         Assert.Single(result);
-        Assert.Equal("Error: login & password", result[0].Assunto);
-        Assert.Contains("<access>", result[0].Descricao);
+        Assert.Equal("Error: login & password", result[0].Subject);
+        Assert.Contains("<access>", result[0].Description);
     }
 
     [Fact]
-    public void Parse_Acentuacao_MantemConteudo()
+    public void Parse_Accents_KeepsContent()
     {
         var csv = "subject,description\nção,Não está funcionando à noite — ñ";
         var result = _sut.Parse(ToStream(csv));
 
         Assert.Single(result);
-        Assert.Contains("Não está funcionando", result[0].Descricao);
+        Assert.Contains("Não está funcionando", result[0].Description);
     }
 
     [Fact]
-    public void Parse_Emoji_MantemConteudo()
+    public void Parse_Emoji_KeepsContent()
     {
         var csv = "subject,description\nIssue 🐛,Critical error 💥 in the system";
         var result = _sut.Parse(ToStream(csv));
 
         Assert.Single(result);
-        Assert.Contains("🐛", result[0].Assunto);
-        Assert.Contains("💥", result[0].Descricao);
+        Assert.Contains("🐛", result[0].Subject);
+        Assert.Contains("💥", result[0].Description);
     }
 
     [Fact]
-    public void Parse_Utf8ComBom_FuncionaCorreto()
+    public void Parse_Utf8WithBom_WorksCorrectly()
     {
         var bom = new byte[] { 0xEF, 0xBB, 0xBF };
-        var conteudo = Encoding.UTF8.GetBytes("subject,description\nError,Issue");
-        var bytes = bom.Concat(conteudo).ToArray();
+        var content = Encoding.UTF8.GetBytes("subject,description\nError,Issue");
+        var bytes = bom.Concat(content).ToArray();
 
         var result = _sut.Parse(new MemoryStream(bytes));
 
         Assert.Single(result);
-        Assert.Equal("Error", result[0].Assunto);
+        Assert.Equal("Error", result[0].Subject);
     }
 
     [Fact]
-    public void Parse_Latin1_FuncionaCorreto()
+    public void Parse_Latin1_WorksCorrectly()
     {
         var latin1 = Encoding.Latin1;
         var csv = "subject,description\nInstallation,Not working";
@@ -147,12 +147,12 @@ public class CsvServiceTests
     }
 
     [Fact]
-    public void Parse_Utf16Le_FuncionaCorreto()
+    public void Parse_Utf16Le_WorksCorrectly()
     {
         var csv = "subject,description\nError,System issue";
         var bom = new byte[] { 0xFF, 0xFE };
-        var conteudo = Encoding.Unicode.GetBytes(csv);
-        var bytes = bom.Concat(conteudo).ToArray();
+        var content = Encoding.Unicode.GetBytes(csv);
+        var bytes = bom.Concat(content).ToArray();
 
         var result = _sut.Parse(new MemoryStream(bytes));
 
@@ -162,31 +162,31 @@ public class CsvServiceTests
     // ── Quoted fields and multiline ───────────────────────────────
 
     [Fact]
-    public void Parse_CampoComAspas_ParseiaCorreto()
+    public void Parse_FieldWithQuotes_ParsesCorrectly()
     {
         var csv = "subject,description\n\"Critical, error\",\"Line 1\nLine 2\"";
         var result = _sut.Parse(ToStream(csv));
 
         Assert.Single(result);
-        Assert.Equal("Critical, error", result[0].Assunto);
-        Assert.Contains("Line 1", result[0].Descricao);
-        Assert.Contains("Line 2", result[0].Descricao);
+        Assert.Equal("Critical, error", result[0].Subject);
+        Assert.Contains("Line 1", result[0].Description);
+        Assert.Contains("Line 2", result[0].Description);
     }
 
     [Fact]
-    public void Parse_CampoComAspasInternas_ParseiaCorreto()
+    public void Parse_FieldWithInternalQuotes_ParsesCorrectly()
     {
         var csv = "subject,description\n\"Error with \"\"quotes\"\"\",Issue";
         var result = _sut.Parse(ToStream(csv));
 
         Assert.Single(result);
-        Assert.Contains("quotes", result[0].Assunto);
+        Assert.Contains("quotes", result[0].Subject);
     }
 
     // ── Invalid and empty lines ────────────────────────────────────
 
     [Fact]
-    public void Parse_LinhasVazias_SaoIgnoradas()
+    public void Parse_EmptyLines_AreIgnored()
     {
         var csv = "subject,description\nError,Issue\n\n  \n\nBug,Another issue";
         var result = _sut.Parse(ToStream(csv));
@@ -195,7 +195,7 @@ public class CsvServiceTests
     }
 
     [Fact]
-    public void Parse_LinhasSemConteudoUtil_SaoIgnoradas()
+    public void Parse_LinesWithoutUsefulContent_AreIgnored()
     {
         var csv = "subject,description\n,\n , ";
         var result = _sut.Parse(ToStream(csv));
@@ -204,7 +204,7 @@ public class CsvServiceTests
     }
 
     [Fact]
-    public void Parse_MisturaLinhasBoasERuins_RetornaApenasBoas()
+    public void Parse_MixOfGoodAndBadLines_ReturnsOnlyGood()
     {
         var csv = "subject,description\nError,Issue\n,\nBug,Failure\n , ";
         var result = _sut.Parse(ToStream(csv));
@@ -215,166 +215,166 @@ public class CsvServiceTests
     // ── Format validations ────────────────────────────────────────
 
     [Fact]
-    public void Parse_ArquivoVazio_LancaExcecao()
+    public void Parse_EmptyFile_ThrowsException()
     {
         var ex = Assert.Throws<CsvValidationException>(() => _sut.Parse(new MemoryStream()));
-        Assert.Equal("ARQUIVO_VAZIO", ex.Codigo);
+        Assert.Equal("ARQUIVO_VAZIO", ex.Code);
     }
 
     [Fact]
-    public void Parse_StreamNull_LancaExcecao()
+    public void Parse_NullStream_ThrowsException()
     {
         Assert.Throws<CsvValidationException>(() => _sut.Parse(null!));
     }
 
     [Fact]
-    public void Parse_ArquivoBinario_LancaExcecao()
+    public void Parse_BinaryFile_ThrowsException()
     {
         var bytes = new byte[500];
         Array.Fill(bytes, (byte)0x00);
         bytes[0] = 0x50; // some non-null byte
 
         var ex = Assert.Throws<CsvValidationException>(() => _sut.Parse(new MemoryStream(bytes)));
-        Assert.Equal("ARQUIVO_BINARIO", ex.Codigo);
+        Assert.Equal("ARQUIVO_BINARIO", ex.Code);
     }
 
     [Fact]
-    public void Parse_ArquivoJson_LancaExcecao()
+    public void Parse_JsonFile_ThrowsException()
     {
         var json = "[{\"subject\":\"test\"}]";
         var ex = Assert.Throws<CsvValidationException>(() => _sut.Parse(ToStream(json)));
-        Assert.Equal("FORMATO_JSON", ex.Codigo);
+        Assert.Equal("FORMATO_JSON", ex.Code);
     }
 
     [Fact]
-    public void Parse_ArquivoJsonObjeto_LancaExcecao()
+    public void Parse_JsonObjectFile_ThrowsException()
     {
         var json = "{\"data\":[{\"subject\":\"test\"}]}";
         var ex = Assert.Throws<CsvValidationException>(() => _sut.Parse(ToStream(json)));
-        Assert.Equal("FORMATO_JSON", ex.Codigo);
+        Assert.Equal("FORMATO_JSON", ex.Code);
     }
 
     [Fact]
-    public void Parse_ArquivoXml_LancaExcecao()
+    public void Parse_XmlFile_ThrowsException()
     {
         var xml = "<?xml version=\"1.0\"?><data></data>";
         var ex = Assert.Throws<CsvValidationException>(() => _sut.Parse(ToStream(xml)));
-        Assert.Equal("FORMATO_XML_HTML", ex.Codigo);
+        Assert.Equal("FORMATO_XML_HTML", ex.Code);
     }
 
     [Fact]
-    public void Parse_ArquivoHtml_LancaExcecao()
+    public void Parse_HtmlFile_ThrowsException()
     {
         var html = "<html><body>test</body></html>";
         var ex = Assert.Throws<CsvValidationException>(() => _sut.Parse(ToStream(html)));
-        Assert.Equal("FORMATO_XML_HTML", ex.Codigo);
+        Assert.Equal("FORMATO_XML_HTML", ex.Code);
     }
 
     [Fact]
-    public void Parse_ArquivoPdf_LancaExcecao()
+    public void Parse_PdfFile_ThrowsException()
     {
         var pdf = "%PDF-1.4 fake content";
         var ex = Assert.Throws<CsvValidationException>(() => _sut.Parse(ToStream(pdf)));
-        Assert.Equal("FORMATO_PDF", ex.Codigo);
+        Assert.Equal("FORMATO_PDF", ex.Code);
     }
 
     // ── Limit validations ─────────────────────────────────────────
 
     [Fact]
-    public void Parse_CampoMuitoGrande_Trunca()
+    public void Parse_FieldTooLarge_Truncates()
     {
-        var description = new string('A', CsvService.MaxTamanhoCampo + 1000);
+        var description = new string('A', CsvService.MaxFieldSize + 1000);
         var csv = $"description\n{description}";
 
         var result = _sut.Parse(ToStream(csv));
 
         Assert.Single(result);
-        Assert.Equal(CsvService.MaxTamanhoCampo, result[0].Descricao.Length);
+        Assert.Equal(CsvService.MaxFieldSize, result[0].Description.Length);
     }
 
     [Fact]
-    public void Parse_ExcessoColunas_LancaExcecao()
+    public void Parse_TooManyColumns_ThrowsException()
     {
-        var headers = string.Join(",", Enumerable.Range(0, CsvService.MaxColunas + 1).Select(i => $"col{i}"));
-        var values = string.Join(",", Enumerable.Range(0, CsvService.MaxColunas + 1).Select(i => $"val{i}"));
+        var headers = string.Join(",", Enumerable.Range(0, CsvService.MaxColumns + 1).Select(i => $"col{i}"));
+        var values = string.Join(",", Enumerable.Range(0, CsvService.MaxColumns + 1).Select(i => $"val{i}"));
         var csv = $"{headers}\n{values}";
 
         var ex = Assert.Throws<CsvValidationException>(() => _sut.Parse(ToStream(csv)));
-        Assert.Equal("EXCESSO_COLUNAS", ex.Codigo);
+        Assert.Equal("EXCESSO_COLUNAS", ex.Code);
     }
 
     // ── Internal methods ─────────────────────────────────────────
 
     [Fact]
-    public void ValidarConteudoBinario_TextoNormal_NaoLanca()
+    public void ValidateBinaryContent_NormalText_DoesNotThrow()
     {
         var bytes = Encoding.UTF8.GetBytes("subject,description\nError,Issue");
-        CsvService.ValidarConteudoBinario(bytes);
+        CsvService.ValidateBinaryContent(bytes);
     }
 
     [Fact]
-    public void ValidarConteudoBinario_MuitosNulos_Lanca()
+    public void ValidateBinaryContent_TooManyNulls_Throws()
     {
         var bytes = new byte[200];
         Array.Fill(bytes, (byte)0x00);
 
-        Assert.Throws<CsvValidationException>(() => CsvService.ValidarConteudoBinario(bytes));
+        Assert.Throws<CsvValidationException>(() => CsvService.ValidateBinaryContent(bytes));
     }
 
     [Fact]
-    public void DecodificarTexto_Utf8SemBom_Funciona()
+    public void DecodeText_Utf8WithoutBom_Works()
     {
         var bytes = Encoding.UTF8.GetBytes("test accentuation");
-        var result = CsvService.DecodificarTexto(bytes);
+        var result = CsvService.DecodeText(bytes);
         Assert.Contains("accentuation", result);
     }
 
     [Fact]
-    public void DecodificarTexto_Latin1_FallbackFunciona()
+    public void DecodeText_Latin1_FallbackWorks()
     {
         var bytes = Encoding.Latin1.GetBytes("café résumé");
-        var result = CsvService.DecodificarTexto(bytes);
+        var result = CsvService.DecodeText(bytes);
         Assert.Contains("caf", result);
     }
 
     [Fact]
-    public void ValidarConteudoTexto_TextoNormal_NaoLanca()
+    public void ValidateTextContent_NormalText_DoesNotThrow()
     {
-        CsvService.ValidarConteudoTexto("subject,description\nError,Issue");
+        CsvService.ValidateTextContent("subject,description\nError,Issue");
     }
 
     [Fact]
-    public void ValidarConteudoTexto_Vazio_Lanca()
+    public void ValidateTextContent_Empty_Throws()
     {
-        Assert.Throws<CsvValidationException>(() => CsvService.ValidarConteudoTexto("   "));
+        Assert.Throws<CsvValidationException>(() => CsvService.ValidateTextContent("   "));
     }
 
     [Fact]
-    public void LimparTexto_RemoveCaracteresInvisiveis()
+    public void CleanText_RemovesInvisibleCharacters()
     {
         var text = "﻿subject​";
-        var result = CsvService.LimparTexto(text);
+        var result = CsvService.CleanText(text);
         Assert.Equal("subject", result);
     }
 
     [Fact]
-    public void LimparCampo_RemoveNulos()
+    public void CleanField_RemovesNulls()
     {
         var field = "text\0with\0nulls";
-        var result = CsvService.LimparCampo(field);
+        var result = CsvService.CleanField(field);
         Assert.Equal("textwithnulls", result);
     }
 
     [Fact]
-    public void LimparCampo_Null_RetornaNull()
+    public void CleanField_Null_ReturnsNull()
     {
-        Assert.Null(CsvService.LimparCampo(null));
+        Assert.Null(CsvService.CleanField(null));
     }
 
     // ── Edge cases ───────────────────────────────────────────────
 
     [Fact]
-    public void Parse_ApenasCabecalhoSemDados_RetornaListaVazia()
+    public void Parse_HeaderOnlyNoData_ReturnsEmptyList()
     {
         var csv = "subject,description";
         var result = _sut.Parse(ToStream(csv));
@@ -382,7 +382,7 @@ public class CsvServiceTests
     }
 
     [Fact]
-    public void Parse_CabecalhoComEspacos_FuncionaCorreto()
+    public void Parse_HeaderWithSpaces_WorksCorrectly()
     {
         var csv = " subject , description \nError,Issue";
         var result = _sut.Parse(ToStream(csv));
@@ -391,7 +391,7 @@ public class CsvServiceTests
     }
 
     [Fact]
-    public void Parse_WindowsLineEndings_FuncionaCorreto()
+    public void Parse_WindowsLineEndings_WorksCorrectly()
     {
         var csv = "subject,description\r\nError,Issue\r\nBug,Failure";
         var result = _sut.Parse(ToStream(csv));
@@ -400,7 +400,7 @@ public class CsvServiceTests
     }
 
     [Fact]
-    public void Parse_GrandeQuantidadeDeLinhas_Funciona()
+    public void Parse_LargeNumberOfLines_Works()
     {
         var sb = new StringBuilder("subject,description\n");
         for (var i = 0; i < 1000; i++)
@@ -411,18 +411,18 @@ public class CsvServiceTests
     }
 
     [Fact]
-    public void Parse_CamposComQuebraDeLinha_MantemConteudo()
+    public void Parse_FieldsWithLineBreaks_KeepContent()
     {
         var csv = "subject,description\n\"Error\",\"Line 1\nLine 2\nLine 3\"";
         var result = _sut.Parse(ToStream(csv));
 
         Assert.Single(result);
-        Assert.Contains("Line 1", result[0].Descricao);
-        Assert.Contains("Line 3", result[0].Descricao);
+        Assert.Contains("Line 1", result[0].Description);
+        Assert.Contains("Line 3", result[0].Description);
     }
 
     [Fact]
-    public void Parse_CaracteresDeControle_SaoTratados()
+    public void Parse_ControlCharacters_AreHandled()
     {
         var csv = "subject,description\nError\x01\x02,Issue\x03";
         var result = _sut.Parse(ToStream(csv));

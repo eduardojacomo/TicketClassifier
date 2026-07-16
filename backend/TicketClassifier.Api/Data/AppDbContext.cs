@@ -10,8 +10,8 @@ public class AppDbContext : DbContext
 
     public DbSet<TicketBatch> Batches => Set<TicketBatch>();
     public DbSet<Ticket> Tickets => Set<Ticket>();
-    public DbSet<TicketSimilaridade> Similaridades => Set<TicketSimilaridade>();
-    public DbSet<ParametroClassificacao> ParametrosClassificacao => Set<ParametroClassificacao>();
+    public DbSet<TicketSimilarity> Similarities => Set<TicketSimilarity>();
+    public DbSet<ClassificationParameter> ClassificationParameters => Set<ClassificationParameter>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

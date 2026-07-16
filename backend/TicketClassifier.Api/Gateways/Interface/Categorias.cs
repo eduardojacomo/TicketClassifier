@@ -4,33 +4,33 @@ using System.Text.Json;
 namespace TicketClassifier.Api.Gateways.Interface;
 
 /// <summary>
-/// Domínio da classificação: valores permitidos (enums), validação tolerante
-/// (sem acento), resultado de fallback e parse da resposta do LLM (array JSON).
+/// Classification domain: allowed values (enums), tolerant validation
+/// (accent-insensitive), fallback result, and parsing of the LLM response (JSON array).
 /// </summary>
-public static class Categorias
+public static class Categories
 {
-    public static readonly string[] Lista =
+    public static readonly string[] CategoryList =
         { "Question", "Bug", "Complaint", "Login", "Payment", "Financial", "Performance", "Integration", "Registration", "Sales", "Suggestion", "Praise", "Other" };
 
-    public static readonly string[] Prioridades =
+    public static readonly string[] PriorityList =
         { "Low", "Medium", "High", "Critical" };
 
-    public static readonly string[] Departamentos =
+    public static readonly string[] DepartmentList =
         { "Support", "Financial", "Sales", "Product", "Development" };
 
-    public static readonly string[] Sentimentos =
+    public static readonly string[] SentimentList =
         { "positive", "negative", "neutral" };
 
-    public static readonly ClassificacaoResultado Fallback =
+    public static readonly ClassificationResult Fallback =
         new("Other", "Medium", "Support", "", 0.0, "Not classified.", "neutral", Array.Empty<string>());
 
-    public static ClassificacaoResultado FallbackComErro(string erro) =>
-        new("Other", "Medium", "Support", "", 0.0, erro, "neutral", Array.Empty<string>());
+    public static ClassificationResult FallbackWithError(string error) =>
+        new("Other", "Medium", "Support", "", 0.0, error, "neutral", Array.Empty<string>());
 
-    public static bool EhFallback(ClassificacaoResultado r) =>
-        r.Confianca == 0.0 && r.Categoria == "Other" && r.Departamento == "Support" && string.IsNullOrEmpty(r.Resumo);
+    public static bool IsFallback(ClassificationResult r) =>
+        r.Confidence == 0.0 && r.Category == "Other" && r.Department == "Support" && string.IsNullOrEmpty(r.Summary);
 
-    private static string Normalizar(string? s)
+    private static string Normalize(string? s)
     {
         if (string.IsNullOrWhiteSpace(s)) return "";
         var d = s.Trim().ToLowerInvariant().Normalize(NormalizationForm.FormD);
@@ -41,109 +41,109 @@ public static class Categorias
         return sb.ToString();
     }
 
-    private static string CasarOu(string[] valores, string? valor, string padrao)
-        => valores.FirstOrDefault(x => Normalizar(x) == Normalizar(valor)) ?? padrao;
+    private static string MatchOr(string[] values, string? value, string fallback)
+        => values.FirstOrDefault(x => Normalize(x) == Normalize(value)) ?? fallback;
 
-    public static string CategoriaValida(string? c)    => CasarOu(Lista, c, "Other");
-    public static string PrioridadeValida(string? p)   => CasarOu(Prioridades, p, "Medium");
-    public static string DepartamentoValido(string? d) => CasarOu(Departamentos, d, "Support");
-    public static string SentimentoValido(string? s) => CasarOu(Sentimentos, s, "neutral");
+    public static string ValidCategory(string? c)    => MatchOr(CategoryList, c, "Other");
+    public static string ValidPriority(string? p)    => MatchOr(PriorityList, p, "Medium");
+    public static string ValidDepartment(string? d)  => MatchOr(DepartmentList, d, "Support");
+    public static string ValidSentiment(string? s)   => MatchOr(SentimentList, s, "neutral");
 
-    private static string LimparMarkdown(string texto)
+    private static string CleanMarkdown(string text)
     {
-        var limpo = texto.Trim();
-        if (limpo.StartsWith("```"))
+        var cleaned = text.Trim();
+        if (cleaned.StartsWith("```"))
         {
-            var fimPrimeiraLinha = limpo.IndexOf('\n');
-            if (fimPrimeiraLinha > 0)
-                limpo = limpo[(fimPrimeiraLinha + 1)..];
+            var firstLineEnd = cleaned.IndexOf('\n');
+            if (firstLineEnd > 0)
+                cleaned = cleaned[(firstLineEnd + 1)..];
         }
-        if (limpo.EndsWith("```"))
-            limpo = limpo[..^3];
-        return limpo.Trim();
+        if (cleaned.EndsWith("```"))
+            cleaned = cleaned[..^3];
+        return cleaned.Trim();
     }
 
-    private static string ExtrairJson(string texto)
+    private static string ExtractJson(string text)
     {
-        var limpo = LimparMarkdown(texto);
+        var cleaned = CleanMarkdown(text);
 
-        var iArr = limpo.IndexOf('[');
-        var iObj = limpo.IndexOf('{');
+        var arrayStart = cleaned.IndexOf('[');
+        var objStart = cleaned.IndexOf('{');
 
-        // Se '[' vem antes de '{', é um array externo
-        if (iArr >= 0 && (iObj < 0 || iArr < iObj))
+        // If '[' comes before '{', it's an outer array
+        if (arrayStart >= 0 && (objStart < 0 || arrayStart < objStart))
         {
-            var jArr = limpo.LastIndexOf(']');
-            if (jArr > iArr)
-                return limpo[iArr..(jArr + 1)];
+            var arrayEnd = cleaned.LastIndexOf(']');
+            if (arrayEnd > arrayStart)
+                return cleaned[arrayStart..(arrayEnd + 1)];
         }
 
-        // Objeto único — envolver em array
-        if (iObj >= 0)
+        // Single object — wrap in array
+        if (objStart >= 0)
         {
-            var jObj = limpo.LastIndexOf('}');
-            if (jObj > iObj)
-                return "[" + limpo[iObj..(jObj + 1)] + "]";
+            var objEnd = cleaned.LastIndexOf('}');
+            if (objEnd > objStart)
+                return "[" + cleaned[objStart..(objEnd + 1)] + "]";
         }
 
         return "[]";
     }
 
-    /// <summary>Converte a resposta (array JSON) em dicionário indice → resultado.</summary>
-    public static Dictionary<int, ClassificacaoResultado> ParseLote(string textoModelo)
+    /// <summary>Converts the response (JSON array) into a dictionary of index → result.</summary>
+    public static Dictionary<int, ClassificationResult> ParseBatch(string modelText)
     {
-        var json = ExtrairJson(textoModelo);
+        var json = ExtractJson(modelText);
 
         using var doc = JsonDocument.Parse(json);
         if (doc.RootElement.ValueKind != JsonValueKind.Array)
-            return new Dictionary<int, ClassificacaoResultado>();
+            return new Dictionary<int, ClassificationResult>();
 
-        return ParseItens(doc.RootElement);
+        return ParseItems(doc.RootElement);
     }
 
     /// <summary>
-    /// Parse com fallback: tenta primeiro por índice explícito. Se nenhum
-    /// índice bater com os esperados, remapeia pela ordem posicional.
+    /// Parse with fallback: first tries by explicit index. If no
+    /// index matches the expected ones, remaps by positional order.
     /// </summary>
-    public static Dictionary<int, ClassificacaoResultado> ParseLoteComFallback(
-        string textoModelo, IReadOnlyList<int> indicesEsperados)
+    public static Dictionary<int, ClassificationResult> ParseBatchWithFallback(
+        string modelText, IReadOnlyList<int> expectedIndices)
     {
-        var json = ExtrairJson(textoModelo);
+        var json = ExtractJson(modelText);
 
         using var doc = JsonDocument.Parse(json);
         if (doc.RootElement.ValueKind != JsonValueKind.Array)
-            return new Dictionary<int, ClassificacaoResultado>();
+            return new Dictionary<int, ClassificationResult>();
 
-        var porIndice = ParseItens(doc.RootElement);
+        var byIndex = ParseItems(doc.RootElement);
 
-        var encontrados = indicesEsperados.Count(idx => porIndice.ContainsKey(idx));
-        if (encontrados > 0) return porIndice;
+        var foundCount = expectedIndices.Count(idx => byIndex.ContainsKey(idx));
+        if (foundCount > 0) return byIndex;
 
-        var elementos = doc.RootElement.EnumerateArray().ToList();
-        var resultado = new Dictionary<int, ClassificacaoResultado>();
-        for (var pos = 0; pos < Math.Min(elementos.Count, indicesEsperados.Count); pos++)
+        var elements = doc.RootElement.EnumerateArray().ToList();
+        var result = new Dictionary<int, ClassificationResult>();
+        for (var pos = 0; pos < Math.Min(elements.Count, expectedIndices.Count); pos++)
         {
-            var r = ParseElemento(elementos[pos]);
+            var r = ParseElement(elements[pos]);
             if (r is not null)
-                resultado[indicesEsperados[pos]] = r;
+                result[expectedIndices[pos]] = r;
         }
-        return resultado;
+        return result;
     }
 
-    private static Dictionary<int, ClassificacaoResultado> ParseItens(JsonElement array)
+    private static Dictionary<int, ClassificationResult> ParseItems(JsonElement array)
     {
-        var resultado = new Dictionary<int, ClassificacaoResultado>();
+        var result = new Dictionary<int, ClassificationResult>();
         foreach (var el in array.EnumerateArray())
         {
             if (!el.TryGetProperty("indice", out var idxEl) || !idxEl.TryGetInt32(out var idx))
                 continue;
-            var r = ParseElemento(el);
-            if (r is not null) resultado[idx] = r;
+            var r = ParseElement(el);
+            if (r is not null) result[idx] = r;
         }
-        return resultado;
+        return result;
     }
 
-    private static ClassificacaoResultado? ParseElemento(JsonElement el)
+    private static ClassificationResult? ParseElement(JsonElement el)
     {
         string? S(string p) => el.TryGetProperty(p, out var v) && v.ValueKind == JsonValueKind.String ? v.GetString() : null;
         double D(string p) => el.TryGetProperty(p, out var v) && v.TryGetDouble(out var d) ? d : 0.8;
@@ -157,14 +157,14 @@ public static class Categorias
                 .Distinct()
                 .ToArray();
 
-        return new ClassificacaoResultado(
-            CategoriaValida(S("categoria")),
-            PrioridadeValida(S("prioridade")),
-            DepartamentoValido(S("departamento")),
+        return new ClassificationResult(
+            ValidCategory(S("categoria")),
+            ValidPriority(S("prioridade")),
+            ValidDepartment(S("departamento")),
             S("resumo") ?? "",
             Math.Clamp(D("confianca"), 0, 1),
             S("justificativa") ?? "",
-            SentimentoValido(S("sentimento")),
+            ValidSentiment(S("sentimento")),
             tags);
     }
 }

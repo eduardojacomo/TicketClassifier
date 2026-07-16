@@ -1,10 +1,10 @@
 namespace TicketClassifier.Api.Models;
 
-public class TicketSimilaridade
+public class TicketSimilarity
 {
     public Guid Id { get; set; } = Guid.NewGuid();
-    public Guid TicketOrigemId { get; set; }
-    public Guid TicketRelacionadoId { get; set; }
-    public string TagsCompartilhadas { get; set; } = "[]";
-    public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
+    public Guid SourceTicketId { get; set; }
+    public Guid RelatedTicketId { get; set; }
+    public string SharedTags { get; set; } = "[]";
+    public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 }

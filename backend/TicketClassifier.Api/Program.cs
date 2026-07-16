@@ -20,31 +20,31 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(o =>
     o.UseNpgsql(builder.Configuration.GetConnectionString("DataBase")));
 
-// ── Camadas: Repositório → Serviço ───────────────────────────────────────────
+// ── Layers: Repository → Service ─────────────────────────────────────────────
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 builder.Services.AddScoped<ITicketService, TicketService>();
 builder.Services.AddScoped<CsvService>();
-builder.Services.AddSingleton<IProgressoStore, ProgressoStore>();
+builder.Services.AddSingleton<IProgressStore, ProgressStore>();
 
-// ── Gateways de classificação (estratégias) + Factory ───────────────────────
+// ── Classification gateways (strategies) + Factory ───────────────────────────
 builder.Services.AddHttpClient<AnthropicGateway>(c => c.Timeout = TimeSpan.FromSeconds(60));
 builder.Services.AddHttpClient<GeminiGateway>(c => c.Timeout = TimeSpan.FromSeconds(60));
 builder.Services.AddHttpClient<LlamaGateway>(c => c.Timeout = TimeSpan.FromMinutes(10));
-builder.Services.AddScoped<IClassificacaoGatewayFactory, ClassificacaoGatewayFactory>();
+builder.Services.AddScoped<IClassificationGatewayFactory, ClassificationGatewayFactory>();
 
 var app = builder.Build();
 
-// Diagnóstico: mostra o que a configuração REALMENTE carregou (mascarado).
+// Diagnostics: shows what the configuration ACTUALLY loaded (masked).
 var geminiKey = app.Configuration["Llm:Gemini:ApiKey"] ?? "";
-var mascarada = geminiKey.Length <= 8 ? geminiKey : $"{geminiKey[..4]}…{geminiKey[^4..]}";
+var maskedKey = geminiKey.Length <= 8 ? geminiKey : $"{geminiKey[..4]}…{geminiKey[^4..]}";
 app.Logger.LogInformation(
-    "Startup: ambiente={Env} | Llm:Provider={Provider} | GeminiKey(len={Len})='{Key}'",
+    "Startup: environment={Env} | Llm:Provider={Provider} | GeminiKey(len={Len})='{Key}'",
     app.Environment.EnvironmentName,
     app.Configuration["Llm:Provider"],
     geminiKey.Length,
-    string.IsNullOrEmpty(geminiKey) ? "(empty)" : mascarada);
+    string.IsNullOrEmpty(geminiKey) ? "(empty)" : maskedKey);
 
-// Aplica migrations pendentes no startup (aguarda o Postgres subir).
+// Applies pending migrations at startup (waits for Postgres to come up).
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
@@ -52,14 +52,14 @@ using (var scope = app.Services.CreateScope())
     {
         try
         {
-            // Se o banco já existe (criado pelo EnsureCreated antigo) mas não tem
-            // a tabela de histórico, marca a InitialCreate como já aplicada.
-            var pendentes = db.Database.GetPendingMigrations().ToList();
-            if (pendentes.Contains("20260714210202_InitialCreate"))
+            // If the database already exists (created by the old EnsureCreated) but doesn't have
+            // the history table, mark InitialCreate as already applied.
+            var pendingMigrations = db.Database.GetPendingMigrations().ToList();
+            if (pendingMigrations.Contains("20260714210202_InitialCreate"))
             {
-                var tabelas = db.Database.SqlQueryRaw<string>(
+                var tables = db.Database.SqlQueryRaw<string>(
                     "SELECT tablename FROM pg_tables WHERE schemaname = 'public'").ToList();
-                if (tabelas.Contains("Batches"))
+                if (tables.Contains("Batches"))
                 {
                     db.Database.ExecuteSqlRaw(
                         """
@@ -84,15 +84,15 @@ using (var scope = app.Services.CreateScope())
         }
     }
 
-    // Seed dos parâmetros de classificação (apenas se a tabela estiver vazia)
+    // Seed classification parameters (only if the table is empty)
     try
     {
         var repo = scope.ServiceProvider.GetRequiredService<ITicketRepository>();
-        var count = await repo.ContarParametrosAsync();
+        var count = await repo.CountParametersAsync();
         if (count == 0)
         {
-            var seed = ParametroSeed.Gerar();
-            await repo.AdicionarParametrosAsync(seed);
+            var seed = ParameterSeed.Generate();
+            await repo.AddParametersAsync(seed);
             app.Logger.LogInformation("Seed: {Count} classification parameters inserted.", seed.Count);
         }
     }
