@@ -8,7 +8,7 @@ const parameters = ref([])
 const loading = ref(false)
 const error = ref('')
 
-const form = ref({ tipo: '', termo: '', alvo: '', ativo: true })
+const form = ref({ type: '', term: '', target: '', active: true })
 const editingId = ref(null)
 const showForm = ref(false)
 const saving = ref(false)
@@ -48,13 +48,13 @@ const typeIcons = {
 
 const filteredParameters = computed(() => {
   if (!selectedType.value) return parameters.value
-  return parameters.value.filter(p => p.tipo === selectedType.value)
+  return parameters.value.filter(p => p.type === selectedType.value)
 })
 
 const countByType = computed(() => {
   const c = {}
   for (const p of parameters.value) {
-    c[p.tipo] = (c[p.tipo] || 0) + 1
+    c[p.type] = (c[p.type] || 0) + 1
   }
   return c
 })
@@ -81,13 +81,13 @@ async function loadParameters() {
 
 function openNew(tipo) {
   editingId.value = null
-  form.value = { tipo: tipo || selectedType.value || 'categoria', termo: '', alvo: '', ativo: true }
+  form.value = { type: tipo || selectedType.value || 'categoria', term: '', target: '', active: true }
   showForm.value = true
 }
 
 function openEdit(p) {
   editingId.value = p.id
-  form.value = { tipo: p.tipo, termo: p.termo, alvo: p.alvo || '', ativo: p.ativo }
+  form.value = { type: p.type, term: p.term, target: p.target || '', active: p.active }
   showForm.value = true
 }
 
@@ -97,18 +97,18 @@ function closeForm() {
 }
 
 async function save() {
-  if (!form.value.termo.trim()) return
+  if (!form.value.term.trim()) return
   saving.value = true
   error.value = ''
   try {
     const payload = {
-      tipo: form.value.tipo,
-      termo: form.value.termo.trim(),
-      alvo: form.value.alvo.trim() || null,
-      ativo: form.value.ativo,
+      type: form.value.type,
+      term: form.value.term.trim(),
+      target: form.value.target.trim() || null,
+      active: form.value.active,
     }
     if (editingId.value) {
-      await api.put(`/parametros/${editingId.value}`, payload)
+      await api.put(`/parameters/${editingId.value}`, payload)
     } else {
       await api.post('/parameters', payload)
     }
@@ -123,8 +123,8 @@ async function save() {
 
 async function toggleActive(p) {
   try {
-    await api.put(`/parametros/${p.id}`, { ...p, ativo: !p.ativo })
-    p.ativo = !p.ativo
+    await api.put(`/parameters/${p.id}`, { ...p, active: !p.active })
+    p.active = !p.active
   } catch (e) {
     error.value = 'Failed to update: ' + (e.response?.data ?? e.message)
   }
@@ -135,7 +135,7 @@ const confirmingDelete = ref(null)
 async function remove(id) {
   error.value = ''
   try {
-    await api.delete(`/parametros/${id}`)
+    await api.delete(`/parameters/${id}`)
     confirmingDelete.value = null
     await loadParameters()
   } catch (e) {
@@ -231,18 +231,18 @@ onMounted(async () => {
             </tr>
           </thead>
           <tbody class="text-sm divide-y divide-slate-100">
-            <tr v-for="p in filteredParameters" :key="p.id" class="hover:bg-slate-50/50 transition duration-150" :class="{ 'opacity-50': !p.ativo }">
+            <tr v-for="p in filteredParameters" :key="p.id" class="hover:bg-slate-50/50 transition duration-150" :class="{ 'opacity-50': !p.active }">
               <td class="p-4">
-                <span :class="`border text-xs font-semibold px-2.5 py-1 rounded-full inline-flex items-center gap-1.5 ${typeColors[p.tipo] || 'bg-slate-50 text-slate-600 border-slate-200'}`">
-                  <i :class="`fa-solid ${typeIcons[p.tipo] || 'fa-circle'} text-[10px]`"></i>
-                  {{ typeLabels[p.tipo] || p.tipo }}
+                <span :class="`border text-xs font-semibold px-2.5 py-1 rounded-full inline-flex items-center gap-1.5 ${typeColors[p.type] || 'bg-slate-50 text-slate-600 border-slate-200'}`">
+                  <i :class="`fa-solid ${typeIcons[p.type] || 'fa-circle'} text-[10px]`"></i>
+                  {{ typeLabels[p.type] || p.type }}
                 </span>
               </td>
-              <td class="p-4 text-slate-900 font-medium">{{ p.termo }}</td>
-              <td class="p-4 text-slate-500">{{ p.alvo || '—' }}</td>
+              <td class="p-4 text-slate-900 font-medium">{{ p.term }}</td>
+              <td class="p-4 text-slate-500">{{ p.target || '—' }}</td>
               <td class="p-4 text-center">
-                <button @click="toggleActive(p)" class="cursor-pointer" :title="p.ativo ? 'Deactivate' : 'Activate'">
-                  <span v-if="p.ativo" class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold px-2.5 py-1 rounded-full inline-flex items-center gap-1">
+                <button @click="toggleActive(p)" class="cursor-pointer" :title="p.active ? 'Deactivate' : 'Activate'">
+                  <span v-if="p.active" class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold px-2.5 py-1 rounded-full inline-flex items-center gap-1">
                     <i class="fa-solid fa-circle-check text-[10px]"></i> Active
                   </span>
                   <span v-else class="bg-slate-100 text-slate-500 border border-slate-200 text-xs font-semibold px-2.5 py-1 rounded-full inline-flex items-center gap-1">
@@ -288,7 +288,7 @@ onMounted(async () => {
           <!-- Type -->
           <div>
             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Type</label>
-            <select v-model="form.tipo" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <select v-model="form.type" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
               <option v-for="t in Object.keys(typeLabels)" :key="t" :value="t">{{ typeLabels[t] }}</option>
             </select>
           </div>
@@ -296,30 +296,30 @@ onMounted(async () => {
           <!-- Term -->
           <div>
             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Term</label>
-            <input v-model="form.termo" type="text" placeholder="E.g.: Bug, Finance, login_failed..."
+            <input v-model="form.term" type="text" placeholder="E.g.: Bug, Finance, login_failed..."
               class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" required>
           </div>
 
           <!-- Target -->
           <div>
             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Target <span class="text-slate-400 font-normal">(optional)</span></label>
-            <input v-model="form.alvo" type="text" placeholder="E.g.: Target department, action..."
+            <input v-model="form.target" type="text" placeholder="E.g.: Target department, action..."
               class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
           </div>
 
           <!-- Active -->
           <div class="flex items-center gap-3">
-            <button type="button" @click="form.ativo = !form.ativo"
-              :class="form.ativo ? 'bg-indigo-600' : 'bg-slate-300'"
+            <button type="button" @click="form.active = !form.active"
+              :class="form.active ? 'bg-indigo-600' : 'bg-slate-300'"
               class="relative w-10 h-5.5 rounded-full transition cursor-pointer">
-              <span :class="form.ativo ? 'translate-x-5' : 'translate-x-0.5'" class="absolute top-0.5 w-4.5 h-4.5 bg-white rounded-full shadow transition-transform"></span>
+              <span :class="form.active ? 'translate-x-5' : 'translate-x-0.5'" class="absolute top-0.5 w-4.5 h-4.5 bg-white rounded-full shadow transition-transform"></span>
             </button>
-            <span class="text-sm text-slate-700 font-medium">{{ form.ativo ? 'Active' : 'Inactive' }}</span>
+            <span class="text-sm text-slate-700 font-medium">{{ form.active ? 'Active' : 'Inactive' }}</span>
           </div>
 
           <!-- Actions -->
           <div class="flex gap-2 pt-2">
-            <button type="submit" :disabled="saving || !form.termo.trim()"
+            <button type="submit" :disabled="saving || !form.term.trim()"
               class="grow bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition cursor-pointer flex items-center justify-center gap-2">
               <i v-if="saving" class="fa-solid fa-spinner animate-spin"></i>
               <i v-else class="fa-solid fa-check"></i>

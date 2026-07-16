@@ -286,36 +286,36 @@ function sendWithOption(overwrite) {
             <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
               <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
                 <i class="fa-solid fa-network-wired text-indigo-600"></i>
-                System Architecture
+                How It Works
               </h3>
 
               <div class="space-y-3.5 text-xs text-slate-600">
                 <div class="flex items-start gap-2.5">
                   <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">1</span>
                   <div>
-                    <p class="font-semibold text-slate-800">Upload CSV (.NET API)</p>
-                    <p class="text-slate-500">File parsed and persisted in PostgreSQL via EF Core.</p>
+                    <p class="font-semibold text-slate-800">Upload CSV</p>
+                    <p class="text-slate-500">Import your support tickets from a spreadsheet.</p>
                   </div>
                 </div>
                 <div class="flex items-start gap-2.5">
                   <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">2</span>
                   <div>
                     <p class="font-semibold text-slate-800">Batch Processing</p>
-                    <p class="text-slate-500">Tickets split into parallel batches with throttling.</p>
+                    <p class="text-slate-500">Tickets are organized into batches for efficient processing.</p>
                   </div>
                 </div>
                 <div class="flex items-start gap-2.5">
                   <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">3</span>
                   <div>
-                    <p class="font-semibold text-slate-800">LLM Classification</p>
-                    <p class="text-slate-500">Gemini, Claude, local Llama or mock investigation.</p>
+                    <p class="font-semibold text-slate-800">AI Classification</p>
+                    <p class="text-slate-500">Each ticket is automatically categorized, prioritized, and routed.</p>
                   </div>
                 </div>
                 <div class="flex items-start gap-2.5">
                   <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">4</span>
                   <div>
                     <p class="font-semibold text-slate-800">Results Dashboard</p>
-                    <p class="text-slate-500">Interactive visualization with Chart.js and filters.</p>
+                    <p class="text-slate-500">Visualize results with charts, filters, and export options.</p>
                   </div>
                 </div>
               </div>
@@ -397,7 +397,7 @@ function sendWithOption(overwrite) {
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 py-6 mt-auto">
       <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400 space-y-1">
-        <p>HelpDesk AI Ticket Classifier &mdash; .NET 8, Vue 3, PostgreSQL, Chart.js</p>
+        <p>HelpDesk AI Ticket Classifier</p>
       </div>
     </footer>
   </div>
